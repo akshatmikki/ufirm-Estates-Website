@@ -43,8 +43,8 @@ export default function Herosection() {
         onSlideChange={setCurrentSlide}
       />
 
-      <div className="fixed top-10 inset-x-0 w-full ">
-        <div className="flex items-center justify-between px-6 py-4">
+      <div className="fixed top-1 left-0 w-full z-50">
+        <div className="flex items-center justify-between px-4 py-4">
           <Image
             src="/UFIRM ESTATES LOGO.png"
             alt="logo"
