@@ -1,7 +1,8 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import Image from "next/image";
 
 const transition = {
@@ -13,22 +14,24 @@ const transition = {
   restSpeed: 0.001,
 };
 
-export const MenuItem = ({
-  setActive,
-  active,
-  item,
-  children,
-}: {
+type MenuItemProps = {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
+};
+
+export const MenuItem: React.FC<MenuItemProps> = ({
+  setActive,
+  active,
+  item,
+  children,
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div onMouseEnter={() => setActive(item)} className="relative">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-bold"
       >
         {item}
       </motion.p>
@@ -42,13 +45,10 @@ export const MenuItem = ({
             <div className="absolute top-[calc(100%_+_1.7rem)] left-1/2 transform -translate-x-1/2">
               <motion.div
                 transition={transition}
-                layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-black/65 backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                layoutId="active"
+                className="bg-white dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
               >
-                <motion.div
-                  layout // layout ensures smooth animation
-                  className="w-max h-full p-4"
-                >
+                <motion.div layout className="w-max h-full p-4">
                   {children}
                 </motion.div>
               </motion.div>
@@ -60,33 +60,34 @@ export const MenuItem = ({
   );
 };
 
-export const Menu = ({
-  setActive,
-  children,
-}: {
+type MenuProps = {
   setActive: (item: string | null) => void;
   children: React.ReactNode;
-}) => {
+};
+
+export const Menu: React.FC<MenuProps> = ({ setActive, children }) => {
   return (
     <nav
-      onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full boder border-transparent dark:bg-black/65 dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
+      onMouseLeave={() => setActive(null)}
+      className="relative rounded-full border border-transparent dark:bg-black/25 dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6"
     >
       {children}
     </nav>
   );
 };
 
-export const ProductItem = ({
-  title,
-  description,
-  href,
-  src,
-}: {
+type ProductItemProps = {
   title: string;
   description: string;
   href: string;
   src: string;
+};
+
+export const ProductItem: React.FC<ProductItemProps> = ({
+  title,
+  description,
+  href,
+  src,
 }) => {
   return (
     <Link href={href} className="flex space-x-2">
@@ -109,7 +110,15 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+type HoveredLinkProps = LinkProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+    children: React.ReactNode;
+  };
+
+export const HoveredLink: React.FC<HoveredLinkProps> = ({
+  children,
+  ...rest
+}) => {
   return (
     <Link
       {...rest}
