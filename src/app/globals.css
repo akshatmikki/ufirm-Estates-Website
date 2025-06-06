@@ -39,3 +39,20 @@ body {
 .animate-slide-in-left {
   animation: slide-in-left 0.6s ease-out;
 }
+
+@keyframes rainbowGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.rainbow-animate {
+  background-size: 200% 200%;
+  animation: rainbowGlow 4s linear infinite;
+}

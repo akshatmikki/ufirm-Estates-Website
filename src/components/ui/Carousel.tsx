@@ -1,6 +1,7 @@
-// Slide.tsx or within Carousel.tsx
 "use client";
-import { useState, useRef, useId, useEffect } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "./Button";
 
 interface SlideData {
@@ -27,7 +28,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   useEffect(() => {
     if (isCurrent) {
       setAnimate(true);
-      const timer = setTimeout(() => setAnimate(false), 600); // Match your CSS animation duration
+      const timer = setTimeout(() => setAnimate(false), 600);
       return () => clearTimeout(timer);
     }
   }, [isCurrent]);
@@ -39,15 +40,16 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   return (
     <li
       ref={slideRef}
-      className="relative flex-shrink-0 w-screen h-[550px] px-7 text-white transition-all duration-300 ease-in-out"
+      className="relative flex-shrink-0 w-screen h-[550px] px-7 text-white transition-all duration-300 ease-in-out cursor-pointer"
       onClick={() => handleSlideClick(index)}
     >
       <div className="absolute inset-0 bg-black/40 z-10" />
-      <img
+      <Image
         src={src}
         alt={title}
         className="absolute inset-0 w-full h-[550px] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
         style={{ opacity: isCurrent ? 1 : 0.5 }}
+        fill
         onLoad={imageLoaded}
         loading="eager"
         decoding="sync"
@@ -61,16 +63,21 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           <h4 className="text-3xl md:text-3xl mb-4 font-bold leading-snug text-left">
             {title}
           </h4>
-          {buttonLabel && (
-            href ? (
-              <a href={href} className="w-fit text-left mt-4 block">
+          {buttonLabel &&
+            (href ? (
+              <Link
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-fit text-left mt-4 block"
+              >
                 <Button
                   borderRadius="2.50rem"
                   className="bg-yellow-400 text-black dark:text-white border-neutral-200 dark:border-slate-800"
                 >
                   {buttonLabel} <span aria-hidden="true">&rarr;</span>
                 </Button>
-              </a>
+              </Link>
             ) : (
               <div className="mt-4">
                 <Button
@@ -80,8 +87,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
                   {buttonLabel} <span aria-hidden="true">&rarr;</span>
                 </Button>
               </div>
-            )
-          )}
+            ))}
         </article>
       )}
     </li>
@@ -90,26 +96,26 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 
 interface CarouselProps {
   slides: SlideData[];
+  current: number;
+  onSlideChange: (index: number) => void;
 }
 
-export function Carousel({ slides }: CarouselProps) {
-  const [current, setCurrent] = useState(0);
-
-  const handleSlideClick = (index: number) => {
-    if (current !== index) {
-      setCurrent(index);
-    }
-  };
-
+export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
+      onSlideChange((current + 1) % slides.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [current, onSlideChange, slides.length]);
 
   const id = useId();
+
+  const handleSlideClick = (index: number) => {
+    if (current !== index) {
+      onSlideChange(index);
+    }
+  };
 
   return (
     <div
@@ -139,7 +145,7 @@ export function Carousel({ slides }: CarouselProps) {
           <button
             key={index}
             onClick={() => handleSlideClick(index)}
-            className={`w-3 h-3 rounded-full ${index === current ? "bg-white scale-125" : "bg-white/40"
+            className={`w-2 h-2 rounded-full ${index === current ? "bg-white scale-125" : "bg-white/40"
               } transition transform duration-200`}
             aria-label={`Go to slide ${index + 1}`}
           />
