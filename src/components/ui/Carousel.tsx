@@ -60,7 +60,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           className={`relative z-20 px-6 lg:px-10 py-8 max-w-2xl text-left flex flex-col justify-center h-full
             ${animate ? "animate-slide-in-left" : ""}`}
         >
-          <h4 className="text-3xl md:text-3xl mb-4 font-bold leading-snug text-left">
+          <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl mb-4 font-bold leading-snug text-left">
             {title}
           </h4>
           {buttonLabel &&
@@ -73,7 +73,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
               >
                 <Button
                   borderRadius="2.50rem"
-                  className="bg-yellow-400 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                  className="bg-[#146995] text-black dark:text-white border-neutral-200 dark:border-slate-800"
                 >
                   {buttonLabel} <span aria-hidden="true">&rarr;</span>
                 </Button>
@@ -82,7 +82,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
               <div className="mt-4">
                 <Button
                   borderRadius="2.50rem"
-                  className="bg-yellow-400 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                  className="bg-[#146995] text-black dark:text-white border-neutral-200 dark:border-slate-800"
                 >
                   {buttonLabel} <span aria-hidden="true">&rarr;</span>
                 </Button>

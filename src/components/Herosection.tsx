@@ -43,7 +43,7 @@ export default function Herosection() {
         onSlideChange={setCurrentSlide}
       />
 
-      <div className="absolute top-0 left-0 w-full z-50">
+      <div className="fixed top-10 inset-x-0 w-full ">
         <div className="flex items-center justify-between px-6 py-4">
           <Image
             src="/UFIRM ESTATES LOGO.png"
@@ -52,8 +52,8 @@ export default function Herosection() {
             height={50}
             priority
           />
-          <div className="flex-grow px-4">
-            <NavBar current={currentSlide} onNavClick={setCurrentSlide} />
+          <div className="flex-grow px-4 hidden lg:block">
+            <NavBar />
           </div>
           <HamBurger />
         </div>
