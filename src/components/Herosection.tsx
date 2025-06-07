@@ -36,7 +36,7 @@ export default function Herosection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <div className="relative w-full h-[550px] overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden">
       <Carousel
         slides={slides}
         current={currentSlide}
