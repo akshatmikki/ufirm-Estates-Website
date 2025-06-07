@@ -40,14 +40,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   return (
     <li
       ref={slideRef}
-      className="relative flex-shrink-0 w-screen h-[550px] px-7 text-white transition-all duration-300 ease-in-out cursor-pointer"
+      className="relative flex-shrink-0 w-screen h-screen px-7 text-white transition-all duration-300 ease-in-out cursor-pointer"
       onClick={() => handleSlideClick(index)}
     >
       <div className="absolute inset-0 bg-black/40 z-10" />
       <Image
         src={src}
         alt={title}
-        className="absolute inset-0 w-full h-[550px] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+        className="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-600 ease-in-out"
         style={{ opacity: isCurrent ? 1 : 0.5 }}
         fill
         onLoad={imageLoaded}
@@ -60,7 +60,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           className={`relative z-20 px-6 lg:px-10 py-8 max-w-2xl text-left flex flex-col justify-center h-full
             ${animate ? "animate-slide-in-left" : ""}`}
         >
-          <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl mb-4 font-bold leading-snug text-left">
+          <h4 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 font-bold leading-snug text-left">
             {title}
           </h4>
           {buttonLabel &&
@@ -72,8 +72,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
                 className="w-fit text-left mt-4 block"
               >
                 <Button
-                  borderRadius="2.50rem"
-                  className="bg-[#146995] text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                  borderRadius="1.75rem"
+                  className="bg-black/20 dark:bg-black/20 text-white dark:text-white border-slate-800 dark:border-slate-800"
                 >
                   {buttonLabel} <span aria-hidden="true">&rarr;</span>
                 </Button>
@@ -81,8 +81,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             ) : (
               <div className="mt-4">
                 <Button
-                  borderRadius="2.50rem"
-                  className="bg-[#146995] text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                  borderRadius="1.75rem"
+                  className="bg-black/20 dark:bg-black/20 text-white dark:text-white border-slate-800 dark:border-slate-800"
                 >
                   {buttonLabel} <span aria-hidden="true">&rarr;</span>
                 </Button>
@@ -119,7 +119,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
 
   return (
     <div
-      className="relative w-full h-[550px] overflow-hidden"
+      className="relative w-full h-full overflow-hidden"
       aria-labelledby={`carousel-heading-${id}`}
     >
       <ul
