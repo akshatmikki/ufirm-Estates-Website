@@ -31,7 +31,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
     <div onMouseEnter={() => setActive(item)} className="relative">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white text-bold"
+        className="cursor-pointer text-white hover:opacity-[0.9] dark:text-white text-bold"
       >
         {item}
       </motion.p>
@@ -46,7 +46,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
               <motion.div
                 transition={transition}
                 layoutId="active"
-                className="bg-white dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl"
+                className="bg-black/30 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
               >
                 <motion.div layout className="w-max h-full p-4">
                   {children}
@@ -69,7 +69,7 @@ export const Menu: React.FC<MenuProps> = ({ setActive, children }) => {
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black/25 dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6"
+      className="relative rounded-full border border-transparent dark:bg-black/25 dark:border-white/[0.2] bg-black/25 shadow-input flex justify-center space-x-4 px-8 py-6"
     >
       {children}
     </nav>
@@ -99,10 +99,10 @@ export const ProductItem: React.FC<ProductItemProps> = ({
         className="flex-shrink-0 rounded-md shadow-2xl"
       />
       <div>
-        <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
+        <h4 className="text-xl font-bold mb-1 text-white dark:text-white">
           {title}
         </h4>
-        <p className="text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300">
+        <p className="text-neutral-300 text-sm max-w-[10rem] dark:text-neutral-300">
           {description}
         </p>
       </div>
@@ -122,7 +122,7 @@ export const HoveredLink: React.FC<HoveredLinkProps> = ({
   return (
     <Link
       {...rest}
-      className="text-neutral-700 dark:text-neutral-200 hover:text-blue-500"
+      className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500"
     >
       {children}
     </Link>
