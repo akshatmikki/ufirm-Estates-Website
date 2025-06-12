@@ -7,7 +7,7 @@ import { Carousel } from "@/components/ui/Carousel";
 
 const slides = [
   {
-    src: "/Banners/Banner1.jpg",
+    src: "/Banners/Banner1.png",
     title: "A Real Estate Platform driven by an entrepreneurial spirit",
     buttonLabel: "Urest",
     href: "https://urest.in/",
@@ -43,7 +43,7 @@ export default function Herosection() {
         onSlideChange={setCurrentSlide}
       />
 
-      <div className="fixed top-1 left-0 w-full z-50">
+      <div className="absolute top-1 left-0 w-full z-50">
         <div className="flex items-center justify-between px-4 py-4">
           <Image
             src="/UFIRM ESTATES LOGO.png"

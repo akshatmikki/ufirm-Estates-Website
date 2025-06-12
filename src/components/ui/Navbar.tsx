@@ -18,6 +18,7 @@ type MenuItemProps = {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
+  description?: string;
   children?: React.ReactNode;
 };
 
@@ -25,35 +26,48 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   setActive,
   active,
   item,
+  description,
   children,
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative">
+    <div onMouseEnter={() => setActive(item)} className="relative text-center">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-white hover:opacity-[0.9] dark:text-white text-bold"
+        className="cursor-pointer text-white hover:opacity-90 font-semibold"
       >
         {item}
       </motion.p>
-      {active !== null && (
+
+      {/* Interactive, floating description */}
+      {active === item && description && (
+        <motion.div
+          initial={{ opacity: 0, y: 6, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.25 }}
+          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-4 py-2 rounded-xl bg-white/10 text-sm text-white dark:text-white backdrop-blur-md border border-white/20 shadow-md whitespace-nowrap"
+        >
+          {description}
+        </motion.div>
+      )}
+
+      {/* Optional submenu content */}
+      {active === item && children && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={transition}
         >
-          {active === item && children && (
-            <div className="absolute top-[calc(100%_+_1.7rem)] left-1/2 transform -translate-x-1/2">
-              <motion.div
-                transition={transition}
-                layoutId="active"
-                className="bg-black/30 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
-              >
-                <motion.div layout className="w-max h-full p-4">
-                  {children}
-                </motion.div>
+          <div className="absolute top-[calc(100%_+_3.5rem)] left-1/2 transform -translate-x-1/2 z-10">
+            <motion.div
+              transition={transition}
+              layoutId="active"
+              className="bg-black/30 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
+            >
+              <motion.div layout className="w-max h-full p-4">
+                {children}
               </motion.div>
-            </div>
-          )}
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </div>
