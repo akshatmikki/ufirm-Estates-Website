@@ -64,11 +64,11 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link
-                                href="/our-impact"
+                                href="/TechnologiesPage"
                                 className={`transition-colors ${isActive("/our-impact") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
-                                Tech
+                                Technologies
                             </Link>
                         </li>
                         <li>
@@ -82,7 +82,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link
-                                href="/insights"
+                                href="/CareerPage"
                                 className={`transition-colors ${isActive("/insights") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
@@ -91,7 +91,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link
-                                href="/contact"
+                                href="/ContactPage"
                                 className={`transition-colors ${isActive("/contact") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
@@ -124,8 +124,8 @@ const Footer = () => {
                             </a>
                         </li>
                         <li>
-                            <Link href="/real-estate-development" className="hover:text-white transition-colors">
-                                Tech
+                            <Link href="/TechnologiesPage" className="hover:text-white transition-colors">
+                                Technologies
                             </Link>
                         </li>
                         <li>

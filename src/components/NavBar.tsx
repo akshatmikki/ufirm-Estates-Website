@@ -46,14 +46,7 @@ export function NavBar() {
           />
           {active === "Technologies" && (
             <div className="absolute left-0 text-white mt-2 bg-black/20 shadow-md rounded-lg p-8 z-50 flex flex-col space-y-2 text-sm font-bold">
-              <div className="relative group">
-                <HoveredLink href="/OurInnovation">Our Innovation</HoveredLink>
-                {/* <div className="hidden group-hover:flex flex-col absolute left-full top-0 ml-2 bg-black/30 rounded-lg p-4 space-y-2 min-w-[200px] z-50">
-                  <HoveredLink href="/OurInnovation/FacilityManagement">Facility Management</HoveredLink>
-                  <HoveredLink href="/OurInnovation/cloud">Supervisor Management</HoveredLink>
-                  <HoveredLink href="/OurInnovation/iot">Visitor Management</HoveredLink>
-                </div> */}
-              </div>
+              <HoveredLink href="/OurInnovation">Our Innovation</HoveredLink>
               <HoveredLink href="/.NetDevelopment">.Net Development</HoveredLink>
               <HoveredLink href="/ReactDevelopment">React Development</HoveredLink>
               <HoveredLink href="/MobileDevelopment">Mobile Development</HoveredLink>
