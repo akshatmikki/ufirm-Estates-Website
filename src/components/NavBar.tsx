@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Menu, MenuItem, HoveredLink } from "./ui/Navbar";
+import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 
@@ -8,19 +8,17 @@ export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <div className={cn("fixed top-10 inset-x-0 max-w-3xl mx-auto")}>
+    <div className={cn("fixed top-8 left-40 right-9")}>
       <Menu setActive={setActive}>
         <Link
           href="https://urest.in/"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full h-full"
         >
           <MenuItem
             setActive={setActive}
             active={active}
-            item="Urest"
-            description="Facility Management"
+            item="Facility Management"
           />
         </Link>
 
@@ -28,40 +26,76 @@ export function NavBar() {
           href="https://royalnestdharamshala.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full h-full mr-7"
         >
           <MenuItem
             setActive={setActive}
             active={active}
-            item="Royal Nest"
-            description="Projects"
+            item="Royal Nest Projects"
           />
         </Link>
-
-        <Link href="/TechnologiesPage" className="relative block w-full h-full ml-7">
+        {/* <div className="block w-full h-full"> */}
           <MenuItem
             setActive={setActive}
             active={active}
-            item="Technologies"
+            item="Products"
           />
-          {active === "Technologies" && (
-            <div className="absolute left-0 text-white mt-2 bg-black/20 shadow-md rounded-lg p-8 z-50 flex flex-col space-y-2 text-sm font-bold">
-              <HoveredLink href="/OurInnovation">Our Innovation</HoveredLink>
-              <HoveredLink href="/.NetDevelopment">.Net Development</HoveredLink>
-              <HoveredLink href="/ReactDevelopment">React Development</HoveredLink>
-              <HoveredLink href="/MobileDevelopment">Mobile Development</HoveredLink>
+          {active === "Products" && (
+            <div className="absolute left-50 text-white mt-8 bg-black/70 dark:bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
+              <div className="flex space-x-8">
+                <div className="space-y-8">
+                  <ProductItem title="Facility Management" src="/Navbar/Dashboard.jpg" description="#1 AI-Powered CMMS for Maintenance Teams" href="/OurInnovation/FacilityManagement" />
+                  <ProductItem title="Inventory Management" src="/Navbar/Inventory.jpg" description="Get a full, granular view of your entire inventory, it's consuming and purchase" href="/OurInnovation/FacilityManagement#InventoryManagement" />
+                  <ProductItem title="Employee Management" src="/Navbar/Employee.jpg" description="HRMS solution to track attendance, roles, and performance—all in one place" href="/OurInnovation/FacilityManagement" />
+                </div>
+                <div className="space-y-8">
+                  <ProductItem title="Asset Management" src="/Navbar/Asset.jpg" description="Digitize your asset lifecycle—from acquisition, maintenance to disposal" href="/OurInnovation/FacilityManagement#AssetManagement" />
+                  <ProductItem title="Visitor Management" src="/Navbar/visitor.jpg" description="Effortless visitor logging, approvals, and notifications" href="/OurInnovation/FacilityManagement#InventoryManagement" />
+                  <ProductItem title="Complain Management" src="/Navbar/Complain.jpeg" description="Ensure smooth facility operations with real-time complaint resolution" href="/OurInnovation/FacilityManagement#ComplainManagement" />
+                </div>
+              </div>
             </div>
           )}
-        </Link>
-
-        <Link href="/estates" className="block w-full h-full">
+        {/* </div> */}
+        <Link href="/TechnologiesPage">
+        {/* <div className="block w-full h-full "> */}
           <MenuItem
             setActive={setActive}
             active={active}
-            item="Estates"
-            description="Management & Advisory"
+            item="Technical Services"
+          />
+          {active === "Technical Services" && (
+            <div className="absolute left-90 text-white mt-2 bg-black/70 dark:bg-black/70 shadow-md rounded-lg p-8 z-30 text-sm">
+              <div className="space-y-8">
+                
+                <ProductItem title="React Development" src="/Navbar/React.jpg" description="" href="/ReactDevelopment" />
+                <ProductItem title="Dotnet Development" src="/Navbar/Dotnet.jpg" description="" href="/.NetDevelopment" />
+                <ProductItem title="Mobile Development" src="/Navbar/Reactnative.jpg" description="" href="/MobileDevelopment" />
+              </div>
+            </div>
+          )}
+        {/* </div> */}
+        </Link>
+        <Link href="/Management&advisory" >
+          <MenuItem
+            setActive={setActive}
+            active={active}
+            item="Real Estate Advisory"
           />
         </Link>
+        <Link href="/CareerPage" >
+          <MenuItem
+            setActive={setActive}
+            active={active}
+            item="Hire"
+          />
+        </Link>
+        {/* <Link href="/ContactPage" >
+          <MenuItem
+            setActive={setActive}
+            active={active}
+            item="Contact"
+          />
+        </Link> */}
       </Menu>
     </div>
   );

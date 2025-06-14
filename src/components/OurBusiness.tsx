@@ -41,12 +41,12 @@ function OurBusiness() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center">
-          <p className="mt-2 text-3xl leading-8 font-bold tracking-tight text-white sm:text-4xl">
+          <p className="mt-2 text-5xl leading-8 font-bold tracking-tight text-white sm:text-5xl">
             Our Business
           </p>
         </div>

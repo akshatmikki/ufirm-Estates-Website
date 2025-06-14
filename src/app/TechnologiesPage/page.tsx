@@ -31,20 +31,19 @@ export default function TechnologiesPage() {
         <>
             <div className="bg-grey-300">
                 <div className="absolute top-1 left-0 w-full z-50">
-                    <div className="flex items-center justify-between px-4 py-4">
+                    <div className="flex items-center justify-between px-4 mt-1">
                         <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
+                            <Image
+                                src="/UFIRM ESTATES LOGO.png"
+                                alt="logo"
+                                width={100}
+                                height={50}
+                                priority
+                            />
                         </Link>
                         <div className="flex-grow px-4 hidden lg:block">
                             <NavBar />
                         </div>
-                        <HamBurger />
                     </div>
                 </div>
                 <div className="flex flex-col h-[70vh] bg-black relative text-white">
