@@ -35,8 +35,8 @@ const stats = [
 
 const AboutUs = () => {
   return (
-    <>
-      <section className="bg-white dark:bg-white min-h-screen py-20 px-6 sm:px-12 md:px-16 lg:px-32 flex flex-col md:flex-row items-center gap-16">
+    <section className="bg-white dark:bg-white min-h-screen py-10 px-6 sm:px-12 md:px-16 lg:px-32 flex flex-col gap-16">
+      <div className="flex flex-col md:flex-row items-center gap-16">
         <div className="w-full text-center md:text-left md:w-1/2">
           <p className="text-[#146995] font-semibold text-base sm:text-lg mb-4">About Us</p>
           <h4 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-snug">
@@ -60,25 +60,23 @@ const AboutUs = () => {
         <div className="relative w-full md:w-1/2 flex justify-center">
           <IndiaMapStatic />
         </div>
-      </section>
+      </div>
 
-      <section className="bg-white dark:bg-white px-6 sm:px-12 md:px-16 lg:px-32 pb-12">
-        <div className="flex flex-wrap justify-center gap-6">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-md rounded-xl p-6 w-full sm:w-[45%] md:w-[22%] text-center hover:shadow-lg transition-all duration-300"
-            >
-              <div className="text-4xl mb-3">{stat.icon}</div>
-              <p className="text-2xl font-bold text-orange-500">
-                <CountUp end={stat.value} duration={2} separator="," /> {stat.suffix}
-              </p>
-              <p className="text-sm text-gray-800 mt-2">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
+      <div className="flex flex-wrap justify-center gap-6">
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className="bg-white shadow-md rounded-xl p-6 w-full sm:w-[45%] md:w-[22%] text-center hover:shadow-lg transition-all duration-300"
+          >
+            <div className="text-4xl mb-3">{stat.icon}</div>
+            <p className="text-2xl font-bold text-orange-500">
+              <CountUp end={stat.value} duration={2} separator="," /> {stat.suffix}
+            </p>
+            <p className="text-sm text-gray-800 mt-2">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

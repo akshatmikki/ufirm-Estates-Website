@@ -33,7 +33,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
     <div onMouseEnter={() => setActive(item)} className="relative text-center">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-white hover:opacity-90 font-semibold"
+        className="cursor-pointer text-white hover:opacity-90 font-sm"
       >
         {item}
       </motion.p>
@@ -83,7 +83,7 @@ export const Menu: React.FC<MenuProps> = ({ setActive, children }) => {
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black/25 dark:border-white/[0.2] bg-black/25 shadow-input flex justify-center space-x-4 px-8 py-6"
+      className="relative rounded-full border border-white/[0.2] dark:bg-black/25 dark:border-white/[0.2] bg-black/25 shadow-input flex justify-center space-x-14 px-4 py-4"
     >
       {children}
     </nav>
@@ -107,13 +107,13 @@ export const ProductItem: React.FC<ProductItemProps> = ({
     <Link href={href} className="flex space-x-2">
       <Image
         src={src}
-        width={140}
-        height={70}
+        width={130}
+        height={110}
         alt={title}
         className="flex-shrink-0 rounded-md shadow-2xl"
       />
       <div>
-        <h4 className="text-xl font-bold mb-1 text-white dark:text-white">
+        <h4 className="text-lg mb-1 text-white dark:text-white">
           {title}
         </h4>
         <p className="text-neutral-300 text-sm max-w-[10rem] dark:text-neutral-300">

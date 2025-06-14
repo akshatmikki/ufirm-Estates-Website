@@ -72,8 +72,8 @@ export default function FacilityManagement() {
 
     return (
         <div>
-            <div className="absolute top-1 left-0 w-full z-50 ">
-                <div className="flex items-center justify-between px-4 py-4">
+            <div className="absolute top-1 left-0 w-full z-50">
+                <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
                         <Image
                             src="/UFIRM ESTATES LOGO.png"
@@ -86,7 +86,6 @@ export default function FacilityManagement() {
                     <div className="flex-grow px-4 hidden lg:block">
                         <NavBar />
                     </div>
-                    <HamBurger />
                 </div>
             </div>
 
@@ -105,7 +104,7 @@ export default function FacilityManagement() {
                 />
             </div>
             <div >
-                <StickyScroll content={content} />      
+                <StickyScroll content={content} />
             </div>
         </div>
     );
