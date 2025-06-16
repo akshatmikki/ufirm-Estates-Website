@@ -20,8 +20,6 @@ export const StickyScroll = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeCard, setActiveCard] = useState(0);
 
-  const { scrollY } = useScroll();
-
   useEffect(() => {
     const onScroll = () => {
       if (!containerRef.current) return;
