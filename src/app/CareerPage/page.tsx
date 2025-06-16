@@ -127,7 +127,7 @@ export default function CareersPage() {
                                 </div>
                             </div>
                             <p className="text-gray-700">
-                                I started my journey with UFirm 12 years ago as a field officer. UFirm feels like my own company... It's a fun place to work.
+                                I started my journey with UFirm 12 years ago as a field officer. UFirm feels like my own company... It&apos;s a fun place to work.
                             </p>
                         </div>
 

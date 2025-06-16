@@ -24,7 +24,7 @@ export const GoogleGeminiEffect = ({
   return (
     <div className={cn("absolute top-45 w-full bottom-40", className)}>
       <p className="text-2xl md:text-3xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
-        {title1 || <i>Optimizing Operations with UREST's </i>}
+        {title1 || <i>Optimizing Operations with UREST&apos;s </i>}
       </p>
       <p className="text-4xl md:text-4xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
         {title2 || <i><b>Computerized Maintenance Management Systems</b></i>}
@@ -36,7 +36,7 @@ export const GoogleGeminiEffect = ({
       
       <div className="w-full h-[890px] -top-55 md:-top-55  flex items-center justify-center bg-red-transparent absolute ">
         <button className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-20 mt-20 z-40 md:text-base text-black text-xs w-fit mx-auto ">
-          UREST'S CMMS
+          UREST&apos;S CMMS
         </button>
       </div>
       <svg

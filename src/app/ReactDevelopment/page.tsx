@@ -21,7 +21,7 @@ export default function ReactServicesPage() {
       title: "Server-Side API",
       content: () => (
         <p>
-          Integrate robust server-side APIs with React for efficient data handling and communication, enhancing your application's performance and reliability.
+          Integrate robust server-side APIs with React for efficient data handling and communication, enhancing your application&apos;s performance and reliability.
         </p>
       ),
     },
@@ -70,7 +70,7 @@ export default function ReactServicesPage() {
                 Developing Applications with React Services
               </h1>
               <p className="text-white text-lg">
-                Explore the full potential of your business with UFirm’s React development services. Our expert team delivers tailored, scalable, and secure solutions designed to meet your unique needs and drive growth.
+                Explore the full potential of your business with UFirm&apos;s React development services. Our expert team delivers tailored, scalable, and secure solutions designed to meet your unique needs and drive growth.
               </p>
               <div className=" mt-10">
                 <Image
