@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "../../components/NavBar";
-import { HamBurger } from "../../components/HamBurger";
+// import { HamBurger } from "../../components/HamBurger";
 import FacilityManagement from "./FacilityManagement/page";
 
 export default function OurInnovation() {
@@ -22,7 +22,6 @@ export default function OurInnovation() {
                     <div className="flex-grow px-4 hidden lg:block">
                         <NavBar />
                     </div>
-                    <HamBurger />
                 </div>
             </div>
             <div >

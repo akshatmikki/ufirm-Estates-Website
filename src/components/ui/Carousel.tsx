@@ -132,7 +132,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
           <button
             key={index}
             onClick={() => handleSlideClick(index)}
-            className={`w-3 h-3 rounded-full ${index === current ? "bg-white scale-125" : "bg-white/40"
+            className={`w-2 h-2 rounded-full ${index === current ? "bg-white scale-125" : "bg-white/40"
               } transition transform duration-200`}
             aria-label={`Go to slide ${index + 1}`}
           />

@@ -8,9 +8,9 @@ const Footer = () => {
     const pathname = usePathname();
     const isActive = (href: string) => pathname === href;
     return (
-        <footer className="bg-gray-800 text-gray-300 py-10 px-4 md:px-8 lg:px-16">
+        <footer className="bg-gray-800 text-gray-300 py-3 px-4 md:px-8 lg:px-16">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-8">
-                <div className="mb-6 md:mb-0">
+                <div className="mb-3 md:mb-0">
                     <Image src="/UFIRM ESTATES LOGO.png" alt="Logo" width={120} height={50} />
                 </div>
                 <div className="flex flex-row items-center md:items-end">

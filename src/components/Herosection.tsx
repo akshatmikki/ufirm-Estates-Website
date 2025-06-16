@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import Image from "next/image";
-import { HamBurger } from "@/components/HamBurger";
 import { Carousel } from "@/components/ui/Carousel";
 
 const slides = [
