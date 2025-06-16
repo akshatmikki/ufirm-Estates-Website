@@ -29,7 +29,7 @@ export default function ReactServicesPage() {
       title: "Mobile App Backend & API Development",
       content: () => (
         <p>
-          We offer complete backend and API development solutions for React Native-based mobile applications. Our engineers possess expertise in Node.js, PHP, and Python to develop personalized backend and API services to cater to your mobile application's requirements.
+          We offer complete backend and API development solutions for React Native-based mobile applications. Our engineers possess expertise in Node.js, PHP, and Python to develop personalized backend and API services to cater to your mobile application&apos;s requirements.
         </p>
       ),
     },
