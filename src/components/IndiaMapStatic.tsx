@@ -3,23 +3,23 @@ import React from 'react';
 import Image from 'next/image';
 
 const markers = [
-    { name: 'Jammu', top: '12%', left: '25%' },
-    { name: 'Dharamshala', top: '18%', left: '34%' },
-    { name: 'Amritsar', top: '20%', left: '26%' },
-    { name: 'Dehradun', top: '24%', left: '37%' },
+    { name: 'Jammu', top: '13%', left: '25%' },
+    { name: 'Dharamshala', top: '20%', left: '34%' },
+    { name: 'Amritsar', top: '22%', left: '26%' },
+    { name: 'Dehradun', top: '24%', left: '39%' },
     { name: 'Jaipur', top: '33%', left: '26%' },
     { name: 'Udaipur', top: '38%', left: '20%' },
     { name: 'Vadodara', top: '46%', left: '12%' },
-    { name: 'Delhi', top: '29%', left: '32%' },
+    { name: 'Delhi', top: '29%', left: '32.5%' },
     { name: 'Pune', top: '58%', left: '20%' },
-    { name: 'Hyderabad', top: '62%', left: '37%' },
+    { name: 'Hyderabad', top: '62%', left: '37.6%' },
     { name: 'Kolkata', top: '47%', left: '68%' },
 ];
 
 export default function IndiaMapStatic() {
     return (
         <div className="relative w-full max-w-3xl mx-auto">
-            <Image src="/india-map.png" alt="India Map" width={1800} height={1500} />
+            <Image src="/india-map.png" alt="India Map" width={500} height={500} />
             {markers.map((marker, index) => (
                 <div
                     key={index}

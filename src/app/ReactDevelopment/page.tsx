@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "../../components/NavBar";
-import { HamBurger } from "../../components/HamBurger";
+// import { HamBurger } from "../../components/HamBurger";
 import { BackgroundGradient } from "../../components/ui/Background-gradient"
 import { ExpandableCardList } from "../../components/expandablescards"
 import { BackgroundBeams } from "../../components/ui/Background-beams";
@@ -13,7 +13,7 @@ export default function ReactServicesPage() {
       title: "React Web Development",
       content: () => (
         <p>
-         Utilize our React web development services to create dynamic, responsive websites that engage users and drive business growth with cutting-edge technology.
+          Utilize our React web development services to create dynamic, responsive websites that engage users and drive business growth with cutting-edge technology.
         </p>
       ),
     },
@@ -46,25 +46,25 @@ export default function ReactServicesPage() {
   return (
     <>
       <div>
-        <div className="absolute top-1 left-0 w-full z-50 ">
-          <div className="flex items-center justify-between px-4 py-4">
+        <div className="absolute top-1 left-0 w-full z-50">
+          <div className="flex items-center justify-between px-4 mt-1">
             <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
-                        </Link>
+              <Image
+                src="/UFIRM ESTATES LOGO.png"
+                alt="logo"
+                width={100}
+                height={50}
+                priority
+              />
+            </Link>
             <div className="flex-grow px-4 hidden lg:block">
               <NavBar />
             </div>
-            <HamBurger />
           </div>
         </div>
-        <div className="min-h-screen px-10 py-40 md:px-20 md:py-40 ">
-          <div className="grid md:grid-cols-2 gap-10 items-start">
+        <div className="relative z-40 px-10 py-40 md:px-20 md:py-40 ">
+          <BackgroundBeams />
+          <div className="relative grid md:grid-cols-2 gap-10 items-start z-40">
             <div>
               <h1 className="text-4xl font-bold text-white mb-6">
                 Developing Applications with React Services
@@ -89,7 +89,6 @@ export default function ReactServicesPage() {
             </div>
           </div>
         </div>
-        <BackgroundBeams />
       </div>
     </>
   );

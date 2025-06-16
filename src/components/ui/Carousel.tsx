@@ -40,14 +40,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   return (
     <li
       ref={slideRef}
-      className="relative flex-shrink-0 w-screen h-screen px-7 text-white transition-all duration-300 ease-in-out cursor-pointer"
+      className="relative flex-shrink-0 w-screen h-screen px-7 text-white transition-all duration-2000 ease-in-out cursor-pointer"
       onClick={() => handleSlideClick(index)}
     >
       <div className="absolute inset-0 bg-black/40 z-10" />
       <Image
         src={src}
         alt={title}
-        className="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+        className="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-2000 ease-in-out"
         style={{ opacity: isCurrent ? 1 : 0.5 }}
         fill
         onLoad={imageLoaded}
@@ -60,34 +60,21 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           className={`relative z-20 px-6 lg:px-10 py-8 max-w-2xl text-left flex flex-col justify-center h-full
             ${animate ? "animate-slide-in-left" : ""}`}
         >
-          <h4 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 font-bold leading-snug text-left">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl sm:text-xl font-bold relative dark:text-white text-white ">
             {title}
-          </h4>
-          {buttonLabel &&
-            (href ? (
-              <Link
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-fit text-left mt-4 block"
-              >
-                <Button
-                  borderRadius="1.75rem"
-                  className="bg-black/20 dark:bg-black/20 text-white dark:text-white border-slate-800 dark:border-slate-800"
-                >
-                  {buttonLabel} <span aria-hidden="true">&rarr;</span>
-                </Button>
-              </Link>
-            ) : (
-              <div className="mt-4">
-                <Button
-                  borderRadius="1.75rem"
-                  className="bg-black/20 dark:bg-black/20 text-white dark:text-white border-slate-800 dark:border-slate-800"
-                >
-                  {buttonLabel} <span aria-hidden="true">&rarr;</span>
-                </Button>
-              </div>
-            ))}
+          </h2>
+          {href && (
+            <Link
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8"
+            >
+              <Button borderClassName="px-6 py-3 relative w-fit text-left block mx-auto md:mx-0 sm:text-sm text-white bg-black/75 dark:bg-black/75 text-white border-slate-800 dark:border-slate-800 h-18 border border-transparent text-lg " borderRadius="1.75rem">
+                {buttonLabel} <span aria-hidden="true" className="ml-2">&rarr;</span>
+              </Button>
+            </Link>
+          )}
         </article>
       )}
     </li>
@@ -104,7 +91,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       onSlideChange((current + 1) % slides.length);
-    }, 4000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [current, onSlideChange, slides.length]);

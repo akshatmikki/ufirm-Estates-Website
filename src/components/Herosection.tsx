@@ -2,33 +2,32 @@
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import Image from "next/image";
-import { HamBurger } from "@/components/HamBurger";
 import { Carousel } from "@/components/ui/Carousel";
 
 const slides = [
   {
     src: "/Banners/Banner1.png",
     title: "A Real Estate Platform driven by an entrepreneurial spirit",
-    buttonLabel: "Urest",
+    buttonLabel: "Facility Management",
     href: "https://urest.in/",
   },
   {
     src: "/Banners/Banner2.webp",
     title: "Celebrating the past & developing the future",
-    buttonLabel: "Royal Nest",
+    buttonLabel: "Royal Nest Projects",
     href: "https://royalnestdharamshala.com/",
   },
   {
     src: "/Banners/Banner3.jpg",
     title: "The engine driving progress and competitive advantage in Real Estate",
-    buttonLabel: "Tech",
-    href: "/tech",
+    buttonLabel: "Our Technologies",
+    href: "/TechnologiesPage",
   },
   {
     src: "/Banners/Banner4.jpg",
     title: "Serving as the backbone of successful Real Estate operations",
-    buttonLabel: "Estates",
-    href: "/estates",
+    buttonLabel: "Real Estate Advisory",
+    href: "/Management&advisory",
   },
 ];
 
@@ -44,7 +43,7 @@ export default function Herosection() {
       />
 
       <div className="absolute top-1 left-0 w-full z-50">
-        <div className="flex items-center justify-between px-4 py-4">
+        <div className="flex items-center justify-between px-4 mt-1">
           <Image
             src="/UFIRM ESTATES LOGO.png"
             alt="logo"
@@ -55,7 +54,6 @@ export default function Herosection() {
           <div className="flex-grow px-4 hidden lg:block">
             <NavBar />
           </div>
-          <HamBurger />
         </div>
       </div>
     </div>
