@@ -18,6 +18,7 @@ type MenuItemProps = {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
+  href: string;
   description?: string;
   children?: React.ReactNode;
 };
@@ -26,17 +27,20 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   setActive,
   active,
   item,
+  href,
   description,
   children,
 }) => {
   return (
     <div onMouseEnter={() => setActive(item)} className="relative text-center">
+      <Link href={href}>
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-white hover:opacity-90 font-sm"
+        className="cursor-pointer text-white hover:opacity-90 text-sm"
       >
         {item}
       </motion.p>
+      </Link>
 
       {/* Interactive, floating description */}
       {active === item && description && (
@@ -93,8 +97,9 @@ export const Menu: React.FC<MenuProps> = ({ setActive, children }) => {
 type ProductItemProps = {
   title: string;
   description: string;
-  href: string;
+  href?: string;
   src: string;
+  onClick?: () => void;
 };
 
 export const ProductItem: React.FC<ProductItemProps> = ({
@@ -102,9 +107,10 @@ export const ProductItem: React.FC<ProductItemProps> = ({
   description,
   href,
   src,
+  onClick,
 }) => {
-  return (
-    <Link href={href} className="flex space-x-2">
+  const content = (
+    <div className="flex space-x-8 space-y-8">
       <Image
         src={src}
         width={130}
@@ -120,6 +126,22 @@ export const ProductItem: React.FC<ProductItemProps> = ({
           {description}
         </p>
       </div>
+    </div>
+  );
+
+  // If onClick is provided, render as button
+  if (onClick) {
+    return (
+      <button onClick={onClick} className="w-full text-left">
+        {content}
+      </button>
+    );
+  }
+
+  // Otherwise render as a normal link
+  return (
+    <Link href={href || "#"} className="w-full">
+      {content}
     </Link>
   );
 };

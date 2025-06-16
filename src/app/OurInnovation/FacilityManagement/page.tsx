@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-import { HamBurger } from "@/components/HamBurger";
+// import { HamBurger } from "@/components/HamBurger";
 import { useScroll, useTransform } from "motion/react";
 import React from "react";
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
