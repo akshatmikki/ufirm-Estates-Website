@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 
 function cn(...inputs: (string | undefined | null | boolean)[]) {
   return inputs.filter(Boolean).join(" ");
