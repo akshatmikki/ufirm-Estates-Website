@@ -37,9 +37,9 @@ export function NavBar() {
           <a href="/OurInnovation">Products</a>
           <div className="ml-4 space-y-2">
             <button onClick={() => navigateWithScroll("/OurInnovation", "#card-0")}>Facility Management</button>
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#card-1")}>Inventory Management</button>
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#card-2")}>Asset Management</button>
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#card-3")}>Complain Management</button>
+            <button onClick={() => navigateWithScroll("/OurInnovation", "#AssetManagement")}>Asset Management</button>
+            <button onClick={() => navigateWithScroll("/OurInnovation", "#InventoryManagement")}>Inventory Management</button>
+            <button onClick={() => navigateWithScroll("/OurInnovation", "#ComplainManagement")}>Complain Management</button>
           </div>
           <a href="/TechnologiesPage">Technical Services</a>
           <div className="ml-4 space-y-2">
@@ -72,7 +72,7 @@ export function NavBar() {
                     title="Inventory Management"
                     src="/Navbar/Inventory.jpg"
                     description="Get a full, granular view of your entire inventory, it's consuming and purchase"
-                    onClick={() => navigateWithScroll("/OurInnovation", "#card-2")}
+                    onClick={() => navigateWithScroll("/OurInnovation", "#InventoryManagement")}
                   />
                   <ProductItem title="Employee Management" src="/Navbar/Employee.jpg" description="HRMS solution to track attendance, roles, and performance—all in one place" href="/OurInnovation/FacilityManagement" />
                 </div>
@@ -81,13 +81,13 @@ export function NavBar() {
                     title="Asset Management"
                     src="/Navbar/Asset.jpg"
                     description="Digitize your asset lifecycle—from acquisition, maintenance to disposal"
-                    onClick={() => navigateWithScroll("/OurInnovation", "#card-1")}
+                    onClick={() => navigateWithScroll("/OurInnovation", "#AssetManagement")}
                   />
                   <ProductItem
                     title="Complain Management"
                     src="/Navbar/Complain.jpeg"
                     description="Ensure smooth facility operations with real-time complaint resolution"
-                    onClick={() => navigateWithScroll("/OurInnovation", "#card-3")}
+                    onClick={() => navigateWithScroll("/OurInnovation", "#ComplainManagement")}
                   />
                   <ProductItem title="Visitor Management" src="/Navbar/visitor.jpg" description="Effortless visitor logging, approvals, and notifications" href="/OurInnovation/FacilityManagement#InventoryManagement" />
                 </div>

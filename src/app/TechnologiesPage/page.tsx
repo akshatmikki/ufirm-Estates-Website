@@ -55,10 +55,9 @@ export default function TechnologiesPage() {
                         Your browser does not support the video tag.
                     </video>
                     <div className="absolute inset-0 flex items-center justify-center p-10">
-                        <div className="bg-white/80 shadow-xl p-4 rounded-xl text-center max-w-full ">
-                            <p className="text-sm text-zinc-900">
-                                <TextGenerateEffect words="We develop, integrate, and modernize applications using the .NET framework, ReactJS & React Native.
-                        Whether you need a web app, enterprise system, or cloud-based solution, our expert team ensures secure, high-performing software that meets your business needs while optimizing development time and costs." />
+                        <div className="shadow-xl p-4 rounded-xl text-center max-w-full ">
+                            <p className="text-sm text-white">
+                                <TextGenerateEffect words="We build and modernize web, enterprise, and cloud apps using .NET, ReactJS, and React Native—delivering secure, high-performance solutions that meet your needs efficiently and cost-effectively." />
                             </p>
                         </div>
                     </div>
