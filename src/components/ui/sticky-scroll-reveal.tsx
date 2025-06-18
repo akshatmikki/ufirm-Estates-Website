@@ -11,6 +11,7 @@ export const StickyScroll = ({
   contentClassName,
 }: {
   content: {
+    id: string; 
     title: string;
     description: string;
     content?: React.ReactNode;
@@ -28,83 +29,64 @@ export const StickyScroll = ({
       const containerHeight = containerRef.current.offsetHeight;
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      if (scrollPosition < containerTop || scrollPosition > containerTop + containerHeight) return;
+      if (
+        scrollPosition < containerTop ||
+        scrollPosition > containerTop + containerHeight
+      )
+        return;
 
       const progress = (scrollPosition - containerTop) / containerHeight;
-      const index = Math.min(Math.floor(progress * content.length), content.length - 1);
+      const index = Math.min(
+        Math.floor(progress * content.length),
+        content.length - 1
+      );
       setActiveCard(index);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // trigger immediately on mount
-
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, [content.length]);
 
-  const backgroundColors = ["#0f172a", "#000000", "#171717"];
-  const gradients = [
-    "linear-gradient(to bottom right, #06b6d4, #10b981)",
-    "linear-gradient(to bottom right, #ec4899, #6366f1)",
-    "linear-gradient(to bottom right, #f97316, #eab308)",
-  ];
-
-  const bgGradient = gradients[activeCard % gradients.length];
+  const backgroundColors = ["#0f172a"];
   const bgColor = backgroundColors[activeCard % backgroundColors.length];
 
   return (
     <motion.div
       ref={containerRef}
       animate={{ backgroundColor: bgColor }}
-      className="relative w-full min-h-[calc((var(--card-length,1)*70vh))] px-4 md:px-10 py-10 flex flex-col lg:flex-row"
+      className="relative w-full min-h-[calc((var(--card-length,1)*100vh))] px-4 md:px-2 py-2"
       style={{ "--card-length": content.length } as React.CSSProperties}
     >
-      {/* LEFT TEXT SECTION */}
-      <div className="w-full lg:w-1/2 space-y-[40vh] relative z-10">
-        {content.map((item, index) => (
-          <div
-            id={`card-${index}`} 
-            key={item.title + index}
-            className="h-[60vh] flex flex-col justify-center sticky top-[20vh]"
-          >
-            <motion.div
-              initial={{ opacity: 0.3, scale: 0.95 }}
-              animate={{
-                opacity: activeCard === index ? 1 : 0,
-                scale: activeCard === index ? 1 : 0.95,
-                display: activeCard === index ? "block" : "none",
-              }}
-              transition={{ duration: 0.2 }}
-            >
-              <h2 className="text-3xl font-bold text-white">{item.title}</h2>
-              <p className="text-lg text-slate-300 mt-4">{item.description}</p>
-            </motion.div>
-          </div>
-        ))}
-      </div>
-
-      {/* RIGHT STICKY CONTENT */}
-      <div
-        className={cn(
-          "sticky top-[20vh] h-[60vh] w-full lg:w-1/2 rounded-xl shadow-xl overflow-hidden",
-          contentClassName
-        )}
-        style={{
-          background: bgGradient,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <motion.div
-          key={activeCard}
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="w-full h-full"
+      {content.map((item) => (
+        <div
+          key={item.id}
+          id={item.id} 
+          className="sticky top-[5vh] h-[90vh] w-full max-w-full mx-auto shadow-lg bg-[#243660] p-10 text-white flex flex-col md:flex-row items-center gap-8 mb-5"
         >
-          {content[activeCard]?.content ?? null}
-        </motion.div>
-      </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="w-full flex flex-col md:flex-row items-center gap-8"
+          >
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold">{item.title}</h2>
+              <p className="text-slate-300 mt-4">{item.description}</p>
+            </div>
+            <div
+              className={cn("flex-1 ", contentClassName)}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {item.content ?? null}
+            </div>
+          </motion.div>
+        </div>
+      ))}
     </motion.div>
   );
 };

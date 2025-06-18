@@ -3,6 +3,38 @@ import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import Image from "next/image";
 
 function OurBusiness() {
+  const slides = [
+    {
+      src: "/Banners/Banner1.png",
+      title: "A Real Estate Platform driven by an entrepreneurial spirit",
+      buttonLabel: "Facility Management",
+      href: "https://urest.in/",
+    },
+    {
+      src: "/Banners/Banner2.webp",
+      title: "Celebrating the past & developing the future",
+      buttonLabel: "Royal Nest Projects",
+      href: "/RoyalNestPage",
+    },
+    {
+      src: "/Banners/Product.jpeg",
+      title: "The engine driving progress and competitive advantage in Real Estate",
+      buttonLabel: "Our Product",
+      href: "/OurInnovation",
+    },
+    {
+      src: "/Banners/Banner3.jpg",
+      title: "The engine powering innovation and transformation in technology",
+      buttonLabel: "Our Technologies",
+      href: "/TechnologiesPage",
+    },
+    {
+      src: "/Banners/Banner4.jpg",
+      title: "Serving as the backbone of successful Real Estate operations",
+      buttonLabel: "Real Estate Advisory",
+      href: "/Management&advisory",
+    },
+  ];
   const Business = [
     {
       title: "Urest: Facility Management",
@@ -13,20 +45,25 @@ function OurBusiness() {
     {
       title: "Royal Nest: Projects",
       description:
-        "Learn the craft of songwriting from experienced musicians and songwriters.",
-      link: "https://royalnestdharamshala.com/",
+        "Celebrating the past & developing the future",
+      link: "/RoyalNestPage",
     },
     {
-      title: "Technologies",
-      description:
-        "Advanced techniques to master your musical instrument of choice.",
-      link: "/technologies",
+      title: "Our Product: CMMS",
+      description: "The engine driving progress and competitive advantage in Real Estate",
+      link: "/OurInnovation",
     },
+    // {
+    //   title: "Technologies",
+    //   description:
+    //     "The engine powering innovation and transformation in technology",
+    //   link: "/TechnologiesPage",
+    // },
     {
       title: "Estates: Management & Advisory",
       description:
-        "Get started with music production with this comprehensive overview.",
-      link: "/estates",
+        "Serving as the backbone of successful Real Estate operations",
+      link: "/Management&advisory",
     },
   ];
 

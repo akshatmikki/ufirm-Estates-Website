@@ -24,10 +24,10 @@ export function InfiniteMovingCards({
   }[speed];
 
   return (
-    <div className="overflow-hidden relative w-full py-6 perspective-[1000px]">
+    <div className="overflow-hidden relative w-full py-6">
       <div
         className={cn(
-          "flex gap-12 w-max animate-marquee whitespace-nowrap",
+          "flex gap-6 w-max animate-marquee whitespace-nowrap items-center",
           direction === "right" ? "animate-marquee-reverse" : "",
           pauseOnHover ? "hover:[animation-play-state:paused]" : ""
         )}
@@ -36,15 +36,14 @@ export function InfiniteMovingCards({
         {items.concat(items).map((item, index) => (
           <div
             key={index}
-            className="transform rotate-y-[20deg] hover:rotate-y-0 transition-transform duration-500"
+            className="flex items-center justify-center min-w-[120px] h-[60px] transition-transform hover:scale-105"
           >
             <Image
               src={item.src}
               alt={item.alt}
-              width="0"
-              height="0"
-              sizes="50vw"
-              className="w-auto h-full"
+              width={120}
+              height={60}
+              className="object-contain h-full w-full"
             />
           </div>
         ))}

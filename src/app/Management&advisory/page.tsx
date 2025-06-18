@@ -3,7 +3,6 @@ import { TextGenerateEffect } from '@/components/ui/textgeneratoreffect';
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-// import { HamBurger } from "@/components/HamBurger";
 
 const words = `Coming Soon`;
 
@@ -26,7 +25,7 @@ export default function Managementadvisory() {
                     </div>
                 </div>
             </div>
-            <div className='text-center mt-40 mb-40 text-7xl'>
+            <div className='text-center mt-40 mb-40 text-7xl text-black dark:text-black'>
                 <TextGenerateEffect words={words} />
             </div>
         </div>
