@@ -15,12 +15,18 @@ const slides = [
     src: "/Banners/Banner2.webp",
     title: "Celebrating the past & developing the future",
     buttonLabel: "Royal Nest Projects",
-    href: "https://royalnestdharamshala.com/",
+    href: "/RoyalNestPage",
+  },
+  {
+    src: "/Banners/Product.jpeg",
+    title: "The engine driving progress and competitive advantage in Real Estate",
+    buttonLabel: "Our Product",
+    href: "/OurInnovation",
   },
   {
     src: "/Banners/Banner3.jpg",
-    title: "The engine driving progress and competitive advantage in Real Estate",
-    buttonLabel: "Our Technologies",
+    title: "The engine powering innovation and transformation in technology",
+    buttonLabel: "Technical Services",
     href: "/TechnologiesPage",
   },
   {
