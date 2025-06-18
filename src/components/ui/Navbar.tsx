@@ -129,7 +129,6 @@ export const ProductItem: React.FC<ProductItemProps> = ({
     </div>
   );
 
-  // If onClick is provided, render as button
   if (onClick) {
     return (
       <button onClick={onClick} className="w-full text-left">
@@ -138,7 +137,6 @@ export const ProductItem: React.FC<ProductItemProps> = ({
     );
   }
 
-  // Otherwise render as a normal link
   return (
     <Link href={href || "#"} className="w-full">
       {content}

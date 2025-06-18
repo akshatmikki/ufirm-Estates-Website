@@ -5,26 +5,33 @@ import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 const topClients = [
     { src: "/logos/Park-hyatt.png", alt: "Park Hyatt" },
     { src: "/logos/ITC Hotels.webp", alt: "ITC Hotels" },
-    { src: "/logos/Sobha.webp", alt: "Sobha" },
-    { src: "/logos/Sharda-university.webp", alt: "Sharda University" },
+    { src: "/logos/Sobha.png", alt: "Sobha" },
+    { src: "/logos/Sharda-university.png", alt: "Sharda University" },
     { src: "/logos/indian-navy.webp", alt: "Indian Navy" },
-    { src: "/logos/baincapital.png", alt: "Bain Capital" },
-    { src: "/logos/fila.png", alt: "FILA" },
-    { src: "/logos/indiabulls.png", alt: "Indiabulls" },
-    { src: "/logos/thirdwave.png", alt: "Third Wave Coffee" },
+    { src: "/logos/Marriott.png", alt: "Marriott" },
+    { src: "/logos/sharda-hospital.png", alt: "Sharda Hospital" },
+    { src: "/logos/LT.png", alt: "LT" },
+    { src: "/logos/BigBasket.jpg", alt: "Big Basket" },
+    { src: "/logos/Kailash.jpg", alt: "Kailash hospital" },
+    { src: "/logos/Commure.jpg", alt: "Commure" },
+    { src: "/logos/Modern-Automotive.png", alt: "Modern Automotive" },
+    { src: "/logos/cinntra.jpeg", alt: "Cinntra" },
 ];
 
 const bottomClients = [
-    { src: "/logos/baghmane.png", alt: "Baghmane" },
-    { src: "/logos/citrix.png", alt: "Citrix" },
-    { src: "/logos/7eleven.png", alt: "7-Eleven" },
-    { src: "/logos/gianteagle.png", alt: "Giant Eagle" },
-    { src: "/logos/delta.png", alt: "Delta" },
-    { src: "/logos/kas.png", alt: "KAS Group Asia" },
-    { src: "/logos/mfar.png", alt: "MFAR" },
-    { src: "/logos/lululemon.png", alt: "Lululemon" },
-    { src: "/logos/ansr.png", alt: "ANSR" },
-    { src: "/logos/forum.png", alt: "Forum" },
+    { src: "/logos/JMFlorence.jpeg", alt: "JM Florence" },
+    { src: "/logos/Donaldson.png", alt: "Donaldson" },
+    { src: "/logos/Signode.jpg", alt: "Signode" },
+    { src: "/logos/selaqui.png", alt: "SelaQui" },
+    { src: "/logos/Vicon.jpg", alt: "Vicon" },
+    { src: "/logos/dpsg.png", alt: "DPSG" },
+    { src: "/logos/SafeExpress.png", alt: "SafeExpress" },
+    { src: "/logos/Schaeffler.jpg", alt: "Schaeffler" },
+    { src: "/logos/Exotica.png", alt: "Exotica" },
+    { src: "/logos/Ck-Birla-Hospital.png", alt: "CK Birla Hospital" },
+    { src: "/logos/ace.png", alt: "ace" },
+    { src: "/logos/iSprout.jpg", alt: "iSprout" },
+    { src: "/logos/RG.jpeg", alt: "RG" },
 ];
 
 export default function ClientCarousel() {
@@ -43,13 +50,13 @@ export default function ClientCarousel() {
                 <InfiniteMovingCards
                     items={topClients}
                     direction="right"
-                    speed="slow"
+                    speed="normal"
                     pauseOnHover={false}
                 />
                 <InfiniteMovingCards
                     items={bottomClients}
                     direction="left"
-                    speed="slow"
+                    speed="normal"
                     pauseOnHover={false}
                 />
             </div>
