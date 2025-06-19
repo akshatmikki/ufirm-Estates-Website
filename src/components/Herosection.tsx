@@ -49,7 +49,7 @@ export default function Herosection() {
       />
 
       <div className="absolute top-1 left-0 w-full z-50">
-        <div className="flex items-center justify-between px-4 mt-1">
+        <div className="flex items-center justify-between px-4 mt-1 w-full">
           <Image
             src="/UFIRM ESTATES LOGO.png"
             alt="logo"
@@ -57,7 +57,9 @@ export default function Herosection() {
             height={50}
             priority
           />
+          
             <NavBar />
+          
         </div>
       </div>
     </div>

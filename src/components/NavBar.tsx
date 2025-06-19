@@ -11,15 +11,15 @@ export function NavBar() {
   const router = useRouter();
 
   const navigateWithScroll = (path: string, hash: string) => {
-    router.push(path); // navigate to the page
+    router.push(path); 
     setTimeout(() => {
       const el = document.querySelector(hash);
       if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 500); // delay until DOM updates
+    }, 500); 
   };
 
   return (
-    <div className={cn("fixed top-8 z-40 w-full md:left-40 md:right-9 md:w-auto")}>
+    <div className={cn("fixed top-8 right-4 z-40 w-auto md:w-auto md:right-20")}>
       <div className="md:hidden flex justify-end items-center px-4 py-2 text-white rounded-xl shadow z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -61,14 +61,13 @@ export function NavBar() {
         </div>
       )}
 
-      {/* Desktop Menu - Only visible on screens 'md' and larger */}
       <div className="hidden md:block">
         <Menu setActive={setActive}>
           <MenuItem setActive={setActive} active={active} item="Facility Management" href="https://urest.in/" />
           <MenuItem setActive={setActive} active={active} item="Royal Nest Projects" href="/RoyalNestPage" />
           <MenuItem setActive={setActive} active={active} item="Products" href="/OurInnovation" />
           {active === "Products" && (
-            <div className="absolute left-50 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
+            <div className="absolute left-20 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
               <div className="flex space-x-2">
                 <div className="space-y-2">
                   <ProductItem
@@ -105,7 +104,7 @@ export function NavBar() {
           )}
           <MenuItem setActive={setActive} active={active} item="Technical Services" href="/TechnologiesPage" />
           {active === "Technical Services" && (
-            <div className="absolute left-1/2 -translate-x-1/2 text-white mt-7 bg-black/70 shadow-md rounded-lg p-8 z-30 text-sm flex">
+            <div className="absolute left-90 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
               <div className="space-y-2">
                 <ProductItem title="React Development" src="/Navbar/React.jpg" description="" href="/ReactDevelopment" />
                 <ProductItem title="Dotnet Development" src="/Navbar/Dotnet.jpg" description="" href="/.NetDevelopment" />
