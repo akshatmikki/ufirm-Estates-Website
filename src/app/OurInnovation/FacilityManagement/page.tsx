@@ -76,54 +76,52 @@ const content = [
 ];
 
 export default function FacilityManagement() {
-    const ref = React.useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start start", "end start"],
-    });
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-    const pathLengthFirst = useTransform(scrollYProgress, [0, 0.8], [0.2, 1.2]);
-    const pathLengthSecond = useTransform(scrollYProgress, [0, 0.8], [0.15, 1.2]);
-    const pathLengthThird = useTransform(scrollYProgress, [0, 0.8], [0.1, 1.2]);
-    const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
-    const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
+  const pathLengthFirst = useTransform(scrollYProgress, [0, 0.8], [0.2, 1.2]);
+  const pathLengthSecond = useTransform(scrollYProgress, [0, 0.8], [0.15, 1.2]);
+  const pathLengthThird = useTransform(scrollYProgress, [0, 0.8], [0.1, 1.2]);
+  const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
+  const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
 
-    return (
-        <div>
-            <div className="absolute top-1 left-0 w-full z-50">
-                <div className="flex items-center justify-between px-4 mt-1">
-                    <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
-                    </Link>
-                    <div className="flex-grow px-4 hidden lg:block">
-                        <NavBar />
-                    </div>
-                </div>
-            </div>
-
-            <div
-                className="h-[100vh] bg-black w-full dark:border dark:border-white/[0.1] relative pt-20 overflow-clip"
-                ref={ref}
-            >
-                <GoogleGeminiEffect
-                    pathLengths={[
-                        pathLengthFirst,
-                        pathLengthSecond,
-                        pathLengthThird,
-                        pathLengthFourth,
-                        pathLengthFifth,
-                    ]}
-                />
-            </div>
-            <div >
-                <StickyScroll content={content} />
-            </div>
+  return (
+    <div>
+      <div className="absolute top-1 left-0 w-full z-50">
+        <div className="flex items-center justify-between px-4 mt-1">
+          <Link href="/">
+            <Image
+              src="/UFIRM ESTATES LOGO.png"
+              alt="logo"
+              width={100}
+              height={50}
+              priority
+            />
+          </Link>
+          <NavBar />
         </div>
-    );
+      </div>
+
+      <div
+        className="h-[100vh] sm:h-[100vh] bg-black w-full dark:border dark:border-white/[0.1] relative pt-30 sm:pt-20 overflow-clip"
+        ref={ref}
+      >
+        <GoogleGeminiEffect
+          pathLengths={[
+            pathLengthFirst,
+            pathLengthSecond,
+            pathLengthThird,
+            pathLengthFourth,
+            pathLengthFifth,
+          ]}
+        />
+      </div>
+      <div >
+        <StickyScroll content={content} />
+      </div>
+    </div>
+  );
 }

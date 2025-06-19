@@ -57,9 +57,7 @@ export default function Herosection() {
             height={50}
             priority
           />
-          <div className="flex-grow px-4 hidden lg:block">
             <NavBar />
-          </div>
         </div>
       </div>
     </div>

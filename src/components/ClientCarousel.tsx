@@ -36,28 +36,30 @@ const bottomClients = [
 
 export default function ClientCarousel() {
     return (
-        <section className="relative w-full py-16 bg-gray-50">
-            <div className="text-center mb-10">
-                <h2 className="text-2xl font-semibold text-gray-800">
+        <section className="relative w-full py-10 sm:py-16 bg-gray-50">
+            <div className="text-center mb-8 sm:mb-10 px-4">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
                     Over 500 clients have trusted us with their
                     <br />
-                    <span className="text-3xl font-bold text-black">Real Estate needs across India</span>
+                    <span className="text-2xl sm:text-3xl font-bold text-black">needs across India</span>
                 </h2>
             </div>
             <div className="relative overflow-hidden">
-                <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
-                <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+
+                <div className="pointer-events-none absolute left-0 top-0 h-full w-20 sm:w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+
+                <div className="pointer-events-none absolute right-0 top-0 h-full w-20 sm:w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
                 <InfiniteMovingCards
                     items={topClients}
                     direction="right"
-                    speed="normal"
-                    pauseOnHover={false}
+                    speed="slow"
+                    pauseOnHover={true}
                 />
                 <InfiniteMovingCards
                     items={bottomClients}
                     direction="left"
-                    speed="normal"
-                    pauseOnHover={false}
+                    speed="slow"
+                    pauseOnHover={true}
                 />
             </div>
         </section>

@@ -12,8 +12,7 @@ function OurBusiness() {
     },
     {
       title: "Royal Nest: Projects",
-      description:
-        "Celebrating the past & developing the future",
+      description: "Celebrating the past & developing the future",
       link: "/RoyalNestPage",
     },
     {
@@ -21,16 +20,9 @@ function OurBusiness() {
       description: "The engine driving progress and competitive advantage in Real Estate",
       link: "/OurInnovation",
     },
-    // {
-    //   title: "Technologies",
-    //   description:
-    //     "The engine powering innovation and transformation in technology",
-    //   link: "/TechnologiesPage",
-    // },
     {
       title: "Estates: Management & Advisory",
-      description:
-        "Serving as the backbone of successful Real Estate operations",
+      description: "Serving as the backbone of successful Real Estate operations",
       link: "/Management&advisory",
     },
   ];
@@ -49,15 +41,15 @@ function OurBusiness() {
           <div className="absolute inset-0 bg-black/45" />
         </div>
       </div>
-      <div className="relative z-10 max-w-auto mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-auto mx-auto px-2 sm:px-4 md:px-6"> {/* Adjusted padding */}
         <div className="text-center">
-          <p className="mt-2 md:text-5xl leading-8 font-extrabold tracking-tight text-white sm:text-5xl">
+          <p className="mt-2 text-4xl md:text-5xl leading-8 font-extrabold tracking-tight text-white sm:text-5xl"> {/* Adjusted font size */}
             Our Business
           </p>
         </div>
 
-        <div className="mt-8 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 py-2">
+        <div className="mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 py-2 justify-items-center"> {/* Added justify-items-center for centering cards */}
             {Business.map((item) => (
               <a
                 href={item.link}
@@ -66,18 +58,18 @@ function OurBusiness() {
                 rel="noopener noreferrer"
               >
                 <CardContainer>
-                  <CardBody className="relative bg-slate-700/30 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-40 sm:w-[30rem] h-40  rounded-xl p-6 border ">
+                  <CardBody className="relative bg-slate-700/30 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] lg:w-[30rem] h-40 rounded-xl p-6 border flex flex-col justify-center items-center"> {/* Adjusted width and added flex properties */}
                     <CardItem
                       translateZ="60"
                       as="div"
-                      className="text-xl font-bold text-white dark:text-white text-center items-center"
+                      className="text-xl font-bold text-white dark:text-white text-center"
                     >
                       {item.title}
                     </CardItem>
                     <CardItem
                       as="p"
                       translateZ="60"
-                      className="text-white text-sm max-w-sm mt-6 dark:text-white"
+                      className="text-white text-sm mt-6 dark:text-white text-center max-w-xs" // Added max-w-xs for description
                     >
                       {item.description}
                     </CardItem>
