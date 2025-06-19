@@ -181,7 +181,7 @@ const Footer = () => {
                     Copyright &copy; {new Date().getFullYear()} UFirm Technologies Pvt Ltd. All rights reserved.
                 </p>
                 <div className="flex space-x-6">
-                    <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                    <Link href="/PrivacyPolicypage" className="hover:text-white transition-colors">
                         Privacy Policy
                     </Link>
                     <Link href="/terms-of-use" className="hover:text-white transition-colors">

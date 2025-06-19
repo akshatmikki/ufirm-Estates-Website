@@ -20,9 +20,7 @@ export default function Managementadvisory() {
                             priority
                         />
                     </Link>
-                    <div className="flex-grow px-4 hidden lg:block">
-                        <NavBar />
-                    </div>
+                    <NavBar />
                 </div>
             </div>
             <div className='text-center mt-40 mb-40 text-7xl text-black dark:text-black'>

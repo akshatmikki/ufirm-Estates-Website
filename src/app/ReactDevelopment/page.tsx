@@ -57,9 +57,7 @@ export default function ReactServicesPage() {
                 priority
               />
             </Link>
-            <div className="flex-grow px-4 hidden lg:block">
-              <NavBar />
-            </div>
+<NavBar />
           </div>
         </div>
         <div className="relative z-40 px-10 py-40 md:px-20 md:py-40 ">

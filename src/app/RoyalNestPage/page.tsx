@@ -26,9 +26,7 @@ export default function Royalnest() {
                             priority
                         />
                     </Link>
-                    <div className="flex-grow px-4 hidden lg:block">
-                        <NavBar />
-                    </div>
+                    <NavBar />
                 </div>
             </div>
             <div >
