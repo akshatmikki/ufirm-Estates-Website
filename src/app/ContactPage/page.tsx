@@ -33,13 +33,11 @@ export default function Contact() {
                             priority
                         />
                     </Link>
-                    <div className="flex-grow px-4 hidden lg:block">
-                        <NavBar />
-                    </div>
+                    <NavBar />
                 </div>
             </div>
             <div className="min-h-screen  flex justify-center items-center relative">
-                <div className="absolute right-0 bottom-0 w-full h-full hidden md:block">
+                <div className="absolute right-0 bottom-0 w-full h-full">
                     <Image
                         src="/Contact.jpg"
                         alt="Handshake"

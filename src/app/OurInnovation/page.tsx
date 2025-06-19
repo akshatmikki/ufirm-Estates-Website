@@ -19,9 +19,7 @@ export default function OurInnovation() {
                             priority
                         />
                     </Link>
-                    <div className="flex-grow px-4 hidden lg:block">
-                        <NavBar />
-                    </div>
+                    <NavBar />
                 </div>
             </div>
             <div >
