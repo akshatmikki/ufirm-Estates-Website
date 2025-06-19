@@ -11,7 +11,7 @@ export const StickyScroll = ({
   contentClassName,
 }: {
   content: {
-    id: string; 
+    id: string;
     title: string;
     description: string;
     content?: React.ReactNode;
@@ -61,25 +61,30 @@ export const StickyScroll = ({
       {content.map((item) => (
         <div
           key={item.id}
-          id={item.id} 
-          className="sticky top-[5vh] h-[90vh] w-full max-w-full mx-auto shadow-lg bg-[#243660] p-10 text-white flex flex-col md:flex-row items-center gap-8 mb-5"
+          id={item.id}
+          className="sticky top-[2vh] sm:top-[5vh] h-[95vh] sm:h-[100vh] w-full mx-auto shadow-lg bg-[#243660] p-4 sm:p-10 text-white flex flex-col md:flex-row items-center gap-4 sm:gap-8 mb-5"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="w-full flex flex-col md:flex-row items-center gap-8"
+            className="w-full flex flex-col md:flex-row items-center gap-4 sm:gap-8"
           >
-            <div className="flex-1">
-              <h2 className="text-3xl font-bold">{item.title}</h2>
-              <p className="text-slate-300 mt-4">{item.description}</p>
+            <div className="flex-1 text-center md:text-left"> 
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                {item.title}
+              </h2>
+              <p className="text-sm sm:text-base text-slate-300 mt-2 sm:mt-4">
+                {item.description}
+              </p>
             </div>
             <div
-              className={cn("flex-1 ", contentClassName)}
+              className={cn("flex-1", contentClassName)}
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                maxWidth: "100%", 
               }}
             >
               {item.content ?? null}

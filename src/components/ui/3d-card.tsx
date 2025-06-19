@@ -26,8 +26,10 @@ export const CardContainer = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
 
+  const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 768; 
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobile()) return; 
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
     const x = (e.clientX - left - width / 2) / 25;
@@ -37,7 +39,7 @@ export const CardContainer = ({
 
   const handleMouseEnter = () => {
     setIsMouseEntered(true);
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobile()) return;
   };
 
   const handleMouseLeave = () => {
@@ -45,6 +47,20 @@ export const CardContainer = ({
     setIsMouseEntered(false);
     containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current && isMobile()) {
+        containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        setIsMouseEntered(false); 
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
@@ -86,7 +102,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "h-96 w-auto sm:w-96 md:w-[30rem] [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]", // Adjusted width for responsiveness
         className
       )}
     >
@@ -116,14 +132,16 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-} & React.HTMLAttributes<HTMLElement> 
+} & React.HTMLAttributes<HTMLElement>
 ) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
 
+  const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 768; 
+
   const handleAnimations = () => {
     if (!ref.current) return;
-    if (isMouseEntered) {
+    if (isMouseEntered && !isMobile()) { 
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
@@ -137,7 +155,10 @@ export const CardItem = ({
   return (
     <Tag
       ref={ref}
-      className={cn("w-fit transition duration-200 ease-linear text-center justify-center content-center items-center", className)}
+      className={cn(
+        "w-fit transition duration-200 ease-linear flex flex-col justify-center items-center text-center", // Added flex properties for centering
+        className
+      )}
       {...rest}
     >
       {children}
@@ -145,7 +166,6 @@ export const CardItem = ({
   );
 };
 
-// Create a hook to use the context
 export const useMouseEnter = () => {
   const context = useContext(MouseEnterContext);
   if (context === undefined) {

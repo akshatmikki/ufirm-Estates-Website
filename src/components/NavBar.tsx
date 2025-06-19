@@ -19,40 +19,49 @@ export function NavBar() {
   };
 
   return (
-        <div className={cn("fixed top-8 left-40 right-9 z-40")}>
-      <div className="md:hidden flex justify-between items-center px-4 py-2 bg-black text-white rounded-xl shadow">
-        <h1 className="text-lg font-semibold">Menu</h1>
+    <div className={cn("fixed top-8 z-40 w-full md:left-40 md:right-9 md:w-auto")}>
+      <div className="md:hidden flex justify-end items-center px-4 py-2 text-white rounded-xl shadow z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="focus:outline-none"
+          className="focus:outline-none bg-black/20 p-2 rounded-xl" 
+          title={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          {isMobileMenuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
         </button>
       </div>
-
       {isMobileMenuOpen && (
-        <div className=" bg-black text-white rounded-xl mt-2 p-4 space-y-4 shadow-lg">
-          <a href="https://urest.in/">Facility Management</a>
-          <a href="/RoyalNestPage">Royal Nest Projects</a>
-          <a href="/OurInnovation">Products</a>
-          <div className="ml-4 space-y-2">
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#card-0")}>Facility Management</button>
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#AssetManagement")}>Asset Management</button>
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#InventoryManagement")}>Inventory Management</button>
-            <button onClick={() => navigateWithScroll("/OurInnovation", "#ComplainManagement")}>Complain Management</button>
+        <div className="md:hidden fixed right-0 top-0 bottom-0 w-64 bg-black/70 text-white p-4 space-y-4 shadow-lg z-50 overflow-y-auto transform transition-transform duration-300 ease-in-out">
+          <div className="flex justify-end pt-2">
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="focus:outline-none text-white p-2 rounded"
+              title="Close menu"
+            >
+              <CloseIcon className="h-6 w-6" />
+            </button>
           </div>
-          <a href="/TechnologiesPage">Technical Services</a>
+
+          <a href="https://urest.in/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Facility Management</a>
+          <a href="/RoyalNestPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Royal Nest Projects</a>
+          <a href="/OurInnovation" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Products</a>
           <div className="ml-4 space-y-2">
-            <a href="/ReactDevelopment">React Development</a>
-            <a href="/.NetDevelopment">Dotnet Development</a>
-            <a href="/MobileDevelopment">Mobile Development</a>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#card-0"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Facility Management</button>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#AssetManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Asset Management</button>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#InventoryManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Inventory Management</button>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#ComplainManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Complain Management</button>
           </div>
-          <a href="/Management&advisory">Real Estate Advisory</a>
-          <a href="/CareerPage">Hire</a>
+          <a href="/TechnologiesPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Technical Services</a>
+          <div className="ml-4 space-y-2">
+            <a href="/ReactDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>React Development</a>
+            <a href="/.NetDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Dotnet Development</a>
+            <a href="/MobileDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Mobile Development</a>
+          </div>
+          <a href="/Management&advisory" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Real Estate Advisory</a>
+          <a href="/CareerPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Hire</a>
         </div>
       )}
 
-      {/* Desktop Menu */}
+      {/* Desktop Menu - Only visible on screens 'md' and larger */}
       <div className="hidden md:block">
         <Menu setActive={setActive}>
           <MenuItem setActive={setActive} active={active} item="Facility Management" href="https://urest.in/" />
@@ -96,8 +105,8 @@ export function NavBar() {
           )}
           <MenuItem setActive={setActive} active={active} item="Technical Services" href="/TechnologiesPage" />
           {active === "Technical Services" && (
-            <div className="absolute left-120 text-white mt-7 bg-black/70 shadow-md rounded-lg p-8 z-30 text-sm">
-              <div className="space-y-2"> 
+            <div className="absolute left-1/2 -translate-x-1/2 text-white mt-7 bg-black/70 shadow-md rounded-lg p-8 z-30 text-sm flex">
+              <div className="space-y-2">
                 <ProductItem title="React Development" src="/Navbar/React.jpg" description="" href="/ReactDevelopment" />
                 <ProductItem title="Dotnet Development" src="/Navbar/Dotnet.jpg" description="" href="/.NetDevelopment" />
                 <ProductItem title="Mobile Development" src="/Navbar/Reactnative.jpg" description="" href="/MobileDevelopment" />

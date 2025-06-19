@@ -18,9 +18,7 @@ export default function ProductPage() {
                             priority
                         />
                     </Link>
-                    <div className="flex-grow px-4 hidden lg:block">
-                        <NavBar />
-                    </div>
+                    <NavBar />
                 </div>
             </div>
             <WavyBackground className="max-w-4xl mx-auto pb-40">
