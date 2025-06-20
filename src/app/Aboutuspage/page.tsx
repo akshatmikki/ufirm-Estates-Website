@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { motion } from "framer-motion";
 import { FaBuilding, FaHandshake, FaUsersCog, FaAward, FaGlobeAsia, FaMicrochip } from "react-icons/fa";
 import { NavBar } from "../../components/NavBar";
 
@@ -42,8 +41,6 @@ export default function AboutusPage() {
             desc: "Targeting pan-India smart city integrations with AI-based facility platforms and new regional offices.",
         },
     ];
-
-    const [activeStep, setActiveStep] = useState(0);
 
     return (
         <div className="bg-white text-gray-800">
@@ -93,7 +90,7 @@ export default function AboutusPage() {
                 <div className="text-center mb-14">
                     <h2 className="text-5xl font-bold text-black">Our Legacy</h2>
                     <p className="text-lg max-w-3xl mx-auto mt-4">
-                        From our roots in Delhi NCR, we’ve delivered 8M+ sq. ft. across 4 states. Backed by 100% delivery and award-winning quality.
+                        From our roots in Delhi NCR, we&apos;ve delivered 8M+ sq. ft. across 4 states. Backed by 100% delivery and award-winning quality.
                     </p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-10">
@@ -109,7 +106,7 @@ export default function AboutusPage() {
                     <div className="md:w-1/2 space-y-6">
                         <h2 className="text-3xl font-bold text-black">Expansion Backed by Vision</h2>
                         <p className="text-lg">
-                            Since our inception in 2000 under Omkar Nests Pvt. Ltd., we’ve scaled with integrity.
+                            Since our inception in 2000 under Omkar Nests Pvt. Ltd., we&apos;ve scaled with integrity.
                             Our footprint extends across:
                         </p>
                         <ul className="list-disc pl-5 space-y-2 text-gray-700">
@@ -188,7 +185,7 @@ export default function AboutusPage() {
             <section className="py-20 text-center bg-purple-50 text-black px-6">
                 <h2 className="text-4xl font-bold mb-4">24+ Years of Real Estate Excellence</h2>
                 <p className="text-lg max-w-xl mx-auto mb-6">
-                    Whether you're buying, leasing, or maintaining — choose UFIRM for trust, technology, and transformation.
+                    Whether you&apos;re buying, leasing, or maintaining — choose UFIRM for trust, technology, and transformation.
                 </p>
                 <Link href="/ContactPage">
                     <button className="bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">
