@@ -5,7 +5,7 @@ import React from "react";
 
 const transition = {
   duration: 0,
-  ease: "linear",
+  ease: [0, 0, 1, 1] as [number, number, number, number],
 };
 
 export const GoogleGeminiEffect = ({
