@@ -10,6 +10,8 @@ const slides = [
     title: "A Real Estate Platform driven by an entrepreneurial spirit",
     buttonLabel: "Facility Management",
     href: "https://urest.in/",
+    extraButtonLabel: "Digitalised Facility Management",
+    extraButtonHref: "/OurInnovation",
   },
   {
     src: "/Banners/Banner2.webp",
@@ -57,9 +59,9 @@ export default function Herosection() {
             height={50}
             priority
           />
-          
-            <NavBar />
-          
+
+          <NavBar />
+
         </div>
       </div>
     </div>

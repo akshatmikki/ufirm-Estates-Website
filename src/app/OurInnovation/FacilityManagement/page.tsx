@@ -73,6 +73,38 @@ const content = [
       </div>
     ),
   },
+  {
+    id: "EmployeeManagement",
+    title: "Employee Management",
+    description:
+      "Simplify daily operations and enhance workforce accountability with Urest’s employee management system. From attendance tracking and access control to shift monitoring and real-time reporting—gain the tools you need to run a productive, compliant, and secure workplace. Identify trends, optimize schedules, and support your team with data-driven decisions that drive performance and satisfaction.",
+    content: (
+      <div className="relative w-[510px] h-[250px]">
+        <Image
+          src="/FacilityManagement/Employee.jpeg"
+          alt="Employee"
+          layout="fill"
+          className="object-fill"
+        />
+      </div>
+    ),
+  },
+  {
+    id: "VisitorManagement",
+    title: "Visitor Management",
+    description:
+      "Deliver a seamless first impression while enhancing security using Urest’s advanced visitor management solution. Track visitor check-ins, issue digital badges, and monitor access in real time—all from one platform. With complete visibility and instant insights, you can streamline front-desk operations, maintain compliance, and ensure every guest experience is smooth, safe, and professional.",
+    content: (
+      <div className="relative w-[510px] h-[250px]">
+        <Image
+          src="/Navbar/visitor.jpg"
+          alt="Visitor"
+          layout="fill"
+          className="object-fill"
+        />
+      </div>
+    ),
+  },
 ];
 
 export default function FacilityManagement() {

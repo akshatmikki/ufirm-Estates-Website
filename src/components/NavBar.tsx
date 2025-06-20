@@ -19,7 +19,7 @@ export function NavBar() {
   };
 
   return (
-    <div className={cn("fixed top-8 right-4 z-40 w-auto md:w-auto md:right-20")}>
+    <div className={cn("fixed top-8 right-4 z-40 w-auto md:w-auto md:right-10")}>
       <div className="md:hidden flex justify-end items-center px-4 py-2 text-white rounded-xl shadow z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -49,6 +49,8 @@ export function NavBar() {
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#AssetManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Asset Management</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#InventoryManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Inventory Management</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#ComplainManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Complain Management</button>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#EmployeeManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Employee Management</button>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#VisitorManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Visitor Management</button>
           </div>
           <a href="/TechnologiesPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Technical Services</a>
           <div className="ml-4 space-y-2">
@@ -82,7 +84,7 @@ export function NavBar() {
                     description="Get a full, granular view of your entire inventory, it's consuming and purchase"
                     onClick={() => navigateWithScroll("/OurInnovation", "#InventoryManagement")}
                   />
-                  <ProductItem title="Employee Management" src="/Navbar/Employee.jpg" description="HRMS solution to track attendance, roles, and performance—all in one place" href="/OurInnovation/FacilityManagement" />
+                  <ProductItem title="Employee Management" src="/Navbar/Employee.jpg" description="HRMS solution to track attendance, roles, and performance—all in one place" onClick={() => navigateWithScroll("/OurInnovation", "#EmployeeManagement")} />
                 </div>
                 <div className="space-y-2">
                   <ProductItem
@@ -97,7 +99,7 @@ export function NavBar() {
                     description="Ensure smooth facility operations with real-time complaint resolution"
                     onClick={() => navigateWithScroll("/OurInnovation", "#ComplainManagement")}
                   />
-                  <ProductItem title="Visitor Management" src="/Navbar/visitor.jpg" description="Effortless visitor logging, approvals, and notifications" href="/OurInnovation/FacilityManagement#InventoryManagement" />
+                  <ProductItem title="Visitor Management" src="/Navbar/visitor.jpg" description="Effortless visitor logging, approvals, and notifications" onClick={() => navigateWithScroll("/OurInnovation", "#VisitorManagement")} />
                 </div>
               </div>
             </div>

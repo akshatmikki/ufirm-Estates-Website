@@ -13,15 +13,15 @@ export default function PrivacyPolicy() {
                         <Image
                             src="/UFIRM ESTATES LOGO.png"
                             alt="logo"
-                            width={80}
-                            height={40}
+                            width={100}
+                            height={50}
                             priority
                         />
                     </Link>
                     <NavBar />
                 </div>
             </div>
-            <div className="pt-24 pb-8 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 max-w-6xl mx-auto">
+            <div className="pt-24 pb-8 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 max-w-6xl mx-auto mt-5">
                 <p className="text-center font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">Privacy Policy</p>
                 <p className="text-right text-sm sm:text-base mb-6 ">Last updated 19-06-2025</p>
 
