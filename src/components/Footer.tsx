@@ -46,14 +46,14 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link
-                                href="/about"
+                                href="/Aboutuspage"
                                 className={`transition-colors ${isActive("/about") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
                                 About us
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link
                                 href="/work-with-us"
                                 className={`transition-colors ${isActive("/work-with-us") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
@@ -79,7 +79,7 @@ const Footer = () => {
                             >
                                 Projects
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link
                                 href="/CareerPage"
@@ -114,18 +114,18 @@ const Footer = () => {
                             </a>
                         </li>
                         <li>
-                            <a
-                                href="https://royalnestdharamshala.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-white transition-colors"
-                            >
+                            <Link href="/RoyalNestPage" className="hover:text-white transition-colors">
                                 Royal Nest
-                            </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/OurInnovation" className="hover:text-white transition-colors">
+                                Products
+                            </Link>
                         </li>
                         <li>
                             <Link href="/TechnologiesPage" className="hover:text-white transition-colors">
-                                Technologies
+                                Technical Services
                             </Link>
                         </li>
                         <li>
@@ -184,10 +184,13 @@ const Footer = () => {
                     <Link href="/PrivacyPolicypage" className="hover:text-white transition-colors">
                         Privacy Policy
                     </Link>
-                    <Link href="/terms-of-use" className="hover:text-white transition-colors">
+                    <Link href="/SecurityPolicyPage" className="hover:text-white transition-colors">
+                        Security Policy
+                    </Link>
+                    <Link href="/TermsofUsePage" className="hover:text-white transition-colors">
                         Terms of Use
                     </Link>
-                    <Link href="/site-map" className="hover:text-white transition-colors">
+                    <Link href="/Sitepage" className="hover:text-white transition-colors">
                         Site map
                     </Link>
                 </div>
