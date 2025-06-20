@@ -25,7 +25,7 @@ export default function TermsofUsePage() {
                 <h1 className="text-3xl font-bold mb-6 text-center">Terms of Use</h1>
 
                 <p className="mb-4">
-                    By accessing and using this website (the “Site”), provided by UFIRM Technologies Private Limited (“UFIRM Technologies”), you acknowledge that you have read, understood, and agree to be bound by the following Terms and Conditions. UFIRM Technologies reserves the right to modify these Terms of Use at any time without prior notice. Your continued use of the Site constitutes your acceptance of any changes.
+                    By accessing and using this website (the &quot;Site&quot;), provided by UFIRM Technologies Private Limited (“UFIRM Technologies”), you acknowledge that you have read, understood, and agree to be bound by the following Terms and Conditions. UFIRM Technologies reserves the right to modify these Terms of Use at any time without prior notice. Your continued use of the Site constitutes your acceptance of any changes.
                 </p>
 
                 <h2 className="text-2xl font-semibold mt-8 mb-4">Accuracy of Information</h2>
@@ -48,7 +48,7 @@ export default function TermsofUsePage() {
 
                 <h2 className="text-2xl font-semibold mt-8 mb-4">Disclaimers</h2>
                 <ul className="list-disc ml-6 mb-4">
-                    <li>The Site is provided "as is" without warranties of any kind.</li>
+                    <li>The Site is provided &quot;as is&quot; without warranties of any kind.</li>
                     <li>UFIRM Technologies is not responsible for errors, omissions, or the content of linked third-party sites.</li>
                     <li>No liability is accepted for Site availability, software/equipment compatibility, or damages resulting from its use.</li>
                 </ul>
