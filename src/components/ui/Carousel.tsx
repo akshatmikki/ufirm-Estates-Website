@@ -9,6 +9,8 @@ interface SlideData {
   buttonLabel?: string;
   src: string;
   href?: string;
+  extraButtonLabel?: string;
+  extraButtonHref?: string;
 }
 
 interface SlideProps {
@@ -22,7 +24,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
   const [animate, setAnimate] = useState(false);
 
-  const { src, title, buttonLabel, href } = slide;
+  const { src, title, buttonLabel, href, extraButtonLabel, extraButtonHref } = slide;
   const isCurrent = current === index;
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   return (
     <li
       ref={slideRef}
-      className="relative flex-shrink-0 w-screen h-screen px-7 text-white transition-all duration-2000 ease-in-out cursor-pointer"
+      className="relative flex-shrink-0 w-screen h-[100dvh] min-h-screen px-4 sm:px-6 md:px-8 text-white transition-all duration-2000 ease-in-out cursor-pointer"
       onClick={() => handleSlideClick(index)}
     >
       <div className="absolute inset-0 bg-black/40 z-10" />
@@ -57,24 +59,39 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 
       {isCurrent && (
         <article
-          className={`relative z-20 px-6 lg:px-10 py-8 max-w-2xl text-left flex flex-col justify-center h-full
-            ${animate ? "animate-slide-in-left" : ""}`}
+          className={`relative z-20 px-4 sm:px-6 md:px-10 py-8 max-w-[90%] sm:max-w-2xl text-left flex flex-col justify-center h-full ${
+            animate ? "animate-slide-in-left" : ""
+          }`}
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl sm:text-xl font-bold relative dark:text-white text-white ">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white">
             {title}
           </h2>
-          {href && (
-            <Link
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8"
-            >
-              <Button borderClassName="px-6 py-3 relative w-fit text-left block mx-auto md:mx-0 sm:text-sm text-white bg-black/75 dark:bg-black/75 text-white border-slate-800 dark:border-slate-800 h-18 border border-transparent text-lg " borderRadius="1.75rem">
-                {buttonLabel} <span aria-hidden="true" className="ml-2">&rarr;</span>
-              </Button>
-            </Link>
-          )}
+
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            {href && (
+              <Link href={href} className="w-full sm:w-auto">
+                <Button
+                  className="w-full sm:w-auto text-center"
+                  borderClassName="px-4 sm:px-6 py-3 bg-black/75 dark:bg-black/75 border-slate-800"
+                  borderRadius="1.75rem"
+                >
+                  {buttonLabel} <span className="ml-2">&rarr;</span>
+                </Button>
+              </Link>
+            )}
+
+            {index === 0 && extraButtonLabel && extraButtonHref && (
+              <Link href={extraButtonHref} className="w-full sm:w-auto">
+                <Button
+                  className="w-full sm:w-auto text-center"
+                  borderClassName="px-4 sm:px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 border-slate-800"
+                  borderRadius="1.75rem"
+                >
+                  {extraButtonLabel} <span className="ml-2">&rarr;</span>
+                </Button>
+              </Link>
+            )}
+          </div>
         </article>
       )}
     </li>
@@ -106,7 +123,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden"
+      className="relative w-full h-[100dvh] min-h-screen overflow-hidden"
       aria-labelledby={`carousel-heading-${id}`}
     >
       <ul
@@ -127,13 +144,14 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
         ))}
       </ul>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-30">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => handleSlideClick(index)}
-            className={`w-2 h-2 rounded-full ${index === current ? "bg-white scale-125" : "bg-white/40"
-              } transition transform duration-200`}
+            className={`w-2.5 h-2.5 rounded-full ${
+              index === current ? "bg-white scale-125" : "bg-white/40"
+            } transition-transform duration-200`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
