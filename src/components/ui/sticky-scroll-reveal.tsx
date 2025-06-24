@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Button } from "./Button";
 import { motion } from "framer-motion";
 
 function cn(...inputs: (string | undefined | null | boolean)[]) {
@@ -70,13 +72,20 @@ export const StickyScroll = ({
             transition={{ duration: 0.2 }}
             className="w-full flex flex-col md:flex-row items-center gap-4 sm:gap-8"
           >
-            <div className="flex-1 text-center md:text-left"> 
+            <div className="flex-1 text-center md:text-left">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold">
                 {item.title}
               </h2>
               <p className="text-sm sm:text-base text-slate-300 mt-2 sm:mt-4">
                 {item.description}
               </p>
+              <div className="mt-6">
+              <Link href="https://calendly.com/bhavesh-singh-ufirm" target="_blank"
+                rel="noopener noreferrer"><Button
+                className="w-full sm:w-auto text-center"
+                borderClassName="px-4 sm:px-6 py-3 bg-black/75 dark:bg-black/75 border-slate-800"
+                borderRadius="1.75rem"
+              >Book a Demo <span className="ml-2">&rarr;</span></Button></Link></div>
             </div>
             <div
               className={cn("flex-1", contentClassName)}
@@ -84,7 +93,7 @@ export const StickyScroll = ({
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                maxWidth: "100%", 
+                maxWidth: "100%",
               }}
             >
               {item.content ?? null}
