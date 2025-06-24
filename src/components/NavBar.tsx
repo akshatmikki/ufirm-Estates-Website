@@ -19,7 +19,7 @@ export function NavBar() {
   };
 
   return (
-    <div className={cn("fixed top-8 right-4 z-40 w-auto md:w-auto md:right-10")}>
+    <div className={cn("fixed top-8 right-4 z-40 w-auto md:w-auto md:right-35")}>
       <div className="md:hidden flex justify-end items-center px-4 py-2 text-white rounded-xl shadow z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
