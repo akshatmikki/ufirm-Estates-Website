@@ -23,10 +23,10 @@ export const GoogleGeminiEffect = ({
 }) => {
   return (
     <div className={cn("absolute top-[30%] w-full bottom-40 md:bottom-20", className)}>
-      <p className="text-2xl md:text-3xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
+      <p className="text-lg md:text-xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
         {title1 || <i>Optimizing Operations with UREST&apos;s </i>}
       </p>
-      <p className="text-4xl md:text-4xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
+      <p className="text-2xl md:text-4xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
         {title2 || <i><b>Computerized Maintenance Management Systems</b></i>}
       </p>
       <p className="text-xs md:text-xs font-normal text-center text-neutral-400 mt-4 max-w-xs mx-auto border-b-2 border-t-2" >
