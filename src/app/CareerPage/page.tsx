@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function CareersPage() {
     const [search, setSearch] = useState("");
+
     const jobs = [
         {
             title: "Safety Officer",
@@ -40,7 +41,8 @@ export default function CareersPage() {
                     <NavBar />
                 </div>
             </div>
-            <div >
+
+            <div>
                 <div className="relative">
                     <Image
                         src="/Career.jpg"
@@ -75,7 +77,6 @@ export default function CareersPage() {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
-
                         {filteredJobs.map((job, idx) => (
                             <div
                                 key={idx}
@@ -105,6 +106,31 @@ export default function CareersPage() {
                     </div>
                 </div>
 
+                <div className="bg-white py-16 px-6 text-black">
+                    <h2 className="text-center text-3xl font-bold mb-4">Internship Programs</h2>
+                    <hr className="w-16 border-t-2 border-yellow-500 mx-auto mb-8" />
+                    <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-gray-100 p-6 rounded shadow">
+                            <h3 className="text-xl font-bold mb-2">Marketing Intern</h3>
+                            <p className="mb-2">Duration: 3 Months</p>
+                            <p className="mb-2">Location: Remote / Bangalore</p>
+                            <p className="mb-2">Stipend: ₹10,000/month</p>
+                            <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                                Apply Now
+                            </button>
+                        </div>
+                        <div className="bg-gray-100 p-6 rounded shadow">
+                            <h3 className="text-xl font-bold mb-2">Software Development Intern</h3>
+                            <p className="mb-2">Duration: 6 Months</p>
+                            <p className="mb-2">Location: Hybrid (Bangalore)</p>
+                            <p className="mb-2">Stipend: ₹15,000/month</p>
+                            <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                                Apply Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="py-16 px-6 bg-gray-100">
                     <h2 className="text-center text-3xl font-bold mb-4 text-black">Employee Experiences</h2>
                     <hr className="w-16 border-t-2 border-yellow-500 mx-auto mb-8" />
@@ -125,7 +151,7 @@ export default function CareersPage() {
                                 </div>
                             </div>
                             <p className="text-gray-700">
-                                I started my journey with UFirm 12 years ago as a field officer. UFirm feels like my own company... It&apos;s a fun place to work.
+                                I started my journey with UFirm 12 years ago as a field officer. UFirm feels like my own company... It's a fun place to work.
                             </p>
                         </div>
 
