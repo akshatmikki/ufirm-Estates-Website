@@ -5,9 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaBuilding, FaHandshake, FaUsersCog, FaAward, FaGlobeAsia, FaMicrochip } from "react-icons/fa";
+import {
+    FaBuilding,
+    FaHandshake,
+    FaUsersCog,
+    FaAward,
+    FaGlobeAsia,
+    FaMicrochip,
+    FaUsers,
+    FaGlobe,
+    FaCoins,
+} from "react-icons/fa";
 import { NavBar } from "../../components/NavBar";
-
 
 export default function AboutusPage() {
     useEffect(() => {
@@ -132,7 +141,7 @@ export default function AboutusPage() {
             </section>
 
             {/* Subdivisions - Tech and Real Estate */}
-            <section className="py-20 px-6 md:px-20 bg-purple-50">
+            <section className="py-20 px-6 md:px-20 bg-[#e6f3f8]">
                 <div className="text-center mb-14">
                     <h2 className="text-5xl font-bold text-black">Our Divisions</h2>
                     <p className="text-lg max-w-3xl mx-auto mt-4">
@@ -162,33 +171,97 @@ export default function AboutusPage() {
                     />
                 </div>
             </section>
-            
-            <section className="bg-white py-20 px-6 md:px-20">
+
+            <section className="py-20 px-6 md:px-20 bg-gradient-to-br from-[#e6f3f8] via-white to-[#e6f3f8] text-black">
+                <div className="text-center mb-12">
+                    <h2 className="text-5xl font-bold">Our Vision & Mission</h2>
+                    <p className="text-gray-700 text-lg mt-4 font-medium">We deeply care for...</p>
+                    <div className="flex justify-center gap-8 mt-2">
+                        <div className="flex flex-col items-center">
+                            <FaUsers className="text-[#146995] text-4xl mb-2" />
+                            <span className="text-sm font-semibold text-gray-600">People</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <FaGlobe className="text-green-600 text-4xl mb-2" />
+                            <span className="text-sm font-semibold text-gray-600">Planet</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <FaCoins className="text-yellow-500 text-4xl mb-2" />
+                            <span className="text-sm font-semibold text-gray-600">Profits</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mb-12 bg-white/70 p-6 rounded-xl shadow-lg">
+                    <h3 className="text-2xl font-bold mb-2" style={{ color: "#146995" }}>VISION</h3>
+                    <h4 className="text-xl font-semibold mb-3">“Manage, Maintain, Enhance Estates”</h4>
+                    <p className="text-gray-800 leading-relaxed">
+                        We manage, maintain, and enhance estates with a focus on people, process, sustainability and technology.
+                        We start by building a strong partnership with clients to ensure seamless facility management.
+                        Next, we provide comprehensive maintenance to keep everything running smoothly.
+                        Finally, we enhance each property by integrating smart solutions and green building practices
+                        to elevate its value, sustainability and performance.
+                    </p>
+                </div>
+
+                <div className="bg-white/70 p-6 rounded-xl shadow-lg">
+                    <h3 className="text-2xl font-bold mb-2" style={{ color: "#146995" }}>MISSION</h3>
+                    <h4 className="text-xl font-semibold mb-3">
+                        “On mission to manage, maintain, and enhance estates while caring for people, planet, and profits.”
+                    </h4>
+                    <p className="text-gray-800 leading-relaxed">
+                        Create value by consciously managing, maintaining, and enhancing estates.
+                        We focus on building strong client relationships, providing efficient maintenance,
+                        and improving properties through smart, sustainable solutions.
+                        By caring for People, protecting the Planet, and driving Profits, we ensure long-term success
+                        and positive impact for all our stakeholders.
+                    </p>
+                </div>
+            </section>
+
+            <section className="bg-white py-20 ">
                 <h2 className="text-3xl font-bold text-black mb-12 text-center">UFIRM Roadmap</h2>
 
-                <div className="overflow-x-auto">
-                    <div className="flex gap-6 min-w-full px-2 md:px-6 pb-4">
-                        {roadmapSteps.map((step, index) => (
-                            <div
-                                key={index}
-                                className="min-w-[250px] md:min-w-[300px] bg-purple-50 border border-purple-200 rounded-xl p-6 text-left shadow-md hover:shadow-xl transition duration-300"
-                            >
-                                <h3 className="text-xl font-bold text-black mb-2">{step.year} – {step.title}</h3>
-                                <p className="text-gray-700 text-sm">{step.desc}</p>
+                <div className="w-full overflow-x-auto">
+                    <div className="relative inline-block">
+                        <div className="min-w-[1600px] relative z-10">
+                            <div className="flex gap-10 px-10">
+                                {roadmapSteps.map((item, idx) => (
+                                    <div key={idx} className="w-[300px] shrink-0">
+                                        {item.title && (
+                                            <span className="text-xs text-white bg-yellow-500 px-2 py-1 rounded uppercase">
+                                                {item.title}
+                                            </span>
+                                        )}
+                                        <h3 className="text-xl font-bold mt-2">{item.year}</h3>
+                                        <p className="text-gray-700 mt-2">{item.desc}</p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+
+                            <div className="flex overflow-hidden h-[200px]">
+                                {[...Array(10)].map((_, i) => (
+                                    <img
+                                        key={i}
+                                        src="/Aboutus/skyline.jpg"
+                                        alt="Skyline"
+                                        className="h-full object-contain"
+                                        style={{ flexShrink: 0 }}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-20 text-center bg-purple-50 text-black px-6">
+            <section className="py-20 text-center bg-[#e6f3f8] text-black px-6">
                 <h2 className="text-4xl font-bold mb-4">24+ Years of Real Estate Excellence</h2>
                 <p className="text-lg max-w-xl mx-auto mb-6">
                     Whether you&apos;re buying, leasing, or maintaining — choose UFIRM for trust, technology, and transformation.
                 </p>
                 <Link href="/ContactPage">
-                    <button className="bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">
+                    <button className="bg-white text-[#146995] font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">
                         Get in Touch
                     </button>
                 </Link>
@@ -200,10 +273,9 @@ export default function AboutusPage() {
 function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
     return (
         <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
-            <div className="text-purple-700 text-5xl mb-4">{icon}</div>
+            <div className="text-[#146995] text-5xl mb-4">{icon}</div>
             <h3 className="text-2xl font-semibold mb-2">{title}</h3>
             <p className="text-gray-600 text-base">{desc}</p>
         </div>
     );
 }
-
