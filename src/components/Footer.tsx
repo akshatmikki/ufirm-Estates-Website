@@ -110,12 +110,12 @@ const Footer = () => {
                                 rel="noopener noreferrer"
                                 className="hover:text-white transition-colors"
                             >
-                                Urest
+                                Facility Management
                             </a>
                         </li>
                         <li>
                             <Link href="/RoyalNestPage" className="hover:text-white transition-colors">
-                                Royal Nest
+                                Royal Nest Projects
                             </Link>
                         </li>
                         <li>
@@ -130,7 +130,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link href="/real-estate-development" className="hover:text-white transition-colors">
-                                Estates
+                                Real Estates Advisory
                             </Link>
                         </li>
                     </ul>

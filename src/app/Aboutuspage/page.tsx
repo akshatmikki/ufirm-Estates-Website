@@ -59,8 +59,8 @@ export default function AboutusPage() {
                         <Image
                             src="/UFIRM ESTATES LOGO.png"
                             alt="logo"
-                            width={120}
-                            height={60}
+                            width={100}
+                            height={50}
                             priority
                         />
                     </Link>
@@ -94,7 +94,6 @@ export default function AboutusPage() {
                 </p>
             </section>
 
-            {/* Legacy Section */}
             <section className="py-20 px-6 md:px-20 bg-gray-50">
                 <div className="text-center mb-14">
                     <h2 className="text-5xl font-bold text-black">Our Legacy</h2>
@@ -109,7 +108,6 @@ export default function AboutusPage() {
                 </div>
             </section>
 
-            {/* Project Showcase */}
             <section className="py-20 px-6 md:px-20">
                 <div className="flex flex-col md:flex-row items-center gap-10">
                     <div className="md:w-1/2 space-y-6">
@@ -140,7 +138,6 @@ export default function AboutusPage() {
                 </div>
             </section>
 
-            {/* Subdivisions - Tech and Real Estate */}
             <section className="py-20 px-6 md:px-20 bg-[#e6f3f8]">
                 <div className="text-center mb-14">
                     <h2 className="text-5xl font-bold text-black">Our Divisions</h2>
@@ -219,9 +216,8 @@ export default function AboutusPage() {
                 </div>
             </section>
 
-            <section className="bg-white py-20 ">
+            <section className="bg-white py-10 ">
                 <h2 className="text-3xl font-bold text-black mb-12 text-center">UFIRM Roadmap</h2>
-
                 <div className="w-full overflow-x-auto">
                     <div className="relative inline-block">
                         <div className="min-w-[1600px] relative z-10">
