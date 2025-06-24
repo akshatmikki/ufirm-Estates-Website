@@ -52,8 +52,10 @@ const AboutUs = () => {
             rel="noopener noreferrer"
             className="w-fit text-left block mx-auto md:mx-0"
           >
-            <Button borderRadius="1.75rem" className="bg-black/75 dark:bg-black/75 text-white border-slate-800 text-sm">
-              Read More <span aria-hidden="true">&rarr;</span>
+            <Button className="w-full sm:w-auto text-center"
+              borderClassName="px-4 sm:px-6 py-3 bg-black/75 dark:bg-black/75 border-slate-800"
+              borderRadius="1.75rem">
+              Read More <span className="ml-2" aria-hidden="true">&rarr;</span>
             </Button>
           </Link>
           <div className="flex flex-wrap gap-2 mt-4">
