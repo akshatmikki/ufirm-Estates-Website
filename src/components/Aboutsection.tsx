@@ -47,9 +47,7 @@ const AboutUs = () => {
           </p>
 
           <Link
-            href="/about"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/Aboutuspage"
             className="w-fit text-left block mx-auto md:mx-0"
           >
             <Button className="w-full sm:w-auto text-center"
