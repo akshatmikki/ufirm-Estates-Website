@@ -4,6 +4,7 @@ import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving";
+import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 
 const Photos = [
     { src: "/Royal nest/Drawingroom.png", alt: "Drawing Room" },
@@ -31,20 +32,25 @@ export default function Royalnest() {
             </div>
             <div >
                 <div className="relative">
-                    <Image
-                        src="/Royalnest.jpg"
-                        alt="construction photo"
-                        width={1600}
-                        height={900}
-                        className="w-full h-[80vh] object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-left px-10">
-                        <div className="bg-white shadow-xl p-8 rounded text-center max-w-lg">
-                            <h1 className="text-3xl font-bold mb-4 text-black">Royal Nest Projects</h1>
+                    <video
+                        width="100%"
+                        height="70%"
+                        autoPlay={true}
+                        muted
+                        loop
+                        className="shadow-md object-cover h-[70vh] md:h-[60vh] lg:h-[80vh] w-full bg-black/30"
+                    >
+                        <source src="/Royal nest/industrial-building.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                      <div className="absolute inset-0 bg-black/45"></div>
+                    <div className="absolute inset-0 flex items-center justify-center p-4 md:p-10">
+                        <div className="shadow-xl p-4 rounded-xl text-center max-w-full bg-opacity-50">
+                            <h1 className="text-6xl font-bold mb-4 sm:mt-4"><TextGenerateEffect words="Royal Nest Projects" /></h1>
                             <hr className="w-30 border-t-2 border-yellow-500 mx-auto mb-4" />
-                            <p className="text-lg text-gray-700">
-                                For over two decades, Royal Nest Group has quietly yet steadfastly made its mark on North India real estate landscape.
-                            </p>
+                            <strong className="text-sm sm:text-base md:text-2xl">
+                                <TextGenerateEffect words="For over two decades, Royal Nest Group has quietly yet steadfastly made its mark on North India real estate landscape." />
+                            </strong>
                         </div>
                     </div>
                 </div>
@@ -73,11 +79,11 @@ export default function Royalnest() {
                     </button>
                     <video
                         width="100%"
-                        height="90%"
+                        height="70%"
                         autoPlay={true}
                         muted
                         loop
-                        className="shadow-md mt-5 mb-2"
+                        className="shadow-md object-cover h-[40vh] md:h-[60vh] lg:h-[80vh] w-full mt-4"
                     >
                         <source src="/Royal nest/Dharamshala.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
@@ -120,10 +126,10 @@ export default function Royalnest() {
                                 </Link> */}
                             </div>
                             <Link href="https://royalnestdharamshala.com/" target="_blank"
-                rel="noopener noreferrer">
-                            <button className="bg-yellow-400 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-300">
-                                Take a deeper look →
-                            </button>
+                                rel="noopener noreferrer">
+                                <button className="bg-yellow-400 text-black px-6 py-3 rounded-md font-medium hover:bg-yellow-300">
+                                    Take a deeper look →
+                                </button>
                             </Link>
                         </div>
                     </div>
