@@ -41,7 +41,7 @@ export function InfiniteMovingCards({
             <Image
               src={item.src}
               alt={item.alt}
-              width={120}
+              width={80}
               height={60}
               className="object-contain h-full w-full"
             />
