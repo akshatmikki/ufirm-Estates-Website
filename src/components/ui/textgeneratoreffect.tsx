@@ -41,7 +41,7 @@ export const TextGenerateEffect = ({
                             className="dark:text-white text-white opacity-0"
                             style={{
                                 filter: filter ? "blur(10px)" : "none",
-                                textShadow: "2px 2px 8px rgba(0,0,0,0.6)",
+                                textShadow: "4px 4px 10px rgba(0,0,0,0.6)",
                             }}
                         >
                             {word}{" "}
