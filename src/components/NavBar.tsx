@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
@@ -41,9 +42,9 @@ export function NavBar() {
             </button>
           </div>
 
-          <a href="https://urest.in/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Facility Management</a>
-          <a href="/RoyalNestPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Royal Nest Projects</a>
-          <a href="/OurInnovation" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Products</a>
+          <Link href="https://urest.in/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Facility Management</Link>
+          <Link href="/RoyalNestPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Royal Nest Projects</Link>
+          <Link href="/OurInnovation" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Products</Link>
           <div className="ml-4 space-y-2">
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#card-0"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Facility Management</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#AssetManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Asset Management</button>
@@ -52,19 +53,19 @@ export function NavBar() {
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#EmployeeManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Employee Management</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#VisitorManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Visitor Management</button>
           </div>
-          <a href="/TechnologiesPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Technical Services</a>
+          <Link href="/TechnologiesPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Technical Services</Link>
           <div className="ml-4 space-y-2">
-            <a href="/ReactDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>React Development</a>
-            <a href="/.NetDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Dotnet Development</a>
-            <a href="/MobileDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Mobile Development</a>
+            <Link href="/ReactDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>React Development</Link>
+            <Link href="/.NetDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Dotnet Development</Link>
+            <Link href="/MobileDevelopment" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Mobile Development</Link>
           </div>
-          <a href="/Management&advisory" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Real Estate Advisory</a>
-          <a href="/CareerPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Hire</a>
-          <a href="/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Login</a>
+          <Link href="/Management&advisory" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Real Estate Advisory</Link>
+          <Link href="/CareerPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Hire</Link>
+          <Link href="/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
           <div className="ml-4 space-y-2">
-            <a href="https://admin.urest.in:9056/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>AOA Login</a>
-            <a href="https://admin.urest.in:8097/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Supervisor Login</a>
-            <a href="https://ufirm.in/Account/Login" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Facility Management Login</a>
+            <Link href="https://admin.urest.in:9056/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>AOA Login</Link>
+            <Link href="https://admin.urest.in:8097/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Supervisor Login</Link>
+            <Link href="https://ufirm.in/Account/Login" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Facility Management Login</Link>
           </div>
         </div>
       )}
