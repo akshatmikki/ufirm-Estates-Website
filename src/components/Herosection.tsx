@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
+import { Login } from "@/components/Login";
 import Image from "next/image";
 import { Carousel } from "@/components/ui/Carousel";
 
@@ -20,19 +21,19 @@ const slides = [
     href: "/RoyalNestPage",
   },
   {
-    src: "/Banners/Product.jpeg",
+    src: "/Banners/Banner3.jpg",
     title: "The engine driving progress and competitive advantage in Real Estate",
     buttonLabel: "Our Product",
     href: "/OurInnovation",
   },
   {
-    src: "/Banners/Banner3.jpg",
+    src: "/Banners/Banner 4.jpg",
     title: "The engine powering innovation and transformation in technology",
     buttonLabel: "Technical Services",
     href: "/TechnologiesPage",
   },
   {
-    src: "/Banners/Banner4.jpg",
+    src: "/Banners/Banner5.webp",
     title: "Serving as the backbone of successful Real Estate operations",
     buttonLabel: "Real Estate Advisory",
     href: "/Management&advisory",
@@ -59,9 +60,8 @@ export default function Herosection() {
             height={50}
             priority
           />
-
           <NavBar />
-
+          <Login />
         </div>
       </div>
     </div>

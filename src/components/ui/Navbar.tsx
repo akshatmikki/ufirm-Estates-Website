@@ -29,7 +29,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   active,
   item,
   href,
-  description,
+  // description,
   children,
 }) => {
   return (
@@ -37,14 +37,13 @@ export const MenuItem: React.FC<MenuItemProps> = ({
       <Link href={href}>
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-white hover:opacity-90 text-sm"
+        className="cursor-pointer text-white text-sm"
       >
         {item}
       </motion.p>
       </Link>
 
-      {/* Interactive, floating description */}
-      {active === item && description && (
+      {/* {active === item && description && (
         <motion.div
           initial={{ opacity: 0, y: 6, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -53,18 +52,18 @@ export const MenuItem: React.FC<MenuItemProps> = ({
         >
           {description}
         </motion.div>
-      )}
+      )} */}
 
       {/* Optional submenu content */}
       {active === item && children && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}
+          // initial={{ opacity: 0, scale: 0.85, y: 10 }}
+          // animate={{ opacity: 1, scale: 1, y: 0 }}
+          // transition={transition}
         >
-          <div className="absolute top-[calc(100%_+_3.5rem)] left-1/2 transform -translate-x-1/2 z-10">
+          <div className="fixed   z-10">
             <motion.div
-              transition={transition}
+              // transition={transition}
               layoutId="active"
               className="bg-black/30 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
             >
@@ -157,7 +156,7 @@ export const HoveredLink: React.FC<HoveredLinkProps> = ({
   return (
     <Link
       {...rest}
-      className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500"
+      className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500 relative text-center"
     >
       {children}
     </Link>
