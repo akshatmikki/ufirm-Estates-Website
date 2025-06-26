@@ -6,14 +6,15 @@ import { NavBar } from "@/components/NavBar";
 import { BackgroundGradient } from "@/components/ui/Background-gradient";
 import { BackgroundBeams } from "@/components/ui/Background-beams";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
-import { Button } from "@/components/ui/Button"; 
+import { Boxes } from "@/components/ui/backgorund-boxes";
+import { Button } from "@/components/ui/Button";
 
 const technologies = [
     {
         title: ".NET Development",
         slug: "NetDevelopment",
         description: "Scalable and secure enterprise solutions built on Microsoft’s .NET framework.",
-        icon: "/Technical Services/dotnet.png", 
+        icon: "/Technical Services/dotnet.png",
     },
     {
         title: "React Development",
@@ -46,15 +47,28 @@ export default function TechnologiesPage() {
                     <NavBar />
                 </div>
             </div>
-
-            <div className="relative">
+            <div className="h-[60vh] md:h-[60vh] lg:h-[80vh] relative w-full overflow-hidden bg-slate-900 flex flex-col items-start justify-center rounded-lg">
+                <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent)] pointer-events-none" />
+                <Boxes />
+                <div className="flex flex-row p-7 px-25 mt-15">
+                    <div className="flex flex-col mt-15">
+                        <p className="text-sm sm:text-base md:text-lg leading-relaxed">
+                            <TextGenerateEffect words="We provide end-to-end technical services—from web and mobile app development to enterprise cloud solutions—built with cutting-edge tools like .NET, React, and React Native." />
+                        </p>
+                    </div>
+                    <div className="flex flex-col">
+                    <Image src="/Technical Services/technical.png" alt="tech" height={900} width={900}  priority className="z-80"/>
+                    </div>
+                </div>
+            </div>
+            {/* <div className="relative">
                 <video
                     width="100%"
                     height="auto"
                     autoPlay
                     muted
                     loop
-                    className="shadow-md object-cover h-[60vh] md:h-[60vh] lg:h-[80vh] w-full bg-black/30"
+                    className="shadow-md object-cover h-[60vh] md:h-[60vh] lg:h-[80vh] w-full"
                 >
                     <source src="/techno.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
@@ -67,7 +81,7 @@ export default function TechnologiesPage() {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="relative z-40 px-4 pt-5 pb-20 bg-black/60">
                 <BackgroundBeams />
                 <div className="mt-5 mx-auto max-w-5xl relative z-50 px-2">
