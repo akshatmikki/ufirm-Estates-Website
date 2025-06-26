@@ -5,7 +5,7 @@ import { Menu, MenuItem, HoveredLink } from "./ui/Navbar";
 export function Login() {
     const [active, setActive] = useState<string | null>(null);
     return (
-        <div className="fixed top-8 right-4 z-40">
+        <div className="fixed top-8 right-4">
             <div className="hidden md:block">
                 <Menu setActive={setActive}>
                     <MenuItem setActive={setActive} active={active} item="Login" href="/" />
