@@ -20,7 +20,7 @@ type MenuItemProps = {
   active: string | null;
   item: string;
   href: string;
-  description?: string;
+  //description?: string;
   children?: React.ReactNode;
 };
 
@@ -61,7 +61,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
           // animate={{ opacity: 1, scale: 1, y: 0 }}
           // transition={transition}
         >
-          <div className="fixed   z-10">
+          <div className="fixed z-10">
             <motion.div
               // transition={transition}
               layoutId="active"
@@ -151,11 +151,11 @@ type HoveredLinkProps = LinkProps &
 
 export const HoveredLink: React.FC<HoveredLinkProps> = ({
   children,
-  ...rest
+  href,
 }) => {
   return (
     <Link
-      {...rest}
+      href={href}
       className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500 relative text-center"
     >
       {children}
