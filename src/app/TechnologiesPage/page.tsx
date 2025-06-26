@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/Button";
 const technologies = [
     {
         title: ".NET Development",
-        slug: "NetDevelopment",
+        slug: ".NetDevelopment",
         description: "Scalable and secure enterprise solutions built on Microsoft’s .NET framework.",
         icon: "/Technical Services/dotnet.png",
     },
@@ -23,7 +23,7 @@ const technologies = [
     },
     {
         title: "Mobile App Development",
-        slug: "MobileAppDevelopment",
+        slug: "MobileDevelopment",
         description: "Cross-platform apps for iOS and Android with seamless UX.",
         icon: "/Technical Services/react-native.png",
     },
