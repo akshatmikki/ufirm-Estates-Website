@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
 
-const transition = {
-  type: "spring",
-  mass: 0.5,
-  damping: 11.5,
-  stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
-} as const;
+// const transition = {
+//   type: "spring",
+//   mass: 0.5,
+//   damping: 11.5,
+//   stiffness: 100,
+//   restDelta: 0.001,
+//   restSpeed: 0.001,
+// } as const;
 
 
 type MenuItemProps = {
