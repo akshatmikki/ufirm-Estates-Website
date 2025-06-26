@@ -120,7 +120,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link href="/OurInnovation" className="hover:text-white transition-colors">
-                                Products
+                                Facility Tech
                             </Link>
                         </li>
                         <li>

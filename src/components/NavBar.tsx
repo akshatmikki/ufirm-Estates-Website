@@ -11,11 +11,11 @@ export function NavBar() {
   const router = useRouter();
 
   const navigateWithScroll = (path: string, hash: string) => {
-    router.push(path); 
+    router.push(path);
     setTimeout(() => {
       const el = document.querySelector(hash);
       if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 500); 
+    }, 500);
   };
 
   return (
@@ -23,7 +23,7 @@ export function NavBar() {
       <div className="md:hidden flex justify-end items-center px-4 py-2 text-white rounded-xl shadow z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="focus:outline-none bg-black/20 p-2 rounded-xl" 
+          className="focus:outline-none bg-black/20 p-2 rounded-xl"
           title={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMobileMenuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
@@ -60,37 +60,91 @@ export function NavBar() {
           </div>
           <a href="/Management&advisory" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Real Estate Advisory</a>
           <a href="/CareerPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Hire</a>
+          <a href="/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Login</a>
+          <div className="ml-4 space-y-2">
+            <a href="https://admin.urest.in:9056/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>AOA Login</a>
+            <a href="https://admin.urest.in:8097/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Supervisor Login</a>
+            <a href="https://ufirm.in/Account/Login" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Facility Management Login</a>
+          </div>
         </div>
       )}
 
       <div className="hidden md:block">
         <Menu setActive={setActive}>
           <MenuItem setActive={setActive} active={active} item="Facility Management" href="https://urest.in/" />
-          <MenuItem setActive={setActive} active={active} item="Royal Nest Projects" href="/RoyalNestPage" />
-          <MenuItem setActive={setActive} active={active} item="Products" href="/OurInnovation" />
-          {active === "Products" && (
-            <div className="absolute left-20 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <div className="flex space-x-2">
-                <div className="space-y-2">
+          {active === "Facility Management" && (
+            <div className="absolute text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
+              <div className="flex flex-row">
+                <div className="flex flex-col">
                   <ProductItem
-                    title="Facility Management"
-                    src="/Navbar/Dashboard.jpg"
-                    description="#1 AI-Powered CMMS for Maintenance Teams"
-                    onClick={() => navigateWithScroll("/OurInnovation", "#card-0")}
+                    title="Green Building Services"
+                    src="/Navbar/greenbuildingservices.jpg"
+                    description="Eco-friendly buildings with green solutions"
                   />
+                  <ProductItem
+                    title="Technical Maintenance"
+                    src="/Navbar/Technicalmaintenance.jpeg"
+                    description="End-to-end facility technical care"
+                  />
+                  <ProductItem
+                    title="Deep cleaning & HK"
+                    src="/Navbar/Deepcleaning.jpg"
+                    description="Expert cleaning, hygiene, and care"
+                  />
+                </div>
+
+                <div className="flex flex-col ml-4">
+                  <ProductItem
+                    title="Integrated Facility Mgmt"
+                    src="/Navbar/Dashboard.jpg"
+                    description="Tech-enabled facility management services"
+                  />
+                  <ProductItem
+                    title="Horticulture Services"
+                    src="/Navbar/horticulture.webp"
+                    description="Sustainable gardens, greener tomorrow"
+                  />
+                  <ProductItem
+                    title="Club & Pool Mgmt"
+                    src="/Navbar/pool.webp"
+                    description="Smooth operations, vibrant communities"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+          <MenuItem setActive={setActive} active={active} item="Royal Nest Projects" href="/RoyalNestPage" />
+          <MenuItem setActive={setActive} active={active} item="Facility Tech" href="/OurInnovation" />
+          {active === "Facility Tech" && (
+            <div className="absolute left-20 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
+               <h2 className="text-xl text-center mb-6">Facility Management</h2>
+              <div className="flex flex-row">
+                <div className="flex flex-col">
                   <ProductItem
                     title="Inventory Management"
                     src="/Navbar/Inventory.jpg"
-                    description="Get a full, granular view of your entire inventory, it's consuming and purchase"
+                    description="Granular inventory and purchase tracking"
                     onClick={() => navigateWithScroll("/OurInnovation", "#InventoryManagement")}
                   />
-                  <ProductItem title="Employee Management" src="/Navbar/Employee.jpg" description="HRMS solution to track attendance, roles, and performance—all in one place" onClick={() => navigateWithScroll("/OurInnovation", "#EmployeeManagement")} />
+                  <ProductItem
+                    title="Employee Management"
+                    src="/Navbar/Employee.jpg"
+                    description="Unified HRMS for team management"
+                    onClick={() => navigateWithScroll("/OurInnovation", "#EmployeeManagement")}
+                  />
+                  <ProductItem
+                    title="Visitor Management"
+                    src="/Navbar/visitor.jpg"
+                    description="Effortless visitor logging, approvals, and notifications"
+                    onClick={() => navigateWithScroll("/OurInnovation", "#VisitorManagement")}
+                  />
                 </div>
-                <div className="space-y-2">
+
+                <div className="flex flex-col ml-4">
                   <ProductItem
                     title="Asset Management"
                     src="/Navbar/Asset.jpg"
-                    description="Digitize your asset lifecycle—from acquisition, maintenance to disposal"
+                    description="Digital control of asset lifecycle"
                     onClick={() => navigateWithScroll("/OurInnovation", "#AssetManagement")}
                   />
                   <ProductItem
@@ -99,7 +153,6 @@ export function NavBar() {
                     description="Ensure smooth facility operations with real-time complaint resolution"
                     onClick={() => navigateWithScroll("/OurInnovation", "#ComplainManagement")}
                   />
-                  <ProductItem title="Visitor Management" src="/Navbar/visitor.jpg" description="Effortless visitor logging, approvals, and notifications" onClick={() => navigateWithScroll("/OurInnovation", "#VisitorManagement")} />
                 </div>
               </div>
             </div>
@@ -107,10 +160,10 @@ export function NavBar() {
           <MenuItem setActive={setActive} active={active} item="Technical Services" href="/TechnologiesPage" />
           {active === "Technical Services" && (
             <div className="absolute left-90 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <div className="space-y-2">
-                <ProductItem title="React Development" src="/Navbar/React.jpg" description="" href="/ReactDevelopment" />
-                <ProductItem title="Dotnet Development" src="/Navbar/Dotnet.jpg" description="" href="/.NetDevelopment" />
-                <ProductItem title="Mobile Development" src="/Navbar/Reactnative.jpg" description="" href="/MobileDevelopment" />
+              <div className="flex flex-col space-y-2">
+                <ProductItem title="React Development" src="/Navbar/React.jpg" description="Dynamic, component-based frontends for modern web apps using React" href="/ReactDevelopment" />
+                <ProductItem title="Dotnet Development" src="/Navbar/Dotnet.jpg" description="Scalable and secure enterprise solutions built on Microsoft&pos;s .NET framework" href="/.NetDevelopment" />
+                <ProductItem title="Mobile Development" src="/Navbar/Reactnative.jpg" description="Cross-platform apps for iOS and Android with seamless UX" href="/MobileDevelopment" />
               </div>
             </div>
           )}
