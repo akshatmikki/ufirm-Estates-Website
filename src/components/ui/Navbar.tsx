@@ -54,20 +54,19 @@ export const MenuItem: React.FC<MenuItemProps> = ({
         </motion.div>
       )} */}
 
-      {/* Optional submenu content */}
       {active === item && children && (
         <motion.div
           // initial={{ opacity: 0, scale: 0.85, y: 10 }}
           // animate={{ opacity: 1, scale: 1, y: 0 }}
           // transition={transition}
         >
-          <div className="fixed z-10">
+          <div className="absolute ">
             <motion.div
               // transition={transition}
               layoutId="active"
-              className="bg-black/30 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
+              className="bg-black/30 dark:bg-black/30  border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
             >
-              <motion.div layout className="w-max h-full p-4">
+              <motion.div layout className="p-4">
                 {children}
               </motion.div>
             </motion.div>
@@ -156,7 +155,7 @@ export const HoveredLink: React.FC<HoveredLinkProps> = ({
   return (
     <Link
       href={href}
-      className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500 relative text-center"
+      className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500  text-center"
     >
       {children}
     </Link>

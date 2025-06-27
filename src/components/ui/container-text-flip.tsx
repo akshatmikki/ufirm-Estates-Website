@@ -14,7 +14,7 @@ export interface ContainerTextFlipProps {
 }
 
 export function ContainerTextFlip({
-  words = ["Secure", "Scalable", "Seamless"],
+  words = ["Think", "Code", "Thrive"],
   interval = 3000,
   className,
   textClassName,
@@ -51,7 +51,7 @@ export function ContainerTextFlip({
       animate={{ width }}
       transition={{ duration: animationDuration / 2000 }}
       className={cn(
-        "relative inline-block rounded-lg pt-2 pb-3 text-center text-3xl font-bold text-black md:text-3xl dark:text-white",
+        "relative inline-block rounded-lg pt-2 pb-3 text-center text-3xl font-bold text-black md:text-3xl dark:text-black",
         "[background:linear-gradient(to_bottom,#f3f4f6,#e5e7eb)]",
         "shadow-[inset_0_-1px_#d1d5db,inset_0_0_0_1px_#d1d5db,_0_4px_8px_#d1d5db]",
         "dark:[background:linear-gradient(to_bottom,#374151,#1f2937)]",

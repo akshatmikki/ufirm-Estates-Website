@@ -1,12 +1,12 @@
 "use client";
-
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
 import { BackgroundGradient } from "@/components/ui/Background-gradient";
 import { BackgroundBeams } from "@/components/ui/Background-beams";
-import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { Button } from "@/components/ui/Button";
+import { FlipWords } from "@/components/ui/flip-words";
 
 const technologies = [
     {
@@ -47,7 +47,16 @@ const icons = [
     },
 ];
 
+const words = ["Web Development", "Mobile App Development", "Enterprise cloud solution"];
+
 export default function TechnologiesPage() {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.playbackRate = 0.5;
+        }
+    }, []);
     return (
         <div>
             <div className="absolute top-1 left-0 w-full z-50">
@@ -67,50 +76,23 @@ export default function TechnologiesPage() {
 
             <div className="relative">
                 <video
+                    ref={videoRef}
                     autoPlay
                     muted
                     loop
+
                     className="shadow-md object-cover h-[40vh] sm:h-[60vh] lg:h-[80vh] w-full"
                 >
                     <source src="/techno.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 bg-black/45"></div>
                 <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-10">
                     <div className="shadow-xl rounded-xl text-center w-full max-w-full mx-auto px-8 py-6 sm:px-10">
-                        <p className="text-sm sm:text-base md:text-lg leading-relaxed text-white text-center">
-                            <TextGenerateEffect words="We provide end-to-end technical services—from web and mobile app development to enterprise cloud solutions—built with cutting-edge tools like .NET, React, and React Native." />
-                        </p>
+                        <h2><FlipWords words={words} /></h2>
                     </div>
                 </div>
             </div>
-
-            <div className="bg-[#f8f8ff]">
-                <div className="py-10 mt-5 mx-auto max-w-5xl relative px-4 sm:px-6">
-                    <p className="text-3xl sm:text-5xl text-center font-bold mb-9">What Sets Us Apart</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
-                        {icons.map((tech, idx) => (
-                            <BackgroundGradient
-                                key={idx}
-                                className="flex flex-col rounded-[22px] bg-zinc-900 overflow-hidden h-full max-w-sm mx-auto shadow-lg hover:scale-[1.02] transition"
-                            >
-                                <div className="p-6 flex flex-col items-center text-center flex-grow">
-                                    <Image
-                                        src={tech.icon}
-                                        alt={`${tech.title} icon`}
-                                        width={80}
-                                        height={80}
-                                        className="mb-4"
-                                    />
-                                    <p className="text-xl text-neutral-200 font-semibold mb-2">{tech.title}</p>
-                                    <p className="text-sm text-neutral-400 mb-4">{tech.description}</p>
-                                </div>
-                            </BackgroundGradient>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
             <div className="relative z-40 px-4 pt-5 pb-20 bg-black/60">
                 <BackgroundBeams />
                 <div className="mt-5 mx-auto max-w-5xl relative z-50 px-4 sm:px-6">
@@ -140,6 +122,31 @@ export default function TechnologiesPage() {
                                             Learn More
                                         </Button>
                                     </Link>
+                                </div>
+                            </BackgroundGradient>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <div className="bg-[#f8f8ff]">
+                <div className="py-10 mt-5 mx-auto max-w-5xl relative px-4 sm:px-6">
+                    <p className="text-3xl sm:text-5xl text-center font-bold mb-9">What Sets Us Apart</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
+                        {icons.map((tech, idx) => (
+                            <BackgroundGradient
+                                key={idx}
+                                className="flex flex-col rounded-[22px] bg-zinc-900 overflow-hidden h-full max-w-sm mx-auto shadow-lg hover:scale-[1.02] transition"
+                            >
+                                <div className="p-6 flex flex-col items-center text-center flex-grow">
+                                    <Image
+                                        src={tech.icon}
+                                        alt={`${tech.title} icon`}
+                                        width={80}
+                                        height={80}
+                                        className="mb-4 rounded-full"
+                                    />
+                                    <p className="text-xl text-neutral-200 font-semibold mb-2">{tech.title}</p>
+                                    <p className="text-sm text-neutral-400 mb-4">{tech.description}</p>
                                 </div>
                             </BackgroundGradient>
                         ))}
