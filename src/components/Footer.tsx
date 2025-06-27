@@ -47,7 +47,7 @@ const Footer = () => {
                         <li>
                             <Link
                                 href="/Aboutuspage"
-                                className={`transition-colors ${isActive("/about") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
+                                className={`transition-colors ${isActive("/Aboutuspage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
                                 About us
@@ -83,7 +83,7 @@ const Footer = () => {
                         <li>
                             <Link
                                 href="/CareerPage"
-                                className={`transition-colors ${isActive("/insights") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
+                                className={`transition-colors ${isActive("/CareerPage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
                                 Career
@@ -92,7 +92,7 @@ const Footer = () => {
                         <li>
                             <Link
                                 href="/ContactPage"
-                                className={`transition-colors ${isActive("/contact") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
+                                className={`transition-colors ${isActive("/ContactPage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
                                 Contact Us
