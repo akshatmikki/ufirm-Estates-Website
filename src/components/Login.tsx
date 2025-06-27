@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { Menu, MenuItem, HoveredLink } from "./ui/Navbar";
+import { cn } from "@/utils/cn";
 
 export function Login() {
     const [active, setActive] = useState<string | null>(null);
     return (
-        <div className="fixed top-8 right-4">
+        <div className={cn("absolute top-8 right-4")}>
             <div className="hidden md:block">
                 <Menu setActive={setActive}>
                     <MenuItem setActive={setActive} active={active} item="Login" href="/" />
