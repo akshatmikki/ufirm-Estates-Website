@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react'; 
 import Image from 'next/image';
 
 const markers = [
@@ -17,10 +17,10 @@ const markers = [
 ];
 
 export default function IndiaMapStatic() {
-    const [activeMarker, setActiveMarker] = useState<number | null>(null); // State to track active marker for mobile
+    const [activeMarker, setActiveMarker] = useState<number | null>(null); 
 
     const handleMarkerClick = (index: number) => {
-        setActiveMarker(activeMarker === index ? null : index); // Toggle visibility
+        setActiveMarker(activeMarker === index ? null : index); 
     };
 
     return (
