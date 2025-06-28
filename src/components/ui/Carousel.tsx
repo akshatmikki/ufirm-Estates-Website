@@ -30,7 +30,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   useEffect(() => {
     if (isCurrent) {
       setAnimate(true);
-      const timer = setTimeout(() => setAnimate(false), 600);
+      const timer = setTimeout(() => setAnimate(false), 800);
       return () => clearTimeout(timer);
     }
   }, [isCurrent]);

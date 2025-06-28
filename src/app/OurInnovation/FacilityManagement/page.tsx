@@ -2,11 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-// import { HamBurger } from "@/components/HamBurger";
+import ClientCarousel from "@/components/ClientCarousel";
 import { useScroll, useTransform } from "motion/react";
 import React from "react";
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { Login } from "@/components/Login";
 
 const content = [
   {
@@ -18,6 +19,22 @@ const content = [
       <div className="relative w-[510px] h-[250px]">
         <Image
           src="/FacilityManagement/Dashboard.png"
+          alt="Dashboard"
+          layout="fill"
+          className="object-cover"
+        />
+      </div>
+    ),
+  },
+  {
+    id: "PPMScheduler",
+    title: "PPM Scheduler",
+    description:
+      "Streamline operations with our PPM Scheduler, and ensure every task is completed on time—every time. With Urest’s maintenance planning solution, you can easily schedule and automate daily housekeeping and technical checks, as well as weekly and yearly preventive tasks—all from your mobile device. Keep your facilities clean, compliant, and fully operational without missing a beat.",
+    content: (
+      <div className="relative w-[510px] h-[250px]">
+        <Image
+          src="/FacilityManagement/PPM.png"
           alt="Dashboard"
           layout="fill"
           className="object-cover"
@@ -58,8 +75,8 @@ const content = [
     ),
   },
   {
-    id: "ComplainManagement",
-    title: "Complain Management",
+    id: "ComplaintManagement",
+    title: "Complaint Management",
     description:
       "Resolve Issues Faster and Keep Customers Happy with Smarter Complaint Management. Turn customer complaints into growth opportunities with Urest’s streamlined complaint management solution. Gain full visibility into issues, response times, and resolution progress to ensure nothing falls through the cracks. With actionable insights, you can identify recurring problems, standardize responses, and improve service quality.",
     content: (
@@ -134,6 +151,7 @@ export default function FacilityManagement() {
             />
           </Link>
           <NavBar />
+          <Login />
         </div>
       </div>
 
@@ -154,6 +172,7 @@ export default function FacilityManagement() {
       <div >
         <StickyScroll content={content} />
       </div>
+      <ClientCarousel />
     </div>
   );
 }
