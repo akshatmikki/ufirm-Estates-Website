@@ -5,6 +5,7 @@ import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
 import { BackgroundGradient } from "@/components/ui/Background-gradient";
 import { BackgroundBeams } from "@/components/ui/Background-beams";
+import ClientCarousel from "@/components/ClientCarousel";
 import { Button } from "@/components/ui/Button";
 import { FlipWords } from "@/components/ui/flip-words";
 
@@ -36,8 +37,8 @@ const icons = [
         icon: "/Technical Services/on-time-delivery.jpg",
     },
     {
-        title: "Professional Approach",
-        description: "We maintain high standards in communication and execution.",
+        title: "Budget Brilliance",
+        description: "We deliver smart, cost-effective solutions without compromising on quality.",
         icon: "/Technical Services/professional.jpeg",
     },
     {
@@ -88,7 +89,7 @@ export default function TechnologiesPage() {
                 </video>
                 <div className="absolute inset-0 bg-black/45"></div>
                 <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-10">
-                    <div className="shadow-xl rounded-xl text-center w-full max-w-full mx-auto px-8 py-6 sm:px-10">
+                    <div className="rounded-xl text-center w-full max-w-full mx-auto px-8 py-6 sm:px-10">
                         <h2><FlipWords words={words} /></h2>
                     </div>
                 </div>
@@ -153,6 +154,7 @@ export default function TechnologiesPage() {
                     </div>
                 </div>
             </div>
+            <ClientCarousel />
         </div>
     );
 }

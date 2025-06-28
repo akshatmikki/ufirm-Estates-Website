@@ -36,7 +36,7 @@ export function InfiniteMovingCards({
         {items.concat(items).map((item, index) => (
           <div
             key={index}
-            className="flex items-center justify-center min-w-[120px] h-[60px] transition-transform hover:scale-105"
+            className="flex items-center justify-center max-w-[120px] h-[60px] transition-transform hover:scale-105"
           >
             <Image
               src={item.src}
