@@ -86,10 +86,10 @@ export default function AboutusPage() {
 
             <section className="text-black py-20 text-center px-6 md:px-20 bg-[#f8f8ff]">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Built on Trust. Driven by Innovation.</h2>
-                <p className="text-lg max-w-3xl mx-auto">
-                    UFIRM is the powerhouse behind <span className="font-semibold text-yellow-300">Royal Nest</span>,
-                    <span className="font-semibold text-yellow-300"> UREST Facility Management</span>, and
-                    <span className="font-semibold text-yellow-300"> UFIRM Estates</span>.
+                <p className="text-lg max-w-4xl mx-auto">
+                    UFIRM is the powerhouse behind <span className="font-bold text-[#146995]">Royal Nest</span>,
+                    <span className="font-bold text-[#146995]"> UREST Facility Management</span>, and
+                    <span className="font-bold text-[#146995]"> UFIRM Estates</span>.
                     Together, we shape better communities and enable smarter property experiences.
                 </p>
             </section>
@@ -145,27 +145,35 @@ export default function AboutusPage() {
                         From sales to service to smart solutions — every UFIRM arm is dedicated to excellence.
                     </p>
                 </div>
-                <div className="grid md:grid-cols-2 gap-10">
-                    <Feature
-                        icon={<FaGlobeAsia />}
-                        title="UFIRM Estates"
-                        desc="Your trusted partner in premium sales, leasing & brokerage. Unlocking commercial & residential opportunities with ease."
-                    />
+                <div className="grid md:grid-cols-2 gap-10 p-4">
+                    <Link href="https://urest.in/">
                     <Feature
                         icon={<FaUsersCog />}
                         title="UREST Facility Management"
-                        desc="Green building services, skilled workforce & preventive maintenance, powered by Urest.in."
+                        desc="Comprehensive green building services, a highly skilled workforce, and advanced preventive maintenance solutions — all powered by Urest.in."
                     />
+                    </Link>
+                    <Link href="/RoyalNestPage">
                     <Feature
                         icon={<FaBuilding />}
-                        title="Royal Nest"
+                        title="Royal Nest Projects"
                         desc="Flagship residential brand offering gated communities and high-rises across North India, known for quality, timely delivery, and smart planning."
                     />
+                    </Link>
+                    <Link href="/OurInnovation">
                     <Feature
                         icon={<FaMicrochip />}
                         title="UFIRM Technologies"
                         desc="Tech-driven platform powering smart property management, green maintenance, and AI-enabled facility services across India."
                     />
+                    </Link>
+                    <Link href="/Management&advisory">
+                    <Feature
+                        icon={<FaGlobeAsia />}
+                        title="UFIRM Estates"
+                        desc="Your trusted partner in premium sales, leasing & brokerage. Unlocking commercial & residential opportunities with ease."
+                    />
+                    </Link>
                 </div>
             </section>
 
@@ -225,7 +233,7 @@ export default function AboutusPage() {
                                 {roadmapSteps.map((item, idx) => (
                                     <div key={idx} className="w-[300px] shrink-0">
                                         {item.title && (
-                                            <span className="text-xs text-white bg-yellow-500 px-2 py-1 rounded uppercase">
+                                            <span className="text-xs text-white font-bold bg-yellow-700 px-2 py-1 rounded uppercase">
                                                 {item.title}
                                             </span>
                                         )}
