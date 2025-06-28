@@ -1,5 +1,6 @@
 "use client";
 import { TextGenerateEffect } from '@/components/ui/textgeneratoreffect';
+import ClientCarousel from "@/components/ClientCarousel";
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
@@ -26,6 +27,7 @@ export default function Managementadvisory() {
             <div className='text-center mt-40 mb-40 text-7xl text-black dark:text-black'>
                 <TextGenerateEffect words={words} />
             </div>
+            <ClientCarousel />
         </div>
     );
 }

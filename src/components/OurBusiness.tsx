@@ -41,15 +41,15 @@ function OurBusiness() {
           <div className="absolute inset-0 bg-black/45" />
         </div>
       </div>
-      <div className="relative z-10 max-w-auto mx-auto px-2 sm:px-4 md:px-6"> {/* Adjusted padding */}
+      <div className="relative z-10 max-w-auto mx-auto px-2 sm:px-4 md:px-6"> 
         <div className="text-center">
-          <p className="mt-2 text-4xl md:text-5xl leading-8 font-extrabold tracking-tight text-white sm:text-5xl"> {/* Adjusted font size */}
-            Our Business
+          <p className="mt-2 text-4xl md:text-5xl leading-8 font-bold tracking-tight text-white sm:text-5xl"> 
+            Our Verticals
           </p>
         </div>
 
         <div className="mt-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 py-2 justify-items-center"> {/* Added justify-items-center for centering cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 py-2 justify-items-center"> 
             {Business.map((item) => (
               <a
                 href={item.link}

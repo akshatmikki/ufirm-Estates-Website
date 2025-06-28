@@ -11,7 +11,7 @@ const slides = [
     title: "A Real Estate Platform driven by an entrepreneurial spirit",
     buttonLabel: "Facility Management",
     href: "https://urest.in/",
-    extraButtonLabel: "Digitalised Facility Management",
+    extraButtonLabel: "Smart Facility",
     extraButtonHref: "/OurInnovation",
   },
   {
