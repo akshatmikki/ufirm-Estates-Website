@@ -221,16 +221,17 @@ export default function Contact() {
                             <label htmlFor="receiveComm">I would like to receive communications from UFIRM</label>
                         </div>
 
-                        <div className="w-full h-[78px] bg-gray-200 flex items-center justify-center rounded-md">
-                            <span className="text-sm text-gray-500"><ReCAPTCHA
-                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                        <div className="w-fit h-[78px]  flex items-center justify-center rounded-md">
+                            <span className="text-sm text-gray-500">
+                                <ReCAPTCHA
+                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                                 ref={recaptchaRef}
                                 onChange={handleChangetoken}
                                 onExpired={handleExpired}
                             />
                             </span>
                         </div>
-
+                        
                         <button type="submit" className="bg-yellow-500 hover:bg-yellow-600 text-white w-full py-2 rounded-md font-medium">
                             Request a callback
                         </button>
