@@ -40,7 +40,7 @@ export default function Home() {
             >
               <span className="font-medium text-sm sm:text-base">
                 <Link
-                  href="https://calendly.com/demo-two"
+                  href="https://calendly.com/bhavesh-singh-ufirm"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
