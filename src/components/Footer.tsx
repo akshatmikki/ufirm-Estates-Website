@@ -12,7 +12,7 @@ const Footer = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const response = await fetch('/api/contact', {
+        const response = await fetch('/api/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
