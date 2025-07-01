@@ -121,19 +121,19 @@ export default function Contact() {
     const [, setIsVerified] = useState(false);
 
     async function handleCaptchaSubmission(token: string | null) {
-        try {
-            if (token) {
-                await fetch("/api", {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ token }),
-                });
-                setIsVerified(true);
-            }
-        } catch (e) {
+
+        if (token) {
+            await fetch("/api", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+            });
+            setIsVerified(true);
+        }
+        else {
             setIsVerified(false);
         }
     }
