@@ -118,33 +118,33 @@ const markers = [
 
 export default function Contact() {
     const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [isVerified, setIsVerified] = useState(false);
+    const [, setIsVerified] = useState(false);
 
-  async function handleCaptchaSubmission(token: string | null) {
-    try {
-      if (token) {
-        await fetch("/api", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token }),
-        });
-        setIsVerified(true);
-      }
-    } catch (e) {
-      setIsVerified(false);
+    async function handleCaptchaSubmission(token: string | null) {
+        try {
+            if (token) {
+                await fetch("/api", {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token }),
+                });
+                setIsVerified(true);
+            }
+        } catch (e) {
+            setIsVerified(false);
+        }
     }
-  }
 
-  const handleChangetoken = (token: string | null) => {
-    handleCaptchaSubmission(token);
-  };
+    const handleChangetoken = (token: string | null) => {
+        handleCaptchaSubmission(token);
+    };
 
-  function handleExpired() {
-    setIsVerified(false);
-  }
+    function handleExpired() {
+        setIsVerified(false);
+    }
     const [selectedLocation, setSelectedLocation] = useState(markers[0]);
     const [form, setForm] = useState({
         name: '', email: '', phone: '', category: '', message: '', receiveComm: true
@@ -223,12 +223,12 @@ export default function Contact() {
 
                         <div className="w-full h-[78px] bg-gray-200 flex items-center justify-center rounded-md">
                             <span className="text-sm text-gray-500"><ReCAPTCHA
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-        ref={recaptchaRef}
-        onChange={handleChangetoken}
-        onExpired={handleExpired}
-      />
-</span>
+                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                                ref={recaptchaRef}
+                                onChange={handleChangetoken}
+                                onExpired={handleExpired}
+                            />
+                            </span>
                         </div>
 
                         <button type="submit" className="bg-yellow-500 hover:bg-yellow-600 text-white w-full py-2 rounded-md font-medium">
@@ -275,8 +275,8 @@ export default function Contact() {
                             <li
                                 key={idx}
                                 className={`p-4 border rounded-lg cursor-pointer transition-all ${selectedLocation.name === location.name
-                                        ? 'bg-yellow-100 border-yellow-400'
-                                        : 'hover:bg-gray-50'
+                                    ? 'bg-yellow-100 border-yellow-400'
+                                    : 'hover:bg-gray-50'
                                     }`}
                                 onClick={() => setSelectedLocation(location)}
                             >
