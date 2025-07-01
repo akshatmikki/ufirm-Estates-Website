@@ -76,7 +76,7 @@ export default function CareersPage() {
                     {[ "hire", "job"].map((tab) => (
                         <button
                             key={tab}
-                            onClick={() => setActiveTab(tab as any)}
+                            onClick={() => setActiveTab(tab as "welcome")}
                             className={clsx(
                                 "px-4 py-2 rounded font-semibold capitalize transition",
                                 activeTab === tab
