@@ -104,10 +104,10 @@ export default function CareersPage() {
                             className="text-center text-xl max-w-3xl mx-auto"
                         >
                             <p className="mb-4">
-                                Welcome to <strong>UFirm Hiring Portal !</strong> We're glad you're here.
+                                Welcome to <strong>UFirm Hiring Portal !</strong> We&apos;re glad you&apos;re here.
                             </p>
                             <p className="mb-4">
-                                Whether you're a company hiring staff or someone looking for a good job — we can help.
+                                Whether you&apos;re a company hiring staff or someone looking for a good job — we can help.
                             </p>
                             <Image src="/Hire.jpeg" alt="hire" width={1000} height={500} className="rounded rounded-full"/>
                         </motion.div>
