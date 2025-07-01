@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "../../components/NavBar";
-// import { HamBurger } from "../../components/HamBurger";
 import { BackgroundGradient } from "../../components/ui/Background-gradient"
 import { ExpandableCardList } from "../../components/expandablescards"
 import { BackgroundBeams } from "../../components/ui/Background-beams";
@@ -57,7 +56,7 @@ export default function ReactServicesPage() {
                 priority
               />
             </Link>
-<NavBar />
+            <NavBar />
           </div>
         </div>
         <div className="relative z-40 px-10 py-40 md:px-20 md:py-40 ">

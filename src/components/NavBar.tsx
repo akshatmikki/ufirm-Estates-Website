@@ -46,7 +46,7 @@ export function NavBar() {
           <Link href="/RoyalNestPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Royal Nest Projects</Link>
           <Link href="/OurInnovation" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Facility Tech</Link>
           <div className="ml-4 space-y-2">
-            <button onClick={() => { navigateWithScroll("/OurInnovation", "#card-0"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Facility Management</button>
+            <button onClick={() => { navigateWithScroll("/OurInnovation", "#card-0"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 font-semibold text-left">Facility Management</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#PPMScheduler"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">PPM Scheduler</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#AssetManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Asset Management</button>
             <button onClick={() => { navigateWithScroll("/OurInnovation", "#InventoryManagement"); setIsMobileMenuOpen(false); }} className="block py-1 text-sm text-gray-300 hover:text-white text-left">Inventory Management</button>
@@ -64,7 +64,7 @@ export function NavBar() {
           <Link href="/CareerPage" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Hire</Link>
           <Link href="/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
           <div className="ml-4 space-y-2">
-            <Link href="https://admin.urest.in:9056/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>AOA Login</Link>
+            <Link href="https://admin.urest.in:9056/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Client Login</Link>
             <Link href="https://admin.urest.in:8097/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Supervisor Login</Link>
             <Link href="https://ufirm.in/Account/Login" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Facility Management Login</Link>
           </div>

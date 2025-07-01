@@ -3,11 +3,119 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-// import { HamBurger } from "@/components/HamBurger";
 import { useState } from 'react';
 import { FaLinkedin, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
+const markers = [
+    {
+        name: 'Noida',
+        address: 'H-64, Sector-63, Noida, Gautam Buddha Nagar, Uttar Pradesh- 201307',
+        representative: 'Shalini Malik',
+        phone: '+91 9289902481',
+        email: 'ufirm.help@ufirm.in',
+        mapQuery: 'Ufirm+Business+Park+(Raamah+Projects)'
+    },
+    {
+        name: 'Delhi',
+        address: 'A-13/S-1, Dilshad Garde, Delhi- 110095',
+        representative: 'Shalini Malik',
+        phone: '+91 9289902481',
+        email: 'ufirm.help@ufirm.in',
+        mapQuery: 'a,+789%2F1%2F3,+Street+No.13,+Mandoli+Extension,+Mandoli,+Delhi,+110093'
+    },
+    {
+        name: 'Faridabad',
+        address: 'Flat No.0106, Tower T-10, RPS Savana Sector-88, Faridabad Haryana-121002',
+        representative: 'Pankaj Kumar',
+        phone: '+91 9069363166',
+        email: 'pankaj.kumar@ufirm.in',
+        mapQuery: 'RPS+Savana'
+    },
+    {
+        name: 'Jammu',
+        address: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011',
+        representative: 'Jaswinder Kour',
+        phone: '+91 9596796757',
+        email: 'crm@ufirm.in',
+        mapQuery: 'Royal+Nest+Hill+View+Jammu'
+    },
+    {
+        name: 'Gurgaon',
+        address: 'C3 102 PWO Housing Complex, Sector-43 Gurugram',
+        representative: 'Ajay Yadav',
+        phone: '+91 9958453389',
+        email: 'ajay.yadav@ufirm.in',
+        mapQuery: 'PWO+Apartments'
+    },
+    {
+        name: 'West Bengal',
+        address: 'Purba Panchanna Gram, Abahani Club, Vip Nagar, Sub District South 21 Parganas, West Bengal-700100',
+        representative: 'Ranadhir Biswas',
+        phone: '+91 9903522839',
+        email: 'ranadhir.biswas@ufirm.in',
+        mapQuery: 'Purba+panchanna+gram'
+    },
+    {
+        name: 'Udaipur',
+        address: '88 Charak Hostal Raza Colony, Mulla Talai, Udaipur-313001',
+        representative: 'Nandini Singh',
+        phone: '+91 9958288544',
+        email: 'crm@ufirm.in',
+        mapQuery: '88+Charak+Hostel+Raza+Colony+Mulla+Talai+Udaipur+313001'
+    },
+    {
+        name: 'Telangana',
+        address: '1-2 361/15, Phool Begh, Hemayat nager, Indira Park, Hyderabad, Telangana-500029',
+        representative: 'Kishore Reddy',
+        phone: '+91 9849203269',
+        email: 'kishore.reddy@ufirm.in',
+        mapQuery: 'Hemayat+nager'
+    },
+    {
+        name: 'Jaipur',
+        address: 'C-163, Riico Residential Colony, Near Git, College Sitapura , Jaipur-302022',
+        representative: 'Sachin Sharma',
+        phone: '+91 9319101871',
+        email: 'sachin.sharma@ufirm.in',
+        mapQuery: 'Riico+residential+colony,+sitapura'
+    },
+    {
+        name: 'Pune',
+        address: 'GAT NO. 354, A&B, NH-4, Old Mumbai - Pune Hwy, Maval, Vadgaon, Pune, Maharashtra 412106',
+        representative: 'Sachin Sharma',
+        phone: '+91 9319101871',
+        email: 'sachin.sharma@ufirm.in',
+        mapQuery: 'GAT+NO.+354,+A%26B,+NH-4,+Old+Mumbai+-+Pune+Hwy,+Maval,+Vadgaon,+Pune,+Maharashtra%C2%A0412106'
+    },
+    {
+        name: 'Dehradun',
+        address: 'Chakrata road SELAQUI INDUSTRIAL AREA central hope town Dehradun Uttarakhand- 248011',
+        representative: 'Mohan Negi',
+        phone: '+91 7042344158',
+        email: 'mohan.negi@ufirm.in',
+        mapQuery: 'Selakui,+Uttarakhand'
+    },
+    {
+        name: 'Ahmedabad',
+        address: 'Shop No.15, Manukrupa Plaza,Sanand, Ta-Sanand, Ahmedabad-382110',
+        representative: 'Jigyasa',
+        phone: '+91 9289902483',
+        email: 'crm.ho@ufirm.in',
+        mapQuery: 'Sanand,+Gujarat+382110'
+    },
+    {
+        name: 'Dharamshala',
+        address: '677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh-176217',
+        representative: 'Nandini Singh',
+        phone: '+91 9958288544',
+        email: 'crm@ufirm.in',
+        mapQuery: 'Royal+Nest+Forest+View'
+    },
+];
+
+
 export default function Contact() {
+    const [selectedLocation, setSelectedLocation] = useState(markers[0]);
     const [form, setForm] = useState({
         name: '', email: '', phone: '', category: '', message: '', receiveComm: true
     });
@@ -109,6 +217,41 @@ export default function Contact() {
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="flex flex-col lg:flex-row w-full">
+                <div className="w-full lg:w-1/2 h-[300px] lg:h-[80vh]">
+                    <iframe
+                        title="Google Map"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        loading="lazy"
+                        allowFullScreen
+                        src={`https://www.google.com/maps?q=${selectedLocation.mapQuery}&output=embed`}
+                    ></iframe>
+                </div>
+
+                <div className="w-full lg:w-1/2 p-4 lg:p-6 overflow-y-auto max-h-[400px] lg:max-h-[80vh]">
+                    <h2 className="text-xl lg:text-2xl font-bold mb-4">Our Branches</h2>
+                    <ul className="space-y-4">
+                        {markers.map((location, idx) => (
+                            <li
+                                key={idx}
+                                className={`p-4 border rounded-lg cursor-pointer transition-all ${selectedLocation.name === location.name
+                                        ? 'bg-yellow-100 border-yellow-400'
+                                        : 'hover:bg-gray-50'
+                                    }`}
+                                onClick={() => setSelectedLocation(location)}
+                            >
+                                <h3 className="font-semibold text-base lg:text-lg">{location.name}</h3>
+                                <p className="text-sm text-gray-700 mb-1">{location.address}</p>
+                                <p className="text-sm"><strong>Representative:</strong> {location.representative}</p>
+                                <p className="text-sm"><strong>Phone:</strong> {location.phone}</p>
+                                <p className="text-sm"><strong>Email:</strong> {location.email}</p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>
