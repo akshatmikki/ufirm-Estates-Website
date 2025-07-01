@@ -158,6 +158,26 @@ export default function Contact() {
         setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(form),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            alert("Your message has been sent!");
+            setForm({ name: '', email: '', phone: '', category: '', message: '', receiveComm: true });
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+
+    };
+
     return (
         <div>
             <div className="absolute top-1 left-0 w-full z-50">
@@ -188,7 +208,7 @@ export default function Contact() {
                     <h2 className="text-2xl font-bold mb-2 ">Connect with us today</h2>
                     <p className="mb-6">Fill out the form below to get started</p>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <input name="name" onChange={handleChange} value={form.name} type="text" placeholder="Full name" className="w-full border px-4 py-2 rounded-md text-black" />
                         <input name="email" onChange={handleChange} value={form.email} type="email" placeholder="Email address" className="w-full border px-4 py-2 rounded-md" />
                         <input name="phone" onChange={handleChange} value={form.phone} type="tel" placeholder="Mobile Number" className="w-full border px-4 py-2 rounded-md" />
@@ -221,16 +241,16 @@ export default function Contact() {
                             <label htmlFor="receiveComm">I would like to receive communications from UFIRM</label>
                         </div>
 
-                        <div className="w-full h-[78px] bg-gray-200 flex items-center justify-center rounded-md">
-                            <span className="text-sm text-gray-500"><ReCAPTCHA
-                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                                ref={recaptchaRef}
-                                onChange={handleChangetoken}
-                                onExpired={handleExpired}
-                            />
+                        <div className="w-fit h-[78px]  flex items-center justify-center rounded-md">
+                            <span className="text-sm text-gray-500">
+                                <ReCAPTCHA
+                                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                                    ref={recaptchaRef}
+                                    onChange={handleChangetoken}
+                                    onExpired={handleExpired}
+                                />
                             </span>
                         </div>
-
                         <button type="submit" className="bg-yellow-500 hover:bg-yellow-600 text-white w-full py-2 rounded-md font-medium">
                             Request a callback
                         </button>
@@ -242,7 +262,7 @@ export default function Contact() {
                             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram">
                                 <FaInstagram className="w-7 h-7 text-black hover:text-gray-600 transition-colors" />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                            <a href="https://www.linkedin.com/company/ufirm-technologies-pvt-ltd/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                                 <FaLinkedin className="w-7 h-7 text-black hover:text-gray-600 transition-colors" />
                             </a>
                             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" title="YouTube">
