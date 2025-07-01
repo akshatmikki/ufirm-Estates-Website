@@ -58,7 +58,7 @@ export default function CareersPage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7 }}
-                        className="bg-white/90 shadow-xl p-8 rounded text-center max-w-md"
+                        className="bg-white/90 shadow-xl p-8 rounded text-center max-w-lg"
                     >
                         <h1 className="text-3xl font-bold mb-4 text-black">
                             Work With Us / हमारे साथ काम करें
@@ -107,7 +107,7 @@ export default function CareersPage() {
                             <p className="mb-4">
                                 Whether you&apos;re a company hiring staff or someone looking for a good job — we can help.
                             </p>
-                            <Image src="/Hire.jpeg" alt="hire" width={1000} height={500} className="rounded rounded-full" />
+                            <Image src="/Hires.jpeg" alt="hire" width={1000} height={500} className="rounded rounded-full" />
                         </motion.div>
                     )}
 
@@ -174,7 +174,7 @@ export default function CareersPage() {
                                 </div>
                             </div>
                             <a
-                                href={`mailto:home@urest.in?subject=Connect with Us&body=${encodeURIComponent(
+                                href={`mailto:bhavesh.singh@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
                                     `Hello,
 
                                     Please reach out to me,
