@@ -45,7 +45,6 @@ export default function CareersPage() {
                 </div>
             </div>
 
-            {/* Banner Section */}
             <div className="relative">
                 <Image
                     src="/Career.jpg"
@@ -72,7 +71,6 @@ export default function CareersPage() {
                 </div>
             </div>
 
-            {/* Tabs */}
             <div className="sticky top-0 z-40 bg-white">
                 <div className="flex justify-center gap-4 py-4">
                     {["hire", "job"].map((tab) => (
@@ -109,7 +107,7 @@ export default function CareersPage() {
                             <p className="mb-4">
                                 Whether you&apos;re a company hiring staff or someone looking for a good job — we can help.
                             </p>
-                            <Image src="/Hire.jpeg" alt="hire" width={1000} height={500} className="rounded rounded-full"/>
+                            <Image src="/Hire.jpeg" alt="hire" width={1000} height={500} className="rounded rounded-full" />
                         </motion.div>
                     )}
 
@@ -129,7 +127,6 @@ export default function CareersPage() {
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
-                                {/* What We Provide */}
                                 <div className="bg-yellow-50 p-6 rounded shadow hover:shadow-lg transition">
                                     <h3 className="font-semibold text-lg mb-2">
                                         What We Provide / हम क्या प्रदान करते हैं
@@ -176,11 +173,24 @@ export default function CareersPage() {
                                     </ul>
                                 </div>
                             </div>
+                            <a
+                                href={`mailto:home@urest.in?subject=Connect with Us&body=${encodeURIComponent(
+                                    `Hello,
 
+                                    Please reach out to me,
+                                    My Name: 
+                                    Company/ Society/ Organization/ Industry name: 
+                                    Mobile no.: 
+                                    Short description of requirement: 
+                                    Location: 
 
-                            <button className="px-6 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-lg transition">
-                                Request Staff / स्टाफ मांगें
-                            </button>
+                                    Thanks`
+                                )}`}
+                            >
+                                <button className="px-6 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-lg transition">
+                                    Request Staff / स्टाफ मांगें
+                                </button>
+                            </a>
                         </motion.div>
                     )}
 
