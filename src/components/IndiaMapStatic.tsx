@@ -55,7 +55,7 @@ export default function IndiaMapStatic() {
     const [activeMarker, setActiveMarker] = useState<number | null>(null);
     const [selectedNCR, setSelectedNCR] = useState(0); 
     const [ncrActive, setNcrActive] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    const [, setIsMobile] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);

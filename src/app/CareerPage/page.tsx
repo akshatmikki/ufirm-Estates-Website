@@ -103,12 +103,12 @@ export default function CareersPage() {
                             className="text-center text-xl max-w-3xl mx-auto"
                         >
                             <p className="mb-4">
-                                Welcome to <strong>UFirm Careers</strong>! We're glad you're here.
+                                Welcome to <strong>UFirm Careers</strong>! We&apos;re glad you&apos;re here.
                             </p>
                             <p>
-                                Whether you're a company looking to build a strong team or a candidate aiming to grow
-                                your career, we have something for you. Click on "Hire Now" to hire employees or "Get a
-                                Job" to explore openings.
+                                Whether you&apos;re a company looking to build a strong team or a candidate aiming to grow
+                                your career, we have something for you. Click on &quot;Hire Now&quot; to hire employees or &quot;Get a
+                                Job&quot; to explore openings.
                             </p>
                         </motion.div>
                     )}
