@@ -86,7 +86,7 @@ const Footer = () => {
                                 className={`transition-colors ${isActive("/CareerPage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"
                                     }`}
                             >
-                                Career
+                                Hire
                             </Link>
                         </li>
                         <li>
