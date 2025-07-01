@@ -10,16 +10,18 @@ export async function POST(request: Request) {
         }
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'smtp.office365.com',
+            port: 587,
+            secure: false,
             auth: {
-                user: process.env.SMTP_USER, 
-                pass: process.env.SMTP_PASS, 
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
             },
         });
 
         const mailOptions = {
             from: process.env.SMTP_USER,
-            to: process.env.SUBSCRIBE_RECEIVER || process.env.SMTP_USER, 
+            to: process.env.SUBSCRIBE_RECEIVER || process.env.SMTP_USER,
             subject: 'New Subscription Request',
             html: `<p>New user subscribed with email: <strong>${email}</strong></p>`,
         };
