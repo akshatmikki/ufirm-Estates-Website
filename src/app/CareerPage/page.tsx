@@ -5,6 +5,7 @@ import { NavBar } from "@/components/NavBar";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
+import { FaTools, FaUserShield, FaWind, FaBroom, FaUserCheck, FaEnvelopeOpenText } from "react-icons/fa";
 
 export default function CareersPage() {
     const [activeTab, setActiveTab] = useState<"welcome" | "hire" | "job">("welcome");
@@ -45,31 +46,22 @@ export default function CareersPage() {
                 </div>
             </div>
 
-            <div className="relative">
-                <Image
-                    src="/Career.jpg"
-                    alt="Career Banner"
-                    width={1600}
-                    height={900}
-                    className="w-full h-[80vh] object-cover"
-                />
-                <div className="absolute inset-0 flex items-center justify-start p-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                        className="bg-white/90 shadow-xl p-8 rounded text-center max-w-lg"
-                    >
-                        <h1 className="text-3xl font-bold mb-4 text-black">
-                            Work With Us / हमारे साथ काम करें
-                        </h1>
-                        <p className="text-lg text-gray-700">
-                            Be a part of a culture of growth, innovation, and excellence. <br />
-                            सीखने, नए आइडिया और अच्छा काम करने के माहौल का हिस्सा बनें।
-                        </p>
-                    </motion.div>
-                </div>
-            </div>
+            <motion.div
+                key="welcome"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="text-center max-w-3xl mx-auto mt-30"
+            >
+                <Image src="/Hire.jpg" alt="hire" width={1000} height={500} className="rounded-full" />
+                <p className="mb-4 mt-4 text-3xl">
+                    Welcome to <strong>UFirm Hiring Portal !</strong> We&apos;re glad you&apos;re here.
+                </p>
+                <p className="mb-4">
+                    Whether you&apos;re a company hiring staff or someone looking for a good job — we can help.
+                </p>
+            </motion.div>
 
             <div className="sticky top-0 z-40 bg-white">
                 <div className="flex justify-center gap-4 py-4">
@@ -90,88 +82,67 @@ export default function CareersPage() {
                 </div>
             </div>
 
-            <div className="px-6 py-10 min-h-[60vh]">
+            <div className="px-6 py-10">
                 <AnimatePresence mode="wait">
-                    {activeTab === "welcome" && (
-                        <motion.div
-                            key="welcome"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.4 }}
-                            className="text-center text-xl max-w-3xl mx-auto"
-                        >
-                            <p className="mb-4">
-                                Welcome to <strong>UFirm Hiring Portal !</strong> We&apos;re glad you&apos;re here.
-                            </p>
-                            <p className="mb-4">
-                                Whether you&apos;re a company hiring staff or someone looking for a good job — we can help.
-                            </p>
-                            <Image src="/Hires.jpeg" alt="hire" width={1000} height={500} className="rounded rounded-full" />
-                        </motion.div>
-                    )}
-
                     {activeTab === "hire" && (
                         <motion.div
                             key="hire"
                             initial={{ opacity: 0, x: 100 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -100 }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.5 }}
                             className="max-w-4xl mx-auto text-center text-gray-800"
                         >
-                            <h2 className="text-3xl font-bold mb-4">Hire Trained Facility Staff</h2>
-                            <p className="text-lg mb-6">
+                            <motion.h2
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="text-3xl font-bold mb-4"
+                            >
+                                Hire Trained Facility Staff
+                            </motion.h2>
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                                className="text-lg mb-6"
+                            >
                                 UFirm offers skilled, verified manpower for your technical and soft service needs. <br />
                                 UFirm आपको काम के लिए अच्छे और जांचे-परखे कर्मचारी देता है।
-                            </p>
+                            </motion.p>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
-                                <div className="bg-yellow-50 p-6 rounded shadow hover:shadow-lg transition">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-14 text-left mb-8">
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    className="bg-yellow-50 p-6 rounded shadow hover:shadow-lg transition"
+                                >
                                     <h3 className="font-semibold text-lg mb-2">
                                         What We Provide / हम क्या प्रदान करते हैं
                                     </h3>
-                                    <ul className="list-disc list-inside text-gray-700 space-y-1">
-                                        <li>
-                                            Facility Staff<br />
-                                        </li>
-                                        <li>
-                                            Electricians & Plumbers <br />
-                                        </li>
-                                        <li>
-                                            HVAC Technicians <br />
-                                        </li>
-                                        <li>
-                                            Housekeeping & Support Staff<br />
-                                        </li>
-                                        <li>
-                                            Safety & Compliance Officers  <br />
-                                        </li>
+                                    <ul className="list-disc list-inside text-gray-700 space-y-4">
+                                        <FaUserCheck className="inline mr-2 text-yellow-500 mt-4" /> Facility Staff<br/>
+                                        <FaTools className="inline mr-2 text-yellow-500 mt-4" /> Electricians & Plumbers<br/>
+                                        <FaWind className="inline mr-2 text-yellow-500 mt-4" /> HVAC Technicians<br/>
+                                        <FaBroom className="inline mr-2 text-yellow-500 mt-4" /> Housekeeping & Support Staff<br/>
+                                        <FaUserShield className="inline mr-2 text-yellow-500 mt-4" /> Safety & Compliance Officers<br/>
                                     </ul>
-                                </div>
+                                </motion.div>
 
-                                <div className="bg-yellow-50 p-6 rounded shadow hover:shadow-lg transition">
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    className="bg-yellow-50 p-6 rounded shadow hover:shadow-lg transition"
+                                >
                                     <h3 className="font-semibold text-lg mb-2">
                                         Why UFirm? / UFirm क्यों चुनें?
                                     </h3>
-                                    <ul className="list-disc list-inside text-gray-700 space-y-1">
-                                        <li>
-                                            Professionally trained staff <br />
-                                        </li>
-                                        <li>
-                                            Background verified workers <br />
-                                        </li>
-                                        <li>
-                                            Flexible hiring – short or long term <br />
-                                        </li>
-                                        <li>
-                                            Services available across India <br />
-                                        </li>
-                                        <li>
-                                            Quick and easy onboarding process <br />
-                                        </li>
+                                    <ul className="list-disc list-inside text-gray-700 space-y-12">
+                                        ✅ Professionally trained staff<br/>
+                                        ✅ Background verified workers<br/>
+                                        ✅ Flexible hiring – short or long term<br/>
+                                        ✅ Services available across India<br/>
+                                        ✅ Quick and easy onboarding process<br/>
                                     </ul>
-                                </div>
+                                </motion.div>
                             </div>
                             <a
                                 href={`mailto:bhavesh.singh@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
@@ -187,8 +158,10 @@ export default function CareersPage() {
                                     Thanks`
                                 )}`}
                             >
-                                <button className="px-6 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-lg transition">
-                                    Request Staff / स्टाफ मांगें
+                                <button
+                                    className="px-6 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-lg transition flex items-center gap-2 mx-auto"
+                                >
+                                    <FaEnvelopeOpenText /> Request Staff / स्टाफ मांगें
                                 </button>
                             </a>
                         </motion.div>

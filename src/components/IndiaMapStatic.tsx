@@ -39,7 +39,8 @@ const ncrGroup = {
 };
 
 const markers = [
-    { name: 'Jammu', description: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011', Representative: 'Jaswinder Kour', Number: '+91 9596796757', MailId: 'crm@ufirm.in', top: '13%', left: '25%' },
+    { name: 'Srinagar', description: 'Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121', Representative: 'Jigyasa', Number: '+91 9289902483', MailId: 'crm.ho@ufirm.in', top: '11%', left: '28%' },
+    { name: 'Jammu', description: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011', Representative: 'Jaswinder Kour', Number: '+91 9596796757', MailId: 'crm@ufirm.in', top: '15%', left: '26.8%' },
     { name: 'Dharamshala',description:'677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh 176217', Representative: 'Nandini Singh', Number: '+91 9958288544', MailId: 'crm@ufirm.in', top: '20%', left: '34%' },
     // { name: 'Amritsar', top: '22%', left: '26%' },
     { name: 'Dehradun',description:'Chakrata road SELAQUI INDUSTRIAL AREA central hope town Dehradun Uttarakhand-248011', Representative: 'Mohan Negi', Number: '+91 7042344158', MailId: 'mohan.negi@ufirm.in', top: '24%', left: '39%' },

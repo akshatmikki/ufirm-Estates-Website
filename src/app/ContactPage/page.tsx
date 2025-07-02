@@ -113,6 +113,14 @@ const markers = [
         email: 'crm@ufirm.in',
         mapQuery: 'Royal+Nest+Forest+View'
     },
+    {
+        name: 'Srinagar',
+        address: 'Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121',
+        representative: 'Jigyasa',
+        phone: '+91 9289902483',
+        email: 'crm.ho@ufirm.in',
+        mapQuery: 'Zabarwan+Peaks+Villa'
+    },
 ];
 
 
