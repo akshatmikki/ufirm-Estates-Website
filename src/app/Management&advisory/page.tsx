@@ -85,27 +85,7 @@ export default function Managementadvisory() {
                         />
                     </div>
                 </div>
-                {/* Hero Section
-                <section className="bg-gradient-to-r from-blue-50 to-blue-100 py-40 px-6 text-center relative overflow-hidden">
-                    <motion.h1
-                        className="text-4xl md:text-5xl font-bold text-black"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        Welcome to UFIRM Estates
-                    </motion.h1>
-                    <p className="mt-4 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-                        Your trusted real estate advisory partner offering expert services across India.
-                    </p>
-                    <motion.div
-                        className="absolute top-0 right-0 w-32 h-32 md:w-52 md:h-52 bg-blue-200 rounded-full blur-3xl opacity-30"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 6, repeat: Infinity }}
-                    />
-                </section> */}
-
-                {/* Intro Paragraph */}
+                
                 <section className="px-6 md:px-20 py-10 text-center">
                     <motion.p
                         className="text-lg leading-relaxed text-gray-700"
@@ -117,7 +97,6 @@ export default function Managementadvisory() {
                     </motion.p>
                 </section>
 
-                {/* Services Section */}
                 <section className="px-6 md:px-20 py-16 bg-gray-50">
                     <h2 className="text-3xl font-bold text-black mb-12 text-center">Our Services</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -144,7 +123,6 @@ export default function Managementadvisory() {
                     </div>
                 </section>
 
-                {/* Why UFIRM Section */}
                 <section className="px-6 md:px-20 py-20 text-center relative">
                     <motion.h2
                         className="text-3xl font-bold text-black mb-6"
@@ -170,7 +148,6 @@ export default function Managementadvisory() {
                 </section>
             </main>
 
-            {/* Clients Carousel */}
             <ClientCarousel />
 
         </div>
