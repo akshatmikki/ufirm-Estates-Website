@@ -149,7 +149,6 @@ export default function Managementadvisory() {
             </main>
 
             <ClientCarousel />
-
         </div>
     );
 }
