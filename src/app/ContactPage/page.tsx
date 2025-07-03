@@ -267,16 +267,16 @@ export default function Contact() {
                     <div className="mt-10">
                         <h3 className="text-lg font-semibold mb-4">Connect with us on Social</h3>
                         <div className="flex space-x-4">
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram">
+                            <a href="https://www.instagram.com/ufirm_technologies/" target="_blank" rel="noopener noreferrer" title="Instagram">
                                 <FaInstagram className="w-7 h-7 text-black hover:text-gray-600 transition-colors" />
                             </a>
                             <a href="https://www.linkedin.com/company/ufirm-technologies-pvt-ltd/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                                 <FaLinkedin className="w-7 h-7 text-black hover:text-gray-600 transition-colors" />
                             </a>
-                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" title="YouTube">
+                            <a href="https://www.youtube.com/@ufirmtechnologies6437" target="_blank" rel="noopener noreferrer" title="YouTube">
                                 <FaYoutube className="w-7 h-7 text-black hover:text-gray-600 transition-colors" />
                             </a>
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Facebook">
+                            <a href="https://www.facebook.com/ufirmtechnologies" target="_blank" rel="noopener noreferrer" title="Facebook">
                                 <FaFacebook className="w-7 h-7 text-black hover:text-gray-600 transition-colors" />
                             </a>
                         </div>

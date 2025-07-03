@@ -65,7 +65,7 @@ export function NavBar() {
           <Link href="/" className="block py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
           <div className="ml-4 space-y-2">
             <Link href="https://admin.urest.in:9056/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Client Login</Link>
-            <Link href="https://admin.urest.in:8097/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Supervisor Login</Link>
+            <Link href="https://admin.urest.in:8097/" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Employee Login</Link>
             <Link href="https://ufirm.in/Account/Login" className="block py-1 text-sm text-gray-300 hover:text-white" onClick={() => setIsMobileMenuOpen(false)}>Facility Management Login</Link>
           </div>
         </div>
