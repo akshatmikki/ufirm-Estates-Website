@@ -108,7 +108,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       onSlideChange((current + 1) % slides.length);
-    }, 7000);
+    }, 12000);
 
     return () => clearInterval(interval);
   }, [current, onSlideChange, slides.length]);
