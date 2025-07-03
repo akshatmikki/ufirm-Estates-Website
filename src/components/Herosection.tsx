@@ -8,7 +8,7 @@ import { Carousel } from "@/components/ui/Carousel";
 const slides = [
   {
     src: "/Banners/Banner1.png",
-    title: "A Real Estate Platform driven by an entrepreneurial spirit",
+    title: "Reimagining Facility Management through innovation, agility, and entrepreneurial drive",
     buttonLabel: "Facility Management",
     href: "https://urest.in/",
     extraButtonLabel: "Smart Facility",
@@ -22,7 +22,7 @@ const slides = [
   },
   {
     src: "/Banners/Banner3.jpg",
-    title: "The engine driving progress and competitive advantage in Real Estate",
+    title: "The engine behind intelligent, data-driven maintenance operations",
     buttonLabel: "Facility Tech",
     href: "/OurInnovation",
   },
