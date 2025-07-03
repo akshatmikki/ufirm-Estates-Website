@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import type { JSX } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
     FaBuilding,
-    FaHandshake,
     FaUsersCog,
-    FaAward,
     FaGlobeAsia,
     FaMicrochip,
     FaUsers,
     FaGlobe,
     FaCoins,
+    FaChartLine, FaCogs, FaTools,
 } from "react-icons/fa";
 import { NavBar } from "../../components/NavBar";
+import ClientCarousel from "@/components/ClientCarousel";
 
 export default function AboutusPage() {
     useEffect(() => {
@@ -25,31 +26,89 @@ export default function AboutusPage() {
 
     const roadmapSteps = [
         {
-            year: "2000",
-            title: "Founded",
-            desc: "Omkar Nests Pvt. Ltd. established, focusing on quality residential development in Delhi NCR.",
-        },
-        {
-            year: "2008",
-            title: "Royal Nest Expansion",
-            desc: "Expanded to Amritsar and Dharamshala, launching multiple high-rise and gated projects.",
-        },
-        {
             year: "2016",
-            title: "UFIRM Technologies Launched",
-            desc: "Introduced tech-enabled real estate care with smart solutions under UREST and UFIRM Estates.",
+            title: "Incorporation",
+            desc: "Incorporated from Royal Nest’s 25-year legacy; began delivering sustainable real estate services.",
+        },
+        {
+            year: "2018",
+            title: "Business Park Launch",
+            desc: "Launched UFIRM Business Park, a professional co-working and flex-office space spanning 80,000+ ft².",
+        },
+        {
+            year: "2020",
+            title: "Urest.in IFM Launch",
+            desc: "Established Urest.in as a dedicated Integrated Facility Management division, proving effectiveness during COVID-19 lockdowns.",
         },
         {
             year: "2022",
-            title: "Award-Winning Growth",
-            desc: "Received national recognition for excellence in infrastructure and on-time delivery.",
+            title: "Green Residential Development",
+            desc: "Commenced ‘Royal Nest Forest View’ in Dharamshala – green-compliant, RERA & TCP approved residential apartments.",
+        },
+        {
+            year: "2024",
+            title: "Tech Platform Deployment",
+            desc: "Deployed 100% Made-in-India CMMS platform for real-time PPM, asset, inventory & workforce management.",
         },
         {
             year: "2025",
-            title: "Vision 2025",
-            desc: "Targeting pan-India smart city integrations with AI-based facility platforms and new regional offices.",
+            title: "Profitability & Growth",
+            desc: "Achieved company-wide profitability (EBIT margin 4.03%) with 76.64% YoY revenue growth.",
         },
     ];
+
+    const iconMap: { [key: string]: JSX.Element } = {
+        "BUILD – Projects": <FaBuilding className="text-white text-xl" />,
+        "Estate Advisory": <FaChartLine className="text-white text-xl" />,
+        "Facility Management": <FaTools className="text-white text-xl" />,
+        "Estate Technology": <FaCogs className="text-white text-xl" />,
+    };
+
+    function Vision2030Card({
+        category,
+        target,
+    }: {
+        category: string;
+        target: string;
+    }) {
+        return (
+            <div
+                data-aos="fade-up"
+                className="bg-[#e6f3f8] p-6 rounded-xl shadow-lg hover:shadow-xl transition-transform transform hover:scale-105"
+            >
+                <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-[#146995] p-3 rounded-full w-12 h-12 flex items-center justify-center">
+                        {iconMap[category]}
+                    </div>
+                    <h3 className="text-xl font-semibold text-[#146995]">{category}</h3>
+                </div>
+                <p className="text-gray-800">{target}</p>
+            </div>
+        );
+    }
+
+    const vision2030 = {
+        title: "Vision 2030",
+        desc: "By 2030, UFIRM aims to be India’s most trusted, tech-enabled, and sustainable real estate services company, delivering value across build, manage, maintain, and enhance verticals.",
+        goals: [
+            {
+                category: "BUILD – Projects",
+                target: "Estate development portfolio to grow by 100%.",
+            },
+            {
+                category: "Estate Advisory",
+                target: "Manage and enable sales of real estate assets worth ₹100+ Crores.",
+            },
+            {
+                category: "Facility Management",
+                target: "urest.in to achieve 120% revenue growth in integrated facility management and manpower outsourcing. ",
+            },
+            {
+                category: "Estate Technology",
+                target: "Launch 3 globally accessible technology and ESG tools for smarter estate construction, maintenance & management. ",
+            },
+        ],
+    };
 
     return (
         <div className="bg-white text-gray-800">
@@ -79,36 +138,110 @@ export default function AboutusPage() {
                 <div className="absolute inset-0 bg-black/60 flex items-center px-10">
                     <div className="text-white max-w-xl">
                         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">We Are UFIRM</h1>
-                        <p className="text-xl">Powering smart living through technology, real estate, and infrastructure excellence.</p>
+                        <p className="text-xl">Purpose-driven real estate services company committed to building, managing, maintaining, and enhancing real estate for <strong>People, Planet & Profits</strong>.</p>
                     </div>
                 </div>
             </div>
 
-            <section className="text-black py-20 text-center px-6 md:px-20 bg-[#f8f8ff]">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">Built on Trust. Driven by Innovation.</h2>
-                <p className="text-lg max-w-4xl mx-auto">
-                    UFIRM is the powerhouse behind <span className="font-bold text-[#146995]">Royal Nest</span>,
-                    <span className="font-bold text-[#146995]"> UREST Facility Management</span>, and
-                    <span className="font-bold text-[#146995]"> UFIRM Estates</span>.
-                    Together, we shape better communities and enable smarter property experiences.
+            <section className="p-20">
+                <p className="text-lg">
+                    Founded in 2016 as an extension of the Royal Nest Group—with over 25 years of legacy and 8 million sq. ft. of successfully delivered residential and commercial projects—Ufirm now integrates four synergistic verticals under one roof.
                 </p>
             </section>
 
-            <section className="py-20 px-6 md:px-20 bg-gray-50">
+            <section className="py-20 px-6 md:px-20 bg-[#e6f3f8]">
+                <div className="text-center mb-12">
+                    <h2 className="text-5xl font-bold text-black">Our Divisions</h2>
+                    <p className="text-lg max-w-3xl mx-auto mt-4">
+                        From sales to service to smart solutions — every UFIRM arm is dedicated to excellence.
+                    </p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-10 p-4">
+                    <Link href="https://urest.in/">
+                        <Feature
+                            icon={<FaUsersCog />}
+                            title="MAINTAIN – Facility Management"
+                            meaning='UREST.IN manages 95+ million ft² estates across India'
+                            deliverables='Maintenance, housekeeping, security, energy & water mgmt.'
+                        />
+                    </Link>
+                    <Link href="/RoyalNestPage">
+                        <Feature
+                            icon={<FaBuilding />}
+                            title="BUILD – Projects"
+                            meaning="Complete lifecycle of project development with green building focus"
+                            deliverables='Feasibility → Design → Construction → Handover'
+                        />
+                    </Link>
+                    <Link href="/OurInnovation">
+                        <Feature
+                            icon={<FaMicrochip />}
+                            title="ENHANCE – Estate Technology"
+                            meaning='In-house CMMS & IoT for smarter, safer buildings'
+                            deliverables='Digital PPM, asset health, helpdesk, ESG dashboards'
+                        />
+                    </Link>
+                    <Link href="/Management&advisory">
+                        <Feature
+                            icon={<FaGlobeAsia />}
+                            title="MANAGE – Estate Advisory"
+                            meaning='Comprehensive strategic & financial advisory services for asset owners'
+                            deliverables='Market analysis, leasing strategy, CAPEX/OPEX optimization'
+                        />
+                    </Link>
+                </div>
+            </section>
+
+            <section className="bg-white py-10 ">
+                <h2 className="text-5xl font-bold text-black mb-15 text-center">UFIRM Roadmap</h2>
+                <div className="w-full overflow-x-auto">
+                    <div className="relative inline-block">
+                        <div className="min-w-[1600px] relative z-10">
+                            <div className="flex gap-10 px-10">
+                                {roadmapSteps.map((item, idx) => (
+                                    <div key={idx} className="w-[300px] shrink-0">
+                                        {item.title && (
+                                            <span className="text-xs text-white font-bold bg-yellow-700 px-2 py-1 rounded uppercase">
+                                                {item.title}
+                                            </span>
+                                        )}
+                                        <h3 className="text-xl font-bold mt-2">{item.year}</h3>
+                                        <p className="text-gray-700 mt-2">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex overflow-hidden h-[200px]">
+                                {[...Array(10)].map((_, i) => (
+                                    <img
+                                        key={i}
+                                        src="/Aboutus/skyline.jpg"
+                                        alt="Skyline"
+                                        className="h-full object-contain"
+                                        style={{ flexShrink: 0 }}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* <section className="py-20 px-6 md:px-20 bg-gray-50">
                 <div className="text-center mb-14">
                     <h2 className="text-5xl font-bold text-black">Our Legacy</h2>
                     <p className="text-lg max-w-3xl mx-auto mt-4">
                         From our roots in Delhi NCR, we&apos;ve delivered 8M+ sq. ft. across 4 states. Backed by 100% delivery and award-winning quality.
                     </p>
                 </div>
-                <div className="grid md:grid-cols-3 gap-10">
+                 <div className="grid md:grid-cols-3 gap-10">
                     <Feature icon={<FaBuilding />} title="8M+ Sq. Ft. Built" desc="Housing & commercial hubs across NCR, Punjab, HP & J&K" />
                     <Feature icon={<FaHandshake />} title="100% On-Time Delivery" desc="Projects delivered with absolute commitment." />
                     <Feature icon={<FaAward />} title="Nationally Awarded" desc="Recognized across platforms for excellence and ethics." />
                 </div>
-            </section>
+            </section> */}
 
-            <section className="py-20 px-6 md:px-20">
+            {/* <section className="py-20 px-6 md:px-20">
                 <div className="flex flex-col md:flex-row items-center gap-10">
                     <div className="md:w-1/2 space-y-6">
                         <h2 className="text-3xl font-bold text-black">Expansion Backed by Vision</h2>
@@ -136,44 +269,21 @@ export default function AboutusPage() {
                         ))}
                     </div>
                 </div>
-            </section>
-
-            <section className="py-20 px-6 md:px-20 bg-[#e6f3f8]">
-                <div className="text-center mb-14">
-                    <h2 className="text-5xl font-bold text-black">Our Divisions</h2>
-                    <p className="text-lg max-w-3xl mx-auto mt-4">
-                        From sales to service to smart solutions — every UFIRM arm is dedicated to excellence.
-                    </p>
+            </section> */}
+            <section className="py-15 px-6 md:px-20 bg-white text-black">
+                <div className="text-center mb-10">
+                    <h2 className="text-5xl font-bold text-black">{vision2030.title}</h2>
+                    <p className="text-lg mt-4 max-w-3xl mx-auto text-gray-700">{vision2030.desc}</p>
                 </div>
-                <div className="grid md:grid-cols-2 gap-10 p-4">
-                    <Link href="https://urest.in/">
-                    <Feature
-                        icon={<FaUsersCog />}
-                        title="UREST Facility Management"
-                        desc="Comprehensive green building services, a highly skilled workforce, and advanced preventive maintenance solutions — all powered by Urest.in."
-                    />
-                    </Link>
-                    <Link href="/RoyalNestPage">
-                    <Feature
-                        icon={<FaBuilding />}
-                        title="Royal Nest Projects"
-                        desc="Flagship residential brand offering gated communities and high-rises across North India, known for quality, timely delivery, and smart planning."
-                    />
-                    </Link>
-                    <Link href="/OurInnovation">
-                    <Feature
-                        icon={<FaMicrochip />}
-                        title="UFIRM Technologies"
-                        desc="Tech-driven platform powering smart property management, green maintenance, and AI-enabled facility services across India."
-                    />
-                    </Link>
-                    <Link href="/Management&advisory">
-                    <Feature
-                        icon={<FaGlobeAsia />}
-                        title="UFIRM Estates"
-                        desc="Your trusted partner in premium sales, leasing & brokerage. Unlocking commercial & residential opportunities with ease."
-                    />
-                    </Link>
+
+                <div className="grid md:grid-cols-2 gap-10 p-10">
+                    {vision2030.goals.map((goal, index) => (
+                        <Vision2030Card
+                            key={index}
+                            category={goal.category}
+                            target={goal.target}
+                        />
+                    ))}
                 </div>
             </section>
 
@@ -182,6 +292,23 @@ export default function AboutusPage() {
                     <h2 className="text-5xl font-bold">Our Vision & Mission</h2>
                     <p className="text-gray-700 text-lg mt-4 font-medium">We deeply care for...</p>
                     <div className="flex justify-center gap-8 mt-2">
+                        {/* <Image
+                            src="/Aboutus/ufirm technologies essence.png"
+                            alt="People, Planet, Profits Venn Diagram"
+                            width={400}
+                            height={400}
+                            className="object-contain"
+                        /> */}
+                        {/* <div className="flex justify-center my-8">
+                            <Image
+                                src="/Aboutus/ufirm technologies essence.png"
+                                alt="People, Planet, Profits Venn Diagram"
+                                width={400}
+                                height={400}
+                                className="object-contain"
+                            />
+                        </div> */}
+
                         <div className="flex flex-col items-center">
                             <FaUsers className="text-[#146995] text-4xl mb-2" />
                             <span className="text-sm font-semibold text-gray-600">People</span>
@@ -223,43 +350,9 @@ export default function AboutusPage() {
                     </p>
                 </div>
             </section>
+            <ClientCarousel />
 
-            <section className="bg-white py-10 ">
-                <h2 className="text-3xl font-bold text-black mb-12 text-center">UFIRM Roadmap</h2>
-                <div className="w-full overflow-x-auto">
-                    <div className="relative inline-block">
-                        <div className="min-w-[1600px] relative z-10">
-                            <div className="flex gap-10 px-10">
-                                {roadmapSteps.map((item, idx) => (
-                                    <div key={idx} className="w-[300px] shrink-0">
-                                        {item.title && (
-                                            <span className="text-xs text-white font-bold bg-yellow-700 px-2 py-1 rounded uppercase">
-                                                {item.title}
-                                            </span>
-                                        )}
-                                        <h3 className="text-xl font-bold mt-2">{item.year}</h3>
-                                        <p className="text-gray-700 mt-2">{item.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="flex overflow-hidden h-[200px]">
-                                {[...Array(10)].map((_, i) => (
-                                    <img
-                                        key={i}
-                                        src="/Aboutus/skyline.jpg"
-                                        alt="Skyline"
-                                        className="h-full object-contain"
-                                        style={{ flexShrink: 0 }}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-20 text-center bg-[#e6f3f8] text-black px-6">
+            {/* <section className="py-20 text-center bg-[#e6f3f8] text-black px-6">
                 <h2 className="text-4xl font-bold mb-4">24+ Years of Real Estate Excellence</h2>
                 <p className="text-lg max-w-xl mx-auto mb-6">
                     Whether you&apos;re buying, leasing, or maintaining — choose UFIRM for trust, technology, and transformation.
@@ -269,17 +362,18 @@ export default function AboutusPage() {
                         Get in Touch
                     </button>
                 </Link>
-            </section>
+            </section> */}
         </div>
     );
 }
 
-function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
+function Feature({ icon, title, meaning, deliverables }: { icon: React.ReactNode; title: string; meaning: string; deliverables: string }) {
     return (
         <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
             <div className="text-[#146995] text-5xl mb-4">{icon}</div>
             <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-            <p className="text-gray-600 text-base">{desc}</p>
+            <p className="text-gray-700 mb-1"><strong>Meaning:</strong> {meaning}</p>
+            <p className="text-gray-700"><strong>Deliverables:</strong> {deliverables}</p>
         </div>
     );
 }

@@ -71,7 +71,7 @@ const Footer = () => {
                         <li><Link href="/RoyalNestPage" className="hover:text-white transition-colors">Royal Nest Projects</Link></li>
                         <li><Link href="/OurInnovation" className="hover:text-white transition-colors">Facility Tech</Link></li>
                         <li><Link href="/TechnologiesPage" className="hover:text-white transition-colors">Technical Services</Link></li>
-                        <li><Link href="/real-estate-development" className="hover:text-white transition-colors">Real Estates Advisory</Link></li>
+                        <li><Link href="/Management&advisory" className="hover:text-white transition-colors">Real Estates Advisory</Link></li>
                     </ul>
                 </div>
 
