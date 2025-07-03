@@ -1,7 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { IncomingForm } from "formidable";
+import {  NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { promisify } from "util";
 export const config = {
   api: {
     bodyParser: false,
