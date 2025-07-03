@@ -11,16 +11,16 @@ export async function POST(request: Request) {
         }
 
         const transporter = nodemailer.createTransport({
-            host: 'smtp.office365.com',
-            port: 587,
-            secure: false,
+            host: 'smtpout.secureserver.net',
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL_USERNAME,
                 pass: process.env.EMAIL_PASSWORD,
             },
             tls: {
                 ciphers: 'SSLv3',
-                rejectUnauthorized: false 
+                rejectUnauthorized: false
             }
         });
 
