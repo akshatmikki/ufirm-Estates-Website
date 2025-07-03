@@ -136,7 +136,7 @@ export default function CareersPage() {
                     Looking for a meaningful career opportunity? <strong>We’re hiring passionate professionals</strong> across multiple sectors.
                 </p>
                 <p className="text-sm text-gray-600 mb-6">
-                    Whether you're actively job hunting or simply exploring, we welcome your resume.
+                    Whether you&apos;re actively job hunting or simply exploring, we welcome your resume.
                 </p>
             </motion.div>
 
