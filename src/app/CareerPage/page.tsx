@@ -121,7 +121,7 @@ export default function CareersPage() {
                     className="w-full"
                 >
                     <Image
-                        src="/hires.jpeg"
+                        src="/Hires.jpeg"
                         alt="hire"
                         width={2400}
                         height={700}
