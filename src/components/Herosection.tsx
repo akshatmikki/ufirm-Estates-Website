@@ -23,7 +23,7 @@ const slides = [
   {
     src: "/Banners/Banner3.jpg",
     title: "The engine driving progress and competitive advantage in Real Estate",
-    buttonLabel: "Our Product",
+    buttonLabel: "Facility Tech",
     href: "/OurInnovation",
   },
   {
