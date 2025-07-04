@@ -6,6 +6,7 @@ import ClientCarousel from "@/components/ClientCarousel";
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
+import SVGComponent from "@/components/Ufirm_estates";
 
 const services = [
     {
@@ -41,13 +42,7 @@ export default function Managementadvisory() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
+                        <SVGComponent className="w-28 h-27" />
                     </Link>
                     <NavBar />
                 </div>
@@ -97,7 +92,7 @@ export default function Managementadvisory() {
                     </motion.p>
                 </section>
 
-                <section className="px-6 md:px-20 py-16 bg-gray-50">
+                <section className="px-6 md:px-20 py-16 bg-[#e6f3f8]">
                     <h2 className="text-3xl font-bold text-black mb-12 text-center">Our Services</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {services.map((service, index) => (

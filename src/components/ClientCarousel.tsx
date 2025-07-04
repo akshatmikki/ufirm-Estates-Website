@@ -38,7 +38,7 @@ export default function ClientCarousel() {
     return (
         <section className="relative w-full py-10 sm:py-16 bg-gray-50">
             <div className="text-center mb-8 sm:mb-10 px-4">
-                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
+                <h2 className="text-xl sm:text-2xl font-semibold ">
                     <span className="text-2xl sm:text-3xl font-bold text-black">Trusted By 250+ clients across India</span>
                 </h2>
             </div>
