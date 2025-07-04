@@ -8,6 +8,7 @@ import { BackgroundBeams } from "@/components/ui/Background-beams";
 import ClientCarousel from "@/components/ClientCarousel";
 import { Button } from "@/components/ui/Button";
 import { FlipWords } from "@/components/ui/flip-words";
+import SVGComponent from "@/components/Ufirm_estates";
 
 const technologies = [
     {
@@ -63,13 +64,7 @@ export default function TechnologiesPage() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
+                        <SVGComponent className="w-28 h-27" />
                     </Link>
                     <NavBar />
                 </div>
