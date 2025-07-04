@@ -5,6 +5,7 @@ import { NavBar } from "../../components/NavBar";
 import { BackgroundGradient } from "../../components/ui/Background-gradient"
 import { ExpandableCardList } from "../../components/expandablescards"
 import { BackgroundBeams } from "../../components/ui/Background-beams";
+import SVGComponent from "../../components/Ufirm_estates";
 
 export default function ReactServicesPage() {
   const ReactCards = [
@@ -40,13 +41,7 @@ export default function ReactServicesPage() {
         <div className="absolute top-1 left-0 w-full z-50">
           <div className="flex items-center justify-between px-4 mt-1">
             <Link href="/">
-              <Image
-                src="/UFIRM ESTATES LOGO.png"
-                alt="logo"
-                width={100}
-                height={50}
-                priority
-              />
+              <SVGComponent className="w-28 h-27" />
             </Link>
             <NavBar />
           </div>
