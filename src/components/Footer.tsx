@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import Image from 'next/image';
+import SVGComponent from '@/components/Ufirm_estates';
 import { usePathname } from "next/navigation";
 import { FaLinkedin, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 import React, { useState } from 'react';
@@ -33,7 +33,7 @@ const Footer = () => {
         <footer className="bg-gray-800 text-gray-300 py-3 px-4 md:px-8 lg:px-16">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-8">
                 <div className="mb-3 md:mb-0">
-                    <Image src="/UFIRM ESTATES LOGO.png" alt="Logo" width={120} height={50} />
+                    <SVGComponent className="w-28 h-27" />
                 </div>
                 <div className="flex flex-row items-center md:items-end">
                     <p className="text-white text-sm mr-4 text-center mb-1">Follow us on social</p>
@@ -57,10 +57,10 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div>
                     <ul className="space-y-2">
-                        <li><Link href="/" className={`transition-colors ${isActive("/") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"}`}>Home</Link></li>
-                        <li><Link href="/Aboutuspage" className={`transition-colors ${isActive("/Aboutuspage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"}`}>About us</Link></li>
-                        <li><Link href="/CareerPage" className={`transition-colors ${isActive("/CareerPage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"}`}>Hire</Link></li>
-                        <li><Link href="/ContactPage" className={`transition-colors ${isActive("/ContactPage") ? "text-yellow-400 font-bold" : "hover:text-white text-gray-300"}`}>Contact Us</Link></li>
+                        <li><Link href="/" className={`transition-colors ${isActive("/") ? "text-blue-400 font-bold" : "hover:text-white"}`}>Home</Link></li>
+                        <li><Link href="/Aboutuspage" className={`transition-colors ${isActive("/Aboutuspage") ? "text-blue-400 font-bold" : "hover:text-white"}`}>About us</Link></li>
+                        <li><Link href="/CareerPage" className={`transition-colors ${isActive("/CareerPage") ? "text-blue-400 font-bold" : "hover:text-white"}`}>Hire</Link></li>
+                        <li><Link href="/ContactPage" className={`transition-colors ${isActive("/ContactPage") ? "text-blue-400 font-bold" : "hover:text-white"}`}>Contact Us</Link></li>
                     </ul>
                 </div>
 
@@ -110,7 +110,7 @@ const Footer = () => {
                         />
                         <button
                             type="submit"
-                            className="bg-yellow-500 text-white font-semibold py-2 px-6 rounded w-fit self-start hover:bg-yellow-600 transition-colors"
+                            className="bg-blue-800 text-white font-semibold py-2 px-6 rounded w-fit self-start hover:bg-blue-500 transition-colors"
                         >
                             Subscribe Now
                         </button>

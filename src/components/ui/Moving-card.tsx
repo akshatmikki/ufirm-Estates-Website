@@ -46,7 +46,7 @@ export function InfiniteStatCards({
             className="bg-white shadow-md rounded-xl p-4 min-w-[220px] text-center hover:shadow-lg transition-all duration-500 transform rotate-y-[20deg] hover:rotate-y-0"
           >
             <div className="text-2xl mb-2">{stat.icon}</div>
-            <p className="text-lg font-bold text-orange-500">
+            <p className="text-lg font-bold text-blue-500">
               <CountUp end={stat.value} duration={2} separator="," /> {stat.suffix}
             </p>
             <p className="text-sm text-gray-800 mt-2">{stat.label}</p>

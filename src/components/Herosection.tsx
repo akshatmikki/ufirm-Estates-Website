@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { Login } from "@/components/Login";
-import Image from "next/image";
 import { Carousel } from "@/components/ui/Carousel";
+import SVGComponent from "@/components/Ufirm_estates";
 
 const slides = [
   {
@@ -52,14 +52,8 @@ export default function Herosection() {
       />
 
       <div className="absolute top-1 left-0 w-full z-50">
-        <div className="flex items-center justify-between px-4 mt-1 w-full">
-          <Image
-            src="/UFIRM ESTATES LOGO.png"
-            alt="logo"
-            width={100}
-            height={50}
-            priority
-          />
+        <div className="flex items-center justify-between px-4  w-full">
+          <SVGComponent className="w-28 h-27" />
           <NavBar />
           <Login />
         </div>
