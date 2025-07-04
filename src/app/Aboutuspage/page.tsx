@@ -194,14 +194,14 @@ export default function AboutusPage() {
 
             <section className="bg-white py-10 ">
                 <h2 className="text-5xl font-bold text-black mb-15 text-center">UFIRM Roadmap</h2>
-                <div className="w-full overflow-x-auto">
+                <div className="w-full overflow-x-auto custom-scrollbar">
                     <div className="relative inline-block">
                         <div className="min-w-[1600px] relative z-10">
                             <div className="flex gap-10 px-10">
                                 {roadmapSteps.map((item, idx) => (
                                     <div key={idx} className="w-[300px] shrink-0">
                                         {item.title && (
-                                            <span className="text-xs text-white font-bold bg-yellow-700 px-2 py-1 rounded uppercase">
+                                            <span className="text-xs text-white font-bold bg-blue-500 px-2 py-1 rounded uppercase">
                                                 {item.title}
                                             </span>
                                         )}
@@ -227,49 +227,6 @@ export default function AboutusPage() {
                 </div>
             </section>
 
-            {/* <section className="py-20 px-6 md:px-20 bg-gray-50">
-                <div className="text-center mb-14">
-                    <h2 className="text-5xl font-bold text-black">Our Legacy</h2>
-                    <p className="text-lg max-w-3xl mx-auto mt-4">
-                        From our roots in Delhi NCR, we&apos;ve delivered 8M+ sq. ft. across 4 states. Backed by 100% delivery and award-winning quality.
-                    </p>
-                </div>
-                 <div className="grid md:grid-cols-3 gap-10">
-                    <Feature icon={<FaBuilding />} title="8M+ Sq. Ft. Built" desc="Housing & commercial hubs across NCR, Punjab, HP & J&K" />
-                    <Feature icon={<FaHandshake />} title="100% On-Time Delivery" desc="Projects delivered with absolute commitment." />
-                    <Feature icon={<FaAward />} title="Nationally Awarded" desc="Recognized across platforms for excellence and ethics." />
-                </div>
-            </section> */}
-
-            {/* <section className="py-20 px-6 md:px-20">
-                <div className="flex flex-col md:flex-row items-center gap-10">
-                    <div className="md:w-1/2 space-y-6">
-                        <h2 className="text-3xl font-bold text-black">Expansion Backed by Vision</h2>
-                        <p className="text-lg">
-                            Since our inception in 2000 under Omkar Nests Pvt. Ltd., we&apos;ve scaled with integrity.
-                            Our footprint extends across:
-                        </p>
-                        <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                            <li>Delhi NCR</li>
-                            <li>Amritsar, Punjab</li>
-                            <li>Dharamshala, Himachal Pradesh</li>
-                            <li>Jammu & Kashmir</li>
-                        </ul>
-                    </div>
-                    <div className="md:w-1/2 grid grid-cols-2 gap-4 mt-10 md:mt-0">
-                        {["/Aboutus/jammu.jpeg", "/Aboutus/Gn.jpg", "/Aboutus/Dharamshala.webp", "/Aboutus/Amritsar.png"].map((src, i) => (
-                            <Image
-                                key={i}
-                                src={src}
-                                alt={`project-${i}`}
-                                width={300}
-                                height={200}
-                                className="rounded-xl shadow-xl hover:scale-105 transition-transform duration-300"
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section> */}
             <section className="py-15 px-6 md:px-20 bg-white text-black">
                 <div className="text-center mb-10">
                     <h2 className="text-5xl font-bold text-black">{vision2030.title}</h2>
@@ -292,22 +249,6 @@ export default function AboutusPage() {
                     <h2 className="text-5xl font-bold">Our Vision & Mission</h2>
                     <p className="text-gray-700 text-lg mt-4 font-medium">We deeply care for...</p>
                     <div className="flex justify-center gap-8 mt-2">
-                        {/* <Image
-                            src="/Aboutus/ufirm technologies essence.png"
-                            alt="People, Planet, Profits Venn Diagram"
-                            width={400}
-                            height={400}
-                            className="object-contain"
-                        /> */}
-                        {/* <div className="flex justify-center my-8">
-                            <Image
-                                src="/Aboutus/ufirm technologies essence.png"
-                                alt="People, Planet, Profits Venn Diagram"
-                                width={400}
-                                height={400}
-                                className="object-contain"
-                            />
-                        </div> */}
 
                         <div className="flex flex-col items-center">
                             <FaUsers className="text-[#146995] text-4xl mb-2" />
@@ -351,18 +292,6 @@ export default function AboutusPage() {
                 </div>
             </section>
             <ClientCarousel />
-
-            {/* <section className="py-20 text-center bg-[#e6f3f8] text-black px-6">
-                <h2 className="text-4xl font-bold mb-4">24+ Years of Real Estate Excellence</h2>
-                <p className="text-lg max-w-xl mx-auto mb-6">
-                    Whether you&apos;re buying, leasing, or maintaining — choose UFIRM for trust, technology, and transformation.
-                </p>
-                <Link href="/ContactPage">
-                    <button className="bg-white text-[#146995] font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">
-                        Get in Touch
-                    </button>
-                </Link>
-            </section> */}
         </div>
     );
 }

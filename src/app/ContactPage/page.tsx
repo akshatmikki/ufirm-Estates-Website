@@ -6,7 +6,7 @@ import { NavBar } from "@/components/NavBar";
 import { useState, useRef } from 'react';
 import { FaLinkedin, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 import ReCAPTCHA from "react-google-recaptcha";
-
+import SVGComponent from "@/components/Ufirm_estates";
 
 const markers = [
     {
@@ -191,13 +191,7 @@ export default function Contact() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
+                        <SVGComponent className="w-28 h-27" />
                     </Link>
                     <NavBar />
                 </div>
