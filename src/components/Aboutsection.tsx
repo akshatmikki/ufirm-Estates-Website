@@ -13,7 +13,7 @@ const AboutUs = () => {
         <div className="flex flex-col md:flex-row items-center gap-15">
           <div className="w-full text-center md:text-left md:w-1/2">
             <p className="text-blue-700 font-bold text-base sm:text-sm mb-4">About Us</p>
-            <h4 className="text-2xl sm:text-md md:text-2xl font-bold text-black mb-6 leading-snug">
+            <h4 className="text-xl sm:text-md md:text-3xl font-bold text-black mb-6 leading-snug">
               Ufirm, founded in 2016 as part of the Royal Nest Group, aims to elevate India’s real estate services. With over 25 years of legacy and 8 million sq. ft. of delivered projects, we offer proven expertise and a commitment to excellence.
             </h4>
             <p className="text-grey-900 text-base sm:text-sm leading-relaxed mb-8">
