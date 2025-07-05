@@ -48,11 +48,11 @@ export default function Managementadvisory() {
                 </div>
             </div>
 
-            <main className="bg-white text-gray-900">
+            <main className="bg-white text-gray-900 min-h-screen">
                 <div className="relative">
                     <div className="relative w-full h-[80vh]">
                         <Image
-                            src="/Estate.jpg"
+                            src="/Banners/Real Estate.svg"
                             alt="Estate Banner"
                             width={1600}
                             height={900}
@@ -63,14 +63,14 @@ export default function Managementadvisory() {
 
                     <div className="absolute inset-0 flex items-center justify-center p-10 flex-col">
                         <motion.h1
-                            className="text-4xl md:text-5xl font-bold text-white"
+                            className="text-4xl md:text-5xl font-bold text-black"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
                         >
                             Welcome to UFIRM Estates
                         </motion.h1>
-                        <p className="mt-4 text-lg md:text-xl text-white max-w-3xl mx-auto">
+                        <p className="mt-4 text-lg md:text-xl text-black max-w-3xl mx-auto">
                             Your trusted real estate advisory partner offering expert services across India.
                         </p>
                         <motion.div
