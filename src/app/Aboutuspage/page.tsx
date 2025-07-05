@@ -133,7 +133,7 @@ export default function AboutusPage() {
                     alt="About Banner"
                     width={1600}
                     height={900}
-                    className="w-full h-[80vh] object-fill"
+                    className="w-full h-[60vh] sm:h-[50vh] lg:h-[80vh]  object-fill"
                 />
                 <div className="absolute inset-0 bg-black/60 flex items-center px-10">
                     <div className="text-white max-w-xl">
@@ -231,7 +231,7 @@ export default function AboutusPage() {
 
                 <div className="w-full md:hidden max-h-[500px] overflow-y-auto">
                     <div className="flex flex-row items-stretch h-full">
-                        <div className="w-1/2 flex flex-col gap-6 px-4 py-4">
+                        <div className="w-full flex flex-col gap-6 px-4 py-4">
                             {roadmapSteps.reverse().map((item, idx) => (
                                 <div key={idx} className="flex items-start gap-4">
                                     <div className="w-full">
