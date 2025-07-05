@@ -163,18 +163,29 @@ export function NavBar() {
               <div className="flex flex-row">
                 <div className="flex flex-col">
                   <ProductItem title="Green Building Services" src="/Navbar/greenbuildingservices.jpg" description="Eco-friendly buildings with green solutions" />
-                  <ProductItem title="Technical Maintenance" src="/Navbar/Technicalmaintenance.jpeg" description="End-to-end facility technical care" />
-                  <ProductItem title="Deep cleaning & HK" src="/Navbar/Deepcleaning.jpg" description="Expert cleaning, hygiene, and care" />
+                  <ProductItem title="Technical Maintenance" src="/Navbar/Technical MEP.svg" description="Comprehensive MEP and facility care" />
+                  <ProductItem title="Deep cleaning & HK" src="/Navbar/deep cleaning housekeeping.svg" description="Expert cleaning, hygiene, and care" />
+                  <ProductItem title="Hospitality Manpower" src="/Navbar/Hospitality Manpower.svg" description="Professional staffing for hospitality operations" />
                 </div>
                 <div className="flex flex-col ml-4">
                   <ProductItem title="Integrated Facility Mgmt" src="/Navbar/Dashboard.jpg" description="Tech-enabled facility management services" />
-                  <ProductItem title="Horticulture Services" src="/Navbar/horticulture.webp" description="Sustainable gardens, greener tomorrow" />
-                  <ProductItem title="Club & Pool Mgmt" src="/Navbar/pool.webp" description="Smooth operations, vibrant communities" />
+                  <ProductItem title="Horticulture Services" src="/Navbar/Horticulture.svg" description="Sustainable gardens, greener tomorrow" />
+                  <ProductItem title="Club & Pool Mgmt" src="/Navbar/Club.svg" description="Smooth operations, vibrant communities" />
+                  <ProductItem title="Waste Management" src="/Navbar/waste management.svg" description="Efficient and eco-friendly waste management" />
                 </div>
               </div>
             </div>
           )}
           <MenuItem setActive={setActive} active={active} item="Royal Nest Projects" href="/RoyalNestPage" />
+          {active === "Royal Nest Projects" && (
+            <div className="absolute left-30 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
+              <div className="flex flex-col space-y-2">
+                <ProductItem title="Forest View Dharamshala" src="/Navbar/Forestview, Dharamshala_ Ongoing.svg" description="Ongoing"  />
+                <ProductItem title="Hill View Apartments Jammu" src="/Navbar/Hillview Apartments, Jammu_ Ongoing.svg" description="Ongoing" />
+                <ProductItem title="Radisson Hotel Amritsar" src="/Navbar/Radisson Hotel, Amritsar_ On-going.svg" description="Ongoing"  />
+              </div>
+            </div>
+          )}
           <MenuItem setActive={setActive} active={active} item="Facility Tech" href="/OurInnovation" />
           {active === "Facility Tech" && (
             <div className="absolute left-20 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
@@ -208,7 +219,7 @@ export function NavBar() {
             <div className="absolute left-40 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
               <div className="flex flex-row">
                 <div className="flex flex-col">
-                  <ProductItem title="Property Management" src="/Navbar/greenbuildingservices.jpg" description="Your property, our priority" />
+                  <ProductItem title="Property Management" src="/Navbar/Property Management.svg" description="Your property, our priority" />
                   <ProductItem title="Property Sale" src="/Navbar/propertysale.jpeg" description="Strategic sales, seamless closures" />
                 </div>
                 <div className="flex flex-col ml-4">

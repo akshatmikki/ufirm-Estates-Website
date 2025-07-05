@@ -143,13 +143,13 @@ export default function AboutusPage() {
                 </div>
             </div>
 
-            <section className="p-20">
+            <section className="p-10 px-20">
                 <p className="text-lg">
-                    Founded in 2016 as an extension of the Royal Nest Group—with over 25 years of legacy and 8 million sq. ft. of successfully delivered residential and commercial projects—Ufirm now integrates four synergistic verticals under one roof.
+                    Founded in 2016 as an extension of the Royal Nest Group—with over 25 years of legacy and 8 million sq. ft. of successfully delivered residential and commercial projects—Ufirm now integrates four synergistic divisions under one roof.
                 </p>
             </section>
 
-            <section className="py-20 px-6 md:px-20 bg-[#e6f3f8]">
+            <section className="py-10 px-6 md:px-20 bg-[#e6f3f8]">
                 <div className="text-center mb-12">
                     <h2 className="text-5xl font-bold text-black">Our Divisions</h2>
                     <p className="text-lg max-w-3xl mx-auto mt-4">
