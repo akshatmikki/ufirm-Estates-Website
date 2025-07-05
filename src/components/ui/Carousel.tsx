@@ -3,6 +3,7 @@ import { useEffect, useId, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./Button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface SlideData {
   title: string;
@@ -26,17 +27,15 @@ const Slide = ({ slide, index, current, animationId }: SlideProps) => {
 
   return (
     <div
-      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-        isCurrent ? "opacity-100 z-20" : "opacity-0 z-10"
-      }`}
+      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isCurrent ? "opacity-100 z-20" : "opacity-0 z-10"
+        }`}
     >
       <Image
         src={src}
         alt={title}
         fill
-        className={`object-cover w-full h-full transition-opacity duration-1000 ease-in-out ${
-          isCurrent ? "animate-fade-in-scale" : ""
-        }`}
+        className={`object-cover w-full h-full transition-opacity duration-1000 ease-in-out ${isCurrent ? "animate-fade-in-scale" : ""
+          }`}
         loading="eager"
         decoding="sync"
       />
@@ -126,17 +125,22 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
         ))}
       </div>
 
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-30">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handleSlideClick(index)}
-            className={`w-2.5 h-2.5 rounded-full ${
-              index === current ? "bg-white scale-125" : "bg-white/40"
-            } transition-transform duration-200`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+        <button
+          onClick={() => handleSlideClick(current - 1)}
+          className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
+          aria-label="Previous Slide"
+        >
+          <ChevronLeft className="w-4 h-4 text-black" />
+        </button>
+
+        <button
+          onClick={() => handleSlideClick(current + 1)}
+          className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
+          aria-label="Next Slide"
+        >
+          <ChevronRight className="w-4 h-4 text-black" />
+        </button>
       </div>
     </div>
   );

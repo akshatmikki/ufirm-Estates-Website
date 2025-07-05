@@ -44,7 +44,7 @@ function OurBusiness() {
       <div className="relative z-10 max-w-auto mx-auto px-2 sm:px-4 md:px-6"> 
         <div className="text-center">
           <p className="mt-2 text-4xl md:text-5xl leading-8 font-bold tracking-tight text-white sm:text-5xl"> 
-            Our Verticals
+            Our Divisions
           </p>
         </div>
 
