@@ -115,7 +115,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({
         width={130}
         height={110}
         alt={title}
-        className="flex-shrink-0 rounded-md shadow-2xl"
+        className="flex-shrink-0 rounded-md shadow-2xl max-w-[130px] max-h-[90px]"
       />
       <div>
         <h4 className="text-lg mb-1 text-white dark:text-white">
