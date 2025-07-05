@@ -34,8 +34,9 @@ const Slide = ({ slide, index, current, animationId }: SlideProps) => {
         src={src}
         alt={title}
         fill
-        className={`object-cover w-full h-full transition-opacity duration-700 ease-in-out ${isCurrent ? "animate-fade-in-scale" : ""
-          }`}
+        sizes="500vw"
+        className={`object-cover h-[40vh] sm:h-[60vh] lg:h-[80vh] w-full transition-opacity duration-700 ease-in-out ${isCurrent ? "animate-fade-in-scale" : ""
+          } object-contain sm:object-cover`}
         loading="eager"
         decoding="sync"
       />
@@ -110,7 +111,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
 
   return (
     <div
-      className="relative w-full h-[100dvh] min-h-screen overflow-hidden"
+      className="relative object-cover h-[60vh] sm:h-[80vh] lg:h-[100vh] w-full overflow-hidden"
       aria-labelledby={`carousel-heading-${id}`}
     >
       <div className="relative w-full h-full">
