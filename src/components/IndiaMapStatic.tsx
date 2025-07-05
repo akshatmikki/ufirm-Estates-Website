@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 const ncrGroup = {
     name: 'Delhi NCR',
-    top: '33.7%',
-    left: '32.2%',
+    top: '35.6%',
+    left: '32%',
     children: [
         {
             name: 'Delhi',
@@ -39,21 +39,21 @@ const ncrGroup = {
 };
 
 const markers = [
-    { name: 'Srinagar', description: 'Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121', Representative: 'Jigyasa', Number: '+91 9289902483', MailId: 'crm.ho@ufirm.in', top: '15%', left: '24%' },
-    { name: 'Jammu', description: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011', Representative: 'Jaswinder Kour', Number: '+91 9596796757', MailId: 'crm@ufirm.in', top: '19%', left: '25.8%' },
-    { name: 'Dharamshala',description:'677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh 176217', Representative: 'Nandini Singh', Number: '+91 9958288544', MailId: 'crm@ufirm.in', top: '22.6%', left: '34%' },
-    { name: 'Dehradun',description:'Chakrata road SELAQUI INDUSTRIAL AREA central hope town Dehradun Uttarakhand-248011', Representative: 'Mohan Negi', Number: '+91 7042344158', MailId: 'mohan.negi@ufirm.in', top: '28%', left: '39%' },
+    { name: 'Srinagar', description: 'Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121', Representative: 'Jigyasa', Number: '+91 9289902483', MailId: 'crm.ho@ufirm.in', top: '19%', left: '24%' },
+    { name: 'Jammu', description: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011', Representative: 'Jaswinder Kour', Number: '+91 9596796757', MailId: 'crm@ufirm.in', top: '22%', left: '25.8%' },
+    { name: 'Dharamshala', description: '677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh 176217', Representative: 'Nandini Singh', Number: '+91 9958288544', MailId: 'crm@ufirm.in', top: '25%', left: '34%' },
+    { name: 'Dehradun', description: 'Chakrata road SELAQUI INDUSTRIAL AREA central hope town Dehradun Uttarakhand-248011', Representative: 'Mohan Negi', Number: '+91 7042344158', MailId: 'mohan.negi@ufirm.in', top: '31%', left: '39%' },
     { name: 'Jaipur', description: 'C-163, Riico Residential Colony, Near Git, College Sitapura, Jaipur-302022', Representative: 'Sachin Sharma', Number: '+91 9319101871', MailId: 'sachin.sharma@ufirm.in', top: '37%', left: '26%' },
     { name: 'Udaipur', description: '88 Charak Hostal Raza Colony, Mulla Talai, Udaipur-313001', Representative: 'Nandini Singh', Number: '+91 9958288544', MailId: 'crm@ufirm.in', top: '41%', left: '20%' },
-    { name: 'Ahmedabad',description: 'Shop No.15, Manukrupa Plaza,Sanand, Ta-Sanand, Ahmedabad-382110', Representative: 'Jigyasa', Number: '+91 9289902483', MailId: 'crm.ho@ufirm.in', top: '52%', left: '12%' },
-    { name: 'Pune',description: 'GAT NO. 354, A&B, NH-4, Old Mumbai - Pune Hwy, Maval, Vadgaon, Pune, Maharashtra-412106', Representative: 'Sachin Sharma', Number: '+91 9319101871', MailId: 'sachin.sharma@ufirm.in', top: '65%', left: '20%' },
+    { name: 'Ahmedabad', description: 'Shop No.15, Manukrupa Plaza,Sanand, Ta-Sanand, Ahmedabad-382110', Representative: 'Jigyasa', Number: '+91 9289902483', MailId: 'crm.ho@ufirm.in', top: '52%', left: '12%' },
+    { name: 'Pune', description: 'GAT NO. 354, A&B, NH-4, Old Mumbai - Pune Hwy, Maval, Vadgaon, Pune, Maharashtra-412106', Representative: 'Sachin Sharma', Number: '+91 9319101871', MailId: 'sachin.sharma@ufirm.in', top: '65%', left: '20%' },
     { name: 'Hyderabad', description: '1-2 361/15, Phool Begh, Hemayathnagar, Indera Park, Hyderabad, Telangana - 500029', Representative: 'Kishore Reddy', Number: '+91 9849203269', MailId: 'kishore.reddy@ufirm.in', top: '66%', left: '37.6%' },
     { name: 'Kolkata', description: 'Purba Panchanna Gram, Abahani Club, Vip Nagar, Sub District South 21 Parganas, West Bengal-700100', Representative: 'Ranadhir Biswas', Number: '+91 9903522839', MailId: 'ranadhir.biswas@ufirm.in', top: '52%', left: '66%' },
 ];
 
 export default function IndiaMapStatic() {
     const [activeMarker, setActiveMarker] = useState<number | null>(null);
-    const [selectedNCR, setSelectedNCR] = useState(0); 
+    const [selectedNCR, setSelectedNCR] = useState(0);
     const [ncrActive, setNcrActive] = useState(false);
     const [, setIsMobile] = useState(false);
 
@@ -71,11 +71,11 @@ export default function IndiaMapStatic() {
             <div className="flex flex-col md:flex-row transition-all duration-500 ease-in-out">
                 <div className={`${showSidebar ? 'md:w-2/3' : 'w-full'} relative transition-all duration-500`}>
                     <Image
-                        src="/india-map.png"
+                        src="/ufirm india map.svg"
                         alt="India Map"
                         width={1500}
                         height={1800}
-                        className="w-full h-full object-fit"
+                        className="w-full h-full object-contain"
                         priority
                     />
                     {markers.map((marker, index) => (

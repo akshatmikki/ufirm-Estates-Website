@@ -44,7 +44,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Site Survey 🎥
+                  Facility Health Survey 🛠️
                 </Link>
               </span>
             </button>
