@@ -192,9 +192,12 @@ export default function AboutusPage() {
                 </div>
             </section>
 
-            <section className="bg-white py-10 ">
-                <h2 className="text-5xl font-bold text-black mb-15 text-center">UFIRM Roadmap</h2>
-                <div className="w-full overflow-x-auto custom-scrollbar">
+            <section className="bg-white py-10">
+                <h2 className="text-5xl font-bold text-black mb-15 text-center">
+                    UFIRM Roadmap
+                </h2>
+
+                <div className="w-full overflow-x-auto custom-scrollbar hidden md:block">
                     <div className="relative inline-block">
                         <div className="min-w-[1600px] relative z-10">
                             <div className="flex gap-10 px-10">
@@ -222,6 +225,34 @@ export default function AboutusPage() {
                                     />
                                 ))}
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="w-full md:hidden max-h-[500px] overflow-y-auto">
+                    <div className="flex flex-row items-stretch h-full">
+                        <div className="w-1/2 flex flex-col gap-6 px-4 py-4">
+                            {roadmapSteps.reverse().map((item, idx) => (
+                                <div key={idx} className="flex items-start gap-4">
+                                    <div className="w-full">
+                                        {item.title && (
+                                            <span className="text-xs text-white font-bold bg-blue-500 px-2 py-1 rounded uppercase w-full">
+                                                {item.title}
+                                            </span>
+                                        )}
+                                        <h3 className="text-lg font-bold mt-1">{item.year}</h3>
+                                        <p className="text-gray-700 mt-1">{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="w-1/2">
+                            <img
+                                src="/Aboutus/building.png"
+                                alt="Building"
+                                className="w-full h-full object-fill"
+                            />
                         </div>
                     </div>
                 </div>
