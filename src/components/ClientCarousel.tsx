@@ -43,8 +43,8 @@ export default function ClientCarousel() {
                 </h2>
             </div>
             <div className="relative overflow-hidden">
-                <div className="pointer-events-none absolute left-0 top-0 h-full w-20 sm:w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
-                <div className="pointer-events-none absolute right-0 top-0 h-full w-20 sm:w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+                <div className="pointer-events-none absolute left-0 top-0 h-full w-17 sm:w-28 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+                <div className="pointer-events-none absolute right-0 top-0 h-full w-17 sm:w-28 bg-gradient-to-l from-gray-50 to-transparent z-10" />
                 <InfiniteMovingCards
                     items={topClients}
                     direction="right"
