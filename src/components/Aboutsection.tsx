@@ -13,7 +13,7 @@ const AboutUs = () => {
         <div className="flex flex-col md:flex-row items-center gap-15">
           <div className="w-full text-center md:text-left md:w-1/2">
             <p className="text-blue-700 font-bold text-base sm:text-sm mb-4">About Us</p>
-            <h4 className="text-3xl sm:text-md md:text-3xl font-bold text-black mb-6 leading-snug">
+            <h4 className="text-2xl sm:text-md md:text-2xl font-bold text-black mb-6 leading-snug">
               Ufirm, founded in 2016 as part of the Royal Nest Group, aims to elevate India’s real estate services. With over 25 years of legacy and 8 million sq. ft. of delivered projects, we offer proven expertise and a commitment to excellence.
             </h4>
             <p className="text-grey-900 text-base sm:text-sm leading-relaxed mb-8">
@@ -32,25 +32,9 @@ const AboutUs = () => {
                 Read More <span className="ml-2" aria-hidden="true">&rarr;</span>
               </Button>
             </Link>
-            {/* <div className="flex flex-row justify-around items-center mt-4 gap-2">
-          <Image src="/certifications/CERTIFICATION1.svg" alt="Certified" width={60} height={30} className=" object-contain" />
-            <Image src="/certifications/CERTIFICATION3.svg" alt="Certified" width={60} height={30} className="object-contain" />
-            <Image src="/certifications/CERTIFICATION4.svg" alt="Certified" width={60} height={30} className="object-contain" />
-            <Image src="/certifications/CERTIFICATION5.svg" alt="Certified" width={60} height={30} className="object-contain" />
-            <Image src="/certifications/CERTIFICATION6.svg" alt="Certified" width={60} height={30} className=" object-contain" />
-            <Image src="/certifications/CERTIFICATION7.svg" alt="Certified" width={60} height={30} className=" object-contain" />
-            </div> */}
           </div>
           <div className="w-full md:w-1/2 flex h-full justify-center">
             <IndiaMapStatic />
-            {/* <div className='flex flex-row justify-around items-center mt-4 gap-2'>
-            <Image src="/certifications/CERTIFICATION1.svg" alt="Certified" width={100} height={50} className=" object-contain" />
-            <Image src="/certifications/CERTIFICATION3.svg" alt="Certified" width={100} height={50} className="object-contain" />
-            <Image src="/certifications/CERTIFICATION4.svg" alt="Certified" width={100} height={50} className="object-contain" />
-            <Image src="/certifications/CERTIFICATION5.svg" alt="Certified" width={100} height={50} className="object-contain" />
-            <Image src="/certifications/CERTIFICATION6.svg" alt="Certified" width={100} height={50} className=" object-contain" />
-            <Image src="/certifications/CERTIFICATION7.svg" alt="Certified" width={100} height={50} className=" object-contain" />
-          </div> */}
           </div>
         </div>
       </section>
