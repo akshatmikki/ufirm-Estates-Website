@@ -27,14 +27,14 @@ const Slide = ({ slide, index, current, animationId }: SlideProps) => {
 
   return (
     <div
-      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isCurrent ? "opacity-100 z-20" : "opacity-0 z-10"
+      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isCurrent ? "opacity-100 z-20" : "opacity-0 z-10"
         }`}
     >
       <Image
         src={src}
         alt={title}
         fill
-        className={`object-cover w-full h-full transition-opacity duration-1000 ease-in-out ${isCurrent ? "animate-fade-in-scale" : ""
+        className={`object-cover w-full h-full transition-opacity duration-700 ease-in-out ${isCurrent ? "animate-fade-in-scale" : ""
           }`}
         loading="eager"
         decoding="sync"
@@ -96,7 +96,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
       const next = (current + 1) % slides.length;
       onSlideChange(next);
       setAnimationId((prev) => prev + 1);
-    }, 8000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [current, onSlideChange, slides.length]);
@@ -127,7 +127,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
 
       <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-30">
         <button
-          onClick={() => handleSlideClick(current - 1)}
+          onClick={() => handleSlideClick((current - 1 + slides.length) % slides.length)}
           className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
           aria-label="Previous Slide"
         >
@@ -135,7 +135,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
         </button>
 
         <button
-          onClick={() => handleSlideClick(current + 1)}
+          onClick={() => handleSlideClick((current + 1) % slides.length)}
           className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
           aria-label="Next Slide"
         >
