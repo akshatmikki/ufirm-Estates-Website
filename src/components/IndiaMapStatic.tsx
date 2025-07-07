@@ -1,9 +1,32 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
-const ncrGroup = {
+// Types
+type Marker = {
+    name: string;
+    description: string;
+    Representative: string;
+    Number: string;
+    MailId: string;
+    top: string;
+    left: string;
+};
+
+type NCRChild = Omit<Marker, "top" | "left">;
+
+type NCRGroupType = {
+    name: string;
+    top: string;
+    left: string;
+    children: NCRChild[];
+};
+
+type MarkerOrNCR = Marker | NCRGroupType;
+
+// NCR Group
+const ncrGroup: NCRGroupType = {
     name: "Delhi NCR",
     top: "35.6%",
     left: "32%",
@@ -41,7 +64,8 @@ const ncrGroup = {
     ],
 };
 
-const markers = [
+// Regular markers
+const markers: Marker[] = [
     {
         name: "Srinagar",
         description: "Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121",
@@ -143,23 +167,13 @@ const markers = [
     },
 ];
 
+// Component
 export default function IndiaMapStatic() {
     const [activeMarker, setActiveMarker] = useState<number | null>(null);
     const [selectedNCR, setSelectedNCR] = useState(0);
     const [ncrActive, setNcrActive] = useState(false);
 
     const showSidebar = activeMarker !== null || ncrActive;
-
-    const markerIcon = (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 text-blue-600 hover:scale-110 transition-transform duration-200"
-            fill="currentColor"
-            viewBox="0 0 384 512"
-        >
-            <path d="M168 0C75.2 0 0 75.2 0 168c0 87.5 130.4 222.4 154.7 245.5 7.2 6.8 18.4 6.8 25.6 0C217.6 390.4 348 255.5 348 168 348 75.2 272.8 0 168 0zm0 240c-39.8 0-72-32.2-72-72s32.2-72 72-72 72 32.2 72 72-32.2 72-72 72z" />
-        </svg>
-    );
 
     return (
         <div className="relative w-full max-w-7xl mx-auto">
@@ -173,7 +187,7 @@ export default function IndiaMapStatic() {
                         className="w-full h-full object-contain"
                         priority
                     />
-                    {[...markers, ncrGroup].map((marker: any, index) => {
+                    {[...markers, ncrGroup].map((marker: MarkerOrNCR, index) => {
                         const isNCR = marker.name === "Delhi NCR";
 
                         return (
@@ -250,13 +264,13 @@ export default function IndiaMapStatic() {
                         ) : (
                             activeMarker !== null && (
                                 <>
-                                    {Object.entries(markers[activeMarker]).map(([key, val]) => (
-                                        key !== "top" && key !== "left" && (
+                                    {Object.entries(markers[activeMarker]).map(([key, val]) =>
+                                        key !== "top" && key !== "left" ? (
                                             <p key={key} className="text-sm mb-1">
                                                 <strong>{key}:</strong> {val}
                                             </p>
-                                        )
-                                    ))}
+                                        ) : null
+                                    )}
                                 </>
                             )
                         )}
