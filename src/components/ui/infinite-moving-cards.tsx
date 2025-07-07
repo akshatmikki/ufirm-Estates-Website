@@ -23,26 +23,35 @@ export function InfiniteMovingCards({
     fast: "20s",
   }[speed];
 
+  const animationClass =
+    direction === "right" ? "marquee-reverse" : "marquee";
+
   return (
     <div className="overflow-hidden relative w-full py-6">
       <div
         className={cn(
-          "flex gap-6 w-max animate-marquee whitespace-nowrap items-center",
-          direction === "right" ? "animate-marquee-reverse" : "",
-          pauseOnHover ? "hover:[animation-play-state:paused]" : ""
+          "flex w-max gap-6 whitespace-nowrap",
+          animationClass,
+          pauseOnHover && "hover:[animation-play-state:paused]"
         )}
-        style={{ animationDuration: baseSpeed }}
+        style={{
+          animationDuration: baseSpeed,
+        }}
       >
-        {items.concat(items).map((item, index) => (
+        {/* Repeat items twice using CSS animation only */}
+        {[...items, ...items].map((item, index) => (
           <div
             key={index}
-            className="flex items-center justify-center max-w-[120px] h-[60px] transition-transform hover:scale-105"
+            className="flex items-center justify-center max-w-[120px] h-[60px] transition-transform hover:scale-105 will-change-transform"
           >
             <Image
               src={item.src}
               alt={item.alt}
               width={80}
               height={60}
+              loading="lazy"
+              priority={false}
+              sizes="(max-width: 640px) 60px, 80px"
               className="object-contain h-full w-full"
             />
           </div>

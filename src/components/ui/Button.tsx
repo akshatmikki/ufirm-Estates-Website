@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useRef } from "react";
 import {
   motion,
@@ -25,18 +26,18 @@ export function Button({
   as: Component = "button",
   containerClassName,
   borderClassName,
-  duration,
+  duration = 3000,
   className,
   ...otherProps
 }: ButtonProps) {
   return (
     <Component
       className={cn(
-        "relative inline-flex overflow-hidden bg-transparent p-[3px] text-base sm:text-lg md:text-xl",
+        "relative inline-flex overflow-hidden p-[3px] text-base sm:text-lg md:text-xl transition-all",
         containerClassName
       )}
       style={{
-        borderRadius: borderRadius,
+        borderRadius,
       }}
       {...otherProps}
     >
@@ -55,7 +56,7 @@ export function Button({
       </div>
       <div
         className={cn(
-          "relative flex items-center justify-center border border-slate-800 bg-slate-900/[0.8] text-white antialiased backdrop-blur-xl px-6 py-4 text-xs sm:text-sm md:text-base",
+          "relative z-10 flex items-center justify-center border border-slate-800 bg-slate-900/[0.8] text-white antialiased backdrop-blur-xl px-6 py-4 text-xs sm:text-sm md:text-base min-h-[42px]",
           className
         )}
         style={{
@@ -94,10 +95,10 @@ export const MovingBorder = ({
   });
 
   const x = useTransform(progress, (val) =>
-    pathRef.current?.getPointAtLength(val).x
+    pathRef.current?.getPointAtLength(val)?.x ?? 0
   );
   const y = useTransform(progress, (val) =>
-    pathRef.current?.getPointAtLength(val).y
+    pathRef.current?.getPointAtLength(val)?.y ?? 0
   );
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
@@ -126,7 +127,6 @@ export const MovingBorder = ({
           position: "absolute",
           top: 0,
           left: 0,
-          display: "inline-block",
           transform,
         }}
       >
