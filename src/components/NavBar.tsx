@@ -1,15 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-// import Link from "next/link";
 import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
-// import { Menu as MenuIcon, X as CloseIcon ,ChevronRight} from "lucide-react";
 
 export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
-  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // const [isLoginOpen, setIsLoginOpen] = useState(false);
   const router = useRouter();
 
   const navigateWithScroll = (path: string, hash: string) => {
@@ -22,139 +18,6 @@ export function NavBar() {
 
   return (
     <div className={cn("fixed top-9 left-1/2 -translate-x-1/2 z-40 lg:w-full max-w-5xl px-16 ")}>
-      {/* {!isMobileMenuOpen && (
-        <div className="lg:hidden flex  justify-end items-end px-4 py-2 text-white rounded-xl shadow z-50">
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="focus:outline-none bg-black/20 p-2 rounded-xl"
-            title="Open menu"
-          >
-            <MenuIcon className="h-6 w-6" />
-          </button>
-        </div>
-      )} */}
-
-      {/* {isMobileMenuOpen && (
-        <div className="lg:hidden fixed right-0 top-6 w-64 bg-black/70 text-white p-4 space-y-4 shadow-lg z-50 max-h-screen overflow-y-auto transform transition-transform duration-300 ease-in-out">
-          <div className="flex justify-end pt-2">
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="focus:outline-none text-white p-2 rounded"
-              title="Close menu"
-            >
-              <CloseIcon className="h-6 w-6" />
-            </button>
-          </div>
-
-          <div>
-            <button
-              className="flex justify-between items-center w-full py-2 text-lg font-semibold focus:outline-none"
-              onClick={() => setIsLoginOpen(!isLoginOpen)}
-            >
-              <span>Login</span>
-              <ChevronRight
-                className={`transition-transform duration-300 ${isLoginOpen ? "rotate-90" : "rotate-0"
-                  }`}
-              />
-            </button>
-
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${isLoginOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
-                }`}
-            >
-              <div className="ml-4 space-y-2 mt-2">
-                <Link
-                  href="https://admin.urest.in:9056/"
-                  className="block py-1 text-sm text-gray-300 hover:text-white"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Client Login
-                </Link>
-                <Link
-                  href="https://admin.urest.in:8097/"
-                  className="block py-1 text-sm text-gray-300 hover:text-white"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Employee Login
-                </Link>
-                <Link
-                  href="http://account.ufirm.in"
-                  className="block py-1 text-sm text-gray-300 hover:text-white"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Facility Management Login
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <Link
-            href="/Aboutuspage"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            About Us
-          </Link>
-
-          <Link
-            href="https://urest.in/"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Facility Management
-          </Link>
-
-          <Link
-            href="/RoyalNestPage"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Royal Nest Projects
-          </Link>
-
-          <Link
-            href="/OurInnovation"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Facility Tech
-          </Link>
-
-          <Link
-            href="/TechnologiesPage"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Technical Services
-          </Link>
-
-          <Link
-            href="/Management&advisory"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Real Estate Advisory
-          </Link>
-
-          <Link
-            href="/CareerPage"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Hire
-          </Link>
-
-          <Link
-            href="/ContactPage"
-            className="block py-2 text-lg"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Contact Us
-          </Link>
-        </div>
-      )} */}
-
-      {/* Desktop menu */}
       <div className="hidden lg:block">
         <Menu setActive={setActive}>
           <MenuItem setActive={setActive} active={active} item="Facility Management" href="https://urest.in/" />
