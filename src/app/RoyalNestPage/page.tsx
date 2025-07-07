@@ -5,6 +5,7 @@ import { NavBar } from "@/components/NavBar";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
+import { HamburgerMenu } from "@/components/Hamburger";
 
 const Photos = [
     { src: "/Royal nest/Drawingroom.png", alt: "Drawing Room" },
@@ -19,9 +20,17 @@ export default function Royalnest() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <SVGComponent className="w-28 h-27" />
+                        <SVGComponent
+                            className="w-16 h-16 sm:w-23 sm:h-23 md:w-26 md:h-26 lg:w-28 lg:h-28"
+                        />
                     </Link>
-                    <NavBar />
+                    <div className="block lg:hidden">
+                        <HamburgerMenu />
+                    </div>
+
+                    <div className="hidden lg:block">
+                        <NavBar />
+                    </div>
                 </div>
             </div>
             <div >
@@ -37,7 +46,7 @@ export default function Royalnest() {
                         <source src="/Royal nest/industrial-building.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
-                      <div className="absolute inset-0 bg-black/45"></div>
+                    <div className="absolute inset-0 bg-black/45"></div>
                     <div className="absolute inset-0 flex items-center justify-center p-4 md:p-10">
                         <div className="shadow-xl p-4 rounded-xl text-center max-w-full bg-opacity-50">
                             <h1 className="text-6xl font-bold mb-4 sm:mt-4"><TextGenerateEffect words="Royal Nest Projects" /></h1>

@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
-import { Menu as MenuIcon, X as CloseIcon ,ChevronRight} from "lucide-react";
+// import { Menu as MenuIcon, X as CloseIcon ,ChevronRight} from "lucide-react";
 
 export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // const [isLoginOpen, setIsLoginOpen] = useState(false);
   const router = useRouter();
 
   const navigateWithScroll = (path: string, hash: string) => {
@@ -21,9 +21,9 @@ export function NavBar() {
   };
 
   return (
-    <div className={cn("fixed top-9 right-4 z-40 w-auto md:w-auto md:right-35")}>
-      {!isMobileMenuOpen && (
-        <div className="md:hidden flex justify-end items-center px-4 py-2 text-white rounded-xl shadow z-50">
+    <div className={cn("fixed top-9 left-1/2 -translate-x-1/2 z-40 lg:w-full max-w-5xl px-16 ")}>
+      {/* {!isMobileMenuOpen && (
+        <div className="lg:hidden flex  justify-end items-end px-4 py-2 text-white rounded-xl shadow z-50">
           <button
             onClick={() => setIsMobileMenuOpen(true)}
             className="focus:outline-none bg-black/20 p-2 rounded-xl"
@@ -32,10 +32,10 @@ export function NavBar() {
             <MenuIcon className="h-6 w-6" />
           </button>
         </div>
-      )}
+      )} */}
 
-      {isMobileMenuOpen && (
-        <div className="md:hidden fixed right-0 top-6 w-64 bg-black/70 text-white p-4 space-y-4 shadow-lg z-50 max-h-screen overflow-y-auto transform transition-transform duration-300 ease-in-out">
+      {/* {isMobileMenuOpen && (
+        <div className="lg:hidden fixed right-0 top-6 w-64 bg-black/70 text-white p-4 space-y-4 shadow-lg z-50 max-h-screen overflow-y-auto transform transition-transform duration-300 ease-in-out">
           <div className="flex justify-end pt-2">
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -78,7 +78,7 @@ export function NavBar() {
                   Employee Login
                 </Link>
                 <Link
-                  href="https://ufirm.in/Account/Login"
+                  href="http://account.ufirm.in"
                   className="block py-1 text-sm text-gray-300 hover:text-white"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -152,10 +152,10 @@ export function NavBar() {
             Contact Us
           </Link>
         </div>
-      )}
+      )} */}
 
       {/* Desktop menu */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Menu setActive={setActive}>
           <MenuItem setActive={setActive} active={active} item="Facility Management" href="https://urest.in/" />
           {active === "Facility Management" && (

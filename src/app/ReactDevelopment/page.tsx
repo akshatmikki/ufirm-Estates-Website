@@ -6,6 +6,7 @@ import { BackgroundGradient } from "../../components/ui/Background-gradient"
 import { ExpandableCardList } from "../../components/expandablescards"
 import { BackgroundBeams } from "../../components/ui/Background-beams";
 import SVGComponent from "../../components/Ufirm_estates";
+import { HamburgerMenu } from "../../components/Hamburger";
 
 export default function ReactServicesPage() {
   const ReactCards = [
@@ -49,10 +50,17 @@ export default function ReactServicesPage() {
         <div className="absolute top-1 left-0 w-full z-50">
           <div className="flex items-center justify-between px-4 mt-1">
             <Link href="/">
-              <SVGComponent className="w-28 h-27" />
-           
+              <SVGComponent
+                className="w-16 h-16 sm:w-23 sm:h-23 md:w-26 md:h-26 lg:w-28 lg:h-28"
+              />
             </Link>
-            <NavBar />
+            <div className="block lg:hidden">
+              <HamburgerMenu />
+            </div>
+
+            <div className="hidden lg:block">
+              <NavBar />
+            </div>
           </div>
         </div>
         <div className="relative z-40 px-10 py-40 md:px-20 md:py-40 ">
