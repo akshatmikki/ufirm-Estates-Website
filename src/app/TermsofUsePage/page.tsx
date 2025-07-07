@@ -24,7 +24,7 @@ export default function TermsofUsePage() {
                     </div>
                 </div>
             </div>
-            <div className="pt-24 pb-8 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 max-w-6xl mx-auto mt-5 ">
+            <div className="max-w-4xl mx-auto p-6 sm:p-12 mt-20">
                 <h1 className="text-3xl font-bold mb-6 text-center">Terms of Use</h1>
 
                 <p className="mb-4">

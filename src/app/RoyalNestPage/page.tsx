@@ -108,11 +108,7 @@ export default function Royalnest() {
                             <p className="mb-6">
                                 Residents can enjoy waking up to the sounds of birds and breathe in the fresh forest air while admiring the mountain scenery every day.
                             </p>
-
-                            {/* <div className="flex gap-4 mb-6">
-                                <span className="border border-white px-3 py-1 rounded-full">Simplex</span>
-                                <span className="border border-yellow-400 bg-yellow-400 text-black px-3 py-1 rounded-full">Duplex</span>
-                            </div> */}
+]
 
                             <div className="flex flex-col sm:flex-row gap-4 mb-4">
                                 <Link href="/Royal nest/Brochure.pdf" target="_blank">
@@ -121,12 +117,6 @@ export default function Royalnest() {
                                         <span>Download brochure</span>
                                     </div>
                                 </Link>
-                                {/* <Link href="https://maps.google.com" target="_blank">
-                                    <div className="flex items-center gap-2 cursor-pointer hover:underline">
-                                        <span>📍</span>
-                                        <span>Get directions</span>
-                                    </div>
-                                </Link> */}
                             </div>
                             <Link href="https://royalnestdharamshala.com/" target="_blank"
                                 rel="noopener noreferrer">
