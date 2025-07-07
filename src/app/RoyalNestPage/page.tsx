@@ -5,6 +5,7 @@ import { NavBar } from "@/components/NavBar";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
+import { HamburgerMenu } from "@/components/Hamburger";
 
 const Photos = [
     { src: "/Royal nest/Drawingroom.png", alt: "Drawing Room" },
@@ -19,9 +20,17 @@ export default function Royalnest() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <SVGComponent className="w-28 h-27" />
+                        <SVGComponent
+                            className="w-16 h-16 sm:w-23 sm:h-23 md:w-26 md:h-26 lg:w-28 lg:h-28"
+                        />
                     </Link>
-                    <NavBar />
+                    <div className="block lg:hidden">
+                        <HamburgerMenu />
+                    </div>
+
+                    <div className="hidden lg:block">
+                        <NavBar />
+                    </div>
                 </div>
             </div>
             <div >
@@ -37,7 +46,7 @@ export default function Royalnest() {
                         <source src="/Royal nest/industrial-building.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
-                      <div className="absolute inset-0 bg-black/45"></div>
+                    <div className="absolute inset-0 bg-black/45"></div>
                     <div className="absolute inset-0 flex items-center justify-center p-4 md:p-10">
                         <div className="shadow-xl p-4 rounded-xl text-center max-w-full bg-opacity-50">
                             <h1 className="text-6xl font-bold mb-4 sm:mt-4"><TextGenerateEffect words="Royal Nest Projects" /></h1>
@@ -99,11 +108,7 @@ export default function Royalnest() {
                             <p className="mb-6">
                                 Residents can enjoy waking up to the sounds of birds and breathe in the fresh forest air while admiring the mountain scenery every day.
                             </p>
-
-                            {/* <div className="flex gap-4 mb-6">
-                                <span className="border border-white px-3 py-1 rounded-full">Simplex</span>
-                                <span className="border border-yellow-400 bg-yellow-400 text-black px-3 py-1 rounded-full">Duplex</span>
-                            </div> */}
+]
 
                             <div className="flex flex-col sm:flex-row gap-4 mb-4">
                                 <Link href="/Royal nest/Brochure.pdf" target="_blank">
@@ -112,12 +117,6 @@ export default function Royalnest() {
                                         <span>Download brochure</span>
                                     </div>
                                 </Link>
-                                {/* <Link href="https://maps.google.com" target="_blank">
-                                    <div className="flex items-center gap-2 cursor-pointer hover:underline">
-                                        <span>📍</span>
-                                        <span>Get directions</span>
-                                    </div>
-                                </Link> */}
                             </div>
                             <Link href="https://royalnestdharamshala.com/" target="_blank"
                                 rel="noopener noreferrer">
