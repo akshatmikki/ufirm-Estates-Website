@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import type { JSX } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
@@ -14,10 +15,22 @@ import {
     FaUsers,
     FaGlobe,
     FaCoins,
-    FaChartLine, FaCogs, FaTools,
+    FaChartLine,
+    FaCogs,
+    FaTools,
 } from "react-icons/fa";
-import { NavBar } from "../../components/NavBar";
-import ClientCarousel from "@/components/ClientCarousel";
+
+// Components (dynamically imported)
+const ClientCarousel = dynamic(() => import("@/components/ClientCarousel"), {
+    ssr: false,
+});
+const NavBar = dynamic(() => import("@/components/NavBar").then(mod => mod.NavBar), { ssr: false });
+const SVGComponent = dynamic(() => import("@/components/Ufirm_estates"), {
+    ssr: false,
+});
+const HamburgerMenu = dynamic(() => import("@/components/Hamburger").then(mod => mod.HamburgerMenu), {
+    ssr: false,
+});
 
 export default function AboutusPage() {
     useEffect(() => {
@@ -57,6 +70,31 @@ export default function AboutusPage() {
         },
     ];
 
+    const vision2030 = {
+        title: "Vision 2030",
+        desc: "By 2030, UFIRM aims to be India’s most trusted, tech-enabled, and sustainable real estate services company, delivering value across build, manage, maintain, and enhance verticals.",
+        goals: [
+            {
+                category: "BUILD – Projects",
+                target: "Estate development portfolio to grow by 100%.",
+            },
+            {
+                category: "Estate Advisory",
+                target: "Manage and enable sales of real estate assets worth ₹100+ Crores.",
+            },
+            {
+                category: "Facility Management",
+                target:
+                    "urest.in to achieve 120% revenue growth in integrated facility management and manpower outsourcing. ",
+            },
+            {
+                category: "Estate Technology",
+                target:
+                    "Launch 3 globally accessible technology and ESG tools for smarter estate construction, maintenance & management. ",
+            },
+        ],
+    };
+
     const iconMap: { [key: string]: JSX.Element } = {
         "BUILD – Projects": <FaBuilding className="text-white text-xl" />,
         "Estate Advisory": <FaChartLine className="text-white text-xl" />,
@@ -64,13 +102,7 @@ export default function AboutusPage() {
         "Estate Technology": <FaCogs className="text-white text-xl" />,
     };
 
-    function Vision2030Card({
-        category,
-        target,
-    }: {
-        category: string;
-        target: string;
-    }) {
+    function Vision2030Card({ category, target }: { category: string; target: string }) {
         return (
             <div
                 data-aos="fade-up"
@@ -87,58 +119,41 @@ export default function AboutusPage() {
         );
     }
 
-    const vision2030 = {
-        title: "Vision 2030",
-        desc: "By 2030, UFIRM aims to be India’s most trusted, tech-enabled, and sustainable real estate services company, delivering value across build, manage, maintain, and enhance verticals.",
-        goals: [
-            {
-                category: "BUILD – Projects",
-                target: "Estate development portfolio to grow by 100%.",
-            },
-            {
-                category: "Estate Advisory",
-                target: "Manage and enable sales of real estate assets worth ₹100+ Crores.",
-            },
-            {
-                category: "Facility Management",
-                target: "urest.in to achieve 120% revenue growth in integrated facility management and manpower outsourcing. ",
-            },
-            {
-                category: "Estate Technology",
-                target: "Launch 3 globally accessible technology and ESG tools for smarter estate construction, maintenance & management. ",
-            },
-        ],
-    };
-
     return (
         <div className="bg-white text-gray-800">
+            {/* Header */}
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
+                        <SVGComponent className="w-16 h-16 sm:w-23 sm:h-23 md:w-26 md:h-26 lg:w-28 lg:h-28" />
                     </Link>
-                    <NavBar />
+                    <div className="block lg:hidden">
+                        <HamburgerMenu />
+                    </div>
+                    <div className="hidden lg:block">
+                        <NavBar />
+                    </div>
                 </div>
             </div>
 
+            {/* Banner */}
             <div className="relative">
                 <Image
                     src="/Aboutus.jpg"
                     alt="About Banner"
                     width={1600}
                     height={900}
-                    className="w-full h-[60vh] sm:h-[50vh] lg:h-[80vh]  object-fill"
+                    priority
+                    placeholder="blur"
+                    blurDataURL="/Aboutus.jpg"
+                    className="w-full h-[60vh] sm:h-[50vh] lg:h-[80vh] object-cover"
                 />
                 <div className="absolute inset-0 bg-black/60 flex items-center px-10">
                     <div className="text-white max-w-xl">
                         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">We Are UFIRM</h1>
-                        <p className="text-xl">Purpose-driven real estate services company committed to building, managing, maintaining, and enhancing real estate for <strong>People, Planet & Profits</strong>.</p>
+                        <p className="text-xl">
+                            Purpose-driven real estate services company committed to building, managing, maintaining, and enhancing real estate for <strong>People, Planet & Profits</strong>.
+                        </p>
                     </div>
                 </div>
             </div>
