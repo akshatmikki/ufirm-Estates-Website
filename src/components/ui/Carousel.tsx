@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useId, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,18 +28,19 @@ const Slide = ({ slide, index, current, animationId }: SlideProps) => {
 
   return (
     <div
-      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isCurrent ? "opacity-100 z-20" : "opacity-0 z-10"
-        }`}
+      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+        isCurrent ? "opacity-100 z-20" : "opacity-0 z-10"
+      }`}
     >
       <Image
         src={src}
         alt={title}
         fill
-        sizes="500vw"
-        className={`object-cover h-[40vh] sm:h-[60vh] lg:h-[80vh] w-full transition-opacity duration-700 ease-in-out ${isCurrent ? "animate-fade-in-scale" : ""
-          } object-contain sm:object-cover`}
-        loading="eager"
-        decoding="sync"
+        sizes="100vw"
+        priority={index === 0}
+        className={`object-cover h-full w-full transition-opacity duration-700 ease-in-out ${
+          isCurrent ? "animate-fade-in-scale" : ""
+        }`}
       />
       <div className="absolute inset-0 bg-black/40 z-10" />
 
@@ -55,7 +57,7 @@ const Slide = ({ slide, index, current, animationId }: SlideProps) => {
             {href && (
               <Link href={href} className="w-full sm:w-auto">
                 <Button
-                  className="w-full sm:w-auto text-center animate-slide-up"
+                  className="w-full sm:w-auto text-center min-h-[48px]"
                   borderClassName="px-4 sm:px-6 py-3 bg-black/75 dark:bg-black/75 border-slate-800"
                   borderRadius="1.75rem"
                 >
@@ -67,7 +69,7 @@ const Slide = ({ slide, index, current, animationId }: SlideProps) => {
             {index === 0 && extraButtonLabel && extraButtonHref && (
               <Link href={extraButtonHref} className="w-full sm:w-auto">
                 <Button
-                  className="w-full sm:w-auto text-center animate-slide-up"
+                  className="w-full sm:w-auto text-center min-h-[48px]"
                   borderClassName="px-4 sm:px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 border-slate-800"
                   borderRadius="1.75rem"
                 >
@@ -111,7 +113,7 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
 
   return (
     <div
-      className="relative object-cover h-[60vh] sm:h-[80vh] lg:h-[100vh] w-full overflow-hidden"
+      className="relative h-[60vh] sm:h-[80vh] lg:h-[100vh] w-full overflow-hidden"
       aria-labelledby={`carousel-heading-${id}`}
     >
       <div className="relative w-full h-full">
@@ -128,7 +130,9 @@ export function Carousel({ slides, current, onSlideChange }: CarouselProps) {
 
       <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-30">
         <button
-          onClick={() => handleSlideClick((current - 1 + slides.length) % slides.length)}
+          onClick={() =>
+            handleSlideClick((current - 1 + slides.length) % slides.length)
+          }
           className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
           aria-label="Previous Slide"
         >
