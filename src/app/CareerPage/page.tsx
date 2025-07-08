@@ -14,7 +14,7 @@ import { NavBar } from "@/components/NavBar";
 //     FaUserCheck,
 //     FaEnvelopeOpenText,
 // } from "react-icons/fa";
-// import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
+import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
 
 export default function CareersPage() {
@@ -103,8 +103,8 @@ export default function CareersPage() {
                     </div>
                 </div>
             </div>
-            {/* <TextGenerateEffect words="Coming Soon" className="text-7xl font-extrabold text-center p-40" />
-        </div> */}
+            <TextGenerateEffect words="Coming Soon" className="text-7xl font-extrabold text-center p-40" />
+        {/*</div> */}
             {/* <div className="min-h-screen bg-white text-black px-4 sm:px-6 md:px-8">
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
