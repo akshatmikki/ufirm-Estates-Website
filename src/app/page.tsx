@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import { HamburgerMenu } from "@/components/Hamburger";
 
 const Herosection = dynamic(() => import("@/components/Herosection"), {
   ssr: false,
@@ -30,13 +31,23 @@ export default function Home() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); 
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [showButton]);
 
   return (
     <main className="min-h-screen relative">
+      <div
+        className="relative lg:block"
+        style={{
+          paddingTop: 'env(safe-area-inset-top)',
+          paddingLeft: 'env(safe-area-inset-left)',
+          paddingRight: 'env(safe-area-inset-right)',
+        }}
+      >
+        <HamburgerMenu />
+      </div>
       <Herosection />
       <div ref={aboutRef}>
         <Aboutsection />
