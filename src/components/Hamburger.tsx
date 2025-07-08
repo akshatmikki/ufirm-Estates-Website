@@ -51,9 +51,11 @@ export const HamburgerMenu = () => {
             >
               <div className="ml-4 space-y-2 mt-2">
                 <Link
-                  href="http://account.ufirm.in"
+                  href="https://account.ufirm.in/Account/Login" target="_blank"
+                                rel="noopener noreferrer"
                   className="block py-1 text-sm text-gray-300 hover:text-white"
                   onClick={() => setIsOpen(false)}
+
                 >
                   Client Login
                 </Link>
@@ -65,7 +67,8 @@ export const HamburgerMenu = () => {
                   Employee Login
                 </Link>
                 <Link
-                  href="http://account.ufirm.in"
+                  href="https://account.ufirm.in/Account/Login" target="_blank"
+                                rel="noopener noreferrer"
                   className="block py-1 text-sm text-gray-300 hover:text-white"
                   onClick={() => setIsOpen(false)}
                 >
