@@ -123,7 +123,7 @@ export default function AboutusPage() {
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
                         <Image className="dark:invert mt-9"
-                                    src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
+                            src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
                     </Link>
                     <div className="block lg:hidden">
                         <HamburgerMenu />
@@ -156,7 +156,7 @@ export default function AboutusPage() {
                 </div>
             </div>
 
-            <section className="p-10 px-20">
+            <section className="p-10 px-10">
                 <p className="text-lg">
                     Founded in 2016 as an extension of the Royal Nest Group—with over 25 years of legacy and 8 million sq. ft. of successfully delivered residential and commercial projects—Ufirm now integrates four synergistic divisions under one roof.
                 </p>
