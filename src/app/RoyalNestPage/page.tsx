@@ -1,5 +1,5 @@
 "use client";
-import SVGComponent from "@/components/Ufirm_estates";
+import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
 import { FaMapMarkedAlt } from "react-icons/fa";
@@ -20,9 +20,8 @@ export default function Royalnest() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <SVGComponent
-                            className="w-16 h-16 sm:w-23 sm:h-23 md:w-26 md:h-26 lg:w-28 lg:h-28"
-                        />
+                        <Image className="dark:invert mt-9"
+                                    src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
                     </Link>
                     <div className="block lg:hidden">
                         <HamburgerMenu />
