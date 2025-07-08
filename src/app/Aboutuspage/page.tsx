@@ -25,9 +25,6 @@ const ClientCarousel = dynamic(() => import("@/components/ClientCarousel"), {
     ssr: false,
 });
 const NavBar = dynamic(() => import("@/components/NavBar").then(mod => mod.NavBar), { ssr: false });
-const SVGComponent = dynamic(() => import("@/components/Ufirm_estates"), {
-    ssr: false,
-});
 const HamburgerMenu = dynamic(() => import("@/components/Hamburger").then(mod => mod.HamburgerMenu), {
     ssr: false,
 });
@@ -125,7 +122,8 @@ export default function AboutusPage() {
             <div className="absolute top-1 left-0 w-full z-50">
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
-                        <SVGComponent className="w-16 h-16 sm:w-23 sm:h-23 md:w-26 md:h-26 lg:w-28 lg:h-28" />
+                        <Image className="dark:invert mt-9"
+                                    src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
                     </Link>
                     <div className="block lg:hidden">
                         <HamburgerMenu />
