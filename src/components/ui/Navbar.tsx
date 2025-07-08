@@ -155,6 +155,8 @@ export const HoveredLink: React.FC<HoveredLinkProps> = ({
   return (
     <Link
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500  text-center"
     >
       {children}
