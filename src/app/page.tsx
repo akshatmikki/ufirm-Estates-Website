@@ -38,14 +38,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative">
-      <div
-        className="relative lg:block"
-        style={{
-          paddingTop: 'env(safe-area-inset-top)',
-          paddingLeft: 'env(safe-area-inset-left)',
-          paddingRight: 'env(safe-area-inset-right)',
-        }}
-      >
+      <div className="block lg:hidden z-[9999] fixed top-0 right-0">
         <HamburgerMenu />
       </div>
       <Herosection />
