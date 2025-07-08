@@ -3,88 +3,88 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import clsx from "clsx";
-import {
-    FaTools,
-    FaUserShield,
-    FaWind,
-    FaBroom,
-    FaUserCheck,
-    FaEnvelopeOpenText,
-} from "react-icons/fa";
-import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
+// import { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+// import clsx from "clsx";
+// import {
+//     FaTools,
+//     FaUserShield,
+//     FaWind,
+//     FaBroom,
+//     FaUserCheck,
+//     FaEnvelopeOpenText,
+// } from "react-icons/fa";
+// import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
 
 export default function CareersPage() {
-    const [showResumeForm, setShowResumeForm] = useState(false);
-    const [resumeName, setResumeName] = useState("");
-    const [resumeEmail, setResumeEmail] = useState("");
-    const [resumeFile, setResumeFile] = useState<File | null>(null);
-    const [activeTab, setActiveTab] = useState("welcome");
-    const [search, setSearch] = useState("");
+    // const [showResumeForm, setShowResumeForm] = useState(false);
+    // const [resumeName, setResumeName] = useState("");
+    // const [resumeEmail, setResumeEmail] = useState("");
+    // const [resumeFile, setResumeFile] = useState<File | null>(null);
+    // const [activeTab, setActiveTab] = useState("welcome");
+    // const [search, setSearch] = useState("");
 
-    const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!resumeFile) return;
+    // const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     if (!resumeFile) return;
 
-        const fileType = resumeFile.type;
-        const fileSize = resumeFile.size;
-        const validTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+    //     const fileType = resumeFile.type;
+    //     const fileSize = resumeFile.size;
+    //     const validTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
 
-        if (!validTypes.includes(fileType)) {
-            alert("Please upload a valid resume file (PDF, DOC, DOCX).");
-            return;
-        }
+    //     if (!validTypes.includes(fileType)) {
+    //         alert("Please upload a valid resume file (PDF, DOC, DOCX).");
+    //         return;
+    //     }
 
-        if (fileSize > 5 * 1024 * 1024) {
-            alert("File size should not exceed 5MB.");
-            return;
-        }
+    //     if (fileSize > 5 * 1024 * 1024) {
+    //         alert("File size should not exceed 5MB.");
+    //         return;
+    //     }
 
-        const formData = new FormData();
-        formData.append("name", resumeName);
-        formData.append("email", resumeEmail);
-        formData.append("file", resumeFile);
+    //     const formData = new FormData();
+    //     formData.append("name", resumeName);
+    //     formData.append("email", resumeEmail);
+    //     formData.append("file", resumeFile);
 
-        try {
-            const res = await fetch("/api/upload-resume", {
-                method: "POST",
-                body: formData,
-            });
+    //     try {
+    //         const res = await fetch("/api/upload-resume", {
+    //             method: "POST",
+    //             body: formData,
+    //         });
 
-            if (res.ok) {
-                alert("Resume submitted successfully!");
-                setShowResumeForm(false);
-                setResumeName("");
-                setResumeEmail("");
-                setResumeFile(null);
-            } else {
-                alert("Failed to submit resume.");
-            }
-        } catch (error) {
-            console.error("Resume submission error:", error);
-            alert("An error occurred.");
-        }
-    };
+    //         if (res.ok) {
+    //             alert("Resume submitted successfully!");
+    //             setShowResumeForm(false);
+    //             setResumeName("");
+    //             setResumeEmail("");
+    //             setResumeFile(null);
+    //         } else {
+    //             alert("Failed to submit resume.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Resume submission error:", error);
+    //         alert("An error occurred.");
+    //     }
+    // };
 
-    const jobs = [
-        {
-            title: "Safety Officer",
-            type: "Full Time",
-            posted: "7th Jan 2025",
-            closes: "31st Dec 2025",
-            experience: "5 - 10 Years",
-            company: "UFirm",
-            department: "Facility Management",
-            designation: "Safety Officer",
-        },
-    ];
+    // const jobs = [
+    //     {
+    //         title: "Safety Officer",
+    //         type: "Full Time",
+    //         posted: "7th Jan 2025",
+    //         closes: "31st Dec 2025",
+    //         experience: "5 - 10 Years",
+    //         company: "UFirm",
+    //         department: "Facility Management",
+    //         designation: "Safety Officer",
+    //     },
+    // ];
 
-    const filteredJobs = jobs.filter((job) =>
-        job.title.toLowerCase().includes(search.toLowerCase())
-    );
+    // const filteredJobs = jobs.filter((job) =>
+    //     job.title.toLowerCase().includes(search.toLowerCase())
+    // );
 
     return (
         <div>
@@ -120,7 +120,7 @@ export default function CareersPage() {
                     <NavBar />
                 </div>
             </div> */}
-            <div className="bg-white text-gray-900 min-h-screen">
+            {/* <div className="bg-white text-gray-900 min-h-screen">
                <div className="relative">
                     <Image src="/career.jpg" alt="Career banner" width={1600} height={900} className="w-full h-[80vh] object-cover" />
                     <div className="absolute inset-0 bg-black/45"></div>
@@ -146,7 +146,7 @@ export default function CareersPage() {
                     </p>
                 </motion.div> */}
 
-                <div className="z-60 bg-white">
+                {/*<div className="z-60 bg-white">
                     <div className="flex flex-wrap justify-center gap-3 py-10 px-2">
                         {["hire", "job"].map((tab) => (
                             <button
@@ -340,7 +340,7 @@ export default function CareersPage() {
                         </div>
                     </div>
                 )}
-            </div>
+            </div> */}
             </div>
             );
 }
