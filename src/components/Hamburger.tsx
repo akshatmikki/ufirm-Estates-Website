@@ -22,7 +22,12 @@ export const HamburgerMenu = () => {
       )}
 
       {isOpen && (
-        <div className="lg:hidden fixed right-0 top-6 w-64 bg-black/70 text-white p-4 space-y-4 shadow-lg z-[1000] max-h-screen overflow-y-auto transition-transform duration-300 ease-in-out">
+        <div
+          className="lg:hidden fixed right-0 top-0 w-64 bg-black/70 text-white p-4 space-y-4 shadow-lg z-[1000] max-h-screen overflow-y-auto transition-transform duration-300 ease-in-out"
+          style={{
+            paddingTop: 'env(safe-area-inset-top)',
+          }}
+        >
           <div className="flex justify-end pt-2">
             <button
               onClick={() => setIsOpen(false)}
