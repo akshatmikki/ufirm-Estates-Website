@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import Head from "next/head";
-import { HamburgerMenu } from "@/components/Hamburger";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
