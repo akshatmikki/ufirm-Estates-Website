@@ -53,10 +53,10 @@ export default function Herosection() {
         <div className="flex items-center justify-between px-4 w-full">
           <Image className="dark:invert mt-9"
             src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
+        
           <div className="hidden lg:block">
             <NavBar />
           </div>
-
           <Login />
         </div>
       </div>
