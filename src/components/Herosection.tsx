@@ -3,7 +3,6 @@ import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { Login } from "@/components/Login";
 import { Carousel } from "@/components/ui/Carousel";
-// import SVGComponent from "@/components/Ufirm_estates";
 import { HamburgerMenu } from "./Hamburger";
 import Image from "next/image";
 
@@ -54,11 +53,19 @@ export default function Herosection() {
       <div className="absolute top-1 left-0 w-full z-50">
         <div className="flex items-center justify-between px-4 w-full">
           <Image className="dark:invert mt-9"
-            src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
+            src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
 
-          <div className="block lg:hidden">
+          <div
+            className="relative lg:block"
+            style={{
+              paddingTop: 'env(safe-area-inset-top)',
+              paddingLeft: 'env(safe-area-inset-left)',
+              paddingRight: 'env(safe-area-inset-right)',
+            }}
+          >
             <HamburgerMenu />
           </div>
+
 
           <div className="hidden lg:block">
             <NavBar />
