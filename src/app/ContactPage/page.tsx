@@ -3,159 +3,153 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-import { useState, useRef } from 'react';
-import { FaLinkedin, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { useState, useRef } from "react";
+import { FaLinkedin, FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 import { HamburgerMenu } from "@/components/Hamburger";
 
 const markers = [
     {
-        name: 'Noida',
-        address: 'H-64, Sector-63, Noida, Gautam Buddha Nagar, Uttar Pradesh- 201307',
-        representative: 'Shalini Malik',
-        phone: '+91 9289902481',
-        email: 'ufirm.help@ufirm.in',
-        mapQuery: 'Ufirm+Business+Park+(Raamah+Projects)'
+        name: "Noida",
+        region: "North",
+        address: "H-64, Sector-63, Noida, Gautam Buddha Nagar, Uttar Pradesh- 201307",
+        representative: "Shalini Malik",
+        phone: "+91 9289902481",
+        email: "ufirm.help@ufirm.in",
+        mapQuery: "Ufirm+Business+Park+(Raamah+Projects)",
     },
     {
-        name: 'Delhi',
-        address: 'A-13/S-1, Dilshad Garde, Delhi- 110095',
-        representative: 'Shalini Malik',
-        phone: '+91 9289902481',
-        email: 'ufirm.help@ufirm.in',
-        mapQuery: 'a,+789%2F1%2F3,+Street+No.13,+Mandoli+Extension,+Mandoli,+Delhi,+110093'
+        name: "Delhi",
+        region: "North",
+        address: "A-13/S-1, Dilshad Garde, Delhi- 110095",
+        representative: "Shalini Malik",
+        phone: "+91 9289902481",
+        email: "ufirm.help@ufirm.in",
+        mapQuery: "a,+789%2F1%2F3,+Street+No.13,+Mandoli+Extension,+Mandoli,+Delhi,+110093",
     },
     {
-        name: 'Faridabad',
-        address: 'Flat No.0106, Tower T-10, RPS Savana Sector-88, Faridabad Haryana-121002',
-        representative: 'Pankaj Kumar',
-        phone: '+91 9069363166',
-        email: 'pankaj.kumar@ufirm.in',
-        mapQuery: 'RPS+Savana'
+        name: "Faridabad",
+        region: "North",
+        address: "Flat No.0106, Tower T-10, RPS Savana Sector-88, Faridabad Haryana-121002",
+        representative: "Pankaj Kumar",
+        phone: "+91 9069363166",
+        email: "pankaj.kumar@ufirm.in",
+        mapQuery: "RPS+Savana",
     },
     {
-        name: 'Jammu',
-        address: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011',
-        representative: 'Jaswinder Kour',
-        phone: '+91 9596796757',
-        email: 'crm@ufirm.in',
-        mapQuery: 'Royal+Nest+Hill+View+Jammu'
+        name: "Jammu",
+        region: "North",
+        address: "Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011",
+        representative: "Jaswinder Kour",
+        phone: "+91 9596796757",
+        email: "crm@ufirm.in",
+        mapQuery: "Royal+Nest+Hill+View+Jammu",
     },
     {
-        name: 'Gurgaon',
-        address: 'C3 102 PWO Housing Complex, Sector-43 Gurugram',
-        representative: 'Ajay Yadav',
-        phone: '+91 9958453389',
-        email: 'ajay.yadav@ufirm.in',
-        mapQuery: 'PWO+Apartments'
+        name: "Gurgaon",
+        region: "North",
+        address: "C3 102 PWO Housing Complex, Sector-43 Gurugram",
+        representative: "Ajay Yadav",
+        phone: "+91 9958453389",
+        email: "ajay.yadav@ufirm.in",
+        mapQuery: "PWO+Apartments",
     },
     {
-        name: 'West Bengal',
-        address: 'Purba Panchanna Gram, Abahani Club, Vip Nagar, Sub District South 21 Parganas, West Bengal-700100',
-        representative: 'Ranadhir Biswas',
-        phone: '+91 9903522839',
-        email: 'ranadhir.biswas@ufirm.in',
-        mapQuery: 'Purba+panchanna+gram'
+        name: "West Bengal",
+        region: "East",
+        address: "Purba Panchanna Gram, Abahani Club, Vip Nagar, Sub District South 21 Parganas, West Bengal-700100",
+        representative: "Ranadhir Biswas",
+        phone: "+91 9903522839",
+        email: "ranadhir.biswas@ufirm.in",
+        mapQuery: "Purba+panchanna+gram",
     },
     {
-        name: 'Udaipur',
-        address: '88 Charak Hostal Raza Colony, Mulla Talai, Udaipur-313001',
-        representative: 'Nandini Singh',
-        phone: '+91 9958288544',
-        email: 'crm@ufirm.in',
-        mapQuery: '88+Charak+Hostel+Raza+Colony+Mulla+Talai+Udaipur+313001'
+        name: "Udaipur",
+        region: "West",
+        address: "88 Charak Hostal Raza Colony, Mulla Talai, Udaipur-313001",
+        representative: "Nandini Singh",
+        phone: "+91 9958288544",
+        email: "crm@ufirm.in",
+        mapQuery: "88+Charak+Hostel+Raza+Colony+Mulla+Talai+Udaipur+313001",
     },
     {
-        name: 'Telangana',
-        address: '1-2 361/15, Phool Begh, Hemayat nager, Indira Park, Hyderabad, Telangana-500029',
-        representative: 'Kishore Reddy',
-        phone: '+91 9849203269',
-        email: 'kishore.reddy@ufirm.in',
-        mapQuery: 'Hemayat+nager'
+        name: "Telangana",
+        region: "South",
+        address: "1-2 361/15, Phool Begh, Hemayat nager, Indira Park, Hyderabad, Telangana-500029",
+        representative: "Kishore Reddy",
+        phone: "+91 9849203269",
+        email: "kishore.reddy@ufirm.in",
+        mapQuery: "Hemayat+nager",
     },
     {
-        name: 'Jaipur',
-        address: 'C-163, Riico Residential Colony, Near Git, College Sitapura , Jaipur-302022',
-        representative: 'Sachin Sharma',
-        phone: '+91 9319101871',
-        email: 'sachin.sharma@ufirm.in',
-        mapQuery: 'Riico+residential+colony,+sitapura'
+        name: "Jaipur",
+        region: "West",
+        address: "C-163, Riico Residential Colony, Near Git, College Sitapura , Jaipur-302022",
+        representative: "Sachin Sharma",
+        phone: "+91 9319101871",
+        email: "sachin.sharma@ufirm.in",
+        mapQuery: "Riico+residential+colony,+sitapura",
     },
     {
-        name: 'Pune',
-        address: 'GAT NO. 354, A&B, NH-4, Old Mumbai - Pune Hwy, Maval, Vadgaon, Pune, Maharashtra 412106',
-        representative: 'Sachin Sharma',
-        phone: '+91 9319101871',
-        email: 'sachin.sharma@ufirm.in',
-        mapQuery: 'GAT+NO.+354,+A%26B,+NH-4,+Old+Mumbai+-+Pune+Hwy,+Maval,+Vadgaon,+Pune,+Maharashtra%C2%A0412106'
+        name: "Pune",
+        region: "West",
+        address: "GAT NO. 354, A&B, NH-4, Old Mumbai - Pune Hwy, Maval, Vadgaon, Pune, Maharashtra 412106",
+        representative: "Sachin Sharma",
+        phone: "+91 9319101871",
+        email: "sachin.sharma@ufirm.in",
+        mapQuery: "GAT+NO.+354,+A%26B,+NH-4,+Old+Mumbai+-+Pune+Hwy,+Maval,+Vadgaon,+Pune,+Maharashtra%C2%A0412106",
     },
     {
-        name: 'Dehradun',
-        address: 'Chakrata road SELAQUI INDUSTRIAL AREA central hope town Dehradun Uttarakhand- 248011',
-        representative: 'Mohan Negi',
-        phone: '+91 7042344158',
-        email: 'mohan.negi@ufirm.in',
-        mapQuery: 'Selakui,+Uttarakhand'
+        name: "Dehradun",
+        region: "North",
+        address: "Chakrata road SELAQUI INDUSTRIAL AREA central hope town Dehradun Uttarakhand- 248011",
+        representative: "Mohan Negi",
+        phone: "+91 7042344158",
+        email: "mohan.negi@ufirm.in",
+        mapQuery: "Selakui,+Uttarakhand",
     },
     {
-        name: 'Ahmedabad',
-        address: 'Shop No.15, Manukrupa Plaza,Sanand, Ta-Sanand, Ahmedabad-382110',
-        representative: 'Jigyasa',
-        phone: '+91 9289902483',
-        email: 'crm.ho@ufirm.in',
-        mapQuery: 'Sanand,+Gujarat+382110'
+        name: "Ahmedabad",
+        region: "West",
+        address: "Shop No.15, Manukrupa Plaza,Sanand, Ta-Sanand, Ahmedabad-382110",
+        representative: "Jigyasa",
+        phone: "+91 9289902483",
+        email: "crm.ho@ufirm.in",
+        mapQuery: "Sanand,+Gujarat+382110",
     },
     {
-        name: 'Dharamshala',
-        address: '677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh-176217',
-        representative: 'Nandini Singh',
-        phone: '+91 9958288544',
-        email: 'crm@ufirm.in',
-        mapQuery: 'Royal+Nest+Forest+View'
+        name: "Dharamshala",
+        region: "North",
+        address: "677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh-176217",
+        representative: "Nandini Singh",
+        phone: "+91 9958288544",
+        email: "crm@ufirm.in",
+        mapQuery: "Royal+Nest+Forest+View",
     },
     {
-        name: 'Srinagar',
-        address: 'Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121',
-        representative: 'Jigyasa',
-        phone: '+91 9289902483',
-        email: 'crm.ho@ufirm.in',
-        mapQuery: 'Zabarwan+Peaks+Villa'
+        name: "Srinagar",
+        region: "North",
+        address: "Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121",
+        representative: "Jigyasa",
+        phone: "+91 9289902483",
+        email: "crm.ho@ufirm.in",
+        mapQuery: "Zabarwan+Peaks+Villa",
     },
 ];
 
+// 👇 Extract all unique regions
+const regions = [...new Set(markers.map((m) => m.region))];
 
 export default function Contact() {
     const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [, setIsVerified] = useState(false);
 
-    async function handleCaptchaSubmission(token: string | null) {
+    const [selectedRegion, setSelectedRegion] = useState("North");
+    const filteredMarkers = markers.filter((m) => m.region === selectedRegion);
+    const [selectedLocation, setSelectedLocation] = useState(filteredMarkers[0]);
 
-        if (token) {
-            await fetch("/api", {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ token }),
-            });
-            setIsVerified(true);
-        }
-        else {
-            setIsVerified(false);
-        }
-    }
-
-    const handleChangetoken = (token: string | null) => {
-        handleCaptchaSubmission(token);
-    };
-
-    function handleExpired() {
-        setIsVerified(false);
-    }
-    const [selectedLocation, setSelectedLocation] = useState(markers[0]);
     const [form, setForm] = useState({
-        name: '', email: '', phone: '', category: '', message: '', receiveComm: true
+        name: "", email: "", phone: "", category: "", message: "", receiveComm: true
     });
 
     const handleChange = (
@@ -170,20 +164,32 @@ export default function Contact() {
         e.preventDefault();
         const response = await fetch('/api/contact', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form),
         });
-
         const data = await response.json();
         if (data.success) {
             alert("Your message has been sent!");
-            setForm({ name: '', email: '', phone: '', category: '', message: '', receiveComm: true });
+            setForm({ name: "", email: "", phone: "", category: "", message: "", receiveComm: true });
         } else {
             alert("Something went wrong. Please try again.");
         }
+    };
 
+    const handleCaptchaSubmission = async (token: string | null) => {
+        if (token) {
+            await fetch("/api", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token }),
+            });
+            setIsVerified(true);
+        } else {
+            setIsVerified(false);
+        }
     };
 
     return (
@@ -255,8 +261,8 @@ export default function Contact() {
                                 <ReCAPTCHA
                                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                                     ref={recaptchaRef}
-                                    onChange={handleChangetoken}
-                                    onExpired={handleExpired}
+                                    onChange={handleCaptchaSubmission}
+                                    onExpired={() => setIsVerified(false)}
                                 />
                             </span>
                         </div>
@@ -284,7 +290,25 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col lg:flex-row w-full">
+            {/* Region Filter */}
+            <div className="flex justify-center flex-wrap gap-3 mt-10 mb-4 z-10 relative">
+                {regions.map((region) => (
+                    <button
+                        key={region}
+                        onClick={() => {
+                            const regionMarkers = markers.filter(m => m.region === region);
+                            setSelectedRegion(region);
+                            setSelectedLocation(regionMarkers[0]);
+                        }}
+                        className={`px-4 py-2 rounded-full font-medium border ${region === selectedRegion ? "bg-yellow-500 text-white" : "bg-white text-black"}`}
+                    >
+                        {region} India
+                    </button>
+                ))}
+            </div>
+
+            {/* Map + Branch Info */}
+            <div className="flex flex-col lg:flex-row w-full mb-10">
                 <div className="w-full lg:w-1/2 h-[300px] lg:h-[80vh]">
                     <iframe
                         title="Google Map"
@@ -294,13 +318,13 @@ export default function Contact() {
                         loading="lazy"
                         allowFullScreen
                         src={`https://www.google.com/maps?q=${selectedLocation.mapQuery}&output=embed`}
-                    ></iframe>
+                    />
                 </div>
 
                 <div className="w-full lg:w-1/2 p-4 lg:p-6 overflow-y-auto max-h-[400px] lg:max-h-[80vh]">
                     <h2 className="text-xl lg:text-2xl font-bold mb-4">Our Branches</h2>
                     <ul className="space-y-4">
-                        {markers.map((location, idx) => (
+                        {filteredMarkers.map((location, idx) => (
                             <li
                                 key={idx}
                                 className={`p-4 border rounded-lg cursor-pointer transition-all ${selectedLocation.name === location.name
