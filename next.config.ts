@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    optimizeCss: true, // This enables CSS inlining via Critters during build
+  },
+  // You can keep other config options here
 };
 
 export default nextConfig;

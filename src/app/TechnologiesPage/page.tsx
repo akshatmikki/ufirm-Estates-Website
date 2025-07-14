@@ -34,19 +34,19 @@ const technologies = [
     title: ".NET Development",
     slug: ".NetDevelopment",
     description: "Scalable and secure enterprise solutions built on Microsoft’s .NET framework.",
-    icon: "/Technical Services/dotnet.png",
+    icon: "/Technical Services/dotnet.webp",
   },
   {
     title: "React Development",
     slug: "ReactDevelopment",
     description: "Dynamic, component-based frontends for modern web apps using React.",
-    icon: "/Technical Services/react.png",
+    icon: "/Technical Services/react.webp",
   },
   {
     title: "Mobile App Development",
     slug: "MobileDevelopment",
     description: "Cross-platform apps for iOS and Android with seamless UX.",
-    icon: "/Technical Services/react-native.png",
+    icon: "/Technical Services/react-native.webp",
   },
 ];
 
@@ -54,17 +54,17 @@ const icons = [
   {
     title: "On-Time Delivery",
     description: "We respect your deadlines and deliver projects without delay.",
-    icon: "/Technical Services/on-time-delivery.jpg",
+    icon: "/Technical Services/on-time-delivery.webp",
   },
   {
     title: "Budget Brilliance",
     description: "We deliver smart, cost-effective solutions without compromising on quality.",
-    icon: "/Technical Services/professional.jpeg",
+    icon: "/Technical Services/professional.webp",
   },
   {
     title: "Proficient Experts",
     description: "Skilled teams using the latest tools for effective results.",
-    icon: "/Technical Services/proficient.jpg",
+    icon: "/Technical Services/proficient.webp",
   },
 ];
 
@@ -91,7 +91,7 @@ export default function TechnologiesPage() {
         <div className="flex items-center justify-between px-4 mt-1">
           <Link href="/">
             <Image className="dark:invert mt-9"
-                        src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
+                        src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
           </Link>
           <div className="block lg:hidden">
             <HamburgerMenu />

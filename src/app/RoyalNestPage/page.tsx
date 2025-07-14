@@ -8,10 +8,10 @@ import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
 
 const Photos = [
-    { src: "/Royal nest/Drawingroom.png", alt: "Drawing Room" },
-    { src: "/Royal nest/Inside bedroom.jpeg", alt: "Bedroom" },
-    { src: "/Royal nest/Dharamshala.jpg", alt: "Dharamshala" },
-    { src: "/Royal nest/Washroom.png", alt: "Washroom" },
+    { src: "/Royal nest/Drawingroom.webp", alt: "Drawing Room" },
+    { src: "/Royal nest/Inside bedroom.webp", alt: "Bedroom" },
+    { src: "/Royal nest/Dharamshala.webp", alt: "Dharamshala" },
+    { src: "/Royal nest/Washroom.webp", alt: "Washroom" },
 ];
 
 export default function Royalnest() {
@@ -21,7 +21,7 @@ export default function Royalnest() {
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
                         <Image className="dark:invert mt-9"
-                                    src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
+                                    src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
                     </Link>
                     <div className="block lg:hidden">
                         <HamburgerMenu />
@@ -97,7 +97,7 @@ export default function Royalnest() {
                     />
                     <div
                         className="min-h-screen bg-cover bg-center text-white flex items-center justify-center"
-                        style={{ backgroundImage: "url('/Royal nest/Kitchen.png')" }}
+                        style={{ backgroundImage: "url('/Royal nest/Kitchen.webp')" }}
                     >
                         <div className="max-w-4xl bg-black/60 p-10 rounded-xl shadow-lg">
                             <h1 className="text-3xl font-semibold mb-6">About Forest View Apartments</h1>
@@ -107,7 +107,7 @@ export default function Royalnest() {
                             <p className="mb-6">
                                 Residents can enjoy waking up to the sounds of birds and breathe in the fresh forest air while admiring the mountain scenery every day.
                             </p>
-]
+
 
                             <div className="flex flex-col sm:flex-row gap-4 mb-4">
                                 <Link href="/Royal nest/Brochure.pdf" target="_blank">
