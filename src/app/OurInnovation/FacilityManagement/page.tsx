@@ -19,7 +19,7 @@ const content = [
     content: (
       <div className="relative w-[510px] h-[250px]">
         <Image
-          src="/FacilityManagement/Dashboard.png"
+          src="/FacilityManagement/Dashboard.webp"
           alt="Dashboard"
           layout="fill"
           className="object-cover"
@@ -35,7 +35,7 @@ const content = [
     content: (
       <div className="relative w-[510px] h-[250px]">
         <Image
-          src="/FacilityManagement/PPM.png"
+          src="/FacilityManagement/PPM.webp"
           alt="Dashboard"
           layout="fill"
           className="object-cover"
@@ -51,7 +51,7 @@ const content = [
     content: (
       <div className="relative w-[510px] h-[250px]">
         <Image
-          src="/FacilityManagement/Asset.png"
+          src="/FacilityManagement/Asset.webp"
           alt="Asset"
           layout="fill"
           className="object-cover"
@@ -67,7 +67,7 @@ const content = [
     content: (
       <div className="relative w-[510px] h-[250px]">
         <Image
-          src="/FacilityManagement/Inventory.png"
+          src="/FacilityManagement/Inventory.webp"
           alt="Inventory"
           layout="fill"
           className="object-cover"
@@ -83,7 +83,7 @@ const content = [
     content: (
       <div className="relative w-[510px] h-[250px]">
         <Image
-          src="/FacilityManagement/Complain.png"
+          src="/FacilityManagement/Complain.webp"
           alt="Complaint"
           layout="fill"
           className="object-cover"
@@ -99,7 +99,7 @@ const content = [
     content: (
       <div className="relative w-[510px] h-[250px]">
         <Image
-          src="/FacilityManagement/Employee.jpeg"
+          src="/FacilityManagement/Employee.webp"
           alt="Employee"
           layout="fill"
           className="object-fill"
@@ -144,7 +144,7 @@ export default function FacilityManagement() {
         <div className="flex items-center justify-between px-4 mt-1">
           <Link href="/">
             <Image className="dark:invert mt-9"
-              src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
+              src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
           </Link>
           <div className="block lg:hidden">
             <HamburgerMenu />
