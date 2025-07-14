@@ -50,7 +50,7 @@ export default function DotNetServicesPage() {
           <div className="flex items-center justify-between px-4 mt-1">
             <Link href="/">
               <Image className="dark:invert mt-9"
-                src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
+                src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
             </Link>
             <div className="block lg:hidden">
               <HamburgerMenu />
@@ -73,7 +73,7 @@ export default function DotNetServicesPage() {
               </p>
               <div className=" mt-10">
                 <Image
-                  src="/DotnetPage.jpg"
+                  src="/DotnetPage.webp"
                   alt="DotNet Development"
                   width={500}
                   height={300}

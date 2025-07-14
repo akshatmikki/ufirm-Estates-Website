@@ -180,7 +180,7 @@ export default function IndiaMapStatic() {
             <div className="flex flex-wrap md:flex-nowrap gap-4 transition-all duration-500">
                 <div className={`${showSidebar ? "md:w-2/3" : "w-full"} relative`}>
                     <Image
-                        src="/ufirm india map.svg"
+                        src="/ufirm india map.webp"
                         alt="India Map"
                         width={1500}
                         height={1800}

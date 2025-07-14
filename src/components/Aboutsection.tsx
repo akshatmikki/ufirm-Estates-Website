@@ -55,7 +55,7 @@ const AboutUs = () => {
           ].map((cert, i) => (
             <Image
               key={i}
-              src={`/certifications/${cert}.svg`}
+              src={`/certifications/${cert}.webp`}
               alt={`Certified ${i + 1}`}
               width={60}
               height={30}

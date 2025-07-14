@@ -32,7 +32,7 @@ function OurBusiness() {
     <section className="relative py-20 overflow-hidden min-h-screen">
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/building-background.jpg"
+          src="/building-background.webp"
           alt="Office building background"
           fill
           loading="lazy"
