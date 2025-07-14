@@ -198,7 +198,7 @@ export default function Contact() {
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
                         <Image className="dark:invert mt-9"
-                            src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
+                            src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
                     </Link>
                     <div className="block lg:hidden">
                         <HamburgerMenu />
@@ -212,7 +212,7 @@ export default function Contact() {
             <div className="min-h-screen  flex justify-center items-center relative">
                 <div className="absolute right-0 bottom-0 w-full h-full">
                     <Image
-                        src="/Contact.jpg"
+                        src="/Contact.webp"
                         alt="Handshake"
                         layout="fill"
                         objectFit="cover"

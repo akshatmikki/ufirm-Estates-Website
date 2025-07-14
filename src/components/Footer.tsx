@@ -34,7 +34,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-8">
                 <div className="mb-3 md:mb-0">
                     <Image className="dark:invert mt-9"
-                                src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
+                                src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100}  />
                 </div>
                 <div className="flex flex-row items-center md:items-end">
                     <p className="text-white text-sm mr-4 text-center mb-1">Follow us on social</p>

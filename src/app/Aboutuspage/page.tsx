@@ -123,7 +123,7 @@ export default function AboutusPage() {
                 <div className="flex items-center justify-between px-4 mt-1">
                     <Link href="/">
                         <Image className="dark:invert mt-9"
-                            src={"/UFIRM ESTATES LOGO.svg"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
+                            src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
                     </Link>
                     <div className="block lg:hidden">
                         <HamburgerMenu />
@@ -137,7 +137,7 @@ export default function AboutusPage() {
             {/* Banner */}
             <div className="relative">
                 <Image
-                    src="/Aboutus.jpg"
+                    src="/Aboutus.webp"
                     alt="About Banner"
                     width={1600}
                     height={900}
@@ -231,7 +231,7 @@ export default function AboutusPage() {
                                 {[...Array(10)].map((_, i) => (
                                     <img
                                         key={i}
-                                        src="/Aboutus/skyline.jpg"
+                                        src="/Aboutus/skyline.webp"
                                         alt="Skyline"
                                         className="h-full object-contain"
                                         style={{ flexShrink: 0 }}
@@ -242,7 +242,7 @@ export default function AboutusPage() {
                     </div>
                 </div>
 
-                <div className="w-full md:hidden max-h-[500px] overflow-y-auto">
+                <div className="w-full md:hidden max-h-[400px] overflow-y-auto">
                     <div className="flex flex-row items-stretch h-full">
                         <div className="w-full flex flex-col gap-6 px-4 py-4">
                             {roadmapSteps.reverse().map((item, idx) => (
@@ -262,7 +262,7 @@ export default function AboutusPage() {
 
                         <div className="w-1/2">
                             <img
-                                src="/Aboutus/building.png"
+                                src="/Aboutus/building.webp"
                                 alt="Building"
                                 className="w-full h-full object-fill"
                             />
