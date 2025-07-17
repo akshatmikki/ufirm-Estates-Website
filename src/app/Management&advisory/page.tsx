@@ -59,7 +59,7 @@ export default function Managementadvisory() {
                 <div className="relative">
                     <div className="relative w-full h-[80vh]">
                         <Image
-                            src="/Banners/Real Estate.svg"
+                            src="/Banners/Real Estate.webp"
                             alt="Estate Banner"
                             width={1600}
                             height={900}

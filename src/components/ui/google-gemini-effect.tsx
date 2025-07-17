@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/utils/cn";
 import { motion, MotionValue } from "framer-motion";
+import Image from "next/image";
 import React from "react";
 
 const transition = {
@@ -45,7 +46,7 @@ export const GoogleGeminiEffect = ({
 
       <div className="w-full h-[890px] -top-55 md:-top-55  flex items-center justify-center bg-red-transparent absolute ">
         <button className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-20 mt-20 z-40 md:text-base text-black text-xs w-fit mx-auto ">
-          UREST&apos;S CMMS
+          <Image src="/FacilityManagement/firmity.png" alt="cmms" width={100} height={100} />
         </button>
       </div>
       <svg
