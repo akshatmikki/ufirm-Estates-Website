@@ -87,7 +87,7 @@ export function NavBar() {
                 </div>
                 <div className="flex flex-col ml-4">
                   <ProductItem title="Interiors & Renovation" src="/Navbar/renovation.webp" description="Experience-backed transformative renovations" />
-                  <ProductItem title="Estate & Landscape Development" src="/Navbar/landscape.webp" description="Landscaping with lasting purpose" />
+                  <ProductItem title="Estate & Landscape Development" src="/Navbar/greenbuildingservices.webp" description="Landscaping with lasting purpose" />
                 </div>
               </div>
             </div>
