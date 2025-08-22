@@ -25,7 +25,7 @@ export default function OurInnovation() {
             </div>
             <div >
                 <FacilityManagement />
-            </div>
+            </div> 
         </div>
     );
 }
