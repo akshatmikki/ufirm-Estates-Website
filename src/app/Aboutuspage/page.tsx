@@ -178,7 +178,7 @@ export default function AboutusPage() {
                             deliverables='Maintenance, housekeeping, security, energy & water mgmt.'
                         />
                     </Link>
-                    <Link href="/RoyalNestPage">
+                    <Link href="https://www.royalnestgroup.com/">
                         <Feature
                             icon={<FaBuilding />}
                             title="BUILD – Projects"

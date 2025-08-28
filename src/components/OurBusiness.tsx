@@ -14,7 +14,7 @@ function OurBusiness() {
     {
       title: "Royal Nest: Projects",
       description: "Celebrating the past & developing the future",
-      link: "/RoyalNestPage",
+      link: "https://www.royalnestgroup.com/",
     },
     {
       title: "Our Product: CMMS",
