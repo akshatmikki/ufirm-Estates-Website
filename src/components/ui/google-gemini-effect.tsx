@@ -1,4 +1,4 @@
-"use client";
+{/*"use client";
 import { cn } from "@/utils/cn";
 import { motion, MotionValue } from "framer-motion";
 import Image from "next/image";
@@ -170,4 +170,4 @@ export const GoogleGeminiEffect = ({
       </svg>
     </div>
   );
-};
+};*/}
