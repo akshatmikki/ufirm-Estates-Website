@@ -129,6 +129,7 @@ export default function MindBlowingStylishPricingSection() {
             xmlns="http://www.w3.org/2000/svg"
             role="img"
             aria-hidden="true"
+
           >
             <circle cx="13" cy="13" r="13" fill="#7bce7e" />
           </svg>

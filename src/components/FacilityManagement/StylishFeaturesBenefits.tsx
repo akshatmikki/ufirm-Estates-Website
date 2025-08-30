@@ -247,7 +247,6 @@ export default function StylishFeaturesBenefits() {
           </motion.div>
         </div>
       </div>
-      
     </section>
   );
 }
