@@ -71,14 +71,14 @@ export default function CareersPage() {
 
     const jobs = [
         {
-            title: "Safety Officer",
+            title: "HouseKeeping Staff",
             type: "Full Time",
-            posted: "7th Jan 2025",
-            closes: "31st Dec 2025",
-            experience: "5 - 10 Years",
+            posted: "30th Aug 2025",
+            education: "6th Pass",
+            CTC: "12,000 INR",
             company: "UFirm",
             department: "Facility Management",
-            designation: "Safety Officer",
+            designation: "HouseKeeping Staff",
         },
     ];
 
@@ -103,26 +103,9 @@ export default function CareersPage() {
                     </div>
                 </div>
             </div>
-            {/* <TextGenerateEffect words="Coming Soon" className="text-7xl font-extrabold text-center p-40" /> */}
-            {/* </div> */}
-            {/* <div className="min-h-screen bg-white text-black px-4 sm:px-6 md:px-8">
-            <div className="absolute top-1 left-0 w-full z-50">
-                <div className="flex items-center justify-between px-4 mt-1">
-                    <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
-                    </Link>
-                    <NavBar />
-                </div>
-            </div> */}
             <div className="bg-white text-gray-900 min-h-screen">
                 <div className="relative">
-                    <Image src="/career.jpg" alt="Career banner" width={1600} height={900} className="w-full h-[80vh] object-cover" />
+                    <Image src="/career.webp" alt="Career banner" width={1600} height={900} className="w-full h-[80vh] object-cover" />
                     <div className="absolute inset-0 bg-black/45"></div>
                     <div className="absolute inset-0 flex items-center justify-center p-4 md:p-10">
                         <div className="p-4 rounded-xl text-center max-w-full bg-opacity-50">
@@ -208,7 +191,7 @@ export default function CareersPage() {
                                     </div>
                                 </div>
                                 <a
-                                    href={`mailto:bhavesh.singh@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
+                                    href={`mailto:crm@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
                                         `Hello,\n\nPlease reach out to me,\nMy Name: \nCompany/ Society/ Organization/ Industry name: \nMobile no.: \nShort description of requirement: \nLocation: \n\nThanks`
                                     )}`}
                                 >
@@ -263,8 +246,8 @@ export default function CareersPage() {
                                         <h3 className="text-xl font-bold mb-2">{job.title}</h3>
                                         <p className="text-sm mb-2">{job.type}</p>
                                         <p className="text-sm mb-1">Posted on {job.posted} / पोस्ट की गई: {job.posted}</p>
-                                        <p className="text-sm mb-1">Closes on {job.closes} / अंतिम तिथि: {job.closes}</p>
-                                        <p className="text-sm mb-1">Experience: {job.experience} / अनुभव: {job.experience}</p>
+                                        <p className="text-sm mb-1">Education: {job.education} / शिक्षा: {job.education}</p>
+                                        <p className="text-sm mb-1">CTC: {job.CTC}/month / CTC: {job.CTC}/month</p>
                                         <div className="flex flex-wrap gap-2 mt-2">
                                             <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
                                                 Company: {job.company}
