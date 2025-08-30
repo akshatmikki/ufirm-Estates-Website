@@ -38,9 +38,8 @@ const AnimatedCard: React.FC<{ children: React.ReactNode; delay: number }> = ({
   // Remove cursor-pointer from the main card!
   return (
     <div
-      className={`transform rounded-xl p-8 bg-white border border-[#9fbc77] shadow-md transition-transform duration-500 ease-in-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-      } hover:shadow-2xl`}
+      className={`transform rounded-xl p-8 bg-white border border-[#9fbc77] shadow-md transition-transform duration-500 ease-in-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        } hover:shadow-2xl`}
     >
       {children}
     </div>
@@ -117,28 +116,29 @@ export default function MindBlowingStylishPricingSection() {
 
       {/* Bottom CTA Box with UFIRM link and Firmity logo */}
       <div
-        className="mt-20 px-8 py-5 max-w-4xl mx-auto flex items-center justify-between 
-  bg-gradient-to-r from-green-300 via-green-100 to-green-200 
-  rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md 
-  shadow-lg ring-2 ring-green-400 border-t-2 border-green-600 
-  relative overflow-visible"
+        className="mt-20 px-6 py-5 max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-4
+    bg-gradient-to-r from-green-300 via-green-100 to-green-200
+    rounded-2xl shadow-lg ring-2 ring-green-400 border-t-2 border-green-600
+    relative overflow-visible"
       >
-        <span className="flex items-center gap-2 font-bold uppercase tracking-widest text-green-800 select-none">
+        <span className="flex items-center gap-2 font-bold uppercase tracking-widest text-green-800 select-none text-sm md:text-base">
           <svg
             width="26"
             height="26"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
           >
             <circle cx="13" cy="13" r="13" fill="#7bce7e" />
           </svg>
           FOR CUSTOMISED OFFER & TRIAL ASSISTANCE:
         </span>
 
-        <div className="w-44 h-16 relative">
+        <div className="w-36 h-12 relative">
           <Image
             src="/FacilityManagement/firmity.png"
-            alt="FIRMITY Logo"
+            alt="Firmity Facility Management Logo"
             fill
             className="object-contain"
             priority

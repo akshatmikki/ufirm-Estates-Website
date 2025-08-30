@@ -247,22 +247,7 @@ export default function StylishFeaturesBenefits() {
           </motion.div>
         </div>
       </div>
-
-      {/* Bottom Bar with Powered By and Firmity Logo inside section */}
-      <div className="mt-20 border-t-2 border-green-500 bg-green-100 dark:bg-green-900 px-8 py-6 flex items-center justify-between max-w-7xl mx-auto rounded-b-3xl shadow-inner">
-        <span className="text-green-700 dark:text-green-300 font-semibold uppercase tracking-widest select-none">
-          Powered By
-        </span>
-        <div className="w-48 h-16 relative">
-          <Image
-            src="/FacilityManagement/firmity.png"
-            alt="FIRMITY Logo"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
-      </div>
+      
     </section>
   );
 }
