@@ -1,18 +1,29 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-const LoginDialogContext = createContext({
-  showLogin: false,
-  openLogin: () => {},
-  closeLogin: () => {},
-});
-
-export function useLoginDialog() {
-  return useContext(LoginDialogContext);
+interface LoginDialogContextType {
+  showLogin: boolean;
+  openLogin: () => void;
+  closeLogin: () => void;
 }
 
-export function LoginDialogProvider({ children }: { children: React.ReactNode }) {
+const LoginDialogContext = createContext<LoginDialogContextType | undefined>(
+  undefined
+);
+
+export function useLoginDialog() {
+  const context = useContext(LoginDialogContext);
+  if (!context) {
+    throw new Error(
+      "useLoginDialog must be used within a LoginDialogProvider"
+    );
+  }
+  return context;
+}
+
+export function LoginDialogProvider({ children }: { children: ReactNode }) {
   const [showLogin, setShowLogin] = useState(false);
+
   const openLogin = () => setShowLogin(true);
   const closeLogin = () => setShowLogin(false);
 
