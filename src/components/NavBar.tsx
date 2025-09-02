@@ -39,7 +39,7 @@ export function NavBar() {
               </div>
             </div>
           )}
-          <MenuItem setActive={setActive} active={active} item="Royal Nest Projects" href="/RoyalNestPage" />
+          <MenuItem setActive={setActive} active={active} item="Royal Nest Projects" href="https://www.royalnestgroup.com/" />
           {active === "Royal Nest Projects" && (
             <div className="absolute left-30 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
               <div className="flex flex-col space-y-2">

@@ -16,7 +16,7 @@ const slides = [
     src: "/Banners/Royal Nest Projects.webp",
     title: "25 Years Of Sustainable Development",
     buttonLabel: "Royal Nest Projects",
-    href: "/RoyalNestPage",
+    href: "https://www.royalnestgroup.com/",
   },
   {
     src: "/Banners/faci tech.webp",

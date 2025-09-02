@@ -69,7 +69,7 @@ const Footer = () => {
                     <h3 className="text-sm text-gray-400 font-semibold mb-4">Our Divisions</h3>
                     <ul className="space-y-2">
                         <li><a href="https://urest.in/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facility Management</a></li>
-                        <li><Link href="/RoyalNestPage" className="hover:text-white transition-colors">Royal Nest Projects</Link></li>
+                        <li><Link href="https://www.royalnestgroup.com/" className="hover:text-white transition-colors">Royal Nest Projects</Link></li>
                         <li><Link href="/OurInnovation" className="hover:text-white transition-colors">Facility Tech</Link></li>
                         <li><Link href="/TechnologiesPage" className="hover:text-white transition-colors">Technical Services</Link></li>
                         <li><Link href="/Management&advisory" className="hover:text-white transition-colors">Real Estates Advisory</Link></li>

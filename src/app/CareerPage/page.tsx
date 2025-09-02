@@ -3,88 +3,88 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-// import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-// import clsx from "clsx";
-// import {
-//     FaTools,
-//     FaUserShield,
-//     FaWind,
-//     FaBroom,
-//     FaUserCheck,
-//     FaEnvelopeOpenText,
-// } from "react-icons/fa";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import clsx from "clsx";
+import {
+    FaTools,
+    FaUserShield,
+    FaWind,
+    FaBroom,
+    FaUserCheck,
+    FaEnvelopeOpenText,
+} from "react-icons/fa";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
 
 export default function CareersPage() {
-    // const [showResumeForm, setShowResumeForm] = useState(false);
-    // const [resumeName, setResumeName] = useState("");
-    // const [resumeEmail, setResumeEmail] = useState("");
-    // const [resumeFile, setResumeFile] = useState<File | null>(null);
-    // const [activeTab, setActiveTab] = useState("welcome");
-    // const [search, setSearch] = useState("");
+    const [showResumeForm, setShowResumeForm] = useState(false);
+    const [resumeName, setResumeName] = useState("");
+    const [resumeEmail, setResumeEmail] = useState("");
+    const [resumeFile, setResumeFile] = useState<File | null>(null);
+    const [activeTab, setActiveTab] = useState("welcome");
+    const [search, setSearch] = useState("");
 
-    // const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     if (!resumeFile) return;
+    const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!resumeFile) return;
 
-    //     const fileType = resumeFile.type;
-    //     const fileSize = resumeFile.size;
-    //     const validTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+        const fileType = resumeFile.type;
+        const fileSize = resumeFile.size;
+        const validTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
 
-    //     if (!validTypes.includes(fileType)) {
-    //         alert("Please upload a valid resume file (PDF, DOC, DOCX).");
-    //         return;
-    //     }
+        if (!validTypes.includes(fileType)) {
+            alert("Please upload a valid resume file (PDF, DOC, DOCX).");
+            return;
+        }
 
-    //     if (fileSize > 5 * 1024 * 1024) {
-    //         alert("File size should not exceed 5MB.");
-    //         return;
-    //     }
+        if (fileSize > 5 * 1024 * 1024) {
+            alert("File size should not exceed 5MB.");
+            return;
+        }
 
-    //     const formData = new FormData();
-    //     formData.append("name", resumeName);
-    //     formData.append("email", resumeEmail);
-    //     formData.append("file", resumeFile);
+        const formData = new FormData();
+        formData.append("name", resumeName);
+        formData.append("email", resumeEmail);
+        formData.append("file", resumeFile);
 
-    //     try {
-    //         const res = await fetch("/api/upload-resume", {
-    //             method: "POST",
-    //             body: formData,
-    //         });
+        try {
+            const res = await fetch("/api/upload-resume", {
+                method: "POST",
+                body: formData,
+            });
 
-    //         if (res.ok) {
-    //             alert("Resume submitted successfully!");
-    //             setShowResumeForm(false);
-    //             setResumeName("");
-    //             setResumeEmail("");
-    //             setResumeFile(null);
-    //         } else {
-    //             alert("Failed to submit resume.");
-    //         }
-    //     } catch (error) {
-    //         console.error("Resume submission error:", error);
-    //         alert("An error occurred.");
-    //     }
-    // };
+            if (res.ok) {
+                alert("Resume submitted successfully!");
+                setShowResumeForm(false);
+                setResumeName("");
+                setResumeEmail("");
+                setResumeFile(null);
+            } else {
+                alert("Failed to submit resume.");
+            }
+        } catch (error) {
+            console.error("Resume submission error:", error);
+            alert("An error occurred.");
+        }
+    };
 
-    // const jobs = [
-    //     {
-    //         title: "Safety Officer",
-    //         type: "Full Time",
-    //         posted: "7th Jan 2025",
-    //         closes: "31st Dec 2025",
-    //         experience: "5 - 10 Years",
-    //         company: "UFirm",
-    //         department: "Facility Management",
-    //         designation: "Safety Officer",
-    //     },
-    // ];
+    const jobs = [
+        {
+            title: "HouseKeeping Staff",
+            type: "Full Time",
+            posted: "30th Aug 2025",
+            education: "6th Pass",
+            CTC: "12,000 INR",
+            company: "UFirm",
+            department: "Facility Management",
+            designation: "HouseKeeping Staff",
+        },
+    ];
 
-    // const filteredJobs = jobs.filter((job) =>
-    //     job.title.toLowerCase().includes(search.toLowerCase())
-    // );
+    const filteredJobs = jobs.filter((job) =>
+        job.title.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
         <div>
@@ -103,26 +103,9 @@ export default function CareersPage() {
                     </div>
                 </div>
             </div>
-            <TextGenerateEffect words="Coming Soon" className="text-7xl font-extrabold text-center p-40" />
-        {/*</div> */}
-            {/* <div className="min-h-screen bg-white text-black px-4 sm:px-6 md:px-8">
-            <div className="absolute top-1 left-0 w-full z-50">
-                <div className="flex items-center justify-between px-4 mt-1">
-                    <Link href="/">
-                        <Image
-                            src="/UFIRM ESTATES LOGO.png"
-                            alt="logo"
-                            width={100}
-                            height={50}
-                            priority
-                        />
-                    </Link>
-                    <NavBar />
-                </div>
-            </div> */}
-            {/* <div className="bg-white text-gray-900 min-h-screen">
-               <div className="relative">
-                    <Image src="/career.jpg" alt="Career banner" width={1600} height={900} className="w-full h-[80vh] object-cover" />
+            <div className="bg-white text-gray-900 min-h-screen">
+                <div className="relative">
+                    <Image src="/career.webp" alt="Career banner" width={1600} height={900} className="w-full h-[80vh] object-cover" />
                     <div className="absolute inset-0 bg-black/45"></div>
                     <div className="absolute inset-0 flex items-center justify-center p-4 md:p-10">
                         <div className="p-4 rounded-xl text-center max-w-full bg-opacity-50">
@@ -134,7 +117,7 @@ export default function CareersPage() {
                         </div>
                     </div>
                 </div>
-                {/* <motion.div>
+                <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
                     <p className="mb-4 mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-yellow-600">
                         Join a Future-Focused Team with <span className="text-black">UFirm Hiring Portal!</span>
                     </p>
@@ -144,9 +127,9 @@ export default function CareersPage() {
                     <p className="text-sm text-gray-600 mb-6">
                         Whether you&apos;re actively job hunting or simply exploring, we welcome your resume.
                     </p>
-                </motion.div> */}
+                </motion.div>
 
-                {/*<div className="z-60 bg-white">
+                <div className="z-60 bg-white">
                     <div className="flex flex-wrap justify-center gap-3 py-10 px-2">
                         {["hire", "job"].map((tab) => (
                             <button
@@ -208,7 +191,7 @@ export default function CareersPage() {
                                     </div>
                                 </div>
                                 <a
-                                    href={`mailto:bhavesh.singh@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
+                                    href={`mailto:crm@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
                                         `Hello,\n\nPlease reach out to me,\nMy Name: \nCompany/ Society/ Organization/ Industry name: \nMobile no.: \nShort description of requirement: \nLocation: \n\nThanks`
                                     )}`}
                                 >
@@ -263,8 +246,8 @@ export default function CareersPage() {
                                         <h3 className="text-xl font-bold mb-2">{job.title}</h3>
                                         <p className="text-sm mb-2">{job.type}</p>
                                         <p className="text-sm mb-1">Posted on {job.posted} / पोस्ट की गई: {job.posted}</p>
-                                        <p className="text-sm mb-1">Closes on {job.closes} / अंतिम तिथि: {job.closes}</p>
-                                        <p className="text-sm mb-1">Experience: {job.experience} / अनुभव: {job.experience}</p>
+                                        <p className="text-sm mb-1">Education: {job.education} / शिक्षा: {job.education}</p>
+                                        <p className="text-sm mb-1">CTC: {job.CTC}/month / CTC: {job.CTC}/month</p>
                                         <div className="flex flex-wrap gap-2 mt-2">
                                             <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
                                                 Company: {job.company}
@@ -340,7 +323,7 @@ export default function CareersPage() {
                         </div>
                     </div>
                 )}
-            </div> */}
             </div>
-            );
+        </div>
+    );
 }
