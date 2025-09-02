@@ -20,7 +20,7 @@ import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
 
 // Import the LoginDialogContext provider and hook
-import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext/page";
+import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext";
 
 function CareerPageContent() {
   // Use context for login dialog state
