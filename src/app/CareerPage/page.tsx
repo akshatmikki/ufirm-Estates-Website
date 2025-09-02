@@ -19,7 +19,13 @@ import {
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
 
-export default function CareersPage() {
+// Import the LoginDialogContext provider and hook
+import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext/page";
+
+function CareerPageContent() {
+  // Use context for login dialog state
+  const { showLogin, closeLogin } = useLoginDialog();
+
   const [showResumeForm, setShowResumeForm] = useState(false);
   const [resumeName, setResumeName] = useState("");
   const [resumeEmail, setResumeEmail] = useState("");
@@ -28,7 +34,6 @@ export default function CareersPage() {
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
 
-  const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showJobInfoForm, setShowJobInfoForm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,19 +51,16 @@ export default function CareersPage() {
   >([]);
 
   // To hold job info passed for resume submission during applying
-  const [appliedJobInfo, setAppliedJobInfo] = useState<
-    | {
-        title: string;
-        type: string;
-        posted: string;
-        education: string;
-        CTC: string;
-        company: string;
-        department: string;
-        designation: string;
-      }
-    | null
-  >(null);
+  const [appliedJobInfo, setAppliedJobInfo] = useState<{
+    title: string;
+    type: string;
+    posted: string;
+    education: string;
+    CTC: string;
+    company: string;
+    department: string;
+    designation: string;
+  } | null>(null);
 
   // Load user-added jobs from localStorage on mount
   useEffect(() => {
@@ -164,7 +166,7 @@ export default function CareersPage() {
 
   const handleLogin = () => {
     if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
-      setShowLoginDialog(false);
+      closeLogin();
       setShowJobInfoForm(true);
       setLoginEmail("");
       setLoginPassword("");
@@ -207,12 +209,12 @@ export default function CareersPage() {
   };
 
   // Open resume form and set the applied job info when clicking "Apply Now"
-//   const handleApplyNow = (
-//     job: typeof allJobs[number]
-//   ) => {
-//     setAppliedJobInfo(job);
-//     setShowResumeForm(true);
-//   };
+  // const handleApplyNow = (
+  //   job: typeof allJobs[number]
+  // ) => {
+  //   setAppliedJobInfo(job);
+  //   setShowResumeForm(true);
+  // };
 
   return (
     <div>
@@ -231,7 +233,7 @@ export default function CareersPage() {
             <HamburgerMenu />
           </div>
           <div className="hidden lg:block">
-            <NavBar onOpenLogin={() => setShowLoginDialog(true)} />
+            <NavBar />
           </div>
         </div>
       </div>
@@ -266,12 +268,12 @@ export default function CareersPage() {
           </p>
           <p className="mb-2 text-base sm:text-lg text-gray-700">
             Looking for a meaningful career opportunity?{" "}
-            <strong>We’re hiring passionate professionals</strong> across multiple
-            sectors.
+            <strong>We’re hiring passionate professionals</strong> across
+            multiple sectors.
           </p>
           <p className="text-sm text-gray-600 mb-6">
-            Whether you&apos;re actively job hunting or simply exploring, we welcome
-            your resume.
+            Whether you&apos;re actively job hunting or simply exploring, we
+            welcome your resume.
           </p>
         </motion.div>
 
@@ -311,8 +313,8 @@ export default function CareersPage() {
                   Hire Trained Facility Staff
                 </h2>
                 <p className="text-lg mb-6">
-                  UFirm offers skilled, verified manpower for your technical and soft
-                  service needs. <br />
+                  UFirm offers skilled, verified manpower for your technical and
+                  soft service needs. <br />
                   UFirm आपको काम के लिए अच्छे और जांचे-परखे कर्मचारी देता है।
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 text-left mb-8">
@@ -322,19 +324,24 @@ export default function CareersPage() {
                     </h3>
                     <ul className="list-disc list-inside text-gray-700 space-y-4">
                       <li>
-                        <FaUserCheck className="inline mr-2 text-yellow-500" /> Facility Staff
+                        <FaUserCheck className="inline mr-2 text-yellow-500" />{" "}
+                        Facility Staff
                       </li>
                       <li>
-                        <FaTools className="inline mr-2 text-yellow-500" /> Electricians & Plumbers
+                        <FaTools className="inline mr-2 text-yellow-500" />{" "}
+                        Electricians & Plumbers
                       </li>
                       <li>
-                        <FaWind className="inline mr-2 text-yellow-500" /> HVAC Technicians
+                        <FaWind className="inline mr-2 text-yellow-500" /> HVAC
+                        Technicians
                       </li>
                       <li>
-                        <FaBroom className="inline mr-2 text-yellow-500" /> Housekeeping & Support Staff
+                        <FaBroom className="inline mr-2 text-yellow-500" />{" "}
+                        Housekeeping & Support Staff
                       </li>
                       <li>
-                        <FaUserShield className="inline mr-2 text-yellow-500" /> Safety & Compliance Officers
+                        <FaUserShield className="inline mr-2 text-yellow-500" />{" "}
+                        Safety & Compliance Officers
                       </li>
                     </ul>
                   </div>
@@ -377,10 +384,10 @@ export default function CareersPage() {
                 </h2>
                 <hr className="w-16 border-t-2 border-yellow-500 mx-auto mb-4" />
                 <p className="text-center text-gray-700 mb-4">
-                  We are hiring for various vacancies. You can also submit your resume
-                  for future opportunities. <br />
-                  हम विभिन्न पदों के लिए भर्ती कर रहे हैं। आप भविष्य की नौकरियों के
-                  लिए अपना Resume भी भेज सकते हैं।
+                  We are hiring for various vacancies. You can also submit your
+                  resume for future opportunities. <br />
+                  हम विभिन्न पदों के लिए भर्ती कर रहे हैं। आप भविष्य की नौकरियों
+                  के लिए अपना Resume भी भेज सकते हैं।
                 </p>
                 <div className="text-center mb-6">
                   <motion.button
@@ -391,7 +398,8 @@ export default function CareersPage() {
                       setShowResumeForm(true);
                     }}
                   >
-                    🚀 Submit Resume Without Applying / बिना आवेदन के Resume भेजें
+                    🚀 Submit Resume Without Applying / बिना आवेदन के Resume
+                    भेजें
                   </motion.button>
                 </div>
                 <input
@@ -439,7 +447,9 @@ export default function CareersPage() {
                         <button
                           onClick={() => {
                             setUserJobs(
-                              userJobs.filter((_, i) => i !== userJobs.indexOf(job))
+                              userJobs.filter(
+                                (_, i) => i !== userJobs.indexOf(job)
+                              )
                             );
                           }}
                           className="absolute top-2 right-2 text-red-600 hover:text-red-800"
@@ -505,7 +515,9 @@ export default function CareersPage() {
                   className="flex items-center justify-center gap-2 cursor-pointer mb-4 px-4 py-2 border border-gray-300 rounded hover:bg-yellow-50 text-gray-700"
                 >
                   <FaPaperclip />
-                  {resumeFile ? resumeFile.name : "Choose resume file (PDF, DOC, DOCX)"}
+                  {resumeFile
+                    ? resumeFile.name
+                    : "Choose resume file (PDF, DOC, DOCX)"}
                 </label>
                 <input
                   id="resumeFileInput"
@@ -543,7 +555,7 @@ export default function CareersPage() {
         )}
 
         <AnimatePresence>
-          {showLoginDialog && (
+          {showLogin && (
             <motion.div
               key="loginDialog"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -593,7 +605,7 @@ export default function CareersPage() {
                   Log In
                 </button>
                 <button
-                  onClick={() => setShowLoginDialog(false)}
+                  onClick={closeLogin}
                   className="w-full mt-3 py-2 rounded bg-gray-300 hover:bg-gray-400"
                 >
                   Cancel
@@ -697,5 +709,13 @@ export default function CareersPage() {
         </AnimatePresence>
       </div>
     </div>
+  );
+}
+
+export default function CareersPage() {
+  return (
+    <LoginDialogProvider>
+      <CareerPageContent />
+    </LoginDialogProvider>
   );
 }

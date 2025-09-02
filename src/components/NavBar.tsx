@@ -3,15 +3,14 @@ import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
+import { useLoginDialog } from "../app/CareerPage/LoginDialogContext/page";
 
-type NavBarProps = {
-  onOpenLogin: () => void;
-};
-
-export function NavBar({ onOpenLogin }: NavBarProps) {
+export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+
+  const { openLogin } = useLoginDialog();
 
   const navigateWithScroll = (path: string, hash: string) => {
     router.push(path);
@@ -127,14 +126,19 @@ export function NavBar({ onOpenLogin }: NavBarProps) {
                     title="PPM Scheduler"
                     src="/Navbar/PPM.webp"
                     description="Plan. Prevent. Perform. Full control of facility tasks at your fingertips"
-                    onClick={() => navigateWithScroll("/OurInnovation", "#PPMScheduler")}
+                    onClick={() =>
+                      navigateWithScroll("/OurInnovation", "#PPMScheduler")
+                    }
                   />
                   <ProductItem
                     title="Inventory Management"
                     src="/Navbar/Inventory.webp"
                     description="Granular inventory and purchase tracking"
                     onClick={() =>
-                      navigateWithScroll("/OurInnovation", "#InventoryManagement")
+                      navigateWithScroll(
+                        "/OurInnovation",
+                        "#InventoryManagement"
+                      )
                     }
                   />
                   <ProductItem
@@ -142,7 +146,10 @@ export function NavBar({ onOpenLogin }: NavBarProps) {
                     src="/Navbar/Employee.webp"
                     description="Unified HRMS for team management"
                     onClick={() =>
-                      navigateWithScroll("/OurInnovation", "#EmployeeManagement")
+                      navigateWithScroll(
+                        "/OurInnovation",
+                        "#EmployeeManagement"
+                      )
                     }
                   />
                 </div>
@@ -160,7 +167,10 @@ export function NavBar({ onOpenLogin }: NavBarProps) {
                     src="/Navbar/Complain.webp"
                     description="Ensure smooth facility operations with real-time complaint resolution"
                     onClick={() =>
-                      navigateWithScroll("/OurInnovation", "#ComplainManagement")
+                      navigateWithScroll(
+                        "/OurInnovation",
+                        "#ComplainManagement"
+                      )
                     }
                   />
                   <ProductItem
@@ -248,14 +258,12 @@ export function NavBar({ onOpenLogin }: NavBarProps) {
             href="/CareerPage"
           />
           {active === "Hire" && pathname === "/CareerPage" && (
-            <div
-              className="absolute left-187 text-white mt-11 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm"
-            >
+            <div className="absolute left-187 text-white mt-11 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
               <div className="flex flex-row">
                 <div className="flex flex-col">
                   <button
                     className="text-lg font-semibold hover:text-blue-400 transition duration-200 text-left"
-                    onClick={onOpenLogin}
+                    onClick={openLogin}
                   >
                     Login
                   </button>
