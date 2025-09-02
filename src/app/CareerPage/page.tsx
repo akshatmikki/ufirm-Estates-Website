@@ -207,12 +207,12 @@ export default function CareersPage() {
   };
 
   // Open resume form and set the applied job info when clicking "Apply Now"
-  const handleApplyNow = (
-    job: typeof allJobs[number]
-  ) => {
-    setAppliedJobInfo(job);
-    setShowResumeForm(true);
-  };
+//   const handleApplyNow = (
+//     job: typeof allJobs[number]
+//   ) => {
+//     setAppliedJobInfo(job);
+//     setShowResumeForm(true);
+//   };
 
   return (
     <div>
