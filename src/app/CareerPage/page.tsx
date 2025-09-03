@@ -73,16 +73,6 @@ function CareerPageContent() {
     }
   }, [latestJobWithImage]);
 
-  const handleLogin = () => {
-    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
-      closeLogin();
-      setShowJobInfoForm(true);
-      setLoginEmail("");
-      setLoginPassword("");
-    } else {
-      alert("Invalid email or password.");
-    }
-  };
 
   const handleJobSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
