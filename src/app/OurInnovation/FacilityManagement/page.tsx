@@ -28,10 +28,10 @@ export default function FacilityManagement() {
           <div className="block lg:hidden">
             <HamburgerMenu />
           </div>
-          <div className="hidden lg:block">
-            <NavBar />
-          </div>
-          <Login />
+            <div className="hidden lg:block">
+              <NavBar />
+            </div>
+            <Login />
         </div>
       </div>
 

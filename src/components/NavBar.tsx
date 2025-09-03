@@ -5,11 +5,8 @@ import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
 import { useLoginDialog } from "../app/CareerPage/LoginDialogContext";
 
-type NavBarProps = {
-  onOpenLogin: () => void;
-};
 
-export function NavBar({  }: NavBarProps) {
+export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -266,7 +263,7 @@ export function NavBar({  }: NavBarProps) {
               <div className="absolute right-3 mt-3 text-white bg-black/70 shadow-md rounded-lg p-6 z-50 text-sm min-w-[90px] flex justify-end">
                 <button
                   className="text-lg font-semibold hover:text-blue-400 transition duration-200 text-left"
-                  onClick={openLogin}
+                  onClick={openLogin} // 👈 this will now work
                 >
                   Login
                 </button>
