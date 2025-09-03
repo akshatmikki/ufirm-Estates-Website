@@ -18,7 +18,6 @@ import {
 } from "react-icons/fa";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
-
 // Import the LoginDialogContext provider and hook
 import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext";
 
