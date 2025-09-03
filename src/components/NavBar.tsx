@@ -9,7 +9,7 @@ type NavBarProps = {
   onOpenLogin: () => void;
 };
 
-export function NavBar({ onOpenLogin }: NavBarProps) {
+export function NavBar({  }: NavBarProps) {
   const [active, setActive] = useState<string | null>(null);
   const router = useRouter();
   const pathname = usePathname();

@@ -33,7 +33,7 @@ function CareerPageContent() {
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
 
-  const [showJobInfoForm, setShowJobInfoForm] = useState(false);
+  const [, setShowJobInfoForm] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const [userJobs, setUserJobs] = useState<
@@ -170,41 +170,6 @@ function CareerPageContent() {
       setLoginEmail("");
       setLoginPassword("");
     } else alert("Invalid email or password.");
-  };
-
-  const handleJobInfoChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setJobInfo({ ...jobInfo, [e.target.name]: e.target.value });
-  };
-
-  const handleJobInfoSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (
-      !jobInfo.title ||
-      !jobInfo.type ||
-      !jobInfo.posted ||
-      !jobInfo.education ||
-      !jobInfo.CTC ||
-      !jobInfo.company ||
-      !jobInfo.department ||
-      !jobInfo.designation
-    ) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    setUserJobs([...userJobs, jobInfo]);
-    setJobInfo({
-      title: "",
-      type: "",
-      posted: "",
-      education: "",
-      CTC: "",
-      company: "",
-      department: "",
-      designation: "",
-    });
-    setShowJobInfoForm(false);
   };
 
   // Open resume form and set the applied job info when clicking "Apply Now"
