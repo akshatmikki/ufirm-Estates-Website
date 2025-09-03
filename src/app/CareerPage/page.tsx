@@ -12,15 +12,33 @@ import {
   FaBroom,
   FaUserCheck,
   FaEnvelopeOpenText,
-  FaEye,
-  FaEyeSlash,
   FaPaperclip,
 } from "react-icons/fa";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
+// Import the LoginDialogContext provider and hook
+import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext";
 
-export default function CareersPage() {
+function CareerPageContent() {
+  // Use context for login dialog state
+  const { showLogin, closeLogin } = useLoginDialog();
+  const [showPosterPopup, setShowPosterPopup] = useState(false);
+
   const [showResumeForm, setShowResumeForm] = useState(false);
+  const [showJobInfoForm, setShowJobInfoForm] = useState(false); // ✅ NEW state
+  type JobInfo = {
+    title: string;
+    type: string;
+    posted: string;
+    education: string;
+    CTC: string;
+    company: string;
+    department: string;
+    designation: string;
+    image?: string;
+  };
+
+  const [appliedJobInfo, setAppliedJobInfo] = useState<JobInfo | null>(null);
   const [resumeName, setResumeName] = useState("");
   const [resumeEmail, setResumeEmail] = useState("");
   const [resumeMobile, setResumeMobile] = useState(""); // Added mobile number state
@@ -28,63 +46,58 @@ export default function CareersPage() {
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
 
-  const [showLoginDialog, setShowLoginDialog] = useState(false);
-  const [showJobInfoForm, setShowJobInfoForm] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [userJobs, setUserJobs] = useState<
-    {
-      title: string;
-      type: string;
-      posted: string;
-      education: string;
-      CTC: string;
-      company: string;
-      department: string;
-      designation: string;
-    }[]
-  >([]);
-
-  // To hold job info passed for resume submission during applying
-  const [appliedJobInfo, setAppliedJobInfo] = useState<
-    | {
-        title: string;
-        type: string;
-        posted: string;
-        education: string;
-        CTC: string;
-        company: string;
-        department: string;
-        designation: string;
-      }
-    | null
-  >(null);
+  const [userJobs, setUserJobs] = useState<JobInfo[]>([]);
+  const latestJobWithImage = userJobs.findLast(job => job.image);
 
   // Load user-added jobs from localStorage on mount
+  // Load user-added jobs from sessionStorage on mount
   useEffect(() => {
     const savedJobs = localStorage.getItem("userJobs");
     if (savedJobs) setUserJobs(JSON.parse(savedJobs));
   }, []);
 
-  // Persist userJobs in localStorage on every change
+  // Persist userJobs in sessionStorage on every change
   useEffect(() => {
     localStorage.setItem("userJobs", JSON.stringify(userJobs));
   }, [userJobs]);
 
-  const defaultJobs = [
-    {
-      title: "HouseKeeping Staff",
-      type: "Full Time",
-      posted: "30th Aug 2025",
-      education: "6th Pass",
-      CTC: "12,000 INR",
-      company: "UFirm",
-      department: "Facility Management",
-      designation: "HouseKeeping Staff",
-    },
-  ];
+  const handleJobSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const allJobs = [...defaultJobs, ...userJobs];
+    const jobWithImage = {
+      ...newJob,
+      image: newJob.image || "", // base64 image string
+    };
+
+    // update state
+    setUserJobs((prev) => {
+      const updatedJobs = [...prev, jobWithImage];
+
+      // ✅ save to localStorage for persistence
+      localStorage.setItem("userJobs", JSON.stringify(updatedJobs));
+
+      return updatedJobs;
+    });
+
+    setShowJobInfoForm(false);
+
+    // reset form
+    setNewJob({
+      title: "",
+      type: "",
+      posted: new Date().toLocaleDateString(),
+      education: "",
+      CTC: "",
+      company: "UFirm",
+      department: "",
+      designation: "",
+      image: "",
+    });
+
+    alert("Job posted successfully!");
+  };
+
+  const allJobs = [...userJobs];
   const filteredJobs = allJobs.filter((job) =>
     job.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -96,16 +109,35 @@ export default function CareersPage() {
   const [loginPassword, setLoginPassword] = useState("");
   const canLogin = loginEmail.trim() !== "" && loginPassword.trim() !== "";
 
-  const [jobInfo, setJobInfo] = useState({
+  const [newJob, setNewJob] = useState({
     title: "",
     type: "",
-    posted: "",
+    posted: new Date().toLocaleDateString(),
     education: "",
     CTC: "",
-    company: "",
+    company: "UFirm",
     department: "",
     designation: "",
+    image: "", // new field for image URL
   });
+
+  // ✅ After successful login → open job posting form
+  const handleLogin = () => {
+    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
+      closeLogin();
+      setShowJobInfoForm(true); // show job posting form
+      setLoginEmail("");
+      setLoginPassword("");
+    } else {
+      alert("Invalid email or password.");
+    }
+  };
+
+  useEffect(() => {
+    if (latestJobWithImage?.image) {
+      setShowPosterPopup(true);
+    }
+  }, [latestJobWithImage]);
 
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -135,9 +167,18 @@ export default function CareersPage() {
 
     // Append job info fields when applying for a specific job
     if (appliedJobInfo) {
-      Object.entries(appliedJobInfo).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
+      // Create a string of job details
+      const jobDetails = `
+      Job Title: ${appliedJobInfo.title}
+      Job Type: ${appliedJobInfo.type}
+      Posted On: ${appliedJobInfo.posted}
+      Education: ${appliedJobInfo.education}
+      CTC: ${appliedJobInfo.CTC}
+      Company: ${appliedJobInfo.company}
+      Department: ${appliedJobInfo.department}
+      Designation: ${appliedJobInfo.designation}
+    `;
+      formData.append("jobDetails", jobDetails);
     }
 
     try {
@@ -162,58 +203,6 @@ export default function CareersPage() {
     }
   };
 
-  const handleLogin = () => {
-    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
-      setShowLoginDialog(false);
-      setShowJobInfoForm(true);
-      setLoginEmail("");
-      setLoginPassword("");
-    } else alert("Invalid email or password.");
-  };
-
-  const handleJobInfoChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setJobInfo({ ...jobInfo, [e.target.name]: e.target.value });
-  };
-
-  const handleJobInfoSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (
-      !jobInfo.title ||
-      !jobInfo.type ||
-      !jobInfo.posted ||
-      !jobInfo.education ||
-      !jobInfo.CTC ||
-      !jobInfo.company ||
-      !jobInfo.department ||
-      !jobInfo.designation
-    ) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    setUserJobs([...userJobs, jobInfo]);
-    setJobInfo({
-      title: "",
-      type: "",
-      posted: "",
-      education: "",
-      CTC: "",
-      company: "",
-      department: "",
-      designation: "",
-    });
-    setShowJobInfoForm(false);
-  };
-
-  // Open resume form and set the applied job info when clicking "Apply Now"
-//   const handleApplyNow = (
-//     job: typeof allJobs[number]
-//   ) => {
-//     setAppliedJobInfo(job);
-//     setShowResumeForm(true);
-//   };
-
   return (
     <div>
       <div className="absolute top-1 left-0 w-full z-50">
@@ -231,7 +220,7 @@ export default function CareersPage() {
             <HamburgerMenu />
           </div>
           <div className="hidden lg:block">
-            <NavBar onOpenLogin={() => setShowLoginDialog(true)} />
+            <NavBar />
           </div>
         </div>
       </div>
@@ -258,6 +247,36 @@ export default function CareersPage() {
             </div>
           </div>
         </div>
+        <AnimatePresence>
+          {showPosterPopup && latestJobWithImage?.image && (
+            <motion.div
+              key="posterPopup"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2"
+            >
+              <div className="bg-white p-4 rounded-lg shadow-lg relative max-w-2xl w-full">
+                <button
+                  onClick={() => setShowPosterPopup(false)}
+                  className="absolute top-2 right-2 text-gray-600 hover:text-white text-xl"
+                >
+                  ✕
+                </button>
+
+                <Image
+                  src={latestJobWithImage.image}
+                  alt={`${latestJobWithImage.title} Poster`}
+                  width={200} // max width
+                  height={100} // max height
+                  className="rounded-lg object-containe max-h-[90vh] w-full mx-auto"
+                  priority
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
           <p className="mb-4 mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-yellow-600">
@@ -266,12 +285,12 @@ export default function CareersPage() {
           </p>
           <p className="mb-2 text-base sm:text-lg text-gray-700">
             Looking for a meaningful career opportunity?{" "}
-            <strong>We’re hiring passionate professionals</strong> across multiple
-            sectors.
+            <strong>We’re hiring passionate professionals</strong> across
+            multiple sectors.
           </p>
           <p className="text-sm text-gray-600 mb-6">
-            Whether you&apos;re actively job hunting or simply exploring, we welcome
-            your resume.
+            Whether you&apos;re actively job hunting or simply exploring, we
+            welcome your resume.
           </p>
         </motion.div>
 
@@ -311,8 +330,8 @@ export default function CareersPage() {
                   Hire Trained Facility Staff
                 </h2>
                 <p className="text-lg mb-6">
-                  UFirm offers skilled, verified manpower for your technical and soft
-                  service needs. <br />
+                  UFirm offers skilled, verified manpower for your technical and
+                  soft service needs. <br />
                   UFirm आपको काम के लिए अच्छे और जांचे-परखे कर्मचारी देता है।
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 text-left mb-8">
@@ -322,19 +341,24 @@ export default function CareersPage() {
                     </h3>
                     <ul className="list-disc list-inside text-gray-700 space-y-4">
                       <li>
-                        <FaUserCheck className="inline mr-2 text-yellow-500" /> Facility Staff
+                        <FaUserCheck className="inline mr-2 text-yellow-500" />{" "}
+                        Facility Staff
                       </li>
                       <li>
-                        <FaTools className="inline mr-2 text-yellow-500" /> Electricians & Plumbers
+                        <FaTools className="inline mr-2 text-yellow-500" />{" "}
+                        Electricians & Plumbers
                       </li>
                       <li>
-                        <FaWind className="inline mr-2 text-yellow-500" /> HVAC Technicians
+                        <FaWind className="inline mr-2 text-yellow-500" /> HVAC
+                        Technicians
                       </li>
                       <li>
-                        <FaBroom className="inline mr-2 text-yellow-500" /> Housekeeping & Support Staff
+                        <FaBroom className="inline mr-2 text-yellow-500" />{" "}
+                        Housekeeping & Support Staff
                       </li>
                       <li>
-                        <FaUserShield className="inline mr-2 text-yellow-500" /> Safety & Compliance Officers
+                        <FaUserShield className="inline mr-2 text-yellow-500" />{" "}
+                        Safety & Compliance Officers
                       </li>
                     </ul>
                   </div>
@@ -377,10 +401,10 @@ export default function CareersPage() {
                 </h2>
                 <hr className="w-16 border-t-2 border-yellow-500 mx-auto mb-4" />
                 <p className="text-center text-gray-700 mb-4">
-                  We are hiring for various vacancies. You can also submit your resume
-                  for future opportunities. <br />
-                  हम विभिन्न पदों के लिए भर्ती कर रहे हैं। आप भविष्य की नौकरियों के
-                  लिए अपना Resume भी भेज सकते हैं।
+                  We are hiring for various vacancies. You can also submit your
+                  resume for future opportunities. <br />
+                  हम विभिन्न पदों के लिए भर्ती कर रहे हैं। आप भविष्य की नौकरियों
+                  के लिए अपना Resume भी भेज सकते हैं।
                 </p>
                 <div className="text-center mb-6">
                   <motion.button
@@ -391,7 +415,8 @@ export default function CareersPage() {
                       setShowResumeForm(true);
                     }}
                   >
-                    🚀 Submit Resume Without Applying / बिना आवेदन के Resume भेजें
+                    🚀 Submit Resume Without Applying / बिना आवेदन के Resume
+                    भेजें
                   </motion.button>
                 </div>
                 <input
@@ -422,7 +447,7 @@ export default function CareersPage() {
                         Education: {job.education} / शिक्षा: {job.education}
                       </p>
                       <p className="text-sm mb-1">
-                        CTC: {job.CTC}/month / CTC: {job.CTC}/month
+                        CTC: {job.CTC} / CTC: {job.CTC}
                       </p>
                       <div className="flex flex-wrap gap-2 mt-2">
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
@@ -439,7 +464,9 @@ export default function CareersPage() {
                         <button
                           onClick={() => {
                             setUserJobs(
-                              userJobs.filter((_, i) => i !== userJobs.indexOf(job))
+                              userJobs.filter(
+                                (_, i) => i !== userJobs.indexOf(job)
+                              )
                             );
                           }}
                           className="absolute top-2 right-2 text-red-600 hover:text-red-800"
@@ -505,7 +532,9 @@ export default function CareersPage() {
                   className="flex items-center justify-center gap-2 cursor-pointer mb-4 px-4 py-2 border border-gray-300 rounded hover:bg-yellow-50 text-gray-700"
                 >
                   <FaPaperclip />
-                  {resumeFile ? resumeFile.name : "Choose resume file (PDF, DOC, DOCX)"}
+                  {resumeFile
+                    ? resumeFile.name
+                    : "Choose resume file (PDF, DOC, DOCX)"}
                 </label>
                 <input
                   id="resumeFileInput"
@@ -543,7 +572,115 @@ export default function CareersPage() {
         )}
 
         <AnimatePresence>
-          {showLoginDialog && (
+          {showJobInfoForm && (
+            <motion.div
+              key="jobForm"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
+            >
+              <div className="bg-white p-6 rounded max-w-md w-full shadow-lg">
+                <h2 className="text-xl font-bold mb-4 text-center">
+                  Post a New Job
+                </h2>
+                <form onSubmit={handleJobSubmit} className="space-y-3">
+                  <input
+                    type="text"
+                    placeholder="Job Title"
+                    value={newJob.title}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, title: e.target.value })
+                    }
+                    required
+                    className="w-full p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Job Type (e.g. Full Time)"
+                    value={newJob.type}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, type: e.target.value })
+                    }
+                    required
+                    className="w-full p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Education Requirement"
+                    value={newJob.education}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, education: e.target.value })
+                    }
+                    className="w-full p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="CTC (e.g. 20,000 INR)"
+                    value={newJob.CTC}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, CTC: e.target.value })
+                    }
+                    className="w-full p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Department"
+                    value={newJob.department}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, department: e.target.value })
+                    }
+                    className="w-full p-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Designation"
+                    value={newJob.designation}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, designation: e.target.value })
+                    }
+                    className="w-full p-2 border rounded"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    placeholder="Upload job poster image"
+                    title="Upload job poster image"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setNewJob({ ...newJob, image: reader.result as string }); // ✅ base64 stored
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="w-full p-2 border rounded"
+                  />
+                  <div className="flex justify-between mt-4">
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                    >
+                      Post Job
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowJobInfoForm(false)}
+                      className="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showLogin && (
             <motion.div
               key="loginDialog"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -552,150 +689,63 @@ export default function CareersPage() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
             >
-              <div className="bg-white p-6 rounded max-w-sm w-full shadow-lg">
+              <div className="bg-white p-6 rounded max-w-md w-full shadow-lg">
                 <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full p-2 mb-4 border rounded"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                />
-                <div className="relative">
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleLogin(); // you already wrote this
+                  }}
+                  className="space-y-4"
+                >
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type="email"
+                    placeholder="Email"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    required
+                  />
+                  <input
+                    type="password"
                     placeholder="Password"
-                    className="w-full p-2 mb-4 border rounded pr-10"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-600"
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
 
-                <button
-                  disabled={!canLogin}
-                  onClick={handleLogin}
-                  className={`w-full py-2 rounded text-white transition ${
-                    canLogin
-                      ? "bg-blue-600 hover:bg-blue-700"
-                      : "bg-gray-400 cursor-not-allowed"
-                  }`}
-                >
-                  Log In
-                </button>
-                <button
-                  onClick={() => setShowLoginDialog(false)}
-                  className="w-full mt-3 py-2 rounded bg-gray-300 hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
+                  <div className="flex justify-between mt-4">
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                      disabled={!canLogin}
+                    >
+                      Login
+                    </button>
+                    <button
+                      type="button"
+                      onClick={closeLogin}
+                      className="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {showJobInfoForm && (
-            <motion.div
-              key="jobInfoForm"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
-            >
-              <form
-                onSubmit={handleJobInfoSubmit}
-                className="bg-white p-6 rounded max-w-lg w-full shadow-lg space-y-4 overflow-auto max-h-[80vh]"
-              >
-                <h2 className="text-xl font-bold mb-4 text-center">
-                  Fill Job Information
-                </h2>
-                <input
-                  name="title"
-                  value={jobInfo.title}
-                  onChange={handleJobInfoChange}
-                  placeholder="Job Title"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="type"
-                  value={jobInfo.type}
-                  onChange={handleJobInfoChange}
-                  placeholder="Job Type"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="posted"
-                  value={jobInfo.posted}
-                  onChange={handleJobInfoChange}
-                  placeholder="Posted Date"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="education"
-                  value={jobInfo.education}
-                  onChange={handleJobInfoChange}
-                  placeholder="Education"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="CTC"
-                  value={jobInfo.CTC}
-                  onChange={handleJobInfoChange}
-                  placeholder="CTC"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="company"
-                  value={jobInfo.company}
-                  onChange={handleJobInfoChange}
-                  placeholder="Company"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="department"
-                  value={jobInfo.department}
-                  onChange={handleJobInfoChange}
-                  placeholder="Department"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="designation"
-                  value={jobInfo.designation}
-                  onChange={handleJobInfoChange}
-                  placeholder="Designation"
-                  className="w-full p-2 border rounded"
-                />
-                <div className="flex justify-between">
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                  >
-                    Submit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowJobInfoForm(false)}
-                    className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     </div>
+  );
+}
+
+export default function CareersPage() {
+  return (
+    <LoginDialogProvider>
+      <CareerPageContent />
+    </LoginDialogProvider>
   );
 }

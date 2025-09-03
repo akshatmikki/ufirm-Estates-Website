@@ -4,6 +4,7 @@ import { NavBar } from "@/components/NavBar";
 import { Login } from "@/components/Login";
 import { Carousel } from "@/components/ui/Carousel";
 import Image from "next/image";
+import { LoginDialogProvider } from "@/app/CareerPage/LoginDialogContext";
 
 const slides = [
   {
@@ -54,10 +55,12 @@ export default function Herosection() {
           <Image className="dark:invert mt-9"
             src={"/UFIRM ESTATES LOGO.webp"} alt={"UFIRM ESTATES LOGO"} width={100} height={100} />
         
-          <div className="hidden lg:block">
-            <NavBar />
-          </div>
-          <Login />
+          <LoginDialogProvider>
+            <div className="hidden lg:block">
+              <NavBar />
+            </div>
+            <Login />
+          </LoginDialogProvider>
         </div>
       </div>
     </div>
