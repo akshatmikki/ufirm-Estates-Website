@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
+import { useLoginDialog } from "../app/CareerPage/LoginDialogContext";
 
-type NavBarProps = {
-  onOpenLogin: () => void;
-};
 
-export function NavBar({ onOpenLogin }: NavBarProps) {
+export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
+
+  const { openLogin } = useLoginDialog();
 
   const navigateWithScroll = (path: string, hash: string) => {
     router.push(path);
@@ -251,28 +252,24 @@ export function NavBar({ onOpenLogin }: NavBarProps) {
               </div>
             </div>
           )}
-          <MenuItem
-            setActive={setActive}
-            active={active}
-            item="Hire"
-            href="/CareerPage"
-          />
-          {active === "Hire" && (
-            <div
-              className="absolute left-187 text-white mt-11 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm"
-            >
-              <div className="flex flex-row">
-                <div className="flex flex-col">
-                  <button
-                    className="text-lg font-semibold hover:text-blue-400 transition duration-200 text-left"
-                    onClick={onOpenLogin}
-                  >
-                    Login
-                  </button>
-                </div>
+          <div className="relative">
+            <MenuItem
+              setActive={setActive}
+              active={active}
+              item="Hire"
+              href="/CareerPage"
+            />
+            {active === "Hire" && pathname === "/CareerPage" && (
+              <div className="absolute right-3 mt-3 text-white bg-black/70 shadow-md rounded-lg p-6 z-50 text-sm min-w-[90px] flex justify-end">
+                <button
+                  className="text-lg font-semibold hover:text-blue-400 transition duration-200 text-left"
+                  onClick={openLogin} // 👈 this will now work
+                >
+                  Login
+                </button>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </Menu>
       </div>
     </div>
