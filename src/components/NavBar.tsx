@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
-import { useLoginDialog } from "../../../ufirm-estates-website/src/app/CareerPage/LoginDialogContext";
+import { useLoginDialog } from "../app/CareerPage/LoginDialogContext";
 
 export function NavBar() {
   const [active, setActive] = useState<string | null>(null);
