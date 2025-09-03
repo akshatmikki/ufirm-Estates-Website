@@ -12,8 +12,6 @@ import {
   FaBroom,
   FaUserCheck,
   FaEnvelopeOpenText,
-  FaEye,
-  FaEyeSlash,
   FaPaperclip,
 } from "react-icons/fa";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
@@ -48,7 +46,7 @@ function CareerPageContent() {
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
 
-  const [userJobs, setUserJobs] = useState<any[]>([]);
+  const [userJobs, setUserJobs] = useState<JobInfo[]>([]);
   const latestJobWithImage = userJobs.findLast(job => job.image);
 
   // Load user-added jobs from localStorage on mount
@@ -95,7 +93,6 @@ function CareerPageContent() {
       designation: "",
       image: "",
     });
-    setNewJobImageFile(null);
 
     alert("Job posted successfully!");
   };
@@ -123,7 +120,6 @@ function CareerPageContent() {
     designation: "",
     image: "", // new field for image URL
   });
-  const [newJobImageFile, setNewJobImageFile] = useState<File | null>(null);
 
   // ✅ After successful login → open job posting form
   const handleLogin = () => {
