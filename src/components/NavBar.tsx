@@ -5,7 +5,11 @@ import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
 import { cn } from "@/utils/cn";
 import { useLoginDialog } from "../../../ufirm-estates-website/src/app/CareerPage/LoginDialogContext";
 
-export function NavBar() {
+type NavBarProps = {
+  onOpenLogin: () => void;
+};
+
+export function NavBar({ onOpenLogin }: NavBarProps) {
   const [active, setActive] = useState<string | null>(null);
   const router = useRouter();
   const pathname = usePathname();
