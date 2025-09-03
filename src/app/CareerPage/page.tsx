@@ -129,12 +129,6 @@ function CareerPageContent() {
     }
   };
 
-  useEffect(() => {
-    if (latestJobWithImage?.image) {
-      setShowPosterPopup(true);
-    }
-  }, [latestJobWithImage]);
-
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!resumeFile) return;
