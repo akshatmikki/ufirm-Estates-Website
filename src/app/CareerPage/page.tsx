@@ -97,16 +97,16 @@ function CareerPageContent() {
   const [loginPassword, setLoginPassword] = useState("");
   const canLogin = loginEmail.trim() !== "" && loginPassword.trim() !== "";
 
-  const [jobInfo, setJobInfo] = useState({
-    title: "",
-    type: "",
-    posted: "",
-    education: "",
-    CTC: "",
-    company: "",
-    department: "",
-    designation: "",
-  });
+  // const [jobInfo, setJobInfo] = useState({
+  //   title: "",
+  //   type: "",
+  //   posted: "",
+  //   education: "",
+  //   CTC: "",
+  //   company: "",
+  //   department: "",
+  //   designation: "",
+  // });
 
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
