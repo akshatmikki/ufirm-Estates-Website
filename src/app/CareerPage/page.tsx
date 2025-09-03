@@ -101,10 +101,15 @@ function CareerPageContent() {
       });
 
       alert("Job posted successfully!");
-    } catch (err) {
-      console.error(err);
-      alert(err.message || "Failed to post job.");
-    }
+    } catch (err: unknown) {
+  console.error(err);
+
+  if (err instanceof Error) {
+    alert(err.message || "Failed to post job.");
+  } else {
+    alert("Failed to post job.");
+  }
+}
   };
 
   const filteredJobs = userJobs.filter((job) =>
