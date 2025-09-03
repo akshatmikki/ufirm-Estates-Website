@@ -208,12 +208,6 @@ function CareerPageContent() {
   };
 
   // Open resume form and set the applied job info when clicking "Apply Now"
-  // const handleApplyNow = (
-  //   job: typeof allJobs[number]
-  // ) => {
-  //   setAppliedJobInfo(job);
-  //   setShowResumeForm(true);
-  // };
 
   return (
     <div>
@@ -591,6 +585,17 @@ function CareerPageContent() {
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
+                <a
+                  href={`mailto:crm@ufirm.in?subject=Connect with Us&body=${encodeURIComponent(
+                    `Hello,\n\nPlease reach out to me,\nMy Name: \nCompany/ Society/ Organization/ Industry name: \nMobile no.: \nShort description of requirement: \nLocation: \n\nThanks`
+                  )}`}
+                >
+                  <button className="px-6 py-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-lg transition flex items-center gap-2 mx-auto">
+                    <FaEnvelopeOpenText /> Request Staff / स्टाफ मांगें
+                  </button>
+                </a>
+              </motion.div>
+            )}
 
                 <button
                   disabled={!canLogin}
