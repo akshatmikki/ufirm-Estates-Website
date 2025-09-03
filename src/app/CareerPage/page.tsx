@@ -28,7 +28,19 @@ function CareerPageContent() {
 
   const [showResumeForm, setShowResumeForm] = useState(false);
   const [showJobInfoForm, setShowJobInfoForm] = useState(false); // ✅ NEW state
-  const [appliedJobInfo, setAppliedJobInfo] = useState(null);
+  type JobInfo = {
+    title: string;
+    type: string;
+    posted: string;
+    education: string;
+    CTC: string;
+    company: string;
+    department: string;
+    designation: string;
+    image?: string;
+  };
+
+  const [appliedJobInfo, setAppliedJobInfo] = useState<JobInfo | null>(null);
   const [resumeName, setResumeName] = useState("");
   const [resumeEmail, setResumeEmail] = useState("");
   const [resumeMobile, setResumeMobile] = useState(""); // Added mobile number state
@@ -159,9 +171,18 @@ function CareerPageContent() {
 
     // Append job info fields when applying for a specific job
     if (appliedJobInfo) {
-      Object.entries(appliedJobInfo).forEach(([key, value]) => {
-        formData.append(key, String(value));
-      });
+      // Create a string of job details
+      const jobDetails = `
+      Job Title: ${appliedJobInfo.title}
+      Job Type: ${appliedJobInfo.type}
+      Posted On: ${appliedJobInfo.posted}
+      Education: ${appliedJobInfo.education}
+      CTC: ${appliedJobInfo.CTC}
+      Company: ${appliedJobInfo.company}
+      Department: ${appliedJobInfo.department}
+      Designation: ${appliedJobInfo.designation}
+    `;
+      formData.append("jobDetails", jobDetails);
     }
 
     try {
@@ -231,35 +252,35 @@ function CareerPageContent() {
           </div>
         </div>
         <AnimatePresence>
-  {showPosterPopup && latestJobWithImage?.image && (
-    <motion.div
-      key="posterPopup"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.3 }}
-      className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2"
-    >
-      <div className="bg-white p-4 rounded-lg shadow-lg relative max-w-2xl w-full">
-        <button
-          onClick={() => setShowPosterPopup(false)}
-          className="absolute top-2 right-2 text-gray-600 hover:text-white text-xl"
-        >
-          ✕
-        </button>
+          {showPosterPopup && latestJobWithImage?.image && (
+            <motion.div
+              key="posterPopup"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2"
+            >
+              <div className="bg-white p-4 rounded-lg shadow-lg relative max-w-2xl w-full">
+                <button
+                  onClick={() => setShowPosterPopup(false)}
+                  className="absolute top-2 right-2 text-gray-600 hover:text-white text-xl"
+                >
+                  ✕
+                </button>
 
-        <Image
-          src={latestJobWithImage.image}
-          alt={`${latestJobWithImage.title} Poster`}
-          width={200} // max width
-          height={100} // max height
-          className="rounded-lg object-containe max-h-[90vh] w-full mx-auto"
-          priority
-        />
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+                <Image
+                  src={latestJobWithImage.image}
+                  alt={`${latestJobWithImage.title} Poster`}
+                  width={200} // max width
+                  height={100} // max height
+                  className="rounded-lg object-containe max-h-[90vh] w-full mx-auto"
+                  priority
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
           <p className="mb-4 mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-yellow-600">
