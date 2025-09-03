@@ -33,6 +33,9 @@ function CareerPageContent() {
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
   const [userJobs, setUserJobs] = useState<JobInfo[]>([]);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [newJob, setNewJob] = useState({
     Title: "",
     Type: "",
@@ -73,6 +76,17 @@ function CareerPageContent() {
     }
   }, [latestJobWithImage]);
 
+  const handleLogin = () => {
+    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
+      setIsLoggedIn(true);
+      closeLogin();
+      setShowJobInfoForm(true);
+      setLoginEmail("");
+      setLoginPassword("");
+    } else {
+      alert("Invalid email or password.");
+    }
+  };
 
   const handleJobSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,18 +130,6 @@ function CareerPageContent() {
     job.Title?.toLowerCase().includes(search.toLowerCase())
   );
 
-
-  // ✅ After successful login → open job posting form
-  const handleLogin = () => {
-    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
-      closeLogin();
-      setShowJobInfoForm(true); // show job posting form
-      setLoginEmail("");
-      setLoginPassword("");
-    } else {
-      alert("Invalid email or password.");
-    }
-  };
 
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -247,12 +249,12 @@ function CareerPageContent() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2"
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-6"
             >
               <div className="bg-white p-4 rounded-lg shadow-lg relative max-w-2xl w-full">
                 <button
                   onClick={() => setShowPosterPopup(false)}
-                  className="absolute top-2 right-2 text-gray-600 hover:text-white text-xl"
+                  className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
                 >
                   ✕
                 </button>
@@ -264,13 +266,30 @@ function CareerPageContent() {
                   className="rounded-lg object-contain max-h-[90vh] w-full mx-auto"
                   priority
                 />
+                <button
+                  onClick={() => {
+                    setShowPosterPopup(false); // close poster
+                    setActiveTab("job"); // switch to job tab
+                    setTimeout(() => {
+                      const jobElement = document.getElementById(`job-${latestJobWithImage.Id}`);
+                      if (jobElement) {
+                        jobElement.scrollIntoView({ behavior: "smooth", block: "center" });
+                        jobElement.classList.add("ring-4", "ring-yellow-400"); // optional highlight
+                        setTimeout(() => jobElement.classList.remove("ring-4", "ring-yellow-400"), 2000);
+                      }
+                    }, 100); // slight delay to ensure DOM is rendered
+                  }}
+                  className="absolute bottom-4 right-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                >
+                  View Job
+                </button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Tabs */}
-         <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
+        <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
           <p className="mb-4 mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-yellow-600">
             Join a Future-Focused Team with{" "}
             <span className="text-black">UFirm Hiring Portal!</span>
@@ -430,6 +449,7 @@ function CareerPageContent() {
                   return (
                     <motion.div
                       key={idx}
+                      id={`job-${job.Id}`} // <- Add this
                       className="bg-white text-black p-6 rounded-md shadow mb-6 hover:shadow-lg transition relative"
                     >
                       <h3 className="text-xl font-bold mb-2">{job.Title}</h3>
@@ -454,7 +474,7 @@ function CareerPageContent() {
                           Designation: {job.Designation}
                         </span>
                       </div>
-                      {isUserJob && (
+                      {isLoggedIn && isUserJob && (
                         <button
                           onClick={async () => {
                             if (!job.Id) return;
