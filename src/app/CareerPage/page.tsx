@@ -226,7 +226,14 @@ function CareerPageContent() {
             <HamburgerMenu />
           </div>
           <div className="hidden lg:block">
-            <NavBar />
+            <NavBar onOpenLogin={() => { 
+              // Use context to open login dialog
+              if (typeof window !== "undefined") {
+                // Defensive: context might not be available outside provider
+                const event = new CustomEvent("openLoginDialog");
+                window.dispatchEvent(event);
+              }
+            }} />
           </div>
         </div>
       </div>
@@ -594,9 +601,6 @@ function CareerPageContent() {
                     <FaEnvelopeOpenText /> Request Staff / स्टाफ मांगें
                   </button>
                 </a>
-              </motion.div>
-            )}
-
                 <button
                   disabled={!canLogin}
                   onClick={handleLogin}
@@ -615,99 +619,6 @@ function CareerPageContent() {
                   Cancel
                 </button>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {showJobInfoForm && (
-            <motion.div
-              key="jobInfoForm"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
-            >
-              <form
-                onSubmit={handleJobInfoSubmit}
-                className="bg-white p-6 rounded max-w-lg w-full shadow-lg space-y-4 overflow-auto max-h-[80vh]"
-              >
-                <h2 className="text-xl font-bold mb-4 text-center">
-                  Fill Job Information
-                </h2>
-                <input
-                  name="title"
-                  value={jobInfo.title}
-                  onChange={handleJobInfoChange}
-                  placeholder="Job Title"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="type"
-                  value={jobInfo.type}
-                  onChange={handleJobInfoChange}
-                  placeholder="Job Type"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="posted"
-                  value={jobInfo.posted}
-                  onChange={handleJobInfoChange}
-                  placeholder="Posted Date"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="education"
-                  value={jobInfo.education}
-                  onChange={handleJobInfoChange}
-                  placeholder="Education"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="CTC"
-                  value={jobInfo.CTC}
-                  onChange={handleJobInfoChange}
-                  placeholder="CTC"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="company"
-                  value={jobInfo.company}
-                  onChange={handleJobInfoChange}
-                  placeholder="Company"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="department"
-                  value={jobInfo.department}
-                  onChange={handleJobInfoChange}
-                  placeholder="Department"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="designation"
-                  value={jobInfo.designation}
-                  onChange={handleJobInfoChange}
-                  placeholder="Designation"
-                  className="w-full p-2 border rounded"
-                />
-                <div className="flex justify-between">
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                  >
-                    Submit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowJobInfoForm(false)}
-                    className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
             </motion.div>
           )}
         </AnimatePresence>
