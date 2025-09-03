@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,116 +17,66 @@ import {
 } from "react-icons/fa";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
-// Import the LoginDialogContext provider and hook
 import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext";
+import { getJobs, createJob, deleteJob, JobInfo } from "@/app/api/job";
 
 function CareerPageContent() {
-  // Use context for login dialog state
   const { showLogin, closeLogin } = useLoginDialog();
   const [showPosterPopup, setShowPosterPopup] = useState(false);
-
   const [showResumeForm, setShowResumeForm] = useState(false);
-  const [showJobInfoForm, setShowJobInfoForm] = useState(false); // ✅ NEW state
-  type JobInfo = {
-    title: string;
-    type: string;
-    posted: string;
-    education: string;
-    CTC: string;
-    company: string;
-    department: string;
-    designation: string;
-    image?: string;
-  };
-
+  const [showJobInfoForm, setShowJobInfoForm] = useState(false);
   const [appliedJobInfo, setAppliedJobInfo] = useState<JobInfo | null>(null);
   const [resumeName, setResumeName] = useState("");
   const [resumeEmail, setResumeEmail] = useState("");
-  const [resumeMobile, setResumeMobile] = useState(""); // Added mobile number state
+  const [resumeMobile, setResumeMobile] = useState("");
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
-
   const [userJobs, setUserJobs] = useState<JobInfo[]>([]);
-  const latestJobWithImage = userJobs.findLast(job => job.image);
-
-  // Load user-added jobs from localStorage on mount
-  // Load user-added jobs from sessionStorage on mount
-  useEffect(() => {
-    const savedJobs = localStorage.getItem("userJobs");
-    if (savedJobs) setUserJobs(JSON.parse(savedJobs));
-  }, []);
-
-  // Persist userJobs in sessionStorage on every change
-  useEffect(() => {
-    localStorage.setItem("userJobs", JSON.stringify(userJobs));
-  }, [userJobs]);
-
-  const handleJobSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const jobWithImage = {
-      ...newJob,
-      image: newJob.image || "", // base64 image string
-    };
-
-    // update state
-    setUserJobs((prev) => {
-      const updatedJobs = [...prev, jobWithImage];
-
-      // ✅ save to localStorage for persistence
-      localStorage.setItem("userJobs", JSON.stringify(updatedJobs));
-
-      return updatedJobs;
-    });
-
-    setShowJobInfoForm(false);
-
-    // reset form
-    setNewJob({
-      title: "",
-      type: "",
-      posted: new Date().toLocaleDateString(),
-      education: "",
-      CTC: "",
-      company: "UFirm",
-      department: "",
-      designation: "",
-      image: "",
-    });
-
-    alert("Job posted successfully!");
-  };
-
-  const allJobs = [...userJobs];
-  const filteredJobs = allJobs.filter((job) =>
-    job.title.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const defaultEmail = "user@ufirm.com";
-  const defaultPassword = "Password123";
-
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const canLogin = loginEmail.trim() !== "" && loginPassword.trim() !== "";
-
   const [newJob, setNewJob] = useState({
-    title: "",
-    type: "",
-    posted: new Date().toLocaleDateString(),
-    education: "",
+    Title: "",
+    Type: "",
+    Posted: new Date().toLocaleDateString().split("T")[0],
+    Education: "",
     CTC: "",
-    company: "UFirm",
-    department: "",
-    designation: "",
-    image: "", // new field for image URL
+    Company: "UFirm",
+    Department: "",
+    Designation: "",
+    ImageUrl: "",
   });
 
-  // ✅ After successful login → open job posting form
+  const latestJobWithImage = userJobs.findLast(job => job.ImageUrl);
+
+  // Login form state
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const defaultEmail = "user@ufirm.com";
+  const defaultPassword = "Password123";
+  const canLogin = loginEmail.trim() !== "" && loginPassword.trim() !== "";
+
+  // Fetch jobs on search change
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        const jobs = await getJobs(search);
+        setUserJobs(jobs);
+      } catch (err) {
+        console.error("Failed to fetch jobs:", err);
+      }
+    }
+    fetchJobs();
+  }, [search]);
+
+  useEffect(() => {
+    if (latestJobWithImage?.ImageUrl) {
+      setShowPosterPopup(true);
+    }
+  }, [latestJobWithImage]);
+
   const handleLogin = () => {
     if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
       closeLogin();
-      setShowJobInfoForm(true); // show job posting form
+      setShowJobInfoForm(true);
       setLoginEmail("");
       setLoginPassword("");
     } else {
@@ -133,11 +84,42 @@ function CareerPageContent() {
     }
   };
 
-  useEffect(() => {
-    if (latestJobWithImage?.image) {
-      setShowPosterPopup(true);
+  const handleJobSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+
+      // Create job with uploaded image URL
+      const postedJob = await createJob({
+        ...newJob,
+        ImageUrl: newJob.ImageUrl,
+        Posted: new Date().toISOString().split("T")[0],
+        Company: "UFirm",
+      });
+
+      setUserJobs(prev => [...prev, postedJob]);
+      setShowJobInfoForm(false);
+      setNewJob({
+        Title: "",
+        Type: "",
+        Posted: new Date().toISOString().split("T")[0],
+        Education: "",
+        CTC: "",
+        Company: "UFirm",
+        Department: "",
+        Designation: "",
+        ImageUrl: "",
+      });
+
+      alert("Job posted successfully!");
+    } catch (err: any) {
+      console.error(err);
+      alert(err.message || "Failed to post job.");
     }
-  }, [latestJobWithImage]);
+  };
+
+  const filteredJobs = userJobs.filter((job) =>
+    job.Title?.toLowerCase().includes(search.toLowerCase())
+  );
 
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -165,18 +147,16 @@ function CareerPageContent() {
     formData.append("mobile", resumeMobile);
     formData.append("file", resumeFile);
 
-    // Append job info fields when applying for a specific job
     if (appliedJobInfo) {
-      // Create a string of job details
       const jobDetails = `
-      Job Title: ${appliedJobInfo.title}
-      Job Type: ${appliedJobInfo.type}
-      Posted On: ${appliedJobInfo.posted}
-      Education: ${appliedJobInfo.education}
+      Job Title: ${appliedJobInfo.Title}
+      Job Type: ${appliedJobInfo.Type}
+      Posted On: ${appliedJobInfo.Posted}
+      Education: ${appliedJobInfo.Education}
       CTC: ${appliedJobInfo.CTC}
-      Company: ${appliedJobInfo.company}
-      Department: ${appliedJobInfo.department}
-      Designation: ${appliedJobInfo.designation}
+      Company: ${appliedJobInfo.Company}
+      Department: ${appliedJobInfo.Department}
+      Designation: ${appliedJobInfo.Designation}
     `;
       formData.append("jobDetails", jobDetails);
     }
@@ -205,6 +185,7 @@ function CareerPageContent() {
 
   return (
     <div>
+      {/* Navbar */}
       <div className="absolute top-1 left-0 w-full z-50">
         <div className="flex items-center justify-between px-4 mt-1">
           <Link href="/">
@@ -225,6 +206,7 @@ function CareerPageContent() {
         </div>
       </div>
 
+      {/* Hero Section */}
       <div className="bg-white text-gray-900 min-h-screen">
         <div className="relative">
           <Image
@@ -247,8 +229,10 @@ function CareerPageContent() {
             </div>
           </div>
         </div>
+
+        {/* Poster Popup */}
         <AnimatePresence>
-          {showPosterPopup && latestJobWithImage?.image && (
+          {showPosterPopup && latestJobWithImage?.ImageUrl && (
             <motion.div
               key="posterPopup"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -264,13 +248,12 @@ function CareerPageContent() {
                 >
                   ✕
                 </button>
-
                 <Image
-                  src={latestJobWithImage.image}
-                  alt={`${latestJobWithImage.title} Poster`}
-                  width={200} // max width
-                  height={100} // max height
-                  className="rounded-lg object-containe max-h-[90vh] w-full mx-auto"
+                  src={latestJobWithImage.ImageUrl}
+                  alt={`${latestJobWithImage.Title} Poster`}
+                  width={200}
+                  height={100}
+                  className="rounded-lg object-contain max-h-[90vh] w-full mx-auto"
                   priority
                 />
               </div>
@@ -278,7 +261,8 @@ function CareerPageContent() {
           )}
         </AnimatePresence>
 
-        <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
+        {/* Tabs */}
+         <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
           <p className="mb-4 mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-yellow-600">
             Join a Future-Focused Team with{" "}
             <span className="text-black">UFirm Hiring Portal!</span>
@@ -293,7 +277,6 @@ function CareerPageContent() {
             welcome your resume.
           </p>
         </motion.div>
-
         <div className="z-60 bg-white">
           <div className="flex flex-wrap justify-center gap-3 py-10 px-2">
             {["hire", "job"].map((tab) => (
@@ -315,6 +298,7 @@ function CareerPageContent() {
           </div>
         </div>
 
+        {/* Tab Content */}
         <div className="py-8">
           <AnimatePresence mode="wait">
             {activeTab === "hire" && (
@@ -326,6 +310,7 @@ function CareerPageContent() {
                 transition={{ duration: 0.5 }}
                 className="max-w-4xl mx-auto text-center text-gray-800 px-2"
               >
+                {/* Hire content here */}
                 <h2 className="text-3xl font-bold mb-4">
                   Hire Trained Facility Staff
                 </h2>
@@ -396,6 +381,7 @@ function CareerPageContent() {
                 transition={{ duration: 0.4 }}
                 className="max-w-3xl mx-auto text-black px-2"
               >
+                {/* Job Listing & Search */}
                 <h2 className="text-center text-3xl font-bold mb-4">
                   Open Positions / उपलब्ध नौकरियाँ
                 </h2>
@@ -438,36 +424,39 @@ function CareerPageContent() {
                       key={idx}
                       className="bg-white text-black p-6 rounded-md shadow mb-6 hover:shadow-lg transition relative"
                     >
-                      <h3 className="text-xl font-bold mb-2">{job.title}</h3>
-                      <p className="text-sm mb-2">{job.type}</p>
+                      <h3 className="text-xl font-bold mb-2">{job.Title}</h3>
+                      <p className="text-sm mb-2">{job.Type}</p>
                       <p className="text-sm mb-1">
-                        Posted on {job.posted} / पोस्ट की गई: {job.posted}
+                        Posted on {job.Posted} / पोस्ट की गई: {job.Posted}
                       </p>
                       <p className="text-sm mb-1">
-                        Education: {job.education} / शिक्षा: {job.education}
+                        Education: {job.Education} / शिक्षा: {job.Education}
                       </p>
                       <p className="text-sm mb-1">
                         CTC: {job.CTC} / CTC: {job.CTC}
                       </p>
                       <div className="flex flex-wrap gap-2 mt-2">
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                          Company: {job.company}
+                          Company: {job.Company}
                         </span>
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                          Department: {job.department}
+                          Department: {job.Department}
                         </span>
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                          Designation: {job.designation}
+                          Designation: {job.Designation}
                         </span>
                       </div>
                       {isUserJob && (
                         <button
-                          onClick={() => {
-                            setUserJobs(
-                              userJobs.filter(
-                                (_, i) => i !== userJobs.indexOf(job)
-                              )
-                            );
+                          onClick={async () => {
+                            if (!job.Id) return;
+                            try {
+                              await deleteJob(job.Id);
+                              setUserJobs(userJobs.filter(j => j.Id !== job.Id));
+                            } catch (err) {
+                              console.error(err);
+                              alert("Failed to delete job.");
+                            }
                           }}
                           className="absolute top-2 right-2 text-red-600 hover:text-red-800"
                           title="Remove Job"
@@ -493,6 +482,7 @@ function CareerPageContent() {
           </AnimatePresence>
         </div>
 
+        {/* Resume Form */}
         {showResumeForm && (
           <div className="fixed inset-0 bg-black/20 bg-opacity-50 flex justify-center items-center z-50 p-4 sm:p-0">
             <div className="bg-white p-6 sm:p-8 rounded shadow-lg w-full max-w-sm sm:max-w-md overflow-auto max-h-[90vh]">
@@ -526,7 +516,6 @@ function CareerPageContent() {
                   pattern="[\d\s+()-]{7,15}"
                   title="Enter a valid phone number"
                 />
-                {/* Styled file input */}
                 <label
                   htmlFor="resumeFileInput"
                   className="flex items-center justify-center gap-2 cursor-pointer mb-4 px-4 py-2 border border-gray-300 rounded hover:bg-yellow-50 text-gray-700"
@@ -571,6 +560,7 @@ function CareerPageContent() {
           </div>
         )}
 
+        {/* Job Posting Form */}
         <AnimatePresence>
           {showJobInfoForm && (
             <motion.div
@@ -586,82 +576,41 @@ function CareerPageContent() {
                   Post a New Job
                 </h2>
                 <form onSubmit={handleJobSubmit} className="space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Job Title"
-                    value={newJob.title}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, title: e.target.value })
-                    }
-                    required
-                    className="w-full p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Job Type (e.g. Full Time)"
-                    value={newJob.type}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, type: e.target.value })
-                    }
-                    required
-                    className="w-full p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Education Requirement"
-                    value={newJob.education}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, education: e.target.value })
-                    }
-                    className="w-full p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="CTC (e.g. 20,000 INR)"
-                    value={newJob.CTC}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, CTC: e.target.value })
-                    }
-                    className="w-full p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Department"
-                    value={newJob.department}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, department: e.target.value })
-                    }
-                    className="w-full p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Designation"
-                    value={newJob.designation}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, designation: e.target.value })
-                    }
-                    className="w-full p-2 border rounded"
-                  />
+                  {["Title", "Type", "Education", "CTC", "Department", "Designation"].map(
+                    (field) => (
+                      <input
+                        key={field}
+                        type="text"
+                        placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                        value={newJob[field as keyof typeof newJob]}
+                        onChange={(e) =>
+                          setNewJob({ ...newJob, [field]: e.target.value })
+                        }
+                        required
+                        className="w-full p-2 border rounded"
+                      />
+                    )
+                  )}
                   <input
                     type="file"
                     accept="image/*"
-                    placeholder="Upload job poster image"
-                    title="Upload job poster image"
+                    placeholder="Upload Image"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                          setNewJob({ ...newJob, image: reader.result as string }); // ✅ base64 stored
-                        };
-                        reader.readAsDataURL(file);
-                      }
+                      if (!file) return;
+
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const base64String = reader.result as string; // keep the "data:image/png;base64," part
+                        setNewJob({ ...newJob, ImageUrl: base64String });
+                      };
+                      reader.readAsDataURL(file);
                     }}
-                    className="w-full p-2 border rounded"
                   />
                   <div className="flex justify-between mt-4">
                     <button
                       type="submit"
+                      onClick={handleJobSubmit}
                       className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
                     >
                       Post Job
@@ -679,6 +628,8 @@ function CareerPageContent() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Login Dialog */}
         <AnimatePresence>
           {showLogin && (
             <motion.div
@@ -691,11 +642,10 @@ function CareerPageContent() {
             >
               <div className="bg-white p-6 rounded max-w-md w-full shadow-lg">
                 <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
-
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    handleLogin(); // you already wrote this
+                    handleLogin();
                   }}
                   className="space-y-4"
                 >
@@ -715,7 +665,6 @@ function CareerPageContent() {
                     className="w-full p-2 border rounded"
                     required
                   />
-
                   <div className="flex justify-between mt-4">
                     <button
                       type="submit"
