@@ -101,7 +101,7 @@ function CareerPageContent() {
       });
 
       alert("Job posted successfully!");
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
       alert(err.message || "Failed to post job.");
     }
