@@ -123,6 +123,25 @@ function CareerPageContent() {
     job.Title?.toLowerCase().includes(search.toLowerCase())
   );
 
+
+  // ✅ After successful login → open job posting form
+  const handleLogin = () => {
+    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
+      closeLogin();
+      setShowJobInfoForm(true); // show job posting form
+      setLoginEmail("");
+      setLoginPassword("");
+    } else {
+      alert("Invalid email or password.");
+    }
+  };
+
+  useEffect(() => {
+    if (latestJobWithImage?.image) {
+      setShowPosterPopup(true);
+    }
+  }, [latestJobWithImage]);
+
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!resumeFile) return;
@@ -231,6 +250,36 @@ function CareerPageContent() {
             </div>
           </div>
         </div>
+        <AnimatePresence>
+          {showPosterPopup && latestJobWithImage?.image && (
+            <motion.div
+              key="posterPopup"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2"
+            >
+              <div className="bg-white p-4 rounded-lg shadow-lg relative max-w-2xl w-full">
+                <button
+                  onClick={() => setShowPosterPopup(false)}
+                  className="absolute top-2 right-2 text-gray-600 hover:text-white text-xl"
+                >
+                  ✕
+                </button>
+
+                <Image
+                  src={latestJobWithImage.image}
+                  alt={`${latestJobWithImage.title} Poster`}
+                  width={200} // max width
+                  height={100} // max height
+                  className="rounded-lg object-containe max-h-[90vh] w-full mx-auto"
+                  priority
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Poster Popup */}
         <AnimatePresence>
@@ -649,7 +698,6 @@ function CareerPageContent() {
           )}
         </AnimatePresence>
 
-        {/* Login Dialog */}
         <AnimatePresence>
           {showLogin && (
             <motion.div
@@ -685,6 +733,7 @@ function CareerPageContent() {
                     className="w-full p-2 border rounded"
                     required
                   />
+
                   <div className="flex justify-between mt-4">
                     <button
                       type="submit"
