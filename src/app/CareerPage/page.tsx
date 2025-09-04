@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,102 +13,123 @@ import {
   FaBroom,
   FaUserCheck,
   FaEnvelopeOpenText,
-  FaEye,
-  FaEyeSlash,
   FaPaperclip,
 } from "react-icons/fa";
 import { TextGenerateEffect } from "@/components/ui/textgeneratoreffect";
 import { HamburgerMenu } from "@/components/Hamburger";
-
-// Import the LoginDialogContext provider and hook
 import { LoginDialogProvider, useLoginDialog } from "./LoginDialogContext";
+import { getJobs, createJob, deleteJob, JobInfo } from "@/app/api/job";
 
 function CareerPageContent() {
-  // Use context for login dialog state
   const { showLogin, closeLogin } = useLoginDialog();
-
+  const [showPosterPopup, setShowPosterPopup] = useState(false);
   const [showResumeForm, setShowResumeForm] = useState(false);
+  const [showJobInfoForm, setShowJobInfoForm] = useState(false);
+  const [appliedJobInfo, setAppliedJobInfo] = useState<JobInfo | null>(null);
   const [resumeName, setResumeName] = useState("");
   const [resumeEmail, setResumeEmail] = useState("");
-  const [resumeMobile, setResumeMobile] = useState(""); // Added mobile number state
+  const [resumeMobile, setResumeMobile] = useState("");
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [activeTab, setActiveTab] = useState("welcome");
   const [search, setSearch] = useState("");
+  const [userJobs, setUserJobs] = useState<JobInfo[]>([]);
 
-  const [showJobInfoForm, setShowJobInfoForm] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [userJobs, setUserJobs] = useState<
-    {
-      title: string;
-      type: string;
-      posted: string;
-      education: string;
-      CTC: string;
-      company: string;
-      department: string;
-      designation: string;
-    }[]
-  >([]);
+  const [newJob, setNewJob] = useState({
+    Title: "",
+    Type: "",
+    Posted: new Date().toLocaleDateString().split("T")[0],
+    Education: "",
+    CTC: "",
+    Company: "UFirm",
+    Department: "",
+    Designation: "",
+    ImageUrl: "",
+  });
 
-  // To hold job info passed for resume submission during applying
-  const [appliedJobInfo, setAppliedJobInfo] = useState<{
-    title: string;
-    type: string;
-    posted: string;
-    education: string;
-    CTC: string;
-    company: string;
-    department: string;
-    designation: string;
-  } | null>(null);
+  const latestJobWithImage = userJobs.findLast(job => job.ImageUrl);
 
-  // Load user-added jobs from localStorage on mount
-  useEffect(() => {
-    const savedJobs = localStorage.getItem("userJobs");
-    if (savedJobs) setUserJobs(JSON.parse(savedJobs));
-  }, []);
-
-  // Persist userJobs in localStorage on every change
-  useEffect(() => {
-    localStorage.setItem("userJobs", JSON.stringify(userJobs));
-  }, [userJobs]);
-
-  const defaultJobs = [
-    {
-      title: "HouseKeeping Staff",
-      type: "Full Time",
-      posted: "30th Aug 2025",
-      education: "6th Pass",
-      CTC: "12,000 INR",
-      company: "UFirm",
-      department: "Facility Management",
-      designation: "HouseKeeping Staff",
-    },
-  ];
-
-  const allJobs = [...defaultJobs, ...userJobs];
-  const filteredJobs = allJobs.filter((job) =>
-    job.title.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const defaultEmail = "user@ufirm.com";
-  const defaultPassword = "Password123";
-
+  // Login form state
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const defaultEmail = "user@ufirm.com";
+  const defaultPassword = "Password123";
   const canLogin = loginEmail.trim() !== "" && loginPassword.trim() !== "";
 
-  const [jobInfo, setJobInfo] = useState({
-    title: "",
-    type: "",
-    posted: "",
-    education: "",
-    CTC: "",
-    company: "",
-    department: "",
-    designation: "",
-  });
+  // Fetch jobs on search change
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        const jobs = await getJobs(search);
+        setUserJobs(jobs);
+      } catch (err) {
+        console.error("Failed to fetch jobs:", err);
+      }
+    }
+    fetchJobs();
+  }, [search]);
+
+  useEffect(() => {
+    if (latestJobWithImage?.ImageUrl) {
+      setShowPosterPopup(true);
+    }
+  }, [latestJobWithImage]);
+
+  const handleLogin = () => {
+    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
+      setIsLoggedIn(true);
+      closeLogin();
+      setShowJobInfoForm(true);
+      setLoginEmail("");
+      setLoginPassword("");
+    } else {
+      alert("Invalid email or password.");
+    }
+  };
+
+  const handleJobSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+
+      // Create job with uploaded image URL
+      const postedJob = await createJob({
+        ...newJob,
+        ImageUrl: newJob.ImageUrl,
+        Posted: new Date().toISOString().split("T")[0],
+        Company: "UFirm",
+      });
+
+      setUserJobs(prev => [...prev, postedJob]);
+      setShowJobInfoForm(false);
+      setNewJob({
+        Title: "",
+        Type: "",
+        Posted: new Date().toISOString().split("T")[0],
+        Education: "",
+        CTC: "",
+        Company: "UFirm",
+        Department: "",
+        Designation: "",
+        ImageUrl: "",
+      });
+
+      alert("Job posted successfully!");
+    } catch (err: unknown) {
+  console.error(err);
+
+  if (err instanceof Error) {
+    alert(err.message || "Failed to post job.");
+  } else {
+    alert("Failed to post job.");
+  }
+}
+  };
+
+  const filteredJobs = userJobs.filter((job) =>
+    job.Title?.toLowerCase().includes(search.toLowerCase())
+  );
+
 
   const handleResumeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -135,11 +157,18 @@ function CareerPageContent() {
     formData.append("mobile", resumeMobile);
     formData.append("file", resumeFile);
 
-    // Append job info fields when applying for a specific job
     if (appliedJobInfo) {
-      Object.entries(appliedJobInfo).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
+      const jobDetails = `
+      Job Title: ${appliedJobInfo.Title}
+      Job Type: ${appliedJobInfo.Type}
+      Posted On: ${appliedJobInfo.Posted}
+      Education: ${appliedJobInfo.Education}
+      CTC: ${appliedJobInfo.CTC}
+      Company: ${appliedJobInfo.Company}
+      Department: ${appliedJobInfo.Department}
+      Designation: ${appliedJobInfo.Designation}
+    `;
+      formData.append("jobDetails", jobDetails);
     }
 
     try {
@@ -164,60 +193,9 @@ function CareerPageContent() {
     }
   };
 
-  const handleLogin = () => {
-    if (loginEmail === defaultEmail && loginPassword === defaultPassword) {
-      closeLogin();
-      setShowJobInfoForm(true);
-      setLoginEmail("");
-      setLoginPassword("");
-    } else alert("Invalid email or password.");
-  };
-
-  const handleJobInfoChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setJobInfo({ ...jobInfo, [e.target.name]: e.target.value });
-  };
-
-  const handleJobInfoSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (
-      !jobInfo.title ||
-      !jobInfo.type ||
-      !jobInfo.posted ||
-      !jobInfo.education ||
-      !jobInfo.CTC ||
-      !jobInfo.company ||
-      !jobInfo.department ||
-      !jobInfo.designation
-    ) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    setUserJobs([...userJobs, jobInfo]);
-    setJobInfo({
-      title: "",
-      type: "",
-      posted: "",
-      education: "",
-      CTC: "",
-      company: "",
-      department: "",
-      designation: "",
-    });
-    setShowJobInfoForm(false);
-  };
-
-  // Open resume form and set the applied job info when clicking "Apply Now"
-  // const handleApplyNow = (
-  //   job: typeof allJobs[number]
-  // ) => {
-  //   setAppliedJobInfo(job);
-  //   setShowResumeForm(true);
-  // };
-
   return (
     <div>
+      {/* Navbar */}
       <div className="absolute top-1 left-0 w-full z-50">
         <div className="flex items-center justify-between px-4 mt-1">
           <Link href="/">
@@ -238,6 +216,7 @@ function CareerPageContent() {
         </div>
       </div>
 
+      {/* Hero Section */}
       <div className="bg-white text-gray-900 min-h-screen">
         <div className="relative">
           <Image
@@ -261,6 +240,55 @@ function CareerPageContent() {
           </div>
         </div>
 
+        {/* Poster Popup */}
+        <AnimatePresence>
+          {showPosterPopup && latestJobWithImage?.ImageUrl && (
+            <motion.div
+              key="posterPopup"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-6"
+            >
+              <div className="bg-white p-4 rounded-lg shadow-lg relative max-w-2xl w-full">
+                <button
+                  onClick={() => setShowPosterPopup(false)}
+                  className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
+                >
+                  ✕
+                </button>
+                <Image
+                  src={latestJobWithImage.ImageUrl}
+                  alt={`${latestJobWithImage.Title} Poster`}
+                  width={200}
+                  height={100}
+                  className="rounded-lg object-contain max-h-[90vh] w-full mx-auto"
+                  priority
+                />
+                <button
+                  onClick={() => {
+                    setShowPosterPopup(false); // close poster
+                    setActiveTab("job"); // switch to job tab
+                    setTimeout(() => {
+                      const jobElement = document.getElementById(`job-${latestJobWithImage.Id}`);
+                      if (jobElement) {
+                        jobElement.scrollIntoView({ behavior: "smooth", block: "center" });
+                        jobElement.classList.add("ring-4", "ring-yellow-400"); // optional highlight
+                        setTimeout(() => jobElement.classList.remove("ring-4", "ring-yellow-400"), 2000);
+                      }
+                    }, 100); // slight delay to ensure DOM is rendered
+                  }}
+                  className="absolute bottom-4 right-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                >
+                  View Job
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Tabs */}
         <motion.div className="max-w-3xl mx-auto text-center mt-10 px-2">
           <p className="mb-4 mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold text-yellow-600">
             Join a Future-Focused Team with{" "}
@@ -276,7 +304,6 @@ function CareerPageContent() {
             welcome your resume.
           </p>
         </motion.div>
-
         <div className="z-60 bg-white">
           <div className="flex flex-wrap justify-center gap-3 py-10 px-2">
             {["hire", "job"].map((tab) => (
@@ -298,6 +325,7 @@ function CareerPageContent() {
           </div>
         </div>
 
+        {/* Tab Content */}
         <div className="py-8">
           <AnimatePresence mode="wait">
             {activeTab === "hire" && (
@@ -309,6 +337,7 @@ function CareerPageContent() {
                 transition={{ duration: 0.5 }}
                 className="max-w-4xl mx-auto text-center text-gray-800 px-2"
               >
+                {/* Hire content here */}
                 <h2 className="text-3xl font-bold mb-4">
                   Hire Trained Facility Staff
                 </h2>
@@ -379,6 +408,7 @@ function CareerPageContent() {
                 transition={{ duration: 0.4 }}
                 className="max-w-3xl mx-auto text-black px-2"
               >
+                {/* Job Listing & Search */}
                 <h2 className="text-center text-3xl font-bold mb-4">
                   Open Positions / उपलब्ध नौकरियाँ
                 </h2>
@@ -419,38 +449,42 @@ function CareerPageContent() {
                   return (
                     <motion.div
                       key={idx}
+                      id={`job-${job.Id}`} // <- Add this
                       className="bg-white text-black p-6 rounded-md shadow mb-6 hover:shadow-lg transition relative"
                     >
-                      <h3 className="text-xl font-bold mb-2">{job.title}</h3>
-                      <p className="text-sm mb-2">{job.type}</p>
+                      <h3 className="text-xl font-bold mb-2">{job.Title}</h3>
+                      <p className="text-sm mb-2">{job.Type}</p>
                       <p className="text-sm mb-1">
-                        Posted on {job.posted} / पोस्ट की गई: {job.posted}
+                        Posted on {job.Posted} / पोस्ट की गई: {job.Posted}
                       </p>
                       <p className="text-sm mb-1">
-                        Education: {job.education} / शिक्षा: {job.education}
+                        Education: {job.Education} / शिक्षा: {job.Education}
                       </p>
                       <p className="text-sm mb-1">
-                        CTC: {job.CTC}/month / CTC: {job.CTC}/month
+                        CTC: {job.CTC} / CTC: {job.CTC}
                       </p>
                       <div className="flex flex-wrap gap-2 mt-2">
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                          Company: {job.company}
+                          Company: {job.Company}
                         </span>
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                          Department: {job.department}
+                          Department: {job.Department}
                         </span>
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                          Designation: {job.designation}
+                          Designation: {job.Designation}
                         </span>
                       </div>
-                      {isUserJob && (
+                      {isLoggedIn && isUserJob && (
                         <button
-                          onClick={() => {
-                            setUserJobs(
-                              userJobs.filter(
-                                (_, i) => i !== userJobs.indexOf(job)
-                              )
-                            );
+                          onClick={async () => {
+                            if (!job.Id) return;
+                            try {
+                              await deleteJob(job.Id);
+                              setUserJobs(userJobs.filter(j => j.Id !== job.Id));
+                            } catch (err) {
+                              console.error(err);
+                              alert("Failed to delete job.");
+                            }
                           }}
                           className="absolute top-2 right-2 text-red-600 hover:text-red-800"
                           title="Remove Job"
@@ -476,6 +510,7 @@ function CareerPageContent() {
           </AnimatePresence>
         </div>
 
+        {/* Resume Form */}
         {showResumeForm && (
           <div className="fixed inset-0 bg-black/20 bg-opacity-50 flex justify-center items-center z-50 p-4 sm:p-0">
             <div className="bg-white p-6 sm:p-8 rounded shadow-lg w-full max-w-sm sm:max-w-md overflow-auto max-h-[90vh]">
@@ -509,7 +544,6 @@ function CareerPageContent() {
                   pattern="[\d\s+()-]{7,15}"
                   title="Enter a valid phone number"
                 />
-                {/* Styled file input */}
                 <label
                   htmlFor="resumeFileInput"
                   className="flex items-center justify-center gap-2 cursor-pointer mb-4 px-4 py-2 border border-gray-300 rounded hover:bg-yellow-50 text-gray-700"
@@ -554,6 +588,75 @@ function CareerPageContent() {
           </div>
         )}
 
+        {/* Job Posting Form */}
+        <AnimatePresence>
+          {showJobInfoForm && (
+            <motion.div
+              key="jobForm"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
+            >
+              <div className="bg-white p-6 rounded max-w-md w-full shadow-lg">
+                <h2 className="text-xl font-bold mb-4 text-center">
+                  Post a New Job
+                </h2>
+                <form onSubmit={handleJobSubmit} className="space-y-3">
+                  {["Title", "Type", "Education", "CTC", "Department", "Designation"].map(
+                    (field) => (
+                      <input
+                        key={field}
+                        type="text"
+                        placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                        value={newJob[field as keyof typeof newJob]}
+                        onChange={(e) =>
+                          setNewJob({ ...newJob, [field]: e.target.value })
+                        }
+                        required
+                        className="w-full p-2 border rounded"
+                      />
+                    )
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    placeholder="Upload Image"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const base64String = reader.result as string; // keep the "data:image/png;base64," part
+                        setNewJob({ ...newJob, ImageUrl: base64String });
+                      };
+                      reader.readAsDataURL(file);
+                    }}
+                  />
+                  <div className="flex justify-between mt-4">
+                    <button
+                      type="submit"
+                      onClick={handleJobSubmit}
+                      className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                    >
+                      Post Job
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowJobInfoForm(false)}
+                      className="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <AnimatePresence>
           {showLogin && (
             <motion.div
@@ -564,146 +667,50 @@ function CareerPageContent() {
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
             >
-              <div className="bg-white p-6 rounded max-w-sm w-full shadow-lg">
+              <div className="bg-white p-6 rounded max-w-md w-full shadow-lg">
                 <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full p-2 mb-4 border rounded"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                />
-                <div className="relative">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleLogin();
+                  }}
+                  className="space-y-4"
+                >
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type="email"
+                    placeholder="Email"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    required
+                  />
+                  <input
+                    type="password"
                     placeholder="Password"
-                    className="w-full p-2 mb-4 border rounded pr-10"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-600"
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
 
-                <button
-                  disabled={!canLogin}
-                  onClick={handleLogin}
-                  className={`w-full py-2 rounded text-white transition ${
-                    canLogin
-                      ? "bg-blue-600 hover:bg-blue-700"
-                      : "bg-gray-400 cursor-not-allowed"
-                  }`}
-                >
-                  Log In
-                </button>
-                <button
-                  onClick={closeLogin}
-                  className="w-full mt-3 py-2 rounded bg-gray-300 hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
+                  <div className="flex justify-between mt-4">
+                    <button
+                      type="submit"
+                      className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                      disabled={!canLogin}
+                    >
+                      Login
+                    </button>
+                    <button
+                      type="button"
+                      onClick={closeLogin}
+                      className="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {showJobInfoForm && (
-            <motion.div
-              key="jobInfoForm"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4"
-            >
-              <form
-                onSubmit={handleJobInfoSubmit}
-                className="bg-white p-6 rounded max-w-lg w-full shadow-lg space-y-4 overflow-auto max-h-[80vh]"
-              >
-                <h2 className="text-xl font-bold mb-4 text-center">
-                  Fill Job Information
-                </h2>
-                <input
-                  name="title"
-                  value={jobInfo.title}
-                  onChange={handleJobInfoChange}
-                  placeholder="Job Title"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="type"
-                  value={jobInfo.type}
-                  onChange={handleJobInfoChange}
-                  placeholder="Job Type"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="posted"
-                  value={jobInfo.posted}
-                  onChange={handleJobInfoChange}
-                  placeholder="Posted Date"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="education"
-                  value={jobInfo.education}
-                  onChange={handleJobInfoChange}
-                  placeholder="Education"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="CTC"
-                  value={jobInfo.CTC}
-                  onChange={handleJobInfoChange}
-                  placeholder="CTC"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="company"
-                  value={jobInfo.company}
-                  onChange={handleJobInfoChange}
-                  placeholder="Company"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="department"
-                  value={jobInfo.department}
-                  onChange={handleJobInfoChange}
-                  placeholder="Department"
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="designation"
-                  value={jobInfo.designation}
-                  onChange={handleJobInfoChange}
-                  placeholder="Designation"
-                  className="w-full p-2 border rounded"
-                />
-                <div className="flex justify-between">
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                  >
-                    Submit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowJobInfoForm(false)}
-                    className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
             </motion.div>
           )}
         </AnimatePresence>
