@@ -51,7 +51,7 @@ export default function Home() {
       {showButton && (
         <div className="fixed right-5 z-50 space-y-3 bottom-10 sm:bottom-12">
           <Link
-            href="https://calendly.com/bhavesh-singh-ufirm"
+            href="https://calendly.com/demo-firmity/30min"
             target="_blank"
             rel="noopener noreferrer"
             className="block px-4 py-2 bg-[#146995] text-white rounded-full shadow-lg text-center text-sm sm:text-base font-medium hover:bg-[#125b81] transition"
@@ -65,6 +65,12 @@ export default function Home() {
             className="block px-4 py-2 bg-[#146995] text-white rounded-full shadow-lg text-center text-sm sm:text-base font-medium hover:bg-[#125b81] transition"
           >
             Facility Health Survey 🛠️
+          </Link>
+          <Link
+            href="https://admin.urest.in:8092/" // 👈 Update with your complaint tracking page route
+            className="block px-4 py-2 bg-[#146995] text-white rounded-full shadow-lg text-center text-sm sm:text-base font-medium hover:bg-[#125b81] transition"
+          >
+            Complaint Tracking 📋
           </Link>
         </div>
       )}

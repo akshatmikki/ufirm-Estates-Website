@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-//import Link from "next/link";
+import Link from "next/link";
 import { FaCheckSquare } from "react-icons/fa";
 
 type PricingTier = {
@@ -79,9 +79,11 @@ export default function MindBlowingStylishPricingSection() {
             </div>
 
             {/* Book Tech Demo Button */}
-            <button className="mb-4 w-full rounded-full bg-[#6eebacff] text-[#3b4f1b] font-bold py-2 px-6 tracking-wide shadow-lg hover:bg-[#1fee87ff] transition-colors duration-300 cursor-pointer">
-              Book Tech Demo
-            </button>
+            <Link href="https://calendly.com/demo-firmity/30min" target="_blank" rel="noopener noreferrer">
+              <button className="mb-4 w-full rounded-full bg-[#6eebacff] text-[#3b4f1b] font-bold py-2 px-6 tracking-wide shadow-lg hover:bg-[#1fee87ff] transition-colors duration-300 cursor-pointer">
+                Book Tech Demo
+              </button>
+            </Link>
 
             {/* Free Trial Badge -- non-button style */}
             <div className="mb-2 text-[#3b4f1b] font-bold tracking-wide">
