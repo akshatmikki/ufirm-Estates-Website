@@ -80,7 +80,7 @@ export const StickyScroll = ({
                 {item.description}
               </p>
               <div className="mt-6">
-              <Link href="https://calendly.com/bhavesh-singh-ufirm" target="_blank"
+              <Link href="https://calendly.com/firmity9/30min" target="_blank"
                 rel="noopener noreferrer"><Button
                 className="w-full sm:w-auto text-center"
                 borderClassName="px-4 sm:px-6 py-3 bg-black/75 dark:bg-black/75 border-slate-800"

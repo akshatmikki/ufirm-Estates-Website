@@ -59,7 +59,7 @@ export default function Home() {
             Facility Tech Demo 📅
           </Link>
           <Link
-            href="https://calendly.com/bhavesh-singh-ufirm"
+            href="https://calendly.com/firmity9/30min"
             target="_blank"
             rel="noopener noreferrer"
             className="block px-4 py-2 bg-[#146995] text-white rounded-full shadow-lg text-center text-sm sm:text-base font-medium hover:bg-[#125b81] transition"
