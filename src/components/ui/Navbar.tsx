@@ -4,24 +4,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
-
-// const transition = {
-//   type: "spring",
-//   mass: 0.5,
-//   damping: 11.5,
-//   stiffness: 100,
-//   restDelta: 0.001,
-//   restSpeed: 0.001,
-// } as const;
-
+import { cn } from "@/utils/cn";
 
 type MenuItemProps = {
-  setActive: (item: string) => void;
+  setActive: (item: string | null) => void;
   active: string | null;
   item: string;
-  href: string;
-  //description?: string;
+  href?: string;
   children?: React.ReactNode;
+  isMegaMenu?: boolean;
 };
 
 export const MenuItem: React.FC<MenuItemProps> = ({
@@ -29,47 +20,59 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   active,
   item,
   href,
-  // description,
   children,
+  isMegaMenu,
 }) => {
-  return (
-    <div onMouseEnter={() => setActive(item)} className="relative text-center">
-      <Link href={href}>
-      <motion.p
-        transition={{ duration: 0.3 }}
-        className="cursor-pointer text-white text-sm"
-      >
-        {item}
-      </motion.p>
-      </Link>
+  const handleClick = (e: React.MouseEvent) => {
+    if (children) {
+      e.preventDefault();
+      setActive(active === item ? null : item);
+    }
+  };
 
-      {/* {active === item && description && (
-        <motion.div
-          initial={{ opacity: 0, y: 6, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.25 }}
-          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-4 py-2 rounded-xl bg-white/10 text-sm text-white dark:text-white backdrop-blur-md border border-white/20 shadow-md whitespace-nowrap"
-        >
-          {description}
-        </motion.div>
-      )} */}
+  return (
+    <div className={cn("relative", isMegaMenu && "static")}>
+      {href ? (
+        <Link href={href} onClick={handleClick}>
+          <motion.p
+            transition={{ duration: 0.2 }}
+            className={cn(
+              "cursor-pointer text-sm transition-all duration-200 text-[#131720]",
+              active === item ? "font-bold" : "font-normal hover:font-bold"
+            )}
+          >
+            {item}
+          </motion.p>
+        </Link>
+      ) : (
+        <div onClick={handleClick} className="cursor-pointer">
+          <motion.p
+            transition={{ duration: 0.2 }}
+            className={cn(
+              "cursor-pointer text-sm transition-all duration-200 text-[#131720]",
+              active === item ? "font-bold" : "font-normal hover:font-bold"
+            )}
+          >
+            {item}
+          </motion.p>
+        </div>
+      )}
 
       {active === item && children && (
         <motion.div
-          // initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          // animate={{ opacity: 1, scale: 1, y: 0 }}
-          // transition={transition}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className={cn(
+            "z-50 mt-2",
+            isMegaMenu ? "fixed left-0 top-[64px] w-screen" : "absolute left-0 top-full"
+          )}
         >
-          <div className="absolute ">
-            <motion.div
-              // transition={transition}
-              layoutId="active"
-              className="bg-black/30 dark:bg-black/30  border border-white/[0.2] dark:border-white/[0.2] shadow-xl"
-            >
-              <motion.div layout className="p-4">
-                {children}
-              </motion.div>
-            </motion.div>
+          <div className={cn(
+            "bg-white shadow-lg border border-gray-200 rounded-md overflow-hidden",
+            isMegaMenu && "bg-transparent border-none shadow-none rounded-none"
+          )}>
+            {children}
           </div>
         </motion.div>
       )}
@@ -80,15 +83,20 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 type MenuProps = {
   setActive: (item: string | null) => void;
   children: React.ReactNode;
+  logo?: React.ReactNode;
+  actions?: React.ReactNode;
 };
 
-export const Menu: React.FC<MenuProps> = ({ setActive, children }) => {
+export const Menu: React.FC<MenuProps> = ({ setActive, children, logo, actions }) => {
   return (
     <nav
-      onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-white/[0.2] dark:bg-black/25 dark:border-white/[0.2] bg-black/25 shadow-input flex justify-center space-x-14 px-4 py-4"
+      className="relative bg-white shadow-md border-b border-gray-200 flex items-center justify-between px-6 sm:px-12 md:px-16 lg:px-24 py-4 z-50"
     >
-      {children}
+      {logo && <div className="flex-shrink-0">{logo}</div>}
+      <div className="flex items-center space-x-10">
+        {children}
+      </div>
+      {actions && <div className="flex items-center space-x-3">{actions}</div>}
     </nav>
   );
 };
@@ -109,19 +117,19 @@ export const ProductItem: React.FC<ProductItemProps> = ({
   onClick,
 }) => {
   const content = (
-    <div className="flex space-x-8 space-y-8">
+    <div className="flex space-x-2 items-start p-3 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition duration-200">
       <Image
         src={src}
-        width={130}
-        height={110}
+        width={140}
+        height={70}
         alt={title}
-        className="flex-shrink-0 rounded-md shadow-2xl max-w-[130px] max-h-[90px]"
+        className="flex-shrink-0 rounded-md shadow-sm"
       />
       <div>
-        <h4 className="text-lg mb-1 text-white dark:text-white">
+        <h4 className="text-base font-bold mb-1 text-black dark:text-white">
           {title}
         </h4>
-        <p className="text-neutral-300 text-sm max-w-[10rem] dark:text-neutral-300">
+        <p className="text-neutral-700 text-xs max-w-[10rem] dark:text-neutral-300">
           {description}
         </p>
       </div>
@@ -130,34 +138,24 @@ export const ProductItem: React.FC<ProductItemProps> = ({
 
   if (onClick) {
     return (
-      <button onClick={onClick} className="w-full text-left">
+      <div onClick={onClick} className="cursor-pointer">
         {content}
-      </button>
+      </div>
     );
   }
 
-  return (
-    <Link href={href || "#"} className="w-full">
-      {content}
-    </Link>
-  );
+  if (href) {
+    return <Link href={href}>{content}</Link>;
+  }
+
+  return content;
 };
 
-type HoveredLinkProps = LinkProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    children: React.ReactNode;
-  };
-
-export const HoveredLink: React.FC<HoveredLinkProps> = ({
-  children,
-  href,
-}) => {
+export const HoveredLink = ({ children, ...rest }: LinkProps & { children: React.ReactNode }) => {
   return (
     <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-neutral-200 dark:text-neutral-200 hover:text-blue-500  text-center"
+      {...rest}
+      className="text-neutral-700 dark:text-neutral-200 hover:text-black dark:hover:text-white"
     >
       {children}
     </Link>

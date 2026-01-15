@@ -1,87 +1,286 @@
-"use client";
+'use client';
 
-import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-function OurBusiness() {
-  const Business = [
+const OurBusiness = () => {
+
+  const businesses = [
     {
-      title: "Urest: Facility Management",
-      description:
-        "Properties not only function efficiently but are also managed with long-term sustainability in mind",
-      link: "https://urest.in/",
+      id: 1,
+      name: 'Urest',
+      logo: '/assets/urestlogo.svg',
+      image: '/assets/urest.svg',
+      description: 'The Operations and facility management arm of the UFirm ecosystem. We deliver structured processes, trained manpower and site level accountability',
+      link: 'https://urest.in/',
+      isHalf: false,
     },
     {
-      title: "Royal Nest: Projects",
-      description: "Celebrating the past & developing the future",
-      link: "https://www.royalnestgroup.com/",
+      id: 2,
+      name: 'Firmity',
+      logo: '/assets/firmitylogo.svg',
+      image: '/assets/laptop.svg',
+      description: 'A CMMS platform under the UFirm umbrella. We bring structure transparency and accountability to day to day operations in one unified system',
+      link: 'https://firmity.in/',
+      isHalf: false,
     },
     {
-      title: "Our Product: CMMS",
-      description: "The engine driving progress and competitive advantage in Real Estate",
-      link: "/OurInnovation",
+      id: 3,
+      name: 'UFirm',
+      logo: '/assets/ufirmlogo.svg',
+      image: '/assets/ufirm.svg',
+      description: 'We bring together strategy, on ground execution and technology',
+      link: 'https://ufirm.in/',
+      isHalf: true,
     },
     {
-      title: "Estates: Management & Advisory",
-      description: "Serving as the backbone of successful Real Estate operations",
-      link: "/Management&advisory",
+      id: 4,
+      name: 'RoyalNest',
+      logo: '/assets/royalnestlogo.svg',
+      image: '/assets/royalnest.svg',
+      description: 'We deliver high-integrity, green-certified real estate and infrastructure projects designed for long-term value',
+      link: 'https://www.royalnestgroup.com/',
+      isHalf: true,
     },
   ];
 
-  return (
-    <section className="relative py-20 overflow-hidden min-h-screen">
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="/building-background.webp"
-          alt="Office building background"
-          fill
-          loading="lazy"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/45" />
-      </div>
+  const fullCards = businesses.filter(b => !b.isHalf);
+  const halfCards = businesses.filter(b => b.isHalf);
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Our Divisions
+  const handleCardClick = (link: string) => {
+    window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <section className="bg-[#fafbf9] py-8 px-6 sm:px-12 md:px-16 lg:px-24">
+      <div className="max-w-7xl mx-auto">
+        {/* Title and Subtitle */}
+        <div className="text-center mb-3">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-[#1e3143] mb-4">
+            Connecting Strategy, Operations and Technology
           </h2>
+          <p className="text-m sm:text-m font-semibold text-[#1f4e7a] leading-relaxed max-w-4xl mx-auto">
+            We integrate strategy, on-ground operations, and technology to transform real estate into consistently high performing investments.
+          </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
-          {Business.map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Read more about ${item.title}`}
-              className="w-full sm:w-[30rem] lg:w-[30rem]"
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* First Full Card */}
+          {fullCards[0] && (
+            <div
+              className="group bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
+              onClick={() => handleCardClick(fullCards[0].link)}
             >
-              <CardContainer>
-                <CardBody className="relative bg-slate-700/30 dark:bg-black border border-white/10 hover:shadow-2xl transition-shadow rounded-xl p-6 flex flex-col justify-center items-center h-40">
-                  <CardItem
-                    translateZ="60"
-                    as="h3"
-                    className="text-xl font-bold text-white text-center"
-                  >
-                    {item.title}
-                  </CardItem>
-                  <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="text-white text-sm mt-4 text-center max-w-xs"
-                  >
-                    {item.description}
-                  </CardItem>
-                </CardBody>
-              </CardContainer>
-            </a>
-          ))}
+              {/* Image with padding */}
+              <div className="px-8 pt-8 pb-2">
+                <div className="relative w-full h-32">
+                  <Image
+                    src={fullCards[0].image}
+                    alt={fullCards[0].name}
+                    fill
+                    className="object-cover object-center rounded-lg"
+                  />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="px-8 pb-2 flex flex-col">
+                {/* Logo */}
+                <div className="mb-2 h-9 flex items-center">
+                  <Image
+                    src={fullCards[0].logo}
+                    alt={`${fullCards[0].name} logo`}
+                    width={50}
+                    height={36}
+                    className="object-contain object-left"
+                    style={{ height: '36px' }}
+                  />
+                </div>
+
+                {/* Description */}
+                <p className="text-[#131720] text-xs mb-2 leading-relaxed flex-grow">
+                  {fullCards[0].description}
+                </p>
+
+                {/* Visit Site Link */}
+                <Link
+                  href={fullCards[0].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline pt-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Visit Site
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Second Full Card */}
+          {fullCards[1] && (
+            <div
+              className="group bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
+              onClick={() => handleCardClick(fullCards[1].link)}
+            >
+              {/* Image with padding */}
+              <div className="px-8 pt-8 pb-2">
+                <div className="relative w-full h-32">
+                  <Image
+                    src={fullCards[1].image}
+                    alt={fullCards[1].name}
+                    fill
+                    className="object-cover object-center rounded-lg"
+                  />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="px-8 pb-2 flex flex-col">
+                {/* Logo */}
+                <div className="mb-2 h-9 flex items-center">
+                  <Image
+                    src={fullCards[1].logo}
+                    alt={`${fullCards[1].name} logo`}
+                    width={80}
+                    height={36}
+                    className="object-contain object-left"
+                    style={{ height: '36px' }}
+                  />
+                </div>
+
+                {/* Description */}
+                <p className="text-[#131720] text-xs mb-2 leading-relaxed flex-grow">
+                  {fullCards[1].description}
+                </p>
+
+                {/* Visit Site Link */}
+                <Link
+                  href={fullCards[1].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline pt-7"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Visit Site
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Half Cards Container */}
+          <div className="flex flex-col gap-12">
+            {/* First Half Card */}
+            {halfCards[0] && (
+              <div
+                className="bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
+                onClick={() => handleCardClick(halfCards[0].link)}
+              >
+                <div className="flex h-full min-h-[140px]">
+                  {/* Image - Left Side with padding */}
+                  <div className="p-2 w-1/3 flex-shrink-0">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={halfCards[0].image}
+                        alt={halfCards[0].name}
+                        fill
+                        className="object-cover object-center rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Content - Right Side */}
+                  <div className="pr-2 py-2 flex flex-col flex-grow">
+                    {/* Logo */}
+                    <div className="mb-2 h-9 flex items-center">
+                      <Image
+                        src={halfCards[0].logo}
+                        alt={`${halfCards[0].name} logo`}
+                        width={60}
+                        height={36}
+                        className="object-contain object-left"
+                        style={{ height: '36px' }}
+                      />
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-[#131720] text-xs mb-2 leading-relaxed flex-grow">
+                      {halfCards[0].description}
+                    </p>
+
+                    {/* Visit Site Link */}
+                    <Link
+                      href={halfCards[0].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Visit Site
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Second Half Card */}
+            {halfCards[1] && (
+              <div
+                className="bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
+                onClick={() => handleCardClick(halfCards[1].link)}
+              >
+                <div className="flex h-full min-h-[140px]">
+                  {/* Image - Left Side with padding */}
+                  <div className="p-2 w-1/3 flex-shrink-0">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={halfCards[1].image}
+                        alt={halfCards[1].name}
+                        fill
+                        className="object-cover object-center rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Content - Right Side */}
+                  <div className="pr-2 py-2 flex flex-col flex-grow">
+                    {/* Logo */}
+                    <div className="mb-2 h-9 flex items-center">
+                      <Image
+                        src={halfCards[1].logo}
+                        alt={`${halfCards[1].name} logo`}
+                        width={90}
+                        height={36}
+                        className="object-contain object-left"
+                        style={{ height: '36px' }}
+                      />
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-[#131720] text-xs mb-2 leading-relaxed flex-grow">
+                      {halfCards[1].description}
+                    </p>
+
+                    {/* Visit Site Link */}
+                    <Link
+                      href={halfCards[1].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Visit Site
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default OurBusiness;

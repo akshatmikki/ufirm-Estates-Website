@@ -1,277 +1,360 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Menu, MenuItem, ProductItem } from "./ui/Navbar";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, MenuItem } from "./ui/Navbar";
+import { NavButton } from "./ui/NavButton";
 import { cn } from "@/utils/cn";
 import { useLoginDialog } from "../app/CareerPage/LoginDialogContext";
-
+import {
+    Menu as MenuIcon,
+    X as CloseIcon,
+    Info,
+    Building2,
+    Home,
+    Cpu,
+    Wrench,
+    Briefcase,
+    UserPlus,
+    Phone,
+    User,
+    ClipboardList, // New icon for Facility Management
+} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function NavBar() {
-  const [active, setActive] = useState<string | null>(null);
-  const router = useRouter();
-  const pathname = usePathname();
+    const [active, setActive] = useState<string | null>(null);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
 
-  const { openLogin } = useLoginDialog();
+    // Mobile State
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navigateWithScroll = (path: string, hash: string) => {
-    router.push(path);
-    setTimeout(() => {
-      const el = document.querySelector(hash);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 500);
-  };
+    const router = useRouter();
+    const pathname = usePathname();
 
-  return (
-    <div
-      className={cn(
-        "fixed top-9 left-1/2 -translate-x-1/2 z-40 lg:w-full max-w-5xl px-16 "
-      )}
-    >
-      <div className="hidden lg:block">
-        <Menu setActive={setActive}>
-          <MenuItem
-            setActive={setActive}
-            active={active}
-            item="Facility Management"
-            href="https://urest.in/"
-          />
-          {active === "Facility Management" && (
-            <div className="absolute text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <div className="flex flex-row">
-                <div className="flex flex-col">
-                  <ProductItem
-                    title="Green Building Services"
-                    src="/Navbar/greenbuildingservices.webp"
-                    description="Eco-friendly buildings with green solutions"
-                  />
-                  <ProductItem
-                    title="Technical Maintenance"
-                    src="/Navbar/Technical MEP.webp"
-                    description="Comprehensive MEP and facility care"
-                  />
-                  <ProductItem
-                    title="Deep cleaning & HK"
-                    src="/Navbar/deep cleaning housekeeping.webp"
-                    description="Expert cleaning, hygiene, and care"
-                  />
-                  <ProductItem
-                    title="Hospitality Manpower"
-                    src="/Navbar/Hospitality Manpower.webp"
-                    description="Professional staffing for hospitality operations"
-                  />
-                </div>
-                <div className="flex flex-col ml-4">
-                  <ProductItem
-                    title="Integrated Facility Mgmt"
-                    src="/Navbar/Dashboard.webp"
-                    description="Tech-enabled facility management services"
-                  />
-                  <ProductItem
-                    title="Horticulture Services"
-                    src="/Navbar/Horticulture.webp"
-                    description="Sustainable gardens, greener tomorrow"
-                  />
-                  <ProductItem
-                    title="Club & Pool Mgmt"
-                    src="/Navbar/Club.webp"
-                    description="Smooth operations, vibrant communities"
-                  />
-                  <ProductItem
-                    title="Waste Management"
-                    src="/Navbar/waste management.webp"
-                    description="Efficient and eco-friendly waste management"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-          <MenuItem
-            setActive={setActive}
-            active={active}
-            item="Royal Nest Projects"
-            href="https://www.royalnestgroup.com/"
-          />
-          {active === "Royal Nest Projects" && (
-            <div className="absolute left-30 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <div className="flex flex-col space-y-2">
-                <ProductItem
-                  title="Forest View Dharamshala"
-                  src="/Navbar/Forestview, Dharamshala_ Ongoing.webp"
-                  description="Ongoing"
-                />
-                <ProductItem
-                  title="Hill View Apartments Jammu"
-                  src="/Navbar/Hillview Apartments, Jammu_ Ongoing.webp"
-                  description="Ongoing"
-                />
-                <ProductItem
-                  title="Radisson Hotel Amritsar"
-                  src="/Navbar/Radisson Hotel, Amritsar_ On-going.webp"
-                  description="Ongoing"
-                />
-              </div>
-            </div>
-          )}
-          <MenuItem
-            setActive={setActive}
-            active={active}
-            item="Facility Tech"
-            href="/OurInnovation"
-          />
-          {active === "Facility Tech" && (
-            <div className="absolute left-20 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <h2 className="text-xl text-center mb-6">Facility Management</h2>
-              <div className="flex flex-row">
-                <div className="flex flex-col">
-                  <ProductItem
-                    title="PPM Scheduler"
-                    src="/Navbar/PPM.webp"
-                    description="Plan. Prevent. Perform. Full control of facility tasks at your fingertips"
-                    onClick={() =>
-                      navigateWithScroll("/OurInnovation", "#PPMScheduler")
-                    }
-                  />
-                  <ProductItem
-                    title="Inventory Management"
-                    src="/Navbar/Inventory.webp"
-                    description="Granular inventory and purchase tracking"
-                    onClick={() =>
-                      navigateWithScroll(
-                        "/OurInnovation",
-                        "#InventoryManagement"
-                      )
-                    }
-                  />
-                  <ProductItem
-                    title="Employee Management"
-                    src="/Navbar/Employee.webp"
-                    description="Unified HRMS for team management"
-                    onClick={() =>
-                      navigateWithScroll(
-                        "/OurInnovation",
-                        "#EmployeeManagement"
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex flex-col ml-4">
-                  <ProductItem
-                    title="Asset Management"
-                    src="/Navbar/Asset.webp"
-                    description="Digital control of asset lifecycle"
-                    onClick={() =>
-                      navigateWithScroll("/OurInnovation", "#AssetManagement")
-                    }
-                  />
-                  <ProductItem
-                    title="Complain Management"
-                    src="/Navbar/Complain.webp"
-                    description="Ensure smooth facility operations with real-time complaint resolution"
-                    onClick={() =>
-                      navigateWithScroll(
-                        "/OurInnovation",
-                        "#ComplainManagement"
-                      )
-                    }
-                  />
-                  <ProductItem
-                    title="Visitor Management"
-                    src="/Navbar/visitor.webp"
-                    description="Effortless visitor logging, approvals, and notifications"
-                    onClick={() =>
-                      navigateWithScroll("/OurInnovation", "#VisitorManagement")
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-          <MenuItem
-            setActive={setActive}
-            active={active}
-            item="Technical Services"
-            href="/TechnologiesPage"
-          />
-          {active === "Technical Services" && (
-            <div className="absolute left-90 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <div className="flex flex-col space-y-2">
-                <ProductItem
-                  title="React Development"
-                  src="/Navbar/React.webp"
-                  description="Dynamic, component-based frontends for modern web apps using React"
-                  href="/ReactDevelopment"
-                />
-                <ProductItem
-                  title="Dotnet Development"
-                  src="/Navbar/Dotnet.webp"
-                  description="Scalable and secure enterprise solutions built on Microsoft's .NET framework"
-                  href="/.NetDevelopment"
-                />
-                <ProductItem
-                  title="Mobile Development"
-                  src="/Navbar/Reactnative.webp"
-                  description="Cross-platform apps for iOS and Android with seamless UX"
-                  href="/MobileDevelopment"
-                />
-              </div>
-            </div>
-          )}
-          <MenuItem
-            setActive={setActive}
-            active={active}
-            item="Real Estate Advisory"
-            href="/Management&advisory"
-          />
-          {active === "Real Estate Advisory" && (
-            <div className="absolute left-40 text-white mt-8 bg-black/70 shadow-md rounded-lg p-8 z-50 text-sm">
-              <div className="flex flex-row">
-                <div className="flex flex-col">
-                  <ProductItem
-                    title="Property Management"
-                    src="/Navbar/Property Management.webp"
-                    description="Your property, our priority"
-                  />
-                  <ProductItem
-                    title="Property Sale"
-                    src="/Navbar/propertysale.webp"
-                    description="Strategic sales, seamless closures"
-                  />
-                </div>
-                <div className="flex flex-col ml-4">
-                  <ProductItem
-                    title="Interiors & Renovation"
-                    src="/Navbar/renovation.webp"
-                    description="Experience-backed transformative renovations"
-                  />
-                  <ProductItem
-                    title="Estate & Landscape Development"
-                    src="/Navbar/greenbuildingservices.webp"
-                    description="Landscaping with lasting purpose"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-          <div className="relative">
-            <MenuItem
-              setActive={setActive}
-              active={active}
-              item="Hire"
-              href="/CareerPage"
-            />
-            {active === "Hire" && pathname === "/CareerPage" && (
-              <div className="absolute right-3 mt-3 text-white bg-black/70 shadow-md rounded-lg p-6 z-50 text-sm min-w-[90px] flex justify-end">
-                <button
-                  className="text-lg font-semibold hover:text-blue-400 transition duration-200 text-left"
-                  onClick={openLogin} // 👈 this will now work
-                >
-                  Login
-                </button>
-              </div>
+    const { openLogin } = useLoginDialog();
+    const servicesRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+                setIsServicesOpen(false);
+                setActive(null);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
+    // Push/Shrink Effect for Main Content
+    useEffect(() => {
+        const main = document.querySelector("main");
+
+        if (isMobileMenuOpen) {
+            if (main) {
+                main.style.transition = "transform 0.5s cubic-bezier(0.32, 0.72, 0, 1), border-radius 0.5s ease, opacity 0.5s ease";
+                main.style.transform = "scale(0.93) translateX(-10%)"; // Push to left and shrink
+                main.style.borderRadius = "20px";
+                main.style.boxShadow = "0 25px 50px -12px rgba(0, 0, 0, 0.25)";
+                main.style.overflow = "hidden"; // Clip content to rounded corners
+            }
+        } else {
+            if (main) {
+                main.style.transform = "none";
+                main.style.borderRadius = "0";
+                main.style.boxShadow = "none";
+                main.style.overflow = "visible";
+            }
+        }
+
+        return () => {
+            // Cleanup
+            if (main) {
+                main.style.transform = "none";
+                main.style.borderRadius = "0";
+                main.style.boxShadow = "none";
+                main.style.overflow = "visible";
+            }
+        };
+    }, [isMobileMenuOpen]);
+
+
+    // Mobile Menu Links Data
+    const mobileLinks = [
+        { label: "About Us", href: "/Aboutuspage", icon: Info },
+        // Changed icon to ClipboardList for "Facility Management"
+        { label: "Facility Management", href: "https://urest.in/", icon: ClipboardList },
+        { label: "Royal Nest Projects", href: "https://www.royalnestgroup.com/", icon: Home },
+        { label: "Facility Tech", href: "/OurInnovation", icon: Cpu },
+        { label: "Technical Services", href: "/TechnologiesPage", icon: Wrench },
+        { label: "Real Estate Advisory", href: "/Management&advisory", icon: Briefcase },
+        { label: "Hire", href: "/CareerPage", icon: UserPlus },
+        // Removed Contact Us from here to treat it specially
+    ];
+
+    // Matches desktop LoginDialog icons: Building2, User, Briefcase
+    const mobileLoginLinks = [
+        { label: "Client Login", href: "https://account.ufirm.in/Account/Login", icon: Building2 },
+        { label: "Employee Login", href: "https://admin.urest.in:8097/", icon: User },
+        { label: "Facility Manager Login", href: "https://account.ufirm.in/Account/Login", icon: Briefcase },
+    ];
+
+    return (
+        <div
+            className={cn(
+                "fixed top-0 left-0 right-0 z-40 w-full transition-shadow duration-200",
+                isScrolled && "shadow-md"
             )}
-          </div>
-        </Menu>
-      </div>
-    </div>
-  );
+        >
+            <div className="relative z-50 bg-white">
+                <Menu
+                    setActive={setActive}
+                    logo={
+                        <Image
+                            src="/Assets/ufirmlogo.svg"
+                            alt="UFirm Estates"
+                            width={80}
+                            height={40}
+                            className="cursor-pointer"
+                            onClick={() => router.push("/")}
+                        />
+                    }
+                    actions={
+                        <>
+                            <div className="hidden lg:flex items-center space-x-3">
+                                <NavButton
+                                    variant="primary"
+                                    className="cursor-pointer"
+                                    onClick={() => window.open("https://ufirm.in/ContactPage", "_blank", "noopener,noreferrer")}
+                                >
+                                    Contact us
+                                </NavButton>
+                                <NavButton
+                                    variant="secondary"
+                                    className="cursor-pointer"
+                                    onClick={openLogin}
+                                >
+                                    Login
+                                </NavButton>
+                            </div>
+
+                            {/* Mobile Hamburger Trigger */}
+                            <button
+                                className={cn(
+                                    "lg:hidden p-2 rounded-md transition-colors",
+                                    "hover:bg-gray-100 active:bg-gray-200"
+                                )}
+                                onClick={() => setIsMobileMenuOpen(true)}
+                                aria-label="Open menu"
+                            >
+                                <MenuIcon className="h-6 w-6 text-[#131720]" />
+                            </button>
+                        </>
+                    }
+                >
+                    <div className="hidden lg:flex items-center space-x-10">
+                        <div
+                            className="relative"
+                            ref={servicesRef}
+                            onClick={() => setIsServicesOpen(!isServicesOpen)}
+                        >
+                            <MenuItem
+                                setActive={setActive}
+                                active={active}
+                                item="Services"
+                            // No href to avoid jumping
+                            />
+                        </div>
+
+                        <MenuItem
+                            setActive={setActive}
+                            active={active}
+                            item="About us"
+                            href="https://ufirm.in/Aboutuspage"
+                        />
+                        <MenuItem
+                            setActive={setActive}
+                            active={active}
+                            item="Hire"
+                            href="https://ufirm.in/CareerPage"
+                        />
+                    </div>
+                </Menu>
+            </div>
+
+            {/* Desktop Dropdown */}
+            <div className="hidden lg:block">
+                {isServicesOpen && (
+                    <>
+                        <div
+                            className="fixed inset-0 bg-black/20 z-30"
+                            style={{ top: '64px' }}
+                            onClick={() => setIsServicesOpen(false)}
+                        />
+                        <div
+                            className="fixed left-0 w-screen bg-white shadow-xl border-b border-gray-100 z-40 flex flex-col items-start"
+                            style={{ top: '64px', height: 'auto' }}
+                            onMouseLeave={() => setIsServicesOpen(false)}
+                        >
+                            <div className="w-full flex flex-col py-4 gap-4">
+                                <div
+                                    className="w-full group hover:bg-[#F0F3F5] active:bg-[#aec2cc] transition-colors cursor-pointer border-b border-transparent"
+                                    onClick={() => {
+                                        setIsServicesOpen(false);
+                                        setActive(null);
+                                        window.location.href = "https://urest.in/";
+                                    }}
+                                >
+                                    <div className="max-w-[1400px] mx-auto px-6 sm:px-12 md:px-16 lg:px-24 py-4 flex flex-col">
+                                        <h3 className="text-[#131720] font-semibold text-sm mb-1">
+                                            Integrated Facility Management
+                                        </h3>
+                                        <p className="text-[#1f4e7a] group-hover:text-[#131720] group-active:text-[#131720] text-xs font-medium">Urest</p>
+                                    </div>
+                                </div>
+                                <div
+                                    className="w-full group hover:bg-[#F0F3F5] active:bg-[#aec2cc] transition-colors cursor-pointer border-b border-transparent"
+                                    onClick={() => {
+                                        setIsServicesOpen(false);
+                                        setActive(null);
+                                        router.push("/OurInnovation");
+                                    }}
+                                >
+                                    <div className="max-w-[1400px] mx-auto px-6 sm:px-12 md:px-16 lg:px-24 py-4 flex flex-col">
+                                        <h3 className="text-[#131720] font-semibold text-sm mb-1">
+                                            CMMS and Facility Tech
+                                        </h3>
+                                        <p className="text-[#1f4e7a] group-hover:text-[#131720] group-active:text-[#131720] text-xs font-medium">Firmity</p>
+                                    </div>
+                                </div>
+                                <div
+                                    className="w-full group hover:bg-[#F0F3F5] active:bg-[#aec2cc] transition-colors cursor-pointer"
+                                    onClick={() => {
+                                        setIsServicesOpen(false);
+                                        setActive(null);
+                                        window.location.href = "https://www.royalnestgroup.com/";
+                                    }}
+                                >
+                                    <div className="max-w-[1400px] mx-auto px-6 sm:px-12 md:px-16 lg:px-24 py-4 flex flex-col">
+                                        <h3 className="text-[#131720] font-semibold text-sm mb-1">
+                                            Infrastructure Development
+                                        </h3>
+                                        <p className="text-[#1f4e7a] group-hover:text-[#131720] group-active:text-[#131720] text-xs font-medium">Royal Nest Group</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[60] lg:hidden"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        />
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                            // Sidebar Background: Neutral Light (#fafbf9 or white), Text: Primary (#1e3143)
+                            className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[320px] bg-[#fafbf9] backdrop-blur-xl z-[70] shadow-2xl lg:hidden overflow-y-auto border-l border-white/20"
+                        >
+                            <div className="p-5 flex flex-col h-full relative">
+                                {/* Fancy Close Button Positioned absolutely */}
+                                <div className="absolute top-5 right-5 z-10">
+                                    <button
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="p-2.5 bg-white rounded-full shadow-lg border border-gray-100 text-[#1e3143] hover:rotate-90 hover:scale-105 active:scale-95 transition-all duration-300"
+                                        aria-label="Close menu"
+                                    >
+                                        <CloseIcon className="h-5 w-5" />
+                                    </button>
+                                </div>
+
+                                {/* Spacer */}
+                                <div className="h-12"></div>
+
+                                <div className="flex-1 flex flex-col gap-4">
+                                    {/* Login Card - Background: Primary (#1e3143), Text: Neutral (#fafbf9) */}
+                                    <div className="bg-[#1e3143] rounded-2xl p-4 shadow-md">
+                                        <h3 className="text-base font-semibold text-[#fafbf9] mb-3 px-1">Login</h3>
+                                        <div className="h-px w-full bg-[#fafbf9]/20 mb-2"></div>
+                                        <div className="space-y-1">
+                                            {mobileLoginLinks.map((link) => (
+                                                <Link
+                                                    key={link.label}
+                                                    href={link.href}
+                                                    className="flex items-center space-x-3 p-2 rounded-lg hover:bg-[#fafbf9]/10 active:bg-[#fafbf9]/20 group transition-all duration-200"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                >
+                                                    {/* Icon container */}
+                                                    <div className="p-1.5 bg-[#fafbf9]/10 rounded-full group-hover:bg-[#fafbf9]/20 transition-colors">
+                                                        <link.icon className="h-4 w-4 text-[#fafbf9]" />
+                                                    </div>
+                                                    <span className="text-sm font-medium text-[#fafbf9]">{link.label}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Mobile Links */}
+                                    <div className="flex flex-col gap-1">
+                                        <h3 className="px-2 text-xs font-semibold text-[#1e3143]/60 uppercase tracking-wider mb-1">Menu</h3>
+                                        {mobileLinks.map((link) => (
+                                            <Link
+                                                key={link.label}
+                                                href={link.href}
+                                                // Sidebar Text: Primary (#1e3143) - Changed font-bold/semibold to font-medium/normal as requested
+                                                className={cn(
+                                                    "flex items-center space-x-3 p-2.5 rounded-xl transition-all duration-200",
+                                                    "text-[#1e3143] hover:bg-white hover:shadow-sm hover:shadow-gray-200/50",
+                                                    "active:scale-[0.98] active:bg-gray-100/50"
+                                                )}
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                            >
+                                                <link.icon className="h-5 w-5 text-[#1e3143]" />
+                                                <span className="text-[15px] font-medium">{link.label}</span>
+                                            </Link>
+                                        ))}
+
+                                        {/* Primary Contact Us CTA */}
+                                        <div className="pt-2 px-1">
+                                            <NavButton
+                                                variant="primary"
+                                                className="w-full flex justify-center items-center gap-2 py-3 shadow-md"
+                                                onClick={() => window.open("https://ufirm.in/ContactPage", "_blank", "noopener,noreferrer")}
+                                            >
+                                                <Phone className="h-4 w-4" />
+                                                Contact Us
+                                            </NavButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+        </div>
+    );
 }
