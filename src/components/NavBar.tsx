@@ -136,7 +136,7 @@ export function NavBar() {
                             <div className="hidden lg:flex items-center space-x-3">
                                 <NavButton
                                     variant="primary"
-                                    className="cursor-pointer"
+                                    className="cursor-pointer mr-3"
                                     onClick={() => window.open("https://ufirm.in/ContactPage", "_blank", "noopener,noreferrer")}
                                 >
                                     Contact us

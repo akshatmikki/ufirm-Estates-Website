@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { BackToTop } from "@/components/BackToTop";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
@@ -41,6 +42,7 @@ export default function RootLayout({
           <LoginDialog />
           {children}
           <Footer />
+          <BackToTop />
         </LoginDialogProvider>
         <SpeedInsights />
         <Analytics />

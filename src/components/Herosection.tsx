@@ -58,11 +58,13 @@ export default function Herosection() {
         <div
           className="w-full h-full bg-cover bg-center transition-all duration-700 ease-in-out"
           style={{ backgroundImage: `url('${slides[currentSlide].src}')` }}
-        />
+        >
+          <div className="absolute inset-0 bg-white/45" />
+        </div>
       </div>
 
       {/* ================= LEFT SIDE: Content ================= */}
-      <div className="relative z-20 w-full lg:w-[60%] h-full flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 bg-white pt-24 lg:pt-0">
+      <div className="relative z-20 w-full lg:w-[60%] h-full flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24 lg:bg-white pt-24 lg:pt-0">
 
         <div className="max-w-xl flex flex-col gap-6 lg:-mt-20">
 
