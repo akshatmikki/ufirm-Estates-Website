@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
 import { LoginDialogProvider } from "@/app/CareerPage/LoginDialogContext";
 import { LoginDialog } from "@/components/LoginDialog";
+import { useEffect } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <html lang="en">
       <Head>

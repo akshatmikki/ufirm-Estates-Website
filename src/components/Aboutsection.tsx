@@ -285,89 +285,91 @@ const AboutUs = () => {
           </div>
 
           {/* Map with Interactive Dots and Info Boxes */}
-          <div className="relative h-full flex items-end justify-end">
-            <Image
-              src="Assets/map_base.svg"
-              alt="India Map with locations"
-              width={350}
-              height={350}
-              className="w-[350px] h-auto object-contain"
-            />
+          <div className="hidden lg:relative lg:h-full lg:flex lg:flex-col lg:items-end lg:justify-end">
+            <div className="relative w-fit">
+              <Image
+                src="Assets/map_base.svg"
+                alt="India Map with locations"
+                width={350}
+                height={350}
+                className="w-[350px] h-auto object-contain"
+              />
 
-            {/* Interactive Dots */}
-            {locations.map((location) => {
-              const isActive = selectedLocation?.id === location.id;
-              // We need a way to track hover state for each dot individually. 
-              // Since we are mapping, we can't easily use a simple state variable without an ID map or moving this to a sub-component.
-              // However, simpler is to use CSS group-hover logic with 3 absolute images controlling opacity, similar to before but with images.
-              // OR better: Create a small sub-component or just use 3 images stacked and toggle visibility.
+              {/* Interactive Dots */}
+              {locations.map((location) => {
+                const isActive = selectedLocation?.id === location.id;
+                // We need a way to track hover state for each dot individually. 
+                // Since we are mapping, we can't easily use a simple state variable without an ID map or moving this to a sub-component.
+                // However, simpler is to use CSS group-hover logic with 3 absolute images controlling opacity, similar to before but with images.
+                // OR better: Create a small sub-component or just use 3 images stacked and toggle visibility.
 
-              return (
-                <button
-                  key={location.id}
-                  onClick={() => handleDotClick(location)}
-                  className="absolute cursor-pointer group w-8 h-8 flex items-center justify-center"
-                  style={{
-                    left: location.left,
-                    top: location.top,
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                  aria-label={`View ${location.name} location`}
-                >
-                  <div className="relative w-6 h-6">
-                    {/* Default Dot - Visible by default, hidden on hover or active */}
-                    <Image
-                      src="/Assets/dot_Default.svg"
-                      alt="Location"
-                      fill
-                      className={`transition-opacity duration-200 animate-pulse ${isActive ? 'opacity-0' : 'group-hover:opacity-0 opacity-100'}`}
-                    />
+                return (
+                  <button
+                    key={location.id}
+                    onClick={() => handleDotClick(location)}
+                    className="absolute cursor-pointer group w-8 h-8 flex items-center justify-center"
+                    style={{
+                      left: location.left,
+                      top: location.top,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    aria-label={`View ${location.name} location`}
+                  >
+                    <div className="relative w-6 h-6">
+                      {/* Default Dot - Visible by default, hidden on hover or active */}
+                      <Image
+                        src="/Assets/dot_Default.svg"
+                        alt="Location"
+                        fill
+                        className={`transition-opacity duration-200 animate-pulse ${isActive ? 'opacity-0' : 'group-hover:opacity-0 opacity-100'}`}
+                      />
 
-                    {/* Hover Dot - Visible on hover, hidden if active */}
-                    <Image
-                      src="/Assets/dot_Hover.svg"
-                      alt="Location Hover"
-                      fill
-                      className={`transition-opacity duration-200 ${isActive ? 'opacity-0' : 'group-hover:opacity-100 opacity-0'}`}
-                    />
+                      {/* Hover Dot - Visible on hover, hidden if active */}
+                      <Image
+                        src="/Assets/dot_Hover.svg"
+                        alt="Location Hover"
+                        fill
+                        className={`transition-opacity duration-200 ${isActive ? 'opacity-0' : 'group-hover:opacity-100 opacity-0'}`}
+                      />
 
-                    {/* Pressed/Active Dot - Visible only when active */}
-                    <Image
-                      src="/Assets/dot_Pressed.svg"
-                      alt="Location Selected"
-                      fill
-                      className={`transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`}
-                    />
-                  </div>
-                </button>
-              );
-            })}
+                      {/* Pressed/Active Dot - Visible only when active */}
+                      <Image
+                        src="/Assets/dot_Pressed.svg"
+                        alt="Location Selected"
+                        fill
+                        className={`transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`}
+                      />
+                    </div>
+                  </button>
+                );
+              })}
 
-            {/* Info Boxes - Positioned based on your Image 2 */}
-            {/* Top Left - 8 million+ SF projects delivered */}
-            <div className={`absolute top-[10%] left-0 bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
-              <p className="text-[#1e3143] text-sm font-medium">8 million+ SF<br />projects delivered</p>
-            </div>
+              {/* Info Boxes - Positioned based on your Image 2 */}
+              {/* Top Left - 8 million+ SF projects delivered */}
+              <div className={`absolute top-[10%] left-0 bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
+                <p className="text-[#1e3143] text-sm font-medium">8 million+ SF<br />projects delivered</p>
+              </div>
 
-            {/* Top Right - 12 million+ SF facilities managed */}
-            <div className={`absolute top-[5%] right-0 bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
-              <p className="text-[#1e3143] text-sm font-medium">12 million+ SF<br />facilities managed</p>
-            </div>
+              {/* Top Right - 12 million+ SF facilities managed */}
+              <div className={`absolute top-[5%] right-0 bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
+                <p className="text-[#1e3143] text-sm font-medium">12 million+ SF<br />facilities managed</p>
+              </div>
 
-            {/* Bottom Left - 250 crore+ deals monitored */}
-            <div className={`absolute bottom-[15%] left-[5%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
-              <p className="text-[#1e3143] text-sm font-medium">250 crore+ deals<br />monitored</p>
-            </div>
+              {/* Bottom Left - 250 crore+ deals monitored */}
+              <div className={`absolute bottom-[15%] left-[5%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
+                <p className="text-[#1e3143] text-sm font-medium">250 crore+ deals<br />monitored</p>
+              </div>
 
-            {/* Bottom Right - 0.5 million+ SF under development */}
-            <div className={`absolute bottom-[10%] right-[5%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
-              <p className="text-[#1e3143] text-sm font-medium">0.5 million+ SF<br />under development</p>
+              {/* Bottom Right - 0.5 million+ SF under development */}
+              <div className={`absolute bottom-[10%] right-[5%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
+                <p className="text-[#1e3143] text-sm font-medium">0.5 million+ SF<br />under development</p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-[#fafbf9] rounded-lg p-4 text-center border border-[#1484bc]"
             style={{ boxShadow: '0 0 15px 5px rgba(20, 132, 188, 0.4)' }}>
             <h3 className="text-3xl font-bold text-[#1484bc] mb-1">5</h3>

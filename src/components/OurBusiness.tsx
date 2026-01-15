@@ -66,16 +66,16 @@ const OurBusiness = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {/* First Full Card */}
           {fullCards[0] && (
             <div
-              className="group bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
+              className="group bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc] flex flex-col"
               onClick={() => handleCardClick(fullCards[0].link)}
             >
               {/* Image with padding */}
-              <div className="px-8 pt-8 pb-2">
-                <div className="relative w-full h-32">
+              <div className="px-4 lg:px-8 pt-6 lg:pt-8 pb-2">
+                <div className="relative w-full h-28 lg:h-32">
                   <Image
                     src={fullCards[0].image}
                     alt={fullCards[0].name}
@@ -109,7 +109,7 @@ const OurBusiness = () => {
                   href={fullCards[0].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline pt-2"
+                  className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline mt-auto pt-2"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Visit Site
@@ -121,12 +121,12 @@ const OurBusiness = () => {
           {/* Second Full Card */}
           {fullCards[1] && (
             <div
-              className="group bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
+              className="group bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc] flex flex-col"
               onClick={() => handleCardClick(fullCards[1].link)}
             >
               {/* Image with padding */}
-              <div className="px-8 pt-8 pb-2">
-                <div className="relative w-full h-32">
+              <div className="px-4 lg:px-8 pt-6 lg:pt-8 pb-2">
+                <div className="relative w-full h-28 lg:h-32">
                   <Image
                     src={fullCards[1].image}
                     alt={fullCards[1].name}
@@ -160,7 +160,7 @@ const OurBusiness = () => {
                   href={fullCards[1].link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline pt-7"
+                  className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline mt-auto pt-2"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Visit Site
@@ -170,17 +170,17 @@ const OurBusiness = () => {
           )}
 
           {/* Half Cards Container */}
-          <div className="flex flex-col gap-12">
+          <div className="col-span-2 lg:col-span-1 grid grid-cols-2 lg:flex lg:flex-col gap-3 md:gap-6 lg:gap-12">
             {/* First Half Card */}
             {halfCards[0] && (
               <div
                 className="bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
                 onClick={() => handleCardClick(halfCards[0].link)}
               >
-                <div className="flex h-full min-h-[140px]">
+                <div className="flex flex-col lg:flex-row h-full">
                   {/* Image - Left Side with padding */}
-                  <div className="p-2 w-1/3 flex-shrink-0">
-                    <div className="relative w-full h-full">
+                  <div className="p-4 lg:p-2 w-full lg:w-1/3 flex-shrink-0">
+                    <div className="relative w-full h-28 lg:h-full">
                       <Image
                         src={halfCards[0].image}
                         alt={halfCards[0].name}
@@ -191,7 +191,7 @@ const OurBusiness = () => {
                   </div>
 
                   {/* Content - Right Side */}
-                  <div className="pr-2 py-2 flex flex-col flex-grow">
+                  <div className="px-4 lg:px-0 lg:pr-2 py-2 flex flex-col flex-grow">
                     {/* Logo */}
                     <div className="mb-2 h-9 flex items-center">
                       <Image
@@ -214,7 +214,7 @@ const OurBusiness = () => {
                       href={halfCards[0].link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline"
+                      className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline mt-auto pt-2"
                       onClick={(e) => e.stopPropagation()}
                     >
                       Visit Site
@@ -230,10 +230,10 @@ const OurBusiness = () => {
                 className="bg-[#f0f3f5] hover:bg-[#aec2cc] rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-xl ring-1 ring-inset ring-[#aec2cc]"
                 onClick={() => handleCardClick(halfCards[1].link)}
               >
-                <div className="flex h-full min-h-[140px]">
+                <div className="flex flex-col lg:flex-row h-full">
                   {/* Image - Left Side with padding */}
-                  <div className="p-2 w-1/3 flex-shrink-0">
-                    <div className="relative w-full h-full">
+                  <div className="p-4 lg:p-2 w-full lg:w-1/3 flex-shrink-0">
+                    <div className="relative w-full h-28 lg:h-full">
                       <Image
                         src={halfCards[1].image}
                         alt={halfCards[1].name}
@@ -244,7 +244,7 @@ const OurBusiness = () => {
                   </div>
 
                   {/* Content - Right Side */}
-                  <div className="pr-2 py-2 flex flex-col flex-grow">
+                  <div className="px-4 lg:px-0 lg:pr-2 py-2 flex flex-col flex-grow">
                     {/* Logo */}
                     <div className="mb-2 h-9 flex items-center">
                       <Image
@@ -267,7 +267,7 @@ const OurBusiness = () => {
                       href={halfCards[1].link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline"
+                      className="text-[#1f4e7a] text-sm font-medium hover:opacity-80 transition-opacity no-underline mt-auto pt-2"
                       onClick={(e) => e.stopPropagation()}
                     >
                       Visit Site
