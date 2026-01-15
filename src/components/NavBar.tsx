@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, MenuItem } from "./ui/Navbar";
@@ -32,7 +32,6 @@ export function NavBar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const router = useRouter();
-    const pathname = usePathname();
 
     const { openLogin } = useLoginDialog();
     const servicesRef = useRef<HTMLDivElement>(null);

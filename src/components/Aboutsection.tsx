@@ -154,7 +154,7 @@ const AboutUs = () => {
     },
   ];
 
-  const handleDotClick = (location) => {
+  const handleDotClick = (location: Location) => {
     setSelectedLocation(location);
     if (location.cities) {
       setSelectedCity(location.cities[0].name);
@@ -186,7 +186,7 @@ const AboutUs = () => {
                   About Ufirm
                 </h2>
                 <p className="text-m sm:text-m font-semibold text-[#fafbf9] mb-4 leading-relaxed">
-                  Ufirm, founded in 2016 as part of the Royal Nest Group, aims to elevate India's real estate services.
+                  Ufirm, founded in 2016 as part of the Royal Nest Group, aims to elevate India&apos;s real estate services.
                 </p>
                 <p className="text-base text-[#f0f3f5] leading-relaxed mb-6">
                   With over 25 years of legacy and 8 million sq. ft. of delivered projects, we offer proven expertise and a commitment to excellence. Ufirm integrates four core divisions—Green-Compliant Project Development, Profitable Estate Management, Skilled Facility Maintenance, and Value Enhancement through Technology—to serve the real estate lifecycle end-to-end. Our mission is rooted in delivering lasting value for People, Planet, and Profits, driven by a team deeply committed to quality and innovation.
