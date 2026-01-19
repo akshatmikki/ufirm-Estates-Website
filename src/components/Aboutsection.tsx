@@ -40,7 +40,7 @@ const AboutUs = () => {
       id: 1,
       name: 'Srinagar',
       top: '12%',
-      left: '46%',
+      left: '24%',
       address: 'Zabarwan Colony brain, Srinagar, Jammu and Kashmir- 191121',
       rep: 'Jigyasa',
       phone: '+91 9289902483',
@@ -50,7 +50,7 @@ const AboutUs = () => {
       id: 2,
       name: 'Jammu',
       top: '16%',
-      left: '45%',
+      left: '23%',
       address: 'Royal Nest Hill View Sector-D, Sainik Colony Estn. Chowadhi, Near Ansal Grace Jammu-180011',
       rep: 'Jaswinder Kour',
       phone: '+91 9596796757',
@@ -60,7 +60,7 @@ const AboutUs = () => {
       id: 3,
       name: 'Dharamshala',
       top: '18%',
-      left: '51%',
+      left: '30%',
       address: '677Q+94M, Chakban Gharo, dharamshala, Himachal Pradesh 176217',
       rep: 'Nandini Singh',
       phone: '+91 9958288544',
@@ -70,7 +70,7 @@ const AboutUs = () => {
       id: 4,
       name: 'Dehradun',
       top: '26%',
-      left: '53%',
+      left: '33%',
       address: 'Chakrata Road, Selaqui Industrial Area, Central Hope Town, Dehradun, Uttarakhand - 248011',
       rep: 'Mohan Negi',
       phone: '+91 704 234 4158',
@@ -80,7 +80,7 @@ const AboutUs = () => {
       id: 5,
       name: 'Delhi',
       top: '30%',
-      left: '50.5%',
+      left: '30.5%',
       address: 'A-13/S-1, Dilshad Garde, Delhi-110095',
       rep: 'Shalini Malik',
       phone: '+91 9289902481',
@@ -96,7 +96,7 @@ const AboutUs = () => {
       id: 6,
       name: 'Jaipur',
       top: '35%',
-      left: '47%',
+      left: '27%',
       address: 'C-163, Riico Residential Colony, Near Git, College Sitapura, Jaipur-302022',
       rep: 'Sachin Sharma',
       phone: '+91 9319101871',
@@ -106,7 +106,7 @@ const AboutUs = () => {
       id: 7,
       name: 'Udaipur',
       top: '44%',
-      left: '43%',
+      left: '19%',
       address: '88 Charak Hostal Raza Colony, Mulla Talai, Udaipur-313001',
       rep: 'Nandini Singh',
       phone: '+91 9958288544',
@@ -116,7 +116,7 @@ const AboutUs = () => {
       id: 8,
       name: 'Ahmedabad',
       top: '50%',
-      left: '39%',
+      left: '15%',
       address: 'Shop No.15, Manukrupa Plaza,Sanand, Ta-Sanand, Ahmedabad-382110',
       rep: 'Jigyasa',
       phone: '+91 9289902483',
@@ -126,7 +126,7 @@ const AboutUs = () => {
       id: 9,
       name: 'Pune',
       top: '67%',
-      left: '45%',
+      left: '22%',
       address: 'GAT NO. 354, A&B, NH-4, Old Mumbai - Pune Hwy, Maval, Vadgaon, Pune, Maharashtra-412106',
       rep: 'Sachin Sharma',
       phone: '+91 9319101871',
@@ -136,7 +136,7 @@ const AboutUs = () => {
       id: 10,
       name: 'Hyderabad',
       top: '68%',
-      left: '53%',
+      left: '35%',
       address: '1-2 361/15, Phool Begh, Hemayathnagar, Indera Park, Hyderabad, Telangana - 500029',
       rep: 'Kishore Reddy',
       phone: '+91 9849203269',
@@ -146,7 +146,7 @@ const AboutUs = () => {
       id: 11,
       name: 'Kolkata',
       top: '52%',
-      left: '78%',
+      left: '68%',
       address: 'Purba Panchanna Gram, Abahani Club, Vip Nagar, Sub District South 21 Parganas, West Bengal-700100',
       rep: 'Ranadhir Biswas',
       phone: '+91 9903522839',
@@ -186,7 +186,7 @@ const AboutUs = () => {
                   About Ufirm
                 </h2>
                 <p className="text-m sm:text-m font-semibold text-[#fafbf9] mb-4 leading-relaxed">
-                  Ufirm, founded in 2016 as part of the Royal Nest Group, aims to elevate India's real estate services.
+                  Ufirm, founded in 2016 as part of the Royal Nest Group, aims to elevate India&apos;s real estate services.
                 </p>
                 <p className="text-base text-[#f0f3f5] leading-relaxed mb-6">
                   With over 25 years of legacy and 8 million sq. ft. of delivered projects, we offer proven expertise and a commitment to excellence. Ufirm integrates four core divisions—Green-Compliant Project Development, Profitable Estate Management, Skilled Facility Maintenance, and Value Enhancement through Technology—to serve the real estate lifecycle end-to-end. Our mission is rooted in delivering lasting value for People, Planet, and Profits, driven by a team deeply committed to quality and innovation.
@@ -346,7 +346,7 @@ const AboutUs = () => {
 
               {/* Info Boxes - Positioned based on your Image 2 */}
               {/* Top Left - 8 million+ SF projects delivered */}
-              <div className={`absolute top-[10%] left-0 bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={`absolute top-[10%] -left-[45%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
                 <p className="text-[#1e3143] text-sm font-medium">8 million+ SF<br />projects delivered</p>
               </div>
 
@@ -356,7 +356,7 @@ const AboutUs = () => {
               </div>
 
               {/* Bottom Left - 250 crore+ deals monitored */}
-              <div className={`absolute bottom-[15%] left-[5%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={`absolute bottom-[15%] -left-[40%] bg-[#f0f3f5] rounded-lg px-4 py-3 text-center shadow-sm transition-opacity duration-500 ${!selectedLocation ? 'opacity-100' : 'opacity-0'}`}>
                 <p className="text-[#1e3143] text-sm font-medium">250 crore+ deals<br />monitored</p>
               </div>
 
