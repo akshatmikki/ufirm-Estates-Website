@@ -154,7 +154,7 @@ const AboutUs = () => {
     },
   ];
 
-  const handleDotClick = (location) => {
+  const handleDotClick = (location: Location) => {
     setSelectedLocation(location);
     if (location.cities) {
       setSelectedCity(location.cities[0].name);

@@ -1,8 +1,6 @@
 "use client";
 
-import FirmityIntroSection from "@/components/Firmity_intro_section";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 
 const Herosection = dynamic(() => import("@/components/Herosection"), {
   ssr: false,
@@ -17,9 +15,6 @@ const CertificationsSection = dynamic(() => import("@/components/Certifications_
   ssr: false,
 });
 const FirmityIntroSection = dynamic(() => import("@/components/Firmity_intro_section"), {
-  ssr: false,
-});
-const ClientCarousel = dynamic(() => import("@/components/ClientCarousel"), {
   ssr: false,
 });
 const Marque = dynamic(

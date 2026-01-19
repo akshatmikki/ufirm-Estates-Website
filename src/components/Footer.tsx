@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { FaLinkedinIn, FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Loader2, ArrowRight } from "lucide-react";
@@ -95,7 +94,7 @@ const Footer = () => {
             } else {
                 alert(data.error || "Something went wrong.");
             }
-        } catch (error) {
+        } catch {
             alert("Error sending request.");
         } finally {
             setIsLoading(false);
@@ -122,7 +121,7 @@ const Footer = () => {
             } else {
                 alert(data.message || "Something went wrong.");
             }
-        } catch (error) {
+        } catch {
             alert("Error sending request.");
         } finally {
             setIsDemoLoading(false);
