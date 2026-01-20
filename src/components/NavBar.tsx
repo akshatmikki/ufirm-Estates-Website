@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, MenuItem } from "./ui/Navbar";
+import { Menu, MenuItem } from "./ui/NavBar";
 import { NavButton } from "./ui/NavButton";
 import { cn } from "@/utils/cn";
 import { useLoginDialog } from "../app/CareerPage/LoginDialogContext";
