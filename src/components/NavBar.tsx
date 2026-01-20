@@ -119,7 +119,6 @@ export function NavBar() {
         >
             <div className="relative z-50 bg-white">
                 <Menu
-                    setActive={setActive}
                     logo={
                         <Image
                             src="/Assets/ufirmlogo.svg"
