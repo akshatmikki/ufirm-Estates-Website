@@ -10,8 +10,8 @@ const OurBusiness = () => {
     {
       id: 1,
       name: 'Urest',
-      logo: '/assets/urestlogo.svg',
-      image: '/assets/urest.svg',
+      logo: '/Assets/urestlogo.svg',
+      image: '/Assets/urest.svg',
       description: 'The Operations and facility management arm of the UFirm ecosystem. We deliver structured processes, trained manpower and site level accountability',
       link: 'https://urest.in/',
       isHalf: false,
@@ -19,8 +19,8 @@ const OurBusiness = () => {
     {
       id: 2,
       name: 'Firmity',
-      logo: '/assets/firmitylogo.svg',
-      image: '/assets/laptop.svg',
+      logo: '/Assets/firmitylogo.svg',
+      image: '/Assets/laptop.svg',
       description: 'A CMMS platform under the UFirm umbrella. We bring structure transparency and accountability to day to day operations in one unified system',
       link: 'https://firmity.in/',
       isHalf: false,
@@ -28,8 +28,8 @@ const OurBusiness = () => {
     {
       id: 3,
       name: 'UFirm',
-      logo: '/assets/ufirmlogo.svg',
-      image: '/assets/ufirm.svg',
+      logo: '/Assets/ufirmlogo.svg',
+      image: '/Assets/ufirm.svg',
       description: 'We bring together strategy, on ground execution and technology',
       link: 'https://ufirm.in/',
       isHalf: true,
@@ -37,8 +37,8 @@ const OurBusiness = () => {
     {
       id: 4,
       name: 'RoyalNest',
-      logo: '/assets/royalnestlogo.svg',
-      image: '/assets/royalnest.svg',
+      logo: '/Assets/royalnestlogo.svg',
+      image: '/Assets/royalnest.svg',
       description: 'We deliver high-integrity, green-certified real estate and infrastructure projects designed for long-term value',
       link: 'https://www.royalnestgroup.com/',
       isHalf: true,
