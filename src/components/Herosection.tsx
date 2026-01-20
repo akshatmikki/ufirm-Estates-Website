@@ -5,19 +5,19 @@ import { ChevronLeft, ChevronRight, ChevronRight as ChevronIcon } from "lucide-r
 // Slide Data
 const slides = [
   {
-    src: "/Assets/carousel_1.svg",
+    src: "/Assets/carousel_1.webp",
     cardTitle: "Royal Nest Group",
     cardSubtext: "Real-estate and infrastructure development",
     href: "https://www.royalnestgroup.com/",
   },
   {
-    src: "/Assets/carousel_2.svg",
+    src: "/Assets/carousel_2.webp",
     cardTitle: "Firmity",
     cardSubtext: "CMMS and operations management platform",
     href: "https://www.firmity.in",
   },
   {
-    src: "/Assets/carousel_3.svg",
+    src: "/Assets/carousel_3.webp",
     cardTitle: "URest",
     cardSubtext: "Operations and facility management",
     href: "https://urest.in/",
