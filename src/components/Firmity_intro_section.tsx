@@ -110,7 +110,7 @@ const FirmityIntroSection = () => {
                   "
                                 >
                                     <Image
-                                        src="/assets/arrow_firmity.svg"
+                                        src="/Assets/arrow_firmity.svg"
                                         alt="Arrow"
                                         width={20}
                                         height={20}
