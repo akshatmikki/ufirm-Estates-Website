@@ -229,13 +229,15 @@ export default function AboutusPage() {
 
                             <div className="flex overflow-hidden h-[200px]">
                                 {[...Array(10)].map((_, i) => (
-                                    <img
-                                        key={i}
-                                        src="/Aboutus/skyline.webp"
-                                        alt="Skyline"
-                                        className="h-full object-contain"
-                                        style={{ flexShrink: 0 }}
-                                    />
+                                    <div key={i} className="relative h-full" style={{ flexShrink: 0, width: 'auto', minWidth: '200px' }}>
+                                        <Image
+                                            src="/Aboutus/skyline.webp"
+                                            alt="Skyline"
+                                            width={200}
+                                            height={200}
+                                            className="h-full object-contain"
+                                        />
+                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -260,11 +262,12 @@ export default function AboutusPage() {
                             ))}
                         </div>
 
-                        <div className="w-1/2">
-                            <img
+                        <div className="w-1/2 relative">
+                            <Image
                                 src="/Aboutus/building.webp"
                                 alt="Building"
-                                className="w-full h-full object-fill"
+                                fill
+                                className="object-fill"
                             />
                         </div>
                     </div>

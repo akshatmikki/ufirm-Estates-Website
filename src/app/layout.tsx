@@ -2,11 +2,15 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { NavBar } from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { BackToTop } from "@/components/BackToTop";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
-import { LoginDialogProvider } from "@/app/CareerPage/LoginDialogContext"; // ⬅️ import provider
+import { LoginDialogProvider } from "@/app/CareerPage/LoginDialogContext";
+import { LoginDialog } from "@/components/LoginDialog";
+import { useEffect } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +27,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <html lang="en">
       <Head>
@@ -35,8 +43,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LoginDialogProvider>
+          <NavBar />
+          <LoginDialog />
           {children}
           <Footer />
+          <BackToTop />
         </LoginDialogProvider>
         <SpeedInsights />
         <Analytics />
