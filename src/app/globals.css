@@ -272,3 +272,6 @@
   animation-timing-function: linear;
 }
 
+.nav-btn-secondary:active {
+  border-color: #1484BC !important;
+}
