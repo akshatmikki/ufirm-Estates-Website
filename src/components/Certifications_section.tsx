@@ -7,22 +7,22 @@ const CertificationsSection = () => {
     const certifications = [
         {
             id: 1,
-            image: '/assets/Certification1.svg',
+            image: '/Assets/Certification1.svg',
             alt: 'Certification 1',
         },
         {
             id: 2,
-            image: '/assets/Certification2.svg',
+            image: '/Assets/Certification2.svg',
             alt: 'Certification 2',
         },
         {
             id: 3,
-            image: '/assets/Certification3.svg',
+            image: '/Assets/Certification3.svg',
             alt: 'Certification 3',
         },
         {
             id: 4,
-            image: '/assets/Certification4.svg',
+            image: '/Assets/Certification4.svg',
             alt: 'Certification 4',
         },
         {
