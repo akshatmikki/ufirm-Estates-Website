@@ -81,13 +81,11 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 };
 
 type MenuProps = {
-  setActive: (item: string | null) => void;
   children: React.ReactNode;
   logo?: React.ReactNode;
   actions?: React.ReactNode;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Menu: React.FC<MenuProps> = ({  children, logo, actions }) => {
   return (
     <nav
