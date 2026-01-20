@@ -54,7 +54,7 @@ const FirmityIntroSection = () => {
                             {/* Laptop */}
                             <div className="absolute left-0 top-0 w-full h-full">
                                 <Image
-                                    src="/assets/phone_laptop.svg"
+                                    src="/Assets/phone_laptop.svg"
                                     alt="Firmity dashboard on laptop"
                                     fill
                                     className="object-contain object-left"
