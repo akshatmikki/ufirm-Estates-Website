@@ -9,7 +9,7 @@ export function Login() {
     return (
         <div className={cn("absolute top-8 right-4")}>
             <div className="hidden lg:block">
-                <Menu setActive={setActive}>
+                <Menu>
                     <MenuItem setActive={setActive} active={active} item="Login" href="/" />
                     {active === "Login" && (
                         <div className="absolute mt-8 bg-[#1e3143] shadow-lg rounded-lg p-4 z-50 text-sm">
