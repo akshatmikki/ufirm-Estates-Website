@@ -1,5 +1,12 @@
 const config = {
-  plugins: ["@tailwindcss/postcss"],
+  plugins: {
+    "@tailwindcss/postcss": {},
+    "cssnano": process.env.NODE_ENV === 'production' ? {
+      preset: ['default', {
+        discardComments: { removeAll: true },
+      }],
+    } : false,
+  },
 };
 
 export default config;

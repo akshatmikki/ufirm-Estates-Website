@@ -46,6 +46,15 @@ export default function Herosection() {
     return () => clearInterval(interval);
   }, [autoSlide, currentSlide]);
 
+  useEffect(() => {
+  // Preload first carousel image
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = '/Assets/carousel_1.webp';
+  document.head.appendChild(link);
+}, []);
+
   return (
     <div
       className="relative w-full h-screen flex flex-col lg:flex-row bg-white overflow-hidden"
