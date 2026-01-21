@@ -288,7 +288,7 @@ const AboutUs = () => {
           <div className="hidden lg:relative lg:h-full lg:flex lg:flex-col lg:items-end lg:justify-end">
             <div className="relative w-fit">
               <Image
-                src="Assets/map_base.svg"
+                src="/Assets/map_base.svg"
                 alt="India Map with locations"
                 width={350}
                 height={350}
