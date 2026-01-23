@@ -18,15 +18,6 @@ const OurBusiness = () => {
     },
     {
       id: 2,
-      name: 'Firmity',
-      logo: '/Assets/firmitylogo.svg',
-      image: '/Assets/laptop.svg',
-      description: 'A CMMS platform under the UFirm umbrella. We bring structure transparency and accountability to day to day operations in one unified system',
-      link: 'https://firmity.in/',
-      isHalf: false,
-    },
-    {
-      id: 3,
       name: 'UFirm',
       logo: '/Assets/ufirmlogo.svg',
       image: '/Assets/ufirm.svg',
@@ -35,13 +26,22 @@ const OurBusiness = () => {
       isHalf: true,
     },
     {
-      id: 4,
+      id: 3,
       name: 'RoyalNest',
       logo: '/Assets/royalnestlogo.svg',
       image: '/Assets/royalnest.svg',
       description: 'We deliver high-integrity, green-certified real estate and infrastructure projects designed for long-term value',
       link: 'https://www.royalnestgroup.com/',
       isHalf: true,
+    },
+    {
+      id: 4,
+      name: 'Firmity',
+      logo: '/Assets/firmitylogo.svg',
+      image: '/Assets/laptop.svg',
+      description: 'A <b>CMMS- facility management</b> platform under the UFirm umbrella. We bring structure transparency and accountability to day to day operations in one unified system',
+      link: 'https://firmity.in/',
+      isHalf: false,
     },
   ];
 
