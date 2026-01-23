@@ -101,12 +101,12 @@ export default function Herosection() {
                 active:bg-[#1484bc] active:shadow-inner active:shadow-[inset_0_0_0_0.2px_#1e3143] cursor-pointer
                 "
             >
-              Request Tech Demo
+              Request Tech Demo FIRMITY
             </a>
 
             {/* Secondary Button */}
             <a
-              href="https://calendly.com/firmity9/30min?month=2026-01"
+              href="https://urest.in/book-service/ola/services/society-site-health-survey-confidential#f9ad9acd-67b8-483a-bd38-ecc1481dd108"
               target="_blank"
               rel="noopener noreferrer"
               className="
