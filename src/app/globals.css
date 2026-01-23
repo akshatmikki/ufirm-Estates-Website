@@ -275,3 +275,10 @@
 .nav-btn-secondary:active {
   border-color: #1484BC !important;
 }
+
+/* Make ONLY Delhi dots red */
+.delhi-dot img {
+  filter: brightness(0) saturate(100%)
+    invert(20%) sepia(90%) saturate(6500%)
+    hue-rotate(355deg) brightness(95%) contrast(110%);
+}
