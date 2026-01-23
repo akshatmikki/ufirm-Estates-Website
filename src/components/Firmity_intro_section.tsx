@@ -7,7 +7,7 @@ import Link from 'next/link';
 const FirmityIntroSection = () => {
     const features = [
         {
-            title: 'Task-based Management',
+            title: 'Task-based Management / Work Order',
             desc: 'Plan and track daily tasks with clarity',
             icon: '/Assets/clipboard.svg',
         },

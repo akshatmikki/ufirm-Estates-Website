@@ -7,43 +7,48 @@ import Link from 'next/link';
 const OurBusiness = () => {
 
   const businesses = [
-    {
-      id: 1,
-      name: 'Urest',
-      logo: '/Assets/urestlogo.svg',
-      image: '/Assets/urest.svg',
-      description: 'The Operations and facility management arm of the UFirm ecosystem. We deliver structured processes, trained manpower and site level accountability',
-      link: 'https://urest.in/',
-      isHalf: false,
-    },
-    {
-      id: 2,
-      name: 'UFirm',
-      logo: '/Assets/ufirmlogo.svg',
-      image: '/Assets/ufirm.svg',
-      description: 'We bring together strategy, on ground execution and technology',
-      link: 'https://ufirm.in/',
-      isHalf: true,
-    },
-    {
-      id: 3,
-      name: 'RoyalNest',
-      logo: '/Assets/royalnestlogo.svg',
-      image: '/Assets/royalnest.svg',
-      description: 'We deliver high-integrity, green-certified real estate and infrastructure projects designed for long-term value',
-      link: 'https://www.royalnestgroup.com/',
-      isHalf: true,
-    },
-    {
-      id: 4,
-      name: 'Firmity',
-      logo: '/Assets/firmitylogo.svg',
-      image: '/Assets/laptop.svg',
-      description: 'A <b>CMMS- facility management</b> platform under the UFirm umbrella. We bring structure transparency and accountability to day to day operations in one unified system',
-      link: 'https://firmity.in/',
-      isHalf: false,
-    },
-  ];
+  {
+    id: 1,
+    name: 'Urest',
+    logo: '/Assets/urestlogo.svg',
+    image: '/Assets/urest.svg',
+    description:
+      'The Operations and facility management arm of the UFirm ecosystem. We deliver structured processes, trained manpower and site level accountability',
+    link: 'https://urest.in/',
+    isHalf: false,
+  },
+  {
+    id: 3,
+    name: 'UFirm',
+    logo: '/Assets/ufirmlogo.svg',
+    image: '/Assets/ufirm.svg',
+    description:
+      'We bring together strategy, on ground execution and technology',
+    link: 'https://ufirm.in/',
+    isHalf: false,
+  },
+  {
+    id: 4,
+    name: 'RoyalNest',
+    logo: '/Assets/royalnestlogo.svg',
+    image: '/Assets/royalnest.svg',
+    description:
+      'We deliver high-integrity, green-certified real estate and infrastructure projects designed for long-term value',
+    link: 'https://www.royalnestgroup.com/',
+    isHalf: true,
+  },
+  {
+    id: 2,
+    name: 'Firmity',
+    logo: '/Assets/firmitylogo.svg',
+    image: '/Assets/laptop.svg',
+    description: <>
+      A <strong>CMMS-facility management </strong> platform under the UFirm umbrella. We bring structure transparency and accountability to day to day operations in one unified system</>,
+    link: 'https://firmity.in/',
+    isHalf: true,
+  },
+];
+
 
   const fullCards = businesses.filter(b => !b.isHalf);
   const halfCards = businesses.filter(b => b.isHalf);
