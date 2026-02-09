@@ -7,6 +7,7 @@ import { Menu, MenuItem } from "./ui/NavBar";
 import { NavButton } from "./ui/NavButton";
 import { cn } from "@/utils/cn";
 import { useLoginDialog } from "../app/CareerPage/LoginDialogContext";
+import { Compass } from "lucide-react";
 import {
     Menu as MenuIcon,
     X as CloseIcon,
@@ -100,6 +101,7 @@ export function NavBar() {
         { label: "Technical Services", href: "/TechnologiesPage", icon: Wrench },
         { label: "Real Estate Advisory", href: "/Management&advisory", icon: Briefcase },
         { label: "Hire", href: "/CareerPage", icon: UserPlus },
+        { label: "Track Complaints", href: "https://admin.urest.in:8092/", icon: Compass },
         // Removed Contact Us from here to treat it specially
     ];
 
@@ -188,6 +190,12 @@ export function NavBar() {
                             item="Hire"
                             href="https://ufirm.in/CareerPage"
                         />
+                        <MenuItem
+    setActive={setActive}
+    active={active}
+    item="Track Complaints"
+    href="https://admin.urest.in:8092/"
+/>
                     </div>
                 </Menu>
             </div>
