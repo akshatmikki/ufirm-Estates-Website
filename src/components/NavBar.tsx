@@ -110,6 +110,7 @@ export function NavBar() {
         { label: "Client Login", href: "https://account.ufirm.in/Account/Login", icon: Building2 },
         { label: "Employee Login", href: "https://admin.urest.in:8097/", icon: User },
         { label: "Facility Manager Login", href: "https://account.ufirm.in/Account/Login", icon: Briefcase },
+        { label: "Track Complaints", href: "https://admin.urest.in:8092/", icon: Compass }, // Added to mobile menu
     ];
 
     return (
@@ -190,12 +191,7 @@ export function NavBar() {
                             item="Hire"
                             href="https://ufirm.in/CareerPage"
                         />
-                        <MenuItem
-    setActive={setActive}
-    active={active}
-    item="Track Complaints"
-    href="https://admin.urest.in:8092/"
-/>
+                        {/* Removed Track Complaints from desktop menu */}
                     </div>
                 </Menu>
             </div>
