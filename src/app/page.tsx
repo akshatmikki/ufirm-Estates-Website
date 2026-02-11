@@ -4,6 +4,8 @@ import OurBusinesses from "@/components/OurBusiness";
 import CertificationsSection from "@/components/Certifications_section";
 import FirmityIntroSection from "@/components/Firmity_intro_section";
 import Marque from "@/components/Marque";
+import { BackToTop } from "@/components/BackToTop";
+import { TrackComplaints } from "@/components/TrackComplaints";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <CertificationsSection />
       <FirmityIntroSection />
       <Marque />
+      <BackToTop />
+      <TrackComplaints />
     </main>
   );
 }
