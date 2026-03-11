@@ -101,7 +101,7 @@ export function NavBar() {
         { label: "Technical Services", href: "/TechnologiesPage", icon: Wrench },
         { label: "Real Estate Advisory", href: "/Management&advisory", icon: Briefcase },
         { label: "Hire", href: "/CareerPage", icon: UserPlus },
-        { label: "Track Complaints", href: "https://admin.urest.in:8092/", icon: Compass },
+        // { label: "Track Complaints", href: "https://admin.urest.in:8092/", icon: Compass },
         // Removed Contact Us from here to treat it specially
     ];
 
