@@ -177,7 +177,7 @@ import Link from 'next/link';
 // bundle — and pdfjs v5's ESM init crashes in Node.js.
 // Solution: dynamic import inside useEffect (guaranteed browser-only).
 
-const DISPLAY_PDF = '/Assets/UFirm_Newsletter-2025-26.pdf';
+const DISPLAY_PDF = '/Assets/AR2025-26.pdf';
 
 export default function NewsletterPopup() {
   const [visible, setVisible]           = useState(false);

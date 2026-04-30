@@ -51,15 +51,11 @@ export default function NewsletterSection() {
             <div className="px-7 py-8 bg-[#0d1f2e] flex flex-col gap-5">
               {/* UFirm wordmark */}
               <p className="text-[#1484bc] text-[11px] font-bold tracking-[0.25em] uppercase">
-                UFirm Estates
+                UFirm
               </p>
-
               <div>
-                <p className="text-[#aec2cc] text-xs tracking-widest uppercase mb-2">
-                  Annual Integrated
-                </p>
                 <p className="text-[#fafbf9] text-4xl font-extrabold leading-none">
-                  Report
+                  Annual Integrated Report
                 </p>
                 <p className="text-[#1484bc] text-4xl font-extrabold leading-none mt-1">
                   2025–26
@@ -70,7 +66,7 @@ export default function NewsletterSection() {
               <div className="h-px w-full bg-gradient-to-r from-[#1484bc] via-[#006990] to-transparent" />
 
               <p className="text-[#aec2cc] text-[11px] leading-relaxed">
-                Real estate · Facility management<br />Sustainable growth
+                Real estate · Integrated Facility management · Automated Facility Maintenance<br />
               </p>
             </div>
 
