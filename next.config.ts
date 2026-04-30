@@ -62,6 +62,10 @@ const nextConfig: NextConfig = {
 
   // Webpack optimizations
   webpack: (config, { isServer }) => {
+    // pdfjs tries to import the `canvas` npm package for server-side rendering;
+    // aliasing it to false prevents the import from failing in the browser bundle.
+    config.resolve.alias.canvas = false;
+
     if (!isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
