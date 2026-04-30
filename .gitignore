@@ -44,3 +44,4 @@ next-env.d.ts
 # The display PDF (public/Assets/UFirm_Newsletter-2025-26.pdf) IS committed.
 # This file is a leftover duplicate — keep it out of the repo.
 /public/AR2025-26_compressed*.pdf
+/public/Assets/AR2025-26*.pdf
