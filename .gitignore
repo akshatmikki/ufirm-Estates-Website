@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large/duplicate PDFs not used by the app
+# The display PDF (public/Assets/UFirm_Newsletter-2025-26.pdf) IS committed.
+# This file is a leftover duplicate — keep it out of the repo.
+/public/AR2025-26_compressed*.pdf
