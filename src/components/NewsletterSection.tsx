@@ -18,8 +18,7 @@ export default function NewsletterSection() {
           </h2>
 
           <p className="text-[#c8d8e2] text-base sm:text-lg leading-relaxed mb-10 max-w-[420px]">
-            Expert perspectives on what matters most in real estate management,
-            facility operations, and sustainable growth.
+            Expert perspectives on real estate, integrated facility management, and automated facility maintenance.
           </p>
 
           <Link
