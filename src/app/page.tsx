@@ -12,7 +12,6 @@ import NewsletterPopup from "@/components/NewsletterPopup";
 export default function Home() {
   return (
     <main className="min-h-screen relative pt-16">
-      {/* Popup rendered at top so it's outside the normal flow */}
       <NewsletterPopup />
       <Herosection />
       <Aboutsection />
