@@ -429,7 +429,7 @@ const HTMLFlipBook = dynamic<AnyProps>(
   { ssr: false },
 );
 
-const PDF_URL      = '/Assets/ufirmcompressed.pdf';
+const PDF_URL      = '/Assets/ufirmfinal.pdf';
 const DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1ZeymzZzCOQIaqtIiOjhncyw6jV_mJxfT';
 const WORKER_URL   = '/pdf.worker.min.mjs';
 
