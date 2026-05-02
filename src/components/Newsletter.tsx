@@ -389,9 +389,8 @@ const HTMLFlipBook = dynamic<AnyProps>(
   { ssr: false },
 );
 
-const PDF_URL      = '/Assets/UFirm_Newsletter-2025-26.pdf';
-const DOWNLOAD_URL =
-  'https://drive.google.com/uc?export=download&id=1CJnzepGUckn6k97spRCaxjdtbfCFHtdO';
+const PDF_URL      = '/Assets/ufirmfinal.pdf';
+const DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1ZeymzZzCOQIaqtIiOjhncyw6jV_mJxfT';
 const WORKER_URL   = '/pdf.worker.min.mjs';
 
 const RENDER_SCALE = 1.0;
