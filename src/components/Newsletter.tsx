@@ -6100,6 +6100,1963 @@
 
 
 
+// 'use client';
+
+// import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+// import dynamic from 'next/dynamic';
+// import {
+//   Download, Maximize2, Minimize2,
+//   ZoomIn, ZoomOut,
+//   ChevronLeft, ChevronRight,
+//   ChevronsLeft, ChevronsRight,
+// } from 'lucide-react';
+
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// type AnyProps = Record<string, any>;
+
+// const HTMLFlipBook = dynamic<AnyProps>(
+//   () =>
+//     import('react-pageflip').then(
+//       (m) => m.default as unknown as React.ComponentType<AnyProps>,
+//     ),
+//   { ssr: false },
+// );
+
+// // ─── Config ───────────────────────────────────────────────────────────────────
+// const TOTAL_PAGES  = 36;
+// const DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1ZeymzZzCOQIaqtIiOjhncyw6jV_mJxfT';
+// const IMG          = (n: number) => `/Assets/newsletterjpegs/pg${n}.jpg`;
+// const MAX_BOOK_H   = 520;
+// const ZOOM_MIN     = 1;
+// const ZOOM_MAX     = 4;
+// const MOBILE_BP    = 768;
+// const WRAPPER_MULT = 1.8;
+
+// const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+
+// type FocusSide = 'left' | 'right' | 'center';
+
+// // ─── Shared: Toolbar button ───────────────────────────────────────────────────
+// function TBtn({ onClick, disabled = false, title, href, children }: {
+//   onClick?: () => void; disabled?: boolean; title?: string;
+//   href?: string; children: React.ReactNode;
+// }) {
+//   const cls =
+//     'flex items-center justify-center w-9 h-9 rounded ' +
+//     'text-[#aec2cc] hover:text-white hover:bg-[#1484bc]/25 ' +
+//     'disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0';
+//   if (href)
+//     return <a href={href} target="_blank" rel="noopener noreferrer" title={title} className={cls}>{children}</a>;
+//   return <button onClick={onClick} disabled={disabled} title={title} className={cls}>{children}</button>;
+// }
+
+// // ─── Shared: Toolbar ──────────────────────────────────────────────────────────
+// function Toolbar({
+//   curPage, zoom, isZoomed, isFS,
+//   onZoomOut, onZoomIn, onFirst, onPrev, onNext, onLast, onToggleFS, onJump,
+// }: {
+//   curPage: number; zoom: number; isZoomed: boolean; isFS: boolean;
+//   onZoomOut: () => void; onZoomIn: () => void;
+//   onFirst: () => void; onPrev: () => void; onNext: () => void; onLast: () => void;
+//   onToggleFS: () => void; onJump: (n: number) => void;
+// }) {
+//   const displayPage = curPage + 1;
+//   return (
+//     <div className="bg-[#1e3143] border-t border-[#1484bc]/15 px-2 py-1.5 flex items-center justify-center gap-0.5 flex-shrink-0 z-30">
+//       <TBtn onClick={onZoomOut} disabled={!isZoomed} title="Zoom out (−)">
+//         <ZoomOut className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onFirst} title="First page">
+//         <ChevronsLeft className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onPrev} title="Previous">
+//         <ChevronLeft className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <div className="flex items-center gap-1 px-1">
+//         <input
+//           type="number" min={1} max={TOTAL_PAGES}
+//           defaultValue={displayPage} key={displayPage}
+//           onKeyDown={(e) => {
+//             if (e.key !== 'Enter') return;
+//             const n = parseInt((e.target as HTMLInputElement).value, 10);
+//             if (n >= 1 && n <= TOTAL_PAGES) onJump(n - 1);
+//           }}
+//           className="w-9 text-center bg-[#0d1f2e] border border-[#1484bc]/30 text-[#fafbf9] rounded px-1 py-0.5 text-xs outline-none"
+//         />
+//         <span className="text-[#aec2cc] text-xs whitespace-nowrap">/ {TOTAL_PAGES}</span>
+//       </div>
+//       <TBtn onClick={onNext} title="Next">
+//         <ChevronRight className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onLast} title="Last page">
+//         <ChevronsRight className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn href={DOWNLOAD_URL} title="Download PDF">
+//         <Download className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onZoomIn} disabled={zoom >= ZOOM_MAX} title="Zoom in (+)">
+//         <ZoomIn className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onToggleFS} title={isFS ? 'Exit full screen' : 'Full screen'}>
+//         {isFS ? <Minimize2 className="w-[18px] h-[18px]" /> : <Maximize2 className="w-[18px] h-[18px]" />}
+//       </TBtn>
+//     </div>
+//   );
+// }
+
+// // ─── Shared: FlipPage ─────────────────────────────────────────────────────────
+// const FlipPage = forwardRef<HTMLDivElement, { pageNum: number }>(({ pageNum }, ref) => (
+//   <div ref={ref} className="relative w-full h-full bg-white overflow-hidden select-none">
+//     {/* eslint-disable-next-line @next/next/no-img-element */}
+//     <img
+//       src={IMG(pageNum)}
+//       alt={`Page ${pageNum}`}
+//       className="w-full h-full object-cover"
+//       loading={pageNum <= 6 ? 'eager' : 'lazy'}
+//       draggable={false}
+//     />
+//   </div>
+// ));
+// FlipPage.displayName = 'FlipPage';
+
+// // ═══════════════════════════════════════════════════════════════════════════════
+// // MOBILE VIEWER
+// // ═══════════════════════════════════════════════════════════════════════════════
+// function MobileViewer() {
+//   const [mounted,   setMounted]   = useState(false);
+//   const [curPage,   setCurPage]   = useState(0);
+//   const [bookH,     setBookH]     = useState(520);
+//   const [zoom,      setZoom]      = useState(1);
+//   const [pan,       setPan]       = useState({ x: 0, y: 0 });
+//   const [isFS,      setIsFS]      = useState(false);
+//   const [focusSide, setFocusSide] = useState<FocusSide>('right');
+
+//   const zoomRef       = useRef(1);
+//   const panRef        = useRef({ x: 0, y: 0 });
+//   const bookHRef      = useRef(520);
+//   const containerWRef = useRef(0);
+//   const focusSideRef  = useRef<FocusSide>('right');
+//   const curPageRef    = useRef(0);
+//   const prevPageRef   = useRef(0);
+
+//   zoomRef.current  = zoom;
+//   panRef.current   = pan;
+//   bookHRef.current = bookH;
+
+//   const isZoomed = zoom > 1.01;
+
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const bookRef        = useRef<any>(null);
+//   const containerRef   = useRef<HTMLDivElement>(null);
+//   const mainRef        = useRef<HTMLDivElement>(null);
+//   const clipRef        = useRef<HTMLDivElement>(null);
+//   const bookWrapperRef = useRef<HTMLDivElement>(null);
+
+//   // ── Pan limits ───────────────────────────────────────────────────────────────
+//   //
+//   // pageW  = WRAPPER_MULT * W / 2  (each page width inside the 150% wrapper)
+//   //
+//   // leftFocusPan  = W/2 - pageW/2  = the pan that centres the left  page → ~+0.05W
+//   // rightFocusPan = W/2 - 3*pageW/2 = the pan that centres the right page → ~-0.85W
+//   //
+//   // xMax = leftFocusPan
+//   //   Prevents panning further right than the left-focus position.
+//   //   Beyond this point the wrapper shifts off the left edge of the viewport,
+//   //   exposing empty dark background — exactly the bug being fixed.
+//   //
+//   // xMin = min(rightFocusPan, W*(1 - WRAPPER_MULT*z))
+//   //   At z=1: ensures the right-focus position is always reachable.
+//   //   At z>1: expands leftward so the full zoomed wrapper stays scrollable.
+//   const getPanLimits = useCallback((z: number) => {
+//     const W     = containerWRef.current;
+//     const bH    = bookHRef.current;
+//     const pageW = (WRAPPER_MULT * W) / 2;
+
+//     const leftFocusPan  = W / 2 - pageW / 2;           // ~+0.05W
+//     const rightFocusPan = W / 2 - pageW - pageW / 2;   // ~-0.85W
+
+//     return {
+//       xMin: Math.min(rightFocusPan, W * (1 - WRAPPER_MULT * z)),
+//       xMax: leftFocusPan,
+//       yMin: -(bH * (z - 1)),
+//       yMax: 0,
+//     };
+//   }, []);
+
+//   const applyPan = useCallback((x: number, y: number, z: number) => {
+//     const lims = getPanLimits(z);
+//     const np   = { x: clamp(x, lims.xMin, lims.xMax), y: clamp(y, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [getPanLimits]);
+
+//   // ── computePan ───────────────────────────────────────────────────────────────
+//   const computePan = useCallback((side: FocusSide): { x: number; y: number } => {
+//     const W     = containerWRef.current;
+//     const pageW = (WRAPPER_MULT * W) / 2;
+//     if (side === 'left')
+//       return { x: W / 2 - pageW / 2,           y: 0 };
+//     if (side === 'right')
+//       return { x: W / 2 - pageW - pageW / 2,   y: 0 };
+//     return   { x: -(W * (WRAPPER_MULT - 1)) / 2, y: 0 };
+//   }, []);
+
+//   const applyFocus = useCallback((side: FocusSide) => {
+//     if (zoomRef.current > 1.01) return;
+//     focusSideRef.current = side;
+//     setFocusSide(side);
+//     const p = computePan(side);
+//     setPan(p); panRef.current = p;
+//   }, [computePan]);
+
+//   // ── zoomTo ───────────────────────────────────────────────────────────────────
+//   const zoomTo = useCallback((newZ: number, pivot?: { x: number; y: number }) => {
+//     newZ = clamp(newZ, ZOOM_MIN, ZOOM_MAX);
+//     const oldZ = zoomRef.current;
+//     const W    = containerWRef.current;
+//     const bH   = bookHRef.current;
+//     const old  = panRef.current;
+//     const px   = pivot?.x ?? W / 2;
+//     const py   = pivot?.y ?? bH / 2;
+
+//     if (newZ <= 1.01) {
+//       setZoom(1); zoomRef.current = 1;
+//       const p = computePan(focusSideRef.current);
+//       setPan(p); panRef.current = p;
+//       return;
+//     }
+
+//     const nx   = px - (px - old.x) * newZ / oldZ;
+//     const ny   = py - (py - old.y) * newZ / oldZ;
+//     const lims = getPanLimits(newZ);
+//     setZoom(newZ); zoomRef.current = newZ;
+//     const np = { x: clamp(nx, lims.xMin, lims.xMax), y: clamp(ny, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [computePan, getPanLimits]);
+
+//   const resetZoom = useCallback(() => zoomTo(1), [zoomTo]);
+
+//   useEffect(() => { setMounted(true); }, []);
+
+//   useEffect(() => {
+//     const el = clipRef.current;
+//     if (!el) return;
+//     const update = () => {
+//       containerWRef.current = el.clientWidth;
+//       if (zoomRef.current <= 1.01) {
+//         const p = computePan(focusSideRef.current);
+//         setPan(p); panRef.current = p;
+//       }
+//     };
+//     const ro = new ResizeObserver(update);
+//     ro.observe(el);
+//     update();
+//     return () => ro.disconnect();
+//   }, [computePan, mounted]);
+
+//   useEffect(() => {
+//     const el = mainRef.current;
+//     if (!el) return;
+//     const calc = () => {
+//       const s   = getComputedStyle(el);
+//       const pad = parseFloat(s.paddingTop) + parseFloat(s.paddingBottom);
+//       const h   = Math.max(280, el.clientHeight - pad);
+//       setBookH(h); bookHRef.current = h;
+//     };
+//     const ro = new ResizeObserver(calc);
+//     ro.observe(el);
+//     calc();
+//     return () => ro.disconnect();
+//   }, []);
+
+//   const toggleFS = useCallback(async () => {
+//     try {
+//       if (!document.fullscreenElement) {
+//         await containerRef.current?.requestFullscreen();
+//       } else {
+//         await document.exitFullscreen();
+//       }
+//     } catch {
+//       // Browser may refuse (e.g. iframe sandbox) — fail silently
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+//     document.addEventListener('fullscreenchange', onFsChange);
+//     return () => document.removeEventListener('fullscreenchange', onFsChange);
+//   }, []);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const m = window.location.hash.match(/page\/(\d+)/);
+//     if (!m) return;
+//     const n = parseInt(m[1], 10);
+//     if (n >= 1 && n <= TOTAL_PAGES)
+//       setTimeout(() => bookRef.current?.pageFlip()?.flip(n - 1), 350);
+//   }, [mounted]);
+
+//   const handleFlip = useCallback((e: { data: number }) => {
+//     const newPage = e.data;
+//     const prev    = prevPageRef.current;
+//     prevPageRef.current = newPage;
+//     curPageRef.current  = newPage;
+//     setCurPage(newPage);
+//     window.history.replaceState(null, '', `#page/${newPage + 1}`);
+//     if (zoomRef.current <= 1.01) {
+//       if (newPage === 0)       applyFocus('right');
+//       else if (newPage > prev) applyFocus('left');
+//       else                     applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goNext = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'right') {
+//       if (curPageRef.current < TOTAL_PAGES - 1)
+//         bookRef.current?.pageFlip()?.flipNext();
+//     } else {
+//       applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goPrev = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'left') {
+//       if (curPageRef.current > 0)
+//         bookRef.current?.pageFlip()?.flipPrev();
+//     } else {
+//       applyFocus('left');
+//     }
+//   }, [applyFocus]);
+
+//   const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
+//   const goLast  = useCallback(() => { bookRef.current?.pageFlip()?.flip(TOTAL_PAGES - 1); }, []);
+//   const goJump  = useCallback((n: number) => { bookRef.current?.pageFlip()?.flip(n); }, []);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const h = (e: KeyboardEvent) => {
+//       if (e.ctrlKey || e.metaKey) return;
+//       switch (e.key) {
+//         case 'Escape':       resetZoom(); break;
+//         case 'f': case 'F': toggleFS(); break;
+//         case '+': case '=': zoomTo(zoomRef.current + 0.5); break;
+//         case '-':           zoomTo(zoomRef.current - 0.5); break;
+//         case 'ArrowRight': case 'PageDown': goNext(); break;
+//         case 'ArrowLeft':  case 'PageUp':   goPrev(); break;
+//       }
+//     };
+//     window.addEventListener('keydown', h);
+//     return () => window.removeEventListener('keydown', h);
+//   }, [mounted, goNext, goPrev, resetZoom, toggleFS, zoomTo]);
+
+//   useEffect(() => {
+//     const el = clipRef.current;
+//     if (!el) return;
+
+//     const g = {
+//       pinching: false, pd0: 0, prevD: 0, pz0: 1,
+//       panning:  false, tx0: 0, ty0: 0, tpx0: 0, tpy0: 0,
+//       lastTap:  0,
+//     };
+
+//     const onTouchStart = (e: TouchEvent) => {
+//       if (e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         g.pinching = true; g.panning = false;
+//         g.pd0 = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         g.prevD = g.pd0;
+//         g.pz0   = zoomRef.current;
+//         return;
+//       }
+//       e.preventDefault(); e.stopPropagation();
+//       const now = Date.now();
+//       if (now - g.lastTap < 300) {
+//         g.lastTap = 0; g.panning = false;
+//         setZoom(1); zoomRef.current = 1;
+//         const p = computePan(focusSideRef.current);
+//         setPan(p); panRef.current = p;
+//         return;
+//       }
+//       g.lastTap = now;
+//       g.panning = true; g.pinching = false;
+//       g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//       g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//     };
+
+//     const onTouchMove = (e: TouchEvent) => {
+//       if (g.pinching && e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         const d      = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         const rect   = el.getBoundingClientRect();
+//         const pivotX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+//         const pivotY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+//         const ratio  = g.prevD > 0 ? d / g.prevD : 1;
+//         g.prevD      = d;
+//         zoomTo(zoomRef.current * ratio, { x: pivotX, y: pivotY });
+//         return;
+//       }
+//       if (e.touches.length === 1) {
+//         e.preventDefault(); e.stopPropagation();
+//         if (!g.panning) {
+//           g.panning = true;
+//           g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//           g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//         }
+//         applyPan(
+//           g.tpx0 + e.touches[0].clientX - g.tx0,
+//           g.tpy0 + e.touches[0].clientY - g.ty0,
+//           zoomRef.current,
+//         );
+//       }
+//     };
+
+//     const onTouchEnd = (e: TouchEvent) => {
+//       if (e.touches.length < 2) { g.pinching = false; g.prevD = 0; }
+//       if (e.touches.length === 0) g.panning = false;
+//     };
+
+//     el.addEventListener('touchstart', onTouchStart, { capture: true, passive: false });
+//     el.addEventListener('touchmove',  onTouchMove,  { capture: true, passive: false });
+//     el.addEventListener('touchend',   onTouchEnd,   { capture: true });
+//     return () => {
+//       el.removeEventListener('touchstart', onTouchStart, { capture: true });
+//       el.removeEventListener('touchmove',  onTouchMove,  { capture: true });
+//       el.removeEventListener('touchend',   onTouchEnd,   { capture: true });
+//     };
+//   }, [applyPan, computePan, zoomTo, mounted]);
+
+//   return (
+//     <div
+//       ref={containerRef}
+//       className="fixed inset-0 flex flex-col z-40"
+//       style={{ background: 'linear-gradient(135deg, #0d1f2e 0%, #1a2f42 60%, #0d1f2e 100%)' }}
+//     >
+//       <main
+//         ref={mainRef}
+//         className="flex-1 flex items-center justify-center overflow-hidden"
+//         style={{ padding: '4px 0' }}
+//       >
+//         {mounted && (
+//           <div
+//             ref={clipRef}
+//             style={{
+//               position: 'relative',
+//               width: '100%',
+//               overflow: 'hidden',
+//               touchAction: 'none',
+//               cursor: isZoomed ? 'grab' : 'default',
+//             }}
+//           >
+//             <div
+//               ref={bookWrapperRef}
+//               style={{
+//                 width: `${WRAPPER_MULT * 100}%`,
+//                 transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+//                 transformOrigin: 'left top',
+//                 transition: 'transform 0.30s ease-out',
+//                 willChange: 'transform',
+//               }}
+//             >
+//               <HTMLFlipBook
+//                 ref={bookRef}
+//                 width={520}
+//                 height={720}
+//                 size="stretch"
+//                 display="double"
+//                 minWidth={100}
+//                 maxWidth={99999}
+//                 minHeight={200}
+//                 maxHeight={bookH}
+//                 maxShadowOpacity={0.5}
+//                 showCover={true}
+//                 mobileScrollSupport={false}
+//                 useMouseEvents={false}
+//                 drawShadow={true}
+//                 flippingTime={1000}
+//                 swipeDistance={99999}
+//                 onFlip={handleFlip}
+//                 className="shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+//               >
+//                 {Array.from({ length: TOTAL_PAGES }, (_, i) => (
+//                   <FlipPage key={i + 1} pageNum={i + 1} />
+//                 ))}
+//               </HTMLFlipBook>
+//             </div>
+
+//             {isZoomed && (
+//               <button
+//                 onClick={resetZoom}
+//                 style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', zIndex: 20 }}
+//                 className="bg-[#0d1f2e]/85 backdrop-blur border border-[#1484bc]/40
+//                   text-[#aec2cc] hover:text-white hover:border-[#1484bc]
+//                   text-[11px] px-3 py-1.5 rounded-full transition-colors select-none"
+//               >
+//                 {zoom.toFixed(1)}× — double tap to reset
+//               </button>
+//             )}
+//           </div>
+//         )}
+//       </main>
+
+//       {mounted && (
+//         <Toolbar
+//           curPage={curPage}
+//           zoom={zoom}
+//           isZoomed={isZoomed}
+//           isFS={isFS}
+//           onZoomOut={() => zoomTo(zoom - 0.5)}
+//           onZoomIn={() => zoomTo(zoom + 0.5)}
+//           onFirst={goFirst}
+//           onPrev={goPrev}
+//           onNext={goNext}
+//           onLast={goLast}
+//           onToggleFS={toggleFS}
+//           onJump={goJump}
+//         />
+//       )}
+//     </div>
+//   );
+// }
+
+// // ═══════════════════════════════════════════════════════════════════════════════
+// // DESKTOP VIEWER — unchanged
+// // ═══════════════════════════════════════════════════════════════════════════════
+// function DesktopViewer() {
+//   const [mounted,  setMounted]  = useState(false);
+//   const [curPage,  setCurPage]  = useState(0);
+//   const [isFS,     setIsFS]     = useState(false);
+//   const [bookH,    setBookH]    = useState(MAX_BOOK_H);
+//   const [zoom,     setZoom]     = useState(1);
+//   const [pan,      setPan]      = useState({ x: 0, y: 0 });
+
+//   const zoomRef        = useRef(1);
+//   const panRef         = useRef({ x: 0, y: 0 });
+//   const bookHRef       = useRef(MAX_BOOK_H);
+//   const containerWRef  = useRef(0);
+//   const focusSideRef   = useRef<FocusSide>('left');
+//   const curPageRef     = useRef(0);
+//   const prevPageRef    = useRef(0);
+
+//   zoomRef.current  = zoom;
+//   panRef.current   = pan;
+//   bookHRef.current = bookH;
+
+//   const isZoomed = zoom > 1.01;
+
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const bookRef          = useRef<any>(null);
+//   const mainRef          = useRef<HTMLDivElement>(null);
+//   const containerRef     = useRef<HTMLDivElement>(null);
+//   const zoomContainerRef = useRef<HTMLDivElement>(null);
+//   const overlayRef       = useRef<HTMLDivElement>(null);
+
+//   const getPanLimits = useCallback((z: number) => {
+//     const m = (z - 1) * 500;
+//     return { xMin: -m, xMax: m, yMin: -(m * 0.8), yMax: m * 0.8 };
+//   }, []);
+
+//   const applyPan = useCallback((x: number, y: number, z: number) => {
+//     const lims = getPanLimits(z);
+//     const np   = { x: clamp(x, lims.xMin, lims.xMax), y: clamp(y, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [getPanLimits]);
+
+//   const computePan = useCallback((side: FocusSide): { x: number; y: number } => {
+//     const spreadW = zoomContainerRef.current?.offsetWidth ?? 600;
+//     const bookW   = Math.min(spreadW, 840);
+//     const offset  = bookW / 4;
+//     if (side === 'left')  return { x:  offset, y: 0 };
+//     if (side === 'right') return { x: -offset, y: 0 };
+//     return { x: 0, y: 0 };
+//   }, []);
+
+//   const applyFocus = useCallback((side: FocusSide) => {
+//     if (zoomRef.current > 1.01) return;
+//     focusSideRef.current = side;
+//     const p = computePan(side);
+//     setPan(p); panRef.current = p;
+//   }, [computePan]);
+
+//   const zoomTo = useCallback((newZ: number, pivot?: { x: number; y: number }) => {
+//     newZ = clamp(newZ, ZOOM_MIN, ZOOM_MAX);
+//     const oldZ = zoomRef.current;
+//     const W    = containerWRef.current;
+//     const bH   = bookHRef.current;
+//     const old  = panRef.current;
+//     const px   = pivot?.x ?? W / 2;
+//     const py   = pivot?.y ?? bH / 2;
+
+//     if (newZ <= 1.01) {
+//       setZoom(1); zoomRef.current = 1;
+//       const p = computePan(focusSideRef.current);
+//       setPan(p); panRef.current = p;
+//       return;
+//     }
+
+//     const nx = px - (px - old.x) * newZ / oldZ;
+//     const ny = py - (py - old.y) * newZ / oldZ;
+//     const lims = getPanLimits(newZ);
+
+//     setZoom(newZ); zoomRef.current = newZ;
+//     const np = { x: clamp(nx, lims.xMin, lims.xMax), y: clamp(ny, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [computePan, getPanLimits]);
+
+//   const resetZoom = useCallback(() => zoomTo(1), [zoomTo]);
+
+//   useEffect(() => { setMounted(true); }, []);
+
+//   useEffect(() => {
+//     const el = zoomContainerRef.current;
+//     if (!el) return;
+//     const update = () => {
+//       containerWRef.current = el.clientWidth;
+//       if (zoomRef.current <= 1.01) {
+//         const p = computePan(focusSideRef.current);
+//         setPan(p); panRef.current = p;
+//       }
+//     };
+//     const ro = new ResizeObserver(update);
+//     ro.observe(el);
+//     update();
+//     return () => ro.disconnect();
+//   }, [computePan, mounted]);
+
+//   useEffect(() => {
+//     const el = mainRef.current;
+//     if (!el) return;
+//     const calc = () => {
+//       const s   = getComputedStyle(el);
+//       const pad = parseFloat(s.paddingTop) + parseFloat(s.paddingBottom);
+//       const h   = Math.max(280, Math.min(el.clientHeight - pad, MAX_BOOK_H));
+//       setBookH(h); bookHRef.current = h;
+//     };
+//     const ro = new ResizeObserver(calc);
+//     ro.observe(el);
+//     calc();
+//     return () => ro.disconnect();
+//   }, []);
+
+//   const toggleFS = useCallback(async () => {
+//     try {
+//       if (!document.fullscreenElement) await containerRef.current?.requestFullscreen();
+//       else await document.exitFullscreen();
+//     } catch { /* ignore */ }
+//   }, []);
+//   useEffect(() => {
+//     const h = () => { setIsFS(!!document.fullscreenElement); resetZoom(); };
+//     document.addEventListener('fullscreenchange', h);
+//     return () => document.removeEventListener('fullscreenchange', h);
+//   }, [resetZoom]);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const m = window.location.hash.match(/page\/(\d+)/);
+//     if (!m) return;
+//     const n = parseInt(m[1], 10);
+//     if (n >= 1 && n <= TOTAL_PAGES)
+//       setTimeout(() => bookRef.current?.pageFlip()?.flip(n - 1), 350);
+//   }, [mounted]);
+
+//   const handleFlip = useCallback((e: { data: number }) => {
+//     const newPage = e.data;
+//     const prev    = prevPageRef.current;
+//     prevPageRef.current = newPage;
+//     curPageRef.current  = newPage;
+//     setCurPage(newPage);
+//     window.history.replaceState(null, '', `#page/${newPage + 1}`);
+//     if (zoomRef.current <= 1.01) {
+//       if (newPage === 0)       applyFocus('center');
+//       else if (newPage > prev) applyFocus('left');
+//       else                     applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goNext = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'right') {
+//       if (curPageRef.current < TOTAL_PAGES - 1)
+//         bookRef.current?.pageFlip()?.flipNext();
+//     } else {
+//       applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goPrev = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'left') {
+//       if (curPageRef.current > 0)
+//         bookRef.current?.pageFlip()?.flipPrev();
+//     } else {
+//       applyFocus('left');
+//     }
+//   }, [applyFocus]);
+
+//   const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
+//   const goLast  = useCallback(() => { bookRef.current?.pageFlip()?.flip(TOTAL_PAGES - 1); }, []);
+//   const goJump  = useCallback((n: number) => { bookRef.current?.pageFlip()?.flip(n); }, []);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const h = (e: KeyboardEvent) => {
+//       if (e.ctrlKey || e.metaKey) return;
+//       switch (e.key) {
+//         case 'Escape':       resetZoom(); break;
+//         case 'f': case 'F': toggleFS(); break;
+//         case '+': case '=': zoomTo(zoomRef.current + 0.5); break;
+//         case '-':           zoomTo(zoomRef.current - 0.5); break;
+//         case 'ArrowRight': case 'PageDown': goNext(); break;
+//         case 'ArrowLeft':  case 'PageUp':   goPrev(); break;
+//       }
+//     };
+//     window.addEventListener('keydown', h);
+//     return () => window.removeEventListener('keydown', h);
+//   }, [mounted, goNext, goPrev, resetZoom, toggleFS, zoomTo]);
+
+//   useEffect(() => {
+//     const container = zoomContainerRef.current;
+//     const overlay   = overlayRef.current;
+//     if (!container || !overlay) return;
+
+//     const g = {
+//       pinching: false, pd0: 0, pz0: 1,
+//       panning:  false, tx0: 0, ty0: 0, tpx0: 0, tpy0: 0,
+//       lastTap:  0,
+//       md: false, mx0: 0, my0: 0, px0: 0, py0: 0,
+//     };
+
+//     const onTouchStart = (e: TouchEvent) => {
+//       if (e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         g.pinching = true; g.panning = false;
+//         g.pd0 = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         g.pz0 = zoomRef.current;
+//         return;
+//       }
+//       const zoomed = zoomRef.current > 1.01;
+//       if (zoomed) {
+//         e.preventDefault(); e.stopPropagation();
+//         const now = Date.now();
+//         if (now - g.lastTap < 300) {
+//           g.lastTap = 0; g.panning = false;
+//           setZoom(1); zoomRef.current = 1;
+//           const p = computePan(focusSideRef.current);
+//           setPan(p); panRef.current = p;
+//           return;
+//         }
+//         g.lastTap = now;
+//         g.panning = true; g.pinching = false;
+//         g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//         g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//       }
+//     };
+
+//     const onTouchMove = (e: TouchEvent) => {
+//       if (g.pinching && e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         const d  = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         const newZ = clamp(g.pz0 * (d / g.pd0), ZOOM_MIN, ZOOM_MAX);
+//         zoomRef.current = newZ; setZoom(newZ);
+//         if (newZ <= 1.01) {
+//           const p = computePan(focusSideRef.current);
+//           setPan(p); panRef.current = p;
+//         }
+//         return;
+//       }
+//       if (e.touches.length === 1) {
+//         const zoomed = zoomRef.current > 1.01;
+//         if (!zoomed) return;
+//         e.preventDefault(); e.stopPropagation();
+//         if (!g.panning) {
+//           g.panning = true;
+//           g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//           g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//         }
+//         applyPan(
+//           g.tpx0 + e.clientX - g.mx0,
+//           g.tpy0 + e.clientY - g.my0,
+//           zoomRef.current,
+//         );
+//       }
+//     };
+
+//     const onTouchEnd = (e: TouchEvent) => {
+//       if (e.touches.length < 2) g.pinching = false;
+//       if (e.touches.length === 0) g.panning = false;
+//     };
+
+//     const onWheel = (e: WheelEvent) => {
+//       e.preventDefault();
+//       const rect  = container.getBoundingClientRect();
+//       const pivot = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+//       const d     = e.deltaMode === 1 ? e.deltaY * 30 : e.deltaY;
+//       zoomTo(zoomRef.current - d / 480, pivot);
+//     };
+
+//     const onMD = (e: MouseEvent) => {
+//       e.preventDefault(); g.md = true;
+//       g.mx0 = e.clientX; g.my0 = e.clientY;
+//       g.px0 = panRef.current.x; g.py0 = panRef.current.y;
+//     };
+//     const onMM = (e: MouseEvent) => {
+//       if (!g.md) return;
+//       applyPan(g.px0 + e.clientX - g.mx0, g.py0 + e.clientY - g.my0, zoomRef.current);
+//     };
+//     const onMU = () => { g.md = false; };
+
+//     container.addEventListener('touchstart', onTouchStart, { capture: true, passive: false });
+//     container.addEventListener('touchmove',  onTouchMove,  { capture: true, passive: false });
+//     container.addEventListener('touchend',   onTouchEnd,   { capture: true });
+//     container.addEventListener('wheel',      onWheel,      { capture: true, passive: false });
+//     overlay.addEventListener('mousedown', onMD);
+//     window.addEventListener('mousemove',  onMM);
+//     window.addEventListener('mouseup',    onMU);
+
+//     return () => {
+//       container.removeEventListener('touchstart', onTouchStart, { capture: true });
+//       container.removeEventListener('touchmove',  onTouchMove,  { capture: true });
+//       container.removeEventListener('touchend',   onTouchEnd,   { capture: true });
+//       container.removeEventListener('wheel',      onWheel,      { capture: true });
+//       overlay.removeEventListener('mousedown', onMD);
+//       window.removeEventListener('mousemove',  onMM);
+//       window.removeEventListener('mouseup',    onMU);
+//     };
+//   }, [applyPan, computePan, zoomTo, mounted]);
+
+//   return (
+//     <div
+//       ref={containerRef}
+//       className="fixed inset-0 flex flex-col z-40"
+//       style={{ background: 'linear-gradient(135deg, #0d1f2e 0%, #1a2f42 60%, #0d1f2e 100%)' }}
+//     >
+//       <main
+//         ref={mainRef}
+//         className="flex-1 flex items-center justify-center overflow-hidden"
+//         style={{ padding: '8px 24px' }}
+//       >
+//         {mounted && (
+//           <div
+//             ref={zoomContainerRef}
+//             className="relative w-full overflow-visible mx-auto"
+//             style={{
+//               maxWidth: '900px',
+//               touchAction: 'none',
+//               cursor: isZoomed ? 'grab' : 'default',
+//             }}
+//           >
+//             <div
+//               style={{
+//                 width: '100%',
+//                 transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+//                 transformOrigin: 'left top',
+//                 transition: 'transform 0.15s ease-out',
+//                 willChange: 'transform',
+//               }}
+//             >
+//               <HTMLFlipBook
+//                 ref={bookRef}
+//                 width={520}
+//                 height={720}
+//                 size="stretch"
+//                 display="double"
+//                 minWidth={100}
+//                 maxWidth={420}
+//                 minHeight={200}
+//                 maxHeight={bookH}
+//                 maxShadowOpacity={0.5}
+//                 showCover={true}
+//                 mobileScrollSupport={false}
+//                 useMouseEvents={true}
+//                 drawShadow={true}
+//                 flippingTime={650}
+//                 swipeDistance={30}
+//                 onFlip={handleFlip}
+//                 className="shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+//               >
+//                 {Array.from({ length: TOTAL_PAGES }, (_, i) => (
+//                   <FlipPage key={i + 1} pageNum={i + 1} />
+//                 ))}
+//               </HTMLFlipBook>
+//             </div>
+
+//             <div
+//               ref={overlayRef}
+//               style={{
+//                 position: 'absolute', inset: 0, zIndex: 10,
+//                 pointerEvents: isZoomed ? 'auto' : 'none',
+//                 cursor: isZoomed ? 'grab' : 'default',
+//                 userSelect: 'none',
+//               }}
+//             />
+
+//             {isZoomed && (
+//               <button
+//                 onClick={resetZoom}
+//                 style={{ zIndex: 20 }}
+//                 className="absolute bottom-3 left-1/2 -translate-x-1/2
+//                   bg-[#0d1f2e]/85 backdrop-blur border border-[#1484bc]/40
+//                   text-[#aec2cc] hover:text-white hover:border-[#1484bc]
+//                   text-[11px] px-3 py-1.5 rounded-full transition-colors select-none"
+//               >
+//                 {zoom.toFixed(1)}× — double tap to reset
+//               </button>
+//             )}
+//           </div>
+//         )}
+//       </main>
+
+//       {mounted && (
+//         <Toolbar
+//           curPage={curPage}
+//           zoom={zoom}
+//           isZoomed={isZoomed}
+//           isFS={isFS}
+//           onZoomOut={() => zoomTo(zoom - 0.5)}
+//           onZoomIn={() => zoomTo(zoom + 0.5)}
+//           onFirst={goFirst}
+//           onPrev={goPrev}
+//           onNext={goNext}
+//           onLast={goLast}
+//           onToggleFS={toggleFS}
+//           onJump={goJump}
+//         />
+//       )}
+//     </div>
+//   );
+// }
+
+// // ═══════════════════════════════════════════════════════════════════════════════
+// // ROOT — unchanged
+// // ═══════════════════════════════════════════════════════════════════════════════
+// export default function NewsletterViewer() {
+//   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+//   useEffect(() => {
+//     const check = () => setIsMobile(window.innerWidth < MOBILE_BP);
+//     check();
+//     window.addEventListener('resize', check);
+//     return () => window.removeEventListener('resize', check);
+//   }, []);
+
+//   if (isMobile === null) return null;
+
+//   return isMobile ? <MobileViewer /> : <DesktopViewer />;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client';
+
+// import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+// import dynamic from 'next/dynamic';
+// import {
+//   Download, Maximize2, Minimize2,
+//   ZoomIn, ZoomOut,
+//   ChevronLeft, ChevronRight,
+//   ChevronsLeft, ChevronsRight,
+// } from 'lucide-react';
+
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// type AnyProps = Record<string, any>;
+
+// const HTMLFlipBook = dynamic<AnyProps>(
+//   () =>
+//     import('react-pageflip').then(
+//       (m) => m.default as unknown as React.ComponentType<AnyProps>,
+//     ),
+//   { ssr: false },
+// );
+
+// // ─── Config ───────────────────────────────────────────────────────────────────
+// const TOTAL_PAGES  = 36;
+// const DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1ZeymzZzCOQIaqtIiOjhncyw6jV_mJxfT';
+// const IMG          = (n: number) => `/Assets/newsletterjpegs/pg${n}.jpg`;
+// const MAX_BOOK_H   = 520;
+// const ZOOM_MIN     = 1;
+// const ZOOM_MAX     = 4;
+// const MOBILE_BP    = 768;
+// const WRAPPER_MULT = 1.8;
+
+// const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+
+// type FocusSide = 'left' | 'right' | 'center';
+
+// // ─── Shared: Toolbar button ───────────────────────────────────────────────────
+// function TBtn({ onClick, disabled = false, title, href, children }: {
+//   onClick?: () => void; disabled?: boolean; title?: string;
+//   href?: string; children: React.ReactNode;
+// }) {
+//   const cls =
+//     'flex items-center justify-center w-9 h-9 rounded ' +
+//     'text-[#aec2cc] hover:text-white hover:bg-[#1484bc]/25 ' +
+//     'disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0';
+//   if (href)
+//     return <a href={href} target="_blank" rel="noopener noreferrer" title={title} className={cls}>{children}</a>;
+//   return <button onClick={onClick} disabled={disabled} title={title} className={cls}>{children}</button>;
+// }
+
+// // ─── Shared: Toolbar ──────────────────────────────────────────────────────────
+// function Toolbar({
+//   curPage, zoom, isZoomed, isFS,
+//   onZoomOut, onZoomIn, onFirst, onPrev, onNext, onLast, onToggleFS, onJump,
+// }: {
+//   curPage: number; zoom: number; isZoomed: boolean; isFS: boolean;
+//   onZoomOut: () => void; onZoomIn: () => void;
+//   onFirst: () => void; onPrev: () => void; onNext: () => void; onLast: () => void;
+//   onToggleFS: () => void; onJump: (n: number) => void;
+// }) {
+//   const displayPage = curPage + 1;
+//   return (
+//     <div className="bg-[#1e3143] border-t border-[#1484bc]/15 px-2 py-1.5 flex items-center justify-center gap-0.5 flex-shrink-0 z-30">
+//       <TBtn onClick={onZoomOut} disabled={!isZoomed} title="Zoom out (−)">
+//         <ZoomOut className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onFirst} title="First page">
+//         <ChevronsLeft className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onPrev} title="Previous">
+//         <ChevronLeft className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <div className="flex items-center gap-1 px-1">
+//         <input
+//           type="number" min={1} max={TOTAL_PAGES}
+//           defaultValue={displayPage} key={displayPage}
+//           onKeyDown={(e) => {
+//             if (e.key !== 'Enter') return;
+//             const n = parseInt((e.target as HTMLInputElement).value, 10);
+//             if (n >= 1 && n <= TOTAL_PAGES) onJump(n - 1);
+//           }}
+//           className="w-9 text-center bg-[#0d1f2e] border border-[#1484bc]/30 text-[#fafbf9] rounded px-1 py-0.5 text-xs outline-none"
+//         />
+//         <span className="text-[#aec2cc] text-xs whitespace-nowrap">/ {TOTAL_PAGES}</span>
+//       </div>
+//       <TBtn onClick={onNext} title="Next">
+//         <ChevronRight className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onLast} title="Last page">
+//         <ChevronsRight className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn href={DOWNLOAD_URL} title="Download PDF">
+//         <Download className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onZoomIn} disabled={zoom >= ZOOM_MAX} title="Zoom in (+)">
+//         <ZoomIn className="w-[18px] h-[18px]" />
+//       </TBtn>
+//       <TBtn onClick={onToggleFS} title={isFS ? 'Exit full screen' : 'Full screen'}>
+//         {isFS ? <Minimize2 className="w-[18px] h-[18px]" /> : <Maximize2 className="w-[18px] h-[18px]" />}
+//       </TBtn>
+//     </div>
+//   );
+// }
+
+// // ─── Shared: FlipPage ─────────────────────────────────────────────────────────
+// const FlipPage = forwardRef<HTMLDivElement, { pageNum: number }>(({ pageNum }, ref) => (
+//   <div ref={ref} className="relative w-full h-full bg-white overflow-hidden select-none">
+//     {/* eslint-disable-next-line @next/next/no-img-element */}
+//     <img
+//       src={IMG(pageNum)}
+//       alt={`Page ${pageNum}`}
+//       className="w-full h-full object-cover"
+//       loading={pageNum <= 6 ? 'eager' : 'lazy'}
+//       draggable={false}
+//     />
+//   </div>
+// ));
+// FlipPage.displayName = 'FlipPage';
+
+// // ═══════════════════════════════════════════════════════════════════════════════
+// // MOBILE VIEWER
+// // ═══════════════════════════════════════════════════════════════════════════════
+// function MobileViewer() {
+//   const [mounted,   setMounted]   = useState(false);
+//   const [curPage,   setCurPage]   = useState(0);
+//   const [bookH,     setBookH]     = useState(520);
+//   const [zoom,      setZoom]      = useState(1);
+//   const [pan,       setPan]       = useState({ x: 0, y: 0 });
+//   const [isFS,      setIsFS]      = useState(false);
+//   const [focusSide, setFocusSide] = useState<FocusSide>('right');
+
+//   const zoomRef       = useRef(1);
+//   const panRef        = useRef({ x: 0, y: 0 });
+//   const bookHRef      = useRef(520);
+//   const containerWRef = useRef(0);
+//   const focusSideRef  = useRef<FocusSide>('right');
+//   const curPageRef    = useRef(0);
+//   const prevPageRef   = useRef(0);
+
+//   zoomRef.current  = zoom;
+//   panRef.current   = pan;
+//   bookHRef.current = bookH;
+
+//   const isZoomed = zoom > 1.01;
+
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const bookRef        = useRef<any>(null);
+//   const containerRef   = useRef<HTMLDivElement>(null);
+//   const mainRef        = useRef<HTMLDivElement>(null);
+//   const clipRef        = useRef<HTMLDivElement>(null);
+//   const bookWrapperRef = useRef<HTMLDivElement>(null);
+
+//   // ── Pan limits ───────────────────────────────────────────────────────────────
+//   //
+//   // pageW  = WRAPPER_MULT * W / 2  (each page width inside the 150% wrapper)
+//   //
+//   // leftFocusPan  = W/2 - pageW/2  = the pan that centres the left  page → ~+0.05W
+//   // rightFocusPan = W/2 - 3*pageW/2 = the pan that centres the right page → ~-0.85W
+//   //
+//   // xMax = leftFocusPan
+//   //   Prevents panning further right than the left-focus position.
+//   //   Beyond this point the wrapper shifts off the left edge of the viewport,
+//   //   exposing empty dark background — exactly the bug being fixed.
+//   //
+//   // xMin = min(rightFocusPan, W*(1 - WRAPPER_MULT*z))
+//   //   At z=1: ensures the right-focus position is always reachable.
+//   //   At z>1: expands leftward so the full zoomed wrapper stays scrollable.
+//   const getPanLimits = useCallback((z: number) => {
+//     const W     = containerWRef.current;
+//     const bH    = bookHRef.current;
+//     const pageW = (WRAPPER_MULT * W) / 2;
+
+//     const leftFocusPan  = W / 2 - pageW / 2;           // ~+0.05W
+//     const rightFocusPan = W / 2 - pageW - pageW / 2;   // ~-0.85W
+
+//     return {
+//       xMin: Math.min(rightFocusPan, W * (1 - WRAPPER_MULT * z)),
+//       xMax: leftFocusPan,
+//       yMin: -(bH * (z - 1)),
+//       yMax: 0,
+//     };
+//   }, []);
+
+//   const applyPan = useCallback((x: number, y: number, z: number) => {
+//     const lims = getPanLimits(z);
+//     const np   = { x: clamp(x, lims.xMin, lims.xMax), y: clamp(y, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [getPanLimits]);
+
+//   // ── computePan ───────────────────────────────────────────────────────────────
+//   const computePan = useCallback((side: FocusSide): { x: number; y: number } => {
+//     const W     = containerWRef.current;
+//     const pageW = (WRAPPER_MULT * W) / 2;
+//     if (side === 'left')
+//       return { x: W / 2 - pageW / 2,           y: 0 };
+//     if (side === 'right')
+//       return { x: W / 2 - pageW - pageW / 2,   y: 0 };
+//     return   { x: -(W * (WRAPPER_MULT - 1)) / 2, y: 0 };
+//   }, []);
+
+//   const applyFocus = useCallback((side: FocusSide) => {
+//     if (zoomRef.current > 1.01) return;
+//     focusSideRef.current = side;
+//     setFocusSide(side);
+//     const p = computePan(side);
+//     setPan(p); panRef.current = p;
+//   }, [computePan]);
+
+//   // ── zoomTo ───────────────────────────────────────────────────────────────────
+//   const zoomTo = useCallback((newZ: number, pivot?: { x: number; y: number }) => {
+//     newZ = clamp(newZ, ZOOM_MIN, ZOOM_MAX);
+//     const oldZ = zoomRef.current;
+//     const W    = containerWRef.current;
+//     const bH   = bookHRef.current;
+//     const old  = panRef.current;
+//     const px   = pivot?.x ?? W / 2;
+//     const py   = pivot?.y ?? bH / 2;
+
+//     if (newZ <= 1.01) {
+//       setZoom(1); zoomRef.current = 1;
+//       const p = computePan(focusSideRef.current);
+//       setPan(p); panRef.current = p;
+//       return;
+//     }
+
+//     const nx   = px - (px - old.x) * newZ / oldZ;
+//     const ny   = py - (py - old.y) * newZ / oldZ;
+//     const lims = getPanLimits(newZ);
+//     setZoom(newZ); zoomRef.current = newZ;
+//     const np = { x: clamp(nx, lims.xMin, lims.xMax), y: clamp(ny, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [computePan, getPanLimits]);
+
+//   const resetZoom = useCallback(() => zoomTo(1), [zoomTo]);
+
+//   useEffect(() => { setMounted(true); }, []);
+
+//   useEffect(() => {
+//     const el = clipRef.current;
+//     if (!el) return;
+//     const update = () => {
+//       containerWRef.current = el.clientWidth;
+//       if (zoomRef.current <= 1.01) {
+//         const p = computePan(focusSideRef.current);
+//         setPan(p); panRef.current = p;
+//       }
+//     };
+//     const ro = new ResizeObserver(update);
+//     ro.observe(el);
+//     update();
+//     return () => ro.disconnect();
+//   }, [computePan, mounted]);
+
+//   useEffect(() => {
+//     const el = mainRef.current;
+//     if (!el) return;
+//     const calc = () => {
+//       const s   = getComputedStyle(el);
+//       const pad = parseFloat(s.paddingTop) + parseFloat(s.paddingBottom);
+//       const h   = Math.max(280, el.clientHeight - pad);
+//       setBookH(h); bookHRef.current = h;
+//     };
+//     const ro = new ResizeObserver(calc);
+//     ro.observe(el);
+//     calc();
+//     return () => ro.disconnect();
+//   }, []);
+
+//   const toggleFS = useCallback(async () => {
+//     try {
+//       if (!document.fullscreenElement) {
+//         await containerRef.current?.requestFullscreen();
+//       } else {
+//         await document.exitFullscreen();
+//       }
+//     } catch {
+//       // Browser may refuse (e.g. iframe sandbox) — fail silently
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     const onFsChange = () => setIsFS(!!document.fullscreenElement);
+//     document.addEventListener('fullscreenchange', onFsChange);
+//     return () => document.removeEventListener('fullscreenchange', onFsChange);
+//   }, []);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const m = window.location.hash.match(/page\/(\d+)/);
+//     if (!m) return;
+//     const n = parseInt(m[1], 10);
+//     if (n >= 1 && n <= TOTAL_PAGES)
+//       setTimeout(() => bookRef.current?.pageFlip()?.flip(n - 1), 350);
+//   }, [mounted]);
+
+//   const handleFlip = useCallback((e: { data: number }) => {
+//     const newPage = e.data;
+//     const prev    = prevPageRef.current;
+//     prevPageRef.current = newPage;
+//     curPageRef.current  = newPage;
+//     setCurPage(newPage);
+//     window.history.replaceState(null, '', `#page/${newPage + 1}`);
+//     if (zoomRef.current <= 1.01) {
+//       if (newPage === 0)       applyFocus('right');
+//       else if (newPage > prev) applyFocus('left');
+//       else                     applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goNext = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'right') {
+//       if (curPageRef.current < TOTAL_PAGES - 1)
+//         bookRef.current?.pageFlip()?.flipNext();
+//     } else {
+//       applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goPrev = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'left') {
+//       if (curPageRef.current > 0)
+//         bookRef.current?.pageFlip()?.flipPrev();
+//     } else {
+//       applyFocus('left');
+//     }
+//   }, [applyFocus]);
+
+//   const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
+//   const goLast  = useCallback(() => { bookRef.current?.pageFlip()?.flip(TOTAL_PAGES - 1); }, []);
+//   const goJump  = useCallback((n: number) => { bookRef.current?.pageFlip()?.flip(n); }, []);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const h = (e: KeyboardEvent) => {
+//       if (e.ctrlKey || e.metaKey) return;
+//       switch (e.key) {
+//         case 'Escape':       resetZoom(); break;
+//         case 'f': case 'F': toggleFS(); break;
+//         case '+': case '=': zoomTo(zoomRef.current + 0.5); break;
+//         case '-':           zoomTo(zoomRef.current - 0.5); break;
+//         case 'ArrowRight': case 'PageDown': goNext(); break;
+//         case 'ArrowLeft':  case 'PageUp':   goPrev(); break;
+//       }
+//     };
+//     window.addEventListener('keydown', h);
+//     return () => window.removeEventListener('keydown', h);
+//   }, [mounted, goNext, goPrev, resetZoom, toggleFS, zoomTo]);
+
+//   useEffect(() => {
+//     const el = clipRef.current;
+//     if (!el) return;
+
+//     const g = {
+//       pinching: false, pd0: 0, prevD: 0, pz0: 1,
+//       panning:  false, tx0: 0, ty0: 0, tpx0: 0, tpy0: 0,
+//       lastTap:  0,
+//     };
+
+//     const onTouchStart = (e: TouchEvent) => {
+//       if (e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         g.pinching = true; g.panning = false;
+//         g.pd0 = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         g.prevD = g.pd0;
+//         g.pz0   = zoomRef.current;
+//         return;
+//       }
+//       e.preventDefault(); e.stopPropagation();
+//       const now = Date.now();
+//       if (now - g.lastTap < 300) {
+//         g.lastTap = 0; g.panning = false;
+//         setZoom(1); zoomRef.current = 1;
+//         const p = computePan(focusSideRef.current);
+//         setPan(p); panRef.current = p;
+//         return;
+//       }
+//       g.lastTap = now;
+//       g.panning = true; g.pinching = false;
+//       g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//       g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//     };
+
+//     const onTouchMove = (e: TouchEvent) => {
+//       if (g.pinching && e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         const d      = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         const rect   = el.getBoundingClientRect();
+//         const pivotX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+//         const pivotY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+//         const ratio  = g.prevD > 0 ? d / g.prevD : 1;
+//         g.prevD      = d;
+//         zoomTo(zoomRef.current * ratio, { x: pivotX, y: pivotY });
+//         return;
+//       }
+//       if (e.touches.length === 1) {
+//         e.preventDefault(); e.stopPropagation();
+//         if (!g.panning) {
+//           g.panning = true;
+//           g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//           g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//         }
+//         applyPan(
+//           g.tpx0 + e.touches[0].clientX - g.tx0,
+//           g.tpy0 + e.touches[0].clientY - g.ty0,
+//           zoomRef.current,
+//         );
+//       }
+//     };
+
+//     const onTouchEnd = (e: TouchEvent) => {
+//       if (e.touches.length < 2) { g.pinching = false; g.prevD = 0; }
+//       if (e.touches.length === 0) g.panning = false;
+//     };
+
+//     el.addEventListener('touchstart', onTouchStart, { capture: true, passive: false });
+//     el.addEventListener('touchmove',  onTouchMove,  { capture: true, passive: false });
+//     el.addEventListener('touchend',   onTouchEnd,   { capture: true });
+//     return () => {
+//       el.removeEventListener('touchstart', onTouchStart, { capture: true });
+//       el.removeEventListener('touchmove',  onTouchMove,  { capture: true });
+//       el.removeEventListener('touchend',   onTouchEnd,   { capture: true });
+//     };
+//   }, [applyPan, computePan, zoomTo, mounted]);
+
+//   return (
+//     <div
+//       ref={containerRef}
+//       className="fixed inset-0 flex flex-col z-40"
+//       style={{ background: 'linear-gradient(135deg, #0d1f2e 0%, #1a2f42 60%, #0d1f2e 100%)' }}
+//     >
+//       <main
+//         ref={mainRef}
+//         className="flex-1 flex items-center justify-center overflow-hidden"
+//         style={{ padding: '4px 0' }}
+//       >
+//         {mounted && (
+//           <div
+//             ref={clipRef}
+//             style={{
+//               position: 'relative',
+//               width: '100%',
+//               overflow: 'hidden',
+//               touchAction: 'none',
+//               cursor: isZoomed ? 'grab' : 'default',
+//             }}
+//           >
+//             <div
+//               ref={bookWrapperRef}
+//               style={{
+//                 width: `${WRAPPER_MULT * 100}%`,
+//                 transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+//                 transformOrigin: 'left top',
+//                 transition: 'transform 0.30s ease-out',
+//                 willChange: 'transform',
+//               }}
+//             >
+//               <HTMLFlipBook
+//                 ref={bookRef}
+//                 width={520}
+//                 height={720}
+//                 size="stretch"
+//                 display="double"
+//                 minWidth={100}
+//                 maxWidth={99999}
+//                 minHeight={200}
+//                 maxHeight={bookH}
+//                 maxShadowOpacity={0.5}
+//                 showCover={true}
+//                 mobileScrollSupport={false}
+//                 useMouseEvents={false}
+//                 drawShadow={true}
+//                 flippingTime={1000}
+//                 swipeDistance={99999}
+//                 onFlip={handleFlip}
+//                 className="shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+//               >
+//                 {Array.from({ length: TOTAL_PAGES }, (_, i) => (
+//                   <FlipPage key={i + 1} pageNum={i + 1} />
+//                 ))}
+//               </HTMLFlipBook>
+//             </div>
+
+//             {isZoomed && (
+//               <button
+//                 onClick={resetZoom}
+//                 style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', zIndex: 20 }}
+//                 className="bg-[#0d1f2e]/85 backdrop-blur border border-[#1484bc]/40
+//                   text-[#aec2cc] hover:text-white hover:border-[#1484bc]
+//                   text-[11px] px-3 py-1.5 rounded-full transition-colors select-none"
+//               >
+//                 {zoom.toFixed(1)}× — double tap to reset
+//               </button>
+//             )}
+//           </div>
+//         )}
+//       </main>
+
+//       {mounted && (
+//         <Toolbar
+//           curPage={curPage}
+//           zoom={zoom}
+//           isZoomed={isZoomed}
+//           isFS={isFS}
+//           onZoomOut={() => zoomTo(zoom - 0.5)}
+//           onZoomIn={() => zoomTo(zoom + 0.5)}
+//           onFirst={goFirst}
+//           onPrev={goPrev}
+//           onNext={goNext}
+//           onLast={goLast}
+//           onToggleFS={toggleFS}
+//           onJump={goJump}
+//         />
+//       )}
+//     </div>
+//   );
+// }
+
+// // ═══════════════════════════════════════════════════════════════════════════════
+// // DESKTOP VIEWER — unchanged
+// // ═══════════════════════════════════════════════════════════════════════════════
+// function DesktopViewer() {
+//   const [mounted,  setMounted]  = useState(false);
+//   const [curPage,  setCurPage]  = useState(0);
+//   const [isFS,     setIsFS]     = useState(false);
+//   const [bookH,    setBookH]    = useState(MAX_BOOK_H);
+//   const [zoom,     setZoom]     = useState(1);
+//   const [pan,      setPan]      = useState({ x: 0, y: 0 });
+
+//   const zoomRef        = useRef(1);
+//   const panRef         = useRef({ x: 0, y: 0 });
+//   const bookHRef       = useRef(MAX_BOOK_H);
+//   const containerWRef  = useRef(0);
+//   const focusSideRef   = useRef<FocusSide>('left');
+//   const curPageRef     = useRef(0);
+//   const prevPageRef    = useRef(0);
+
+//   zoomRef.current  = zoom;
+//   panRef.current   = pan;
+//   bookHRef.current = bookH;
+
+//   const isZoomed = zoom > 1.01;
+
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const bookRef          = useRef<any>(null);
+//   const mainRef          = useRef<HTMLDivElement>(null);
+//   const containerRef     = useRef<HTMLDivElement>(null);
+//   const zoomContainerRef = useRef<HTMLDivElement>(null);
+//   const overlayRef       = useRef<HTMLDivElement>(null);
+
+//   const getPanLimits = useCallback((z: number) => {
+//     const m = (z - 1) * 500;
+//     return { xMin: -m, xMax: m, yMin: -(m * 0.8), yMax: m * 0.8 };
+//   }, []);
+
+//   const applyPan = useCallback((x: number, y: number, z: number) => {
+//     const lims = getPanLimits(z);
+//     const np   = { x: clamp(x, lims.xMin, lims.xMax), y: clamp(y, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [getPanLimits]);
+
+//   const computePan = useCallback((side: FocusSide): { x: number; y: number } => {
+//     const spreadW = zoomContainerRef.current?.offsetWidth ?? 600;
+//     const bookW   = Math.min(spreadW, 840);
+//     const offset  = bookW / 4;
+//     if (side === 'left')  return { x:  offset, y: 0 };
+//     if (side === 'right') return { x: -offset, y: 0 };
+//     return { x: 0, y: 0 };
+//   }, []);
+
+//   const applyFocus = useCallback((side: FocusSide) => {
+//     if (zoomRef.current > 1.01) return;
+//     focusSideRef.current = side;
+//     const p = computePan(side);
+//     setPan(p); panRef.current = p;
+//   }, [computePan]);
+
+//   const zoomTo = useCallback((newZ: number, pivot?: { x: number; y: number }) => {
+//     newZ = clamp(newZ, ZOOM_MIN, ZOOM_MAX);
+//     const oldZ = zoomRef.current;
+//     const W    = containerWRef.current;
+//     const bH   = bookHRef.current;
+//     const old  = panRef.current;
+//     const px   = pivot?.x ?? W / 2;
+//     const py   = pivot?.y ?? bH / 2;
+
+//     if (newZ <= 1.01) {
+//       setZoom(1); zoomRef.current = 1;
+//       const p = computePan(focusSideRef.current);
+//       setPan(p); panRef.current = p;
+//       return;
+//     }
+
+//     const nx = px - (px - old.x) * newZ / oldZ;
+//     const ny = py - (py - old.y) * newZ / oldZ;
+//     const lims = getPanLimits(newZ);
+
+//     setZoom(newZ); zoomRef.current = newZ;
+//     const np = { x: clamp(nx, lims.xMin, lims.xMax), y: clamp(ny, lims.yMin, lims.yMax) };
+//     setPan(np); panRef.current = np;
+//   }, [computePan, getPanLimits]);
+
+//   const resetZoom = useCallback(() => zoomTo(1), [zoomTo]);
+
+//   useEffect(() => { setMounted(true); }, []);
+
+//   useEffect(() => {
+//     const el = zoomContainerRef.current;
+//     if (!el) return;
+//     const update = () => {
+//       containerWRef.current = el.clientWidth;
+//       if (zoomRef.current <= 1.01) {
+//         const p = computePan(focusSideRef.current);
+//         setPan(p); panRef.current = p;
+//       }
+//     };
+//     const ro = new ResizeObserver(update);
+//     ro.observe(el);
+//     update();
+//     return () => ro.disconnect();
+//   }, [computePan, mounted]);
+
+//   useEffect(() => {
+//     const el = mainRef.current;
+//     if (!el) return;
+//     const calc = () => {
+//       const s   = getComputedStyle(el);
+//       const pad = parseFloat(s.paddingTop) + parseFloat(s.paddingBottom);
+//       const h   = Math.max(280, Math.min(el.clientHeight - pad, MAX_BOOK_H));
+//       setBookH(h); bookHRef.current = h;
+//     };
+//     const ro = new ResizeObserver(calc);
+//     ro.observe(el);
+//     calc();
+//     return () => ro.disconnect();
+//   }, []);
+
+//   const toggleFS = useCallback(async () => {
+//     try {
+//       if (!document.fullscreenElement) await containerRef.current?.requestFullscreen();
+//       else await document.exitFullscreen();
+//     } catch { /* ignore */ }
+//   }, []);
+//   useEffect(() => {
+//     const h = () => { setIsFS(!!document.fullscreenElement); resetZoom(); };
+//     document.addEventListener('fullscreenchange', h);
+//     return () => document.removeEventListener('fullscreenchange', h);
+//   }, [resetZoom]);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const m = window.location.hash.match(/page\/(\d+)/);
+//     if (!m) return;
+//     const n = parseInt(m[1], 10);
+//     if (n >= 1 && n <= TOTAL_PAGES)
+//       setTimeout(() => bookRef.current?.pageFlip()?.flip(n - 1), 350);
+//   }, [mounted]);
+
+//   const handleFlip = useCallback((e: { data: number }) => {
+//     const newPage = e.data;
+//     const prev    = prevPageRef.current;
+//     prevPageRef.current = newPage;
+//     curPageRef.current  = newPage;
+//     setCurPage(newPage);
+//     window.history.replaceState(null, '', `#page/${newPage + 1}`);
+//     if (zoomRef.current <= 1.01) {
+//       if (newPage === 0)       applyFocus('center');
+//       else if (newPage > prev) applyFocus('left');
+//       else                     applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goNext = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'right') {
+//       if (curPageRef.current < TOTAL_PAGES - 1)
+//         bookRef.current?.pageFlip()?.flipNext();
+//     } else {
+//       applyFocus('right');
+//     }
+//   }, [applyFocus]);
+
+//   const goPrev = useCallback(() => {
+//     const onCover = curPageRef.current === 0;
+//     if (onCover || focusSideRef.current === 'left') {
+//       if (curPageRef.current > 0)
+//         bookRef.current?.pageFlip()?.flipPrev();
+//     } else {
+//       applyFocus('left');
+//     }
+//   }, [applyFocus]);
+
+//   const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
+//   const goLast  = useCallback(() => { bookRef.current?.pageFlip()?.flip(TOTAL_PAGES - 1); }, []);
+//   const goJump  = useCallback((n: number) => { bookRef.current?.pageFlip()?.flip(n); }, []);
+
+//   useEffect(() => {
+//     if (!mounted) return;
+//     const h = (e: KeyboardEvent) => {
+//       if (e.ctrlKey || e.metaKey) return;
+//       switch (e.key) {
+//         case 'Escape':       resetZoom(); break;
+//         case 'f': case 'F': toggleFS(); break;
+//         case '+': case '=': zoomTo(zoomRef.current + 0.5); break;
+//         case '-':           zoomTo(zoomRef.current - 0.5); break;
+//         case 'ArrowRight': case 'PageDown': goNext(); break;
+//         case 'ArrowLeft':  case 'PageUp':   goPrev(); break;
+//       }
+//     };
+//     window.addEventListener('keydown', h);
+//     return () => window.removeEventListener('keydown', h);
+//   }, [mounted, goNext, goPrev, resetZoom, toggleFS, zoomTo]);
+
+//   useEffect(() => {
+//     const container = zoomContainerRef.current;
+//     const overlay   = overlayRef.current;
+//     if (!container || !overlay) return;
+
+//     const g = {
+//       pinching: false, pd0: 0, pz0: 1,
+//       panning:  false, tx0: 0, ty0: 0, tpx0: 0, tpy0: 0,
+//       lastTap:  0,
+//       md: false, mx0: 0, my0: 0, px0: 0, py0: 0,
+//     };
+
+//     const onTouchStart = (e: TouchEvent) => {
+//       if (e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         g.pinching = true; g.panning = false;
+//         g.pd0 = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         g.pz0 = zoomRef.current;
+//         return;
+//       }
+//       const zoomed = zoomRef.current > 1.01;
+//       if (zoomed) {
+//         e.preventDefault(); e.stopPropagation();
+//         const now = Date.now();
+//         if (now - g.lastTap < 300) {
+//           g.lastTap = 0; g.panning = false;
+//           setZoom(1); zoomRef.current = 1;
+//           const p = computePan(focusSideRef.current);
+//           setPan(p); panRef.current = p;
+//           return;
+//         }
+//         g.lastTap = now;
+//         g.panning = true; g.pinching = false;
+//         g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//         g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//       }
+//     };
+
+//     const onTouchMove = (e: TouchEvent) => {
+//       if (g.pinching && e.touches.length >= 2) {
+//         e.preventDefault(); e.stopPropagation();
+//         const d  = Math.hypot(
+//           e.touches[0].clientX - e.touches[1].clientX,
+//           e.touches[0].clientY - e.touches[1].clientY,
+//         );
+//         const newZ = clamp(g.pz0 * (d / g.pd0), ZOOM_MIN, ZOOM_MAX);
+//         zoomRef.current = newZ; setZoom(newZ);
+//         if (newZ <= 1.01) {
+//           const p = computePan(focusSideRef.current);
+//           setPan(p); panRef.current = p;
+//         }
+//         return;
+//       }
+//       if (e.touches.length === 1) {
+//         const zoomed = zoomRef.current > 1.01;
+//         if (!zoomed) return;
+//         e.preventDefault(); e.stopPropagation();
+//         if (!g.panning) {
+//           g.panning = true;
+//           g.tx0  = e.touches[0].clientX; g.ty0  = e.touches[0].clientY;
+//           g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
+//         }
+//        applyPan(
+//   g.tpx0 + e.touches[0].clientX - g.tx0,
+//   g.tpy0 + e.touches[0].clientY - g.ty0,
+//   zoomRef.current,
+// );
+//       }
+//     };
+
+//     const onTouchEnd = (e: TouchEvent) => {
+//       if (e.touches.length < 2) g.pinching = false;
+//       if (e.touches.length === 0) g.panning = false;
+//     };
+
+//     const onWheel = (e: WheelEvent) => {
+//       e.preventDefault();
+//       const rect  = container.getBoundingClientRect();
+//       const pivot = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+//       const d     = e.deltaMode === 1 ? e.deltaY * 30 : e.deltaY;
+//       zoomTo(zoomRef.current - d / 480, pivot);
+//     };
+
+//     const onMD = (e: MouseEvent) => {
+//       e.preventDefault(); g.md = true;
+//       g.mx0 = e.clientX; g.my0 = e.clientY;
+//       g.px0 = panRef.current.x; g.py0 = panRef.current.y;
+//     };
+//     const onMM = (e: MouseEvent) => {
+//       if (!g.md) return;
+//       applyPan(g.px0 + e.clientX - g.mx0, g.py0 + e.clientY - g.my0, zoomRef.current);
+//     };
+//     const onMU = () => { g.md = false; };
+
+//     container.addEventListener('touchstart', onTouchStart, { capture: true, passive: false });
+//     container.addEventListener('touchmove',  onTouchMove,  { capture: true, passive: false });
+//     container.addEventListener('touchend',   onTouchEnd,   { capture: true });
+//     container.addEventListener('wheel',      onWheel,      { capture: true, passive: false });
+//     overlay.addEventListener('mousedown', onMD);
+//     window.addEventListener('mousemove',  onMM);
+//     window.addEventListener('mouseup',    onMU);
+
+//     return () => {
+//       container.removeEventListener('touchstart', onTouchStart, { capture: true });
+//       container.removeEventListener('touchmove',  onTouchMove,  { capture: true });
+//       container.removeEventListener('touchend',   onTouchEnd,   { capture: true });
+//       container.removeEventListener('wheel',      onWheel,      { capture: true });
+//       overlay.removeEventListener('mousedown', onMD);
+//       window.removeEventListener('mousemove',  onMM);
+//       window.removeEventListener('mouseup',    onMU);
+//     };
+//   }, [applyPan, computePan, zoomTo, mounted]);
+
+//   return (
+//     <div
+//       ref={containerRef}
+//       className="fixed inset-0 flex flex-col z-40"
+//       style={{ background: 'linear-gradient(135deg, #0d1f2e 0%, #1a2f42 60%, #0d1f2e 100%)' }}
+//     >
+//       <main
+//         ref={mainRef}
+//         className="flex-1 flex items-center justify-center overflow-hidden"
+//         style={{ padding: '8px 24px' }}
+//       >
+//         {mounted && (
+//           <div
+//             ref={zoomContainerRef}
+//             className="relative w-full overflow-visible mx-auto"
+//             style={{
+//               maxWidth: '900px',
+//               touchAction: 'none',
+//               cursor: isZoomed ? 'grab' : 'default',
+//             }}
+//           >
+//             <div
+//               style={{
+//                 width: '100%',
+//                 transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+//                 transformOrigin: 'left top',
+//                 transition: 'transform 0.15s ease-out',
+//                 willChange: 'transform',
+//               }}
+//             >
+//               <HTMLFlipBook
+//                 ref={bookRef}
+//                 width={520}
+//                 height={720}
+//                 size="stretch"
+//                 display="double"
+//                 minWidth={100}
+//                 maxWidth={420}
+//                 minHeight={200}
+//                 maxHeight={bookH}
+//                 maxShadowOpacity={0.5}
+//                 showCover={true}
+//                 mobileScrollSupport={false}
+//                 useMouseEvents={true}
+//                 drawShadow={true}
+//                 flippingTime={650}
+//                 swipeDistance={30}
+//                 onFlip={handleFlip}
+//                 className="shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+//               >
+//                 {Array.from({ length: TOTAL_PAGES }, (_, i) => (
+//                   <FlipPage key={i + 1} pageNum={i + 1} />
+//                 ))}
+//               </HTMLFlipBook>
+//             </div>
+
+//             <div
+//               ref={overlayRef}
+//               style={{
+//                 position: 'absolute', inset: 0, zIndex: 10,
+//                 pointerEvents: isZoomed ? 'auto' : 'none',
+//                 cursor: isZoomed ? 'grab' : 'default',
+//                 userSelect: 'none',
+//               }}
+//             />
+
+//             {isZoomed && (
+//               <button
+//                 onClick={resetZoom}
+//                 style={{ zIndex: 20 }}
+//                 className="absolute bottom-3 left-1/2 -translate-x-1/2
+//                   bg-[#0d1f2e]/85 backdrop-blur border border-[#1484bc]/40
+//                   text-[#aec2cc] hover:text-white hover:border-[#1484bc]
+//                   text-[11px] px-3 py-1.5 rounded-full transition-colors select-none"
+//               >
+//                 {zoom.toFixed(1)}× — double tap to reset
+//               </button>
+//             )}
+//           </div>
+//         )}
+//       </main>
+
+//       {mounted && (
+//         <Toolbar
+//           curPage={curPage}
+//           zoom={zoom}
+//           isZoomed={isZoomed}
+//           isFS={isFS}
+//           onZoomOut={() => zoomTo(zoom - 0.5)}
+//           onZoomIn={() => zoomTo(zoom + 0.5)}
+//           onFirst={goFirst}
+//           onPrev={goPrev}
+//           onNext={goNext}
+//           onLast={goLast}
+//           onToggleFS={toggleFS}
+//           onJump={goJump}
+//         />
+//       )}
+//     </div>
+//   );
+// }
+
+// // ═══════════════════════════════════════════════════════════════════════════════
+// // ROOT — unchanged
+// // ═══════════════════════════════════════════════════════════════════════════════
+// export default function NewsletterViewer() {
+//   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+//   useEffect(() => {
+//     const check = () => setIsMobile(window.innerWidth < MOBILE_BP);
+//     check();
+//     window.addEventListener('resize', check);
+//     return () => window.removeEventListener('resize', check);
+//   }, []);
+
+//   if (isMobile === null) return null;
+
+//   return isMobile ? <MobileViewer /> : <DesktopViewer />;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 'use client';
 
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
@@ -6223,13 +8180,12 @@ FlipPage.displayName = 'FlipPage';
 // MOBILE VIEWER
 // ═══════════════════════════════════════════════════════════════════════════════
 function MobileViewer() {
-  const [mounted,   setMounted]   = useState(false);
-  const [curPage,   setCurPage]   = useState(0);
-  const [bookH,     setBookH]     = useState(520);
-  const [zoom,      setZoom]      = useState(1);
-  const [pan,       setPan]       = useState({ x: 0, y: 0 });
-  const [isFS,      setIsFS]      = useState(false);
-  const [focusSide, setFocusSide] = useState<FocusSide>('right');
+  const [mounted,  setMounted]  = useState(false);
+  const [curPage,  setCurPage]  = useState(0);
+  const [bookH,    setBookH]    = useState(520);
+  const [zoom,     setZoom]     = useState(1);
+  const [pan,      setPan]      = useState({ x: 0, y: 0 });
+  const [isFS,     setIsFS]     = useState(false);
 
   const zoomRef       = useRef(1);
   const panRef        = useRef({ x: 0, y: 0 });
@@ -6252,28 +8208,13 @@ function MobileViewer() {
   const clipRef        = useRef<HTMLDivElement>(null);
   const bookWrapperRef = useRef<HTMLDivElement>(null);
 
-  // ── Pan limits ───────────────────────────────────────────────────────────────
-  //
-  // pageW  = WRAPPER_MULT * W / 2  (each page width inside the 150% wrapper)
-  //
-  // leftFocusPan  = W/2 - pageW/2  = the pan that centres the left  page → ~+0.05W
-  // rightFocusPan = W/2 - 3*pageW/2 = the pan that centres the right page → ~-0.85W
-  //
-  // xMax = leftFocusPan
-  //   Prevents panning further right than the left-focus position.
-  //   Beyond this point the wrapper shifts off the left edge of the viewport,
-  //   exposing empty dark background — exactly the bug being fixed.
-  //
-  // xMin = min(rightFocusPan, W*(1 - WRAPPER_MULT*z))
-  //   At z=1: ensures the right-focus position is always reachable.
-  //   At z>1: expands leftward so the full zoomed wrapper stays scrollable.
   const getPanLimits = useCallback((z: number) => {
     const W     = containerWRef.current;
     const bH    = bookHRef.current;
     const pageW = (WRAPPER_MULT * W) / 2;
 
-    const leftFocusPan  = W / 2 - pageW / 2;           // ~+0.05W
-    const rightFocusPan = W / 2 - pageW - pageW / 2;   // ~-0.85W
+    const leftFocusPan  = W / 2 - pageW / 2;
+    const rightFocusPan = W / 2 - pageW - pageW / 2;
 
     return {
       xMin: Math.min(rightFocusPan, W * (1 - WRAPPER_MULT * z)),
@@ -6289,26 +8230,23 @@ function MobileViewer() {
     setPan(np); panRef.current = np;
   }, [getPanLimits]);
 
-  // ── computePan ───────────────────────────────────────────────────────────────
   const computePan = useCallback((side: FocusSide): { x: number; y: number } => {
     const W     = containerWRef.current;
     const pageW = (WRAPPER_MULT * W) / 2;
     if (side === 'left')
-      return { x: W / 2 - pageW / 2,           y: 0 };
+      return { x: W / 2 - pageW / 2,             y: 0 };
     if (side === 'right')
-      return { x: W / 2 - pageW - pageW / 2,   y: 0 };
+      return { x: W / 2 - pageW - pageW / 2,     y: 0 };
     return   { x: -(W * (WRAPPER_MULT - 1)) / 2, y: 0 };
   }, []);
 
   const applyFocus = useCallback((side: FocusSide) => {
     if (zoomRef.current > 1.01) return;
-    focusSideRef.current = side;
-    setFocusSide(side);
+    focusSideRef.current = side;          // ref only — no state needed
     const p = computePan(side);
     setPan(p); panRef.current = p;
   }, [computePan]);
 
-  // ── zoomTo ───────────────────────────────────────────────────────────────────
   const zoomTo = useCallback((newZ: number, pivot?: { x: number; y: number }) => {
     newZ = clamp(newZ, ZOOM_MIN, ZOOM_MAX);
     const oldZ = zoomRef.current;
@@ -6381,7 +8319,7 @@ function MobileViewer() {
   }, []);
 
   useEffect(() => {
-    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+    const onFsChange = () => setIsFS(!!document.fullscreenElement);
     document.addEventListener('fullscreenchange', onFsChange);
     return () => document.removeEventListener('fullscreenchange', onFsChange);
   }, []);
@@ -6626,7 +8564,7 @@ function MobileViewer() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// DESKTOP VIEWER — unchanged
+// DESKTOP VIEWER
 // ═══════════════════════════════════════════════════════════════════════════════
 function DesktopViewer() {
   const [mounted,  setMounted]  = useState(false);
@@ -6750,6 +8688,7 @@ function DesktopViewer() {
       else await document.exitFullscreen();
     } catch { /* ignore */ }
   }, []);
+
   useEffect(() => {
     const h = () => { setIsFS(!!document.fullscreenElement); resetZoom(); };
     document.addEventListener('fullscreenchange', h);
@@ -6886,8 +8825,8 @@ function DesktopViewer() {
           g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
         }
         applyPan(
-          g.tpx0 + e.clientX - g.mx0,
-          g.tpy0 + e.clientY - g.my0,
+          g.tpx0 + e.touches[0].clientX - g.tx0,
+          g.tpy0 + e.touches[0].clientY - g.ty0,
           zoomRef.current,
         );
       }
@@ -7039,7 +8978,7 @@ function DesktopViewer() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// ROOT — unchanged
+// ROOT
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function NewsletterViewer() {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
