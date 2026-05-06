@@ -9148,10 +9148,12 @@ const FlipPage = forwardRef<HTMLDivElement, { pageNum: number }>(({ pageNum }, r
   className="w-full h-full object-contain"
   loading={pageNum <= 6 ? 'eager' : 'lazy'}
   draggable={false}
+    decoding="async"
   style={{
     imageRendering: 'auto',
     backfaceVisibility: 'hidden',
     transform: 'translateZ(0)',
+    WebkitFontSmoothing: 'antialiased',
   }}
 />
   </div>
@@ -9168,7 +9170,7 @@ function MobileViewer() {
   const [zoom,      setZoom]      = useState(1);
   const [pan,       setPan]       = useState({ x: 0, y: 0 });
   const [isFS,      setIsFS]      = useState(false);
-  const [focusSide, setFocusSide] = useState<FocusSide>('right');
+  // const [focusSide, setFocusSide] = useState<FocusSide>('right');
 
   const zoomRef       = useRef(1);
   const panRef        = useRef({ x: 0, y: 0 });
@@ -9242,7 +9244,7 @@ function MobileViewer() {
   const applyFocus = useCallback((side: FocusSide) => {
     if (zoomRef.current > 1.01) return;
     focusSideRef.current = side;
-    setFocusSide(side);
+    // setFocusSide(side);
     const p = computePan(side);
     setPan(p); panRef.current = p;
   }, [computePan]);
