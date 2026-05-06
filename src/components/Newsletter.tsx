@@ -9171,7 +9171,7 @@ function MobileViewer() {
   const [pan,       setPan]       = useState({ x: 0, y: 0 });
   const [isFS,      setIsFS]      = useState(false);
   // const [focusSide, setFocusSide] = useState<FocusSide>('right');
-// added this comment for a new commit
+
   const zoomRef       = useRef(1);
   const panRef        = useRef({ x: 0, y: 0 });
   const bookHRef      = useRef(520);
@@ -9821,9 +9821,12 @@ function DesktopViewer() {
           g.tpx0 = panRef.current.x;     g.tpy0 = panRef.current.y;
         }
         applyPan(
-          g.tpx0 + e.clientX - g.mx0,
-          g.tpy0 + e.clientY - g.my0,
-          zoomRef.current,
+          // g.tpx0 + e.clientX - g.mx0,
+          // g.tpy0 + e.clientY - g.my0,
+          // zoomRef.current,
+            g.tpx0 + e.touches[0].clientX - g.tx0,
+  g.tpy0 + e.touches[0].clientY - g.ty0,
+  zoomRef.current,
         );
       }
     };
