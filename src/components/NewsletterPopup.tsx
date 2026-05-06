@@ -277,7 +277,7 @@ import Link from 'next/link';
 
 // Cover is a pre-extracted static JPEG — no pdfjs, no PDF download, instant.
 // Generate once with: python extract_cover.py
-const COVER_SRC = '/Assets/newsletterjpegs/pg1.jpg';
+const COVER_SRC = '/Assets/newsletterjpegs/1.jpg';
 
 // ─── Minimized thumbnail ──────────────────────────────────────────────────────
 function MinimizedThumbnail({ onDismiss }: { onDismiss: () => void }) {
