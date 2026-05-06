@@ -45,3 +45,4 @@ next-env.d.ts
 # This file is a leftover duplicate — keep it out of the repo.
 /public/AR2025-26_compressed*.pdf
 /public/Assets/AR2025-26*.pdf
+.claude
