@@ -9171,7 +9171,7 @@ function MobileViewer() {
   const [pan,       setPan]       = useState({ x: 0, y: 0 });
   const [isFS,      setIsFS]      = useState(false);
   // const [focusSide, setFocusSide] = useState<FocusSide>('right');
-
+// added this comment for a new commit
   const zoomRef       = useRef(1);
   const panRef        = useRef({ x: 0, y: 0 });
   const bookHRef      = useRef(520);
