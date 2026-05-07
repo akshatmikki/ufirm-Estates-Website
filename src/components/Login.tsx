@@ -23,7 +23,7 @@ export function Login() {
                                     Client Login
                                 </Link>
                                 <Link
-                                    href="https://admin.urest.in:8097/"
+                                    href="https://admin.urest.in:8084/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="block w-full text-[#f0f3f5] hover:bg-[#1f4e7a] hover:text-white active:bg-[#1484bc] active:text-white transition-colors text-center py-2 rounded-md"
