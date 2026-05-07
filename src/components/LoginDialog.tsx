@@ -18,7 +18,7 @@ export function LoginDialog() {
     {
       icon: User,
       label: "Employee Login",
-      href: "https://admin.urest.in:8097/",
+      href: "https://admin.urest.in:8084/",
     },
     {
       icon: Briefcase,
