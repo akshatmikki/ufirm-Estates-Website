@@ -374,7 +374,7 @@ export default function NewsletterPopup() {
             UFirm Newsletter
           </p>
           <h3 className="text-[#fafbf9] font-bold text-lg leading-tight mb-1.5">
-            Annual Integrated Report 2025–26
+            Annual Report 2025–26
           </h3>
           <p className="text-[#aec2cc] text-xs leading-relaxed mb-4">
             Expert perspectives on real estate, integrated facility management, and automated facility maintenance.
