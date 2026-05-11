@@ -9058,7 +9058,7 @@ const HTMLFlipBook = dynamic<AnyProps>(
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const TOTAL_PAGES  = 36;
-const DOWNLOAD_URL = '/Ufirm_Newsletter-25-26.pdf';
+const DOWNLOAD_URL = '/Assets/Ufirm_Newsletter-25-26.pdf';
 // const DOWNLOAD_URL = 'https://drive.google.com/file/d/1bbTybzJry0PLPvJWX1OMDWWY48rro6VJ/view?usp=sharing';
 // const DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1ZeymzZzCOQIaqtIiOjhncyw6jV_mJxfT';
 const IMG          = (n: number) => `/Assets/newsletterjpegs/${n}.jpg`;
