@@ -335,7 +335,7 @@ const Footer = () => {
             {/* Bottom Legal Bar */}
             <div className="bg-white py-6">
                 <div className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-24 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="flex-shrink-0">
+                    <div className="flex items-center gap-5 flex-shrink-0">
                         <Image
                             src="/Assets/ufirmlogo.svg"
                             alt="UFIRM ESTATES"
@@ -344,6 +344,12 @@ const Footer = () => {
                             className="object-contain cursor-pointer"
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         />
+                        {/* <Link
+                            href="/login"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1e3143] text-white text-xs font-semibold rounded-[6px] hover:bg-[#1f4e7a] active:bg-[#1484bc] transition-colors duration-200 whitespace-nowrap"
+                        >
+                            Portal Login
+                        </Link> */}
                     </div>
 
                     <div className="flex flex-col items-center md:items-end gap-2 text-gray-700">

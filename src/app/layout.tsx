@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { LoginDialogProvider } from "@/app/CareerPage/LoginDialogContext";
 import { LoginDialog } from "@/components/LoginDialog";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 
 // Lazy load Footer
@@ -32,6 +33,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isAuthPage = pathname?.startsWith("/login");
+
   useEffect(() => {
     // SEO Meta Tags
     document.title = "UFirm - End-to-End Real Estate Performance Management";
@@ -89,11 +93,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LoginDialogProvider>
-          <NavBar />
-          <LoginDialog />
+          {!isAuthPage && <NavBar />}
+          {!isAuthPage && <LoginDialog />}
           {children}
-          <Footer />
-          <BackToTop />
+          {!isAuthPage && <Footer />}
+          {!isAuthPage && <BackToTop />}
         </LoginDialogProvider>
         {process.env.NODE_ENV === 'production' && (
           <>
