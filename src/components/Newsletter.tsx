@@ -9045,7 +9045,7 @@ import {
   Download, Maximize2, Minimize2,
   ZoomIn, ZoomOut,
   ChevronLeft, ChevronRight,
-  ChevronsLeft, ChevronsRight,
+ChevronsLeft, ChevronsRight,
 } from 'lucide-react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9058,7 +9058,8 @@ const HTMLFlipBook = dynamic<AnyProps>(
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const TOTAL_PAGES  = 36;
-const DOWNLOAD_URL = 'https://drive.google.com/file/d/1bbTybzJry0PLPvJWX1OMDWWY48rro6VJ/view?usp=sharing';
+const DOWNLOAD_URL = '/Ufirm_Newsletter-25-26.pdf';
+// const DOWNLOAD_URL = 'https://drive.google.com/file/d/1bbTybzJry0PLPvJWX1OMDWWY48rro6VJ/view?usp=sharing';
 // const DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1ZeymzZzCOQIaqtIiOjhncyw6jV_mJxfT';
 const IMG          = (n: number) => `/Assets/newsletterjpegs/${n}.jpg`;
 const MAX_BOOK_H   = 520;
@@ -9081,61 +9082,56 @@ function TBtn({ onClick, disabled = false, title, href, children }: {
     'text-[#aec2cc] hover:text-white hover:bg-[#1484bc]/25 ' +
     'disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex-shrink-0';
   if (href)
-    return <a href={href} target="_blank" rel="noopener noreferrer" title={title} className={cls}>{children}</a>;
+    return <a href={href} download target="_blank" rel="noopener noreferrer" title={title} className={cls}>{children}</a>;
   return <button onClick={onClick} disabled={disabled} title={title} className={cls}>{children}</button>;
 }
 
 // ─── Shared: Toolbar ──────────────────────────────────────────────────────────
 function Toolbar({
   curPage, zoom, isZoomed, isFS,
-  onZoomOut, onZoomIn, onFirst, onPrev, onNext, onLast, onToggleFS, onJump,
+  onZoomOut, onZoomIn, onFirst, onLast, onToggleFS, onJump,
 }: {
   curPage: number; zoom: number; isZoomed: boolean; isFS: boolean;
   onZoomOut: () => void; onZoomIn: () => void;
-  onFirst: () => void; onPrev: () => void; onNext: () => void; onLast: () => void;
+    onFirst: () => void; onLast: () => void;
+  // onFirst: () => void; onPrev: () => void; onNext: () => void; onLast: () => void;
   onToggleFS: () => void; onJump: (n: number) => void;
 }) {
   const displayPage = curPage + 1;
   return (
-    <div className="bg-[#1e3143] border-t border-[#1484bc]/15 px-2 py-1.5 flex items-center justify-center gap-0.5 flex-shrink-0 z-30">
-      <TBtn onClick={onZoomOut} disabled={!isZoomed} title="Zoom out (−)">
-        <ZoomOut className="w-[18px] h-[18px]" />
-      </TBtn>
-      <TBtn onClick={onFirst} title="First page">
-        <ChevronsLeft className="w-[18px] h-[18px]" />
-      </TBtn>
-      <TBtn onClick={onPrev} title="Previous">
-        <ChevronLeft className="w-[18px] h-[18px]" />
-      </TBtn>
-      <div className="flex items-center gap-1 px-1">
-        <input
-          type="number" min={1} max={TOTAL_PAGES}
-          defaultValue={displayPage} key={displayPage}
-          onKeyDown={(e) => {
-            if (e.key !== 'Enter') return;
-            const n = parseInt((e.target as HTMLInputElement).value, 10);
-            if (n >= 1 && n <= TOTAL_PAGES) onJump(n - 1);
-          }}
-          className="w-9 text-center bg-[#0d1f2e] border border-[#1484bc]/30 text-[#fafbf9] rounded px-1 py-0.5 text-xs outline-none"
-        />
-        <span className="text-[#aec2cc] text-xs whitespace-nowrap">/ {TOTAL_PAGES}</span>
-      </div>
-      <TBtn onClick={onNext} title="Next">
-        <ChevronRight className="w-[18px] h-[18px]" />
-      </TBtn>
-      <TBtn onClick={onLast} title="Last page">
-        <ChevronsRight className="w-[18px] h-[18px]" />
-      </TBtn>
-      <TBtn href={DOWNLOAD_URL} title="Download PDF">
-        <Download className="w-[18px] h-[18px]" />
-      </TBtn>
-      <TBtn onClick={onZoomIn} disabled={zoom >= ZOOM_MAX} title="Zoom in (+)">
-        <ZoomIn className="w-[18px] h-[18px]" />
-      </TBtn>
-      <TBtn onClick={onToggleFS} title={isFS ? 'Exit full screen' : 'Full screen'}>
-        {isFS ? <Minimize2 className="w-[18px] h-[18px]" /> : <Maximize2 className="w-[18px] h-[18px]" />}
-      </TBtn>
+  <div className="bg-[#1e3143] border-t border-[#1484bc]/15 px-2 py-1.5 flex items-center justify-center gap-0.5 flex-shrink-0 z-30">
+    <TBtn onClick={onZoomOut} disabled={!isZoomed} title="Zoom out (−)">
+      <ZoomOut className="w-[18px] h-[18px]" />
+    </TBtn>
+    <TBtn onClick={onFirst} title="First page">
+  <ChevronsLeft className="w-[18px] h-[18px]" />
+</TBtn>
+    <div className="flex items-center gap-1 px-1">
+      <input
+        type="number" min={1} max={TOTAL_PAGES}
+        defaultValue={displayPage} key={displayPage}
+        onKeyDown={(e) => {
+          if (e.key !== 'Enter') return;
+          const n = parseInt((e.target as HTMLInputElement).value, 10);
+          if (n >= 1 && n <= TOTAL_PAGES) onJump(n - 1);
+        }}
+        className="w-9 text-center bg-[#0d1f2e] border border-[#1484bc]/30 text-[#fafbf9] rounded px-1 py-0.5 text-xs outline-none"
+      />
+      <span className="text-[#aec2cc] text-xs whitespace-nowrap">/ {TOTAL_PAGES}</span>
     </div>
+    <TBtn onClick={onLast} title="Last page">
+      <ChevronsRight className="w-[18px] h-[18px]" />
+    </TBtn>
+    <TBtn href={DOWNLOAD_URL} title="Download PDF">
+      <Download className="w-[18px] h-[18px]" />
+    </TBtn>
+    <TBtn onClick={onZoomIn} disabled={zoom >= ZOOM_MAX} title="Zoom in (+)">
+      <ZoomIn className="w-[18px] h-[18px]" />
+    </TBtn>
+    <TBtn onClick={onToggleFS} title={isFS ? 'Exit full screen' : 'Full screen'}>
+      {isFS ? <Minimize2 className="w-[18px] h-[18px]" /> : <Maximize2 className="w-[18px] h-[18px]" />}
+    </TBtn>
+  </div>
   );
 }
 
@@ -9365,9 +9361,10 @@ function MobileViewer() {
     }
   }, [applyFocus]);
 
-  const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
+  // const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
   const goLast  = useCallback(() => { bookRef.current?.pageFlip()?.flip(TOTAL_PAGES - 1); }, []);
   const goJump  = useCallback((n: number) => { bookRef.current?.pageFlip()?.flip(n); }, []);
+  const goFirst = useCallback(() => { bookRef.current?.pageFlip()?.flip(0); }, []);
 
   useEffect(() => {
     if (!mounted) return;
@@ -9541,6 +9538,26 @@ function MobileViewer() {
         )}
       </main>
 
+{mounted && (
+        <>
+          <button onClick={goPrev} className="fixed left-2 top-1/2 -translate-y-1/2 z-50
+  w-6 h-9 flex items-center justify-center
+  bg-[#1e3143]/30 hover:bg-[#1484bc]/40
+  backdrop-blur rounded-lg
+  text-[#1E3143] hover:text-white
+transition-all duration-300 select-none"
+            aria-label="Previous page">
+            <ChevronLeft className="w-8 h-8" />
+          </button>
+          <button onClick={goNext} className="fixed right-2 top-1/2 -translate-y-1/2 z-50
+            w-6 h-9 flex items-center justify-center
+            bg-[#1e3143]/30 hover:bg-[#1484bc]/40 backdrop-blur rounded-lg
+            text-[#1E3143] hover:text-white transition-all duration-300 select-none"
+            aria-label="Next page">
+            <ChevronRight className="w-8 h-8" />
+          </button>
+        </>
+      )}
       {mounted && (
         <Toolbar
           curPage={curPage}
@@ -9550,8 +9567,8 @@ function MobileViewer() {
           onZoomOut={() => zoomTo(zoom - 0.5)}
           onZoomIn={() => zoomTo(zoom + 0.5)}
           onFirst={goFirst}
-          onPrev={goPrev}
-          onNext={goNext}
+          // onPrev={goPrev}
+          // onNext={goNext}
           onLast={goLast}
           onToggleFS={toggleFS}
           onJump={goJump}
@@ -9956,7 +9973,24 @@ function DesktopViewer() {
           </div>
         )}
       </main>
-
+{mounted && (
+        <>
+          <button onClick={goPrev} className="fixed left-2 top-1/2 -translate-y-1/2 z-50
+            w-12 h-16 flex items-center justify-center
+            bg-[#1E3143]/30 hover:bg-[#1484bc]/40 backdrop-blur rounded-lg
+            text-[#1E3143] hover:text-white transition-all duration-300 select-none"
+            aria-label="Previous page">
+            <ChevronLeft className="w-8 h-8" />
+          </button>
+          <button onClick={goNext} className="fixed right-2 top-1/2 -translate-y-1/2 z-50
+            w-12 h-16 flex items-center justify-center
+            bg-[#1E3143]/30 hover:bg-[#1484bc]/40 backdrop-blur rounded-lg
+            text-[#1E3143] hover:text-white transition-all duration-300 select-none"
+            aria-label="Next page">
+            <ChevronRight className="w-8 h-8" />
+          </button>
+        </>
+      )}
       {mounted && (
         <Toolbar
           curPage={curPage}
@@ -9966,8 +10000,8 @@ function DesktopViewer() {
           onZoomOut={() => zoomTo(zoom - 0.5)}
           onZoomIn={() => zoomTo(zoom + 0.5)}
           onFirst={goFirst}
-          onPrev={goPrev}
-          onNext={goNext}
+          // onPrev={goPrev}
+          // onNext={goNext}
           onLast={goLast}
           onToggleFS={toggleFS}
           onJump={goJump}
