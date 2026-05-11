@@ -9531,7 +9531,7 @@ function MobileViewer() {
                   text-[#aec2cc] hover:text-white hover:border-[#1484bc]
                   text-[11px] px-3 py-1.5 rounded-full transition-colors select-none"
               >
-                {zoom.toFixed(1)}× — tap to reset
+                {zoom.toFixed(1)}× — double tap to reset
               </button>
             )}
           </div>
@@ -9967,7 +9967,7 @@ function DesktopViewer() {
                   text-[#aec2cc] hover:text-white hover:border-[#1484bc]
                   text-[11px] px-3 py-1.5 rounded-full transition-colors select-none"
               >
-                {zoom.toFixed(1)}× — tap to reset
+                {zoom.toFixed(1)}× — double tap to reset
               </button>
             )}
           </div>
