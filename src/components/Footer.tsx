@@ -344,12 +344,12 @@ const Footer = () => {
                             className="object-contain cursor-pointer"
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         />
-                        <Link
+                        {/* <Link
                             href="/login"
                             className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1e3143] text-white text-xs font-semibold rounded-[6px] hover:bg-[#1f4e7a] active:bg-[#1484bc] transition-colors duration-200 whitespace-nowrap"
                         >
                             Portal Login
-                        </Link>
+                        </Link> */}
                     </div>
 
                     <div className="flex flex-col items-center md:items-end gap-2 text-gray-700">

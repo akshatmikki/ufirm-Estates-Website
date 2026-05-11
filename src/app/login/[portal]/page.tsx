@@ -150,7 +150,7 @@ export default function PortalLoginPage() {
               Both panels share the same pt-10/pt-12 start, and the elements above
               each heading add up to roughly the same height. */}
           <h2 className="text-[1.3rem] font-bold text-white leading-snug tracking-tight mb-2">
-            India's Leading Real Estate Technology Platform
+            India;s Leading Real Estate Technology Platform
           </h2>
           <p className="text-[12.5px] text-white/50 leading-relaxed mb-7">
             UFirm powers operations for real estate businesses across India — from
