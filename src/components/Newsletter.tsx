@@ -9542,7 +9542,7 @@ function MobileViewer() {
         <>
           <button onClick={goPrev} className="fixed left-2 top-1/2 -translate-y-1/2 z-50
   w-6 h-9 flex items-center justify-center
-  bg-[#1e3143]/30 hover:bg-[#1484bc]/40
+  bg-[#1484bc]/30 hover:bg-[#1484bc]/40
   backdrop-blur rounded-lg
   text-[#1E3143] hover:text-white
 transition-all duration-300 select-none"
@@ -9551,7 +9551,7 @@ transition-all duration-300 select-none"
           </button>
           <button onClick={goNext} className="fixed right-2 top-1/2 -translate-y-1/2 z-50
             w-6 h-9 flex items-center justify-center
-            bg-[#1e3143]/30 hover:bg-[#1484bc]/40 backdrop-blur rounded-lg
+            bg-[#1484bc]/30 hover:bg-[#1484bc]/40 backdrop-blur rounded-lg
             text-[#1E3143] hover:text-white transition-all duration-300 select-none"
             aria-label="Next page">
             <ChevronRight className="w-8 h-8" />
