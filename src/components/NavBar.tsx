@@ -108,7 +108,7 @@ export function NavBar() {
     // Matches desktop LoginDialog icons: Building2, User, Briefcase
     const mobileLoginLinks = [
         { label: "Client Login", href: "https://account.ufirm.in/Account/Login", icon: Building2 },
-        { label: "Employee Login", href: "https://admin.urest.in:8097/", icon: User },
+        { label: "Employee Login", href: "https://admin.urest.in:8084/", icon: User },
         { label: "Facility Manager Login", href: "https://account.ufirm.in/Account/Login", icon: Briefcase },
         { label: "Track Complaints", href: "https://admin.urest.in:8092/", icon: Compass }, // Added to mobile menu
     ];
