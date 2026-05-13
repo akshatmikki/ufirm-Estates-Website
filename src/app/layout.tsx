@@ -137,30 +137,30 @@ const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'UFirm - End-to-End Real Estate Performance Management',
+  title: 'UFirm - Connecting Strategy, Operations and Technology',
   description: 'UFirm integrates URest facility management and Firmity CMMS into a single ecosystem—connecting day-to-day operations with intelligent asset management.',
-  keywords: 'facility management, CMMS, real estate, asset management, UFirm',
+  keywords: 'facility management, CMMS, real estate, asset management, UFirm, technology, india, firmity, urest',
   robots: 'index, follow',
   openGraph: {
-    title: 'UFirm - End-to-End Real Estate Performance Management',
+    title: 'UFirm - Connecting Strategy, Operations and Technology',
     description: 'Connecting day-to-day operations with intelligent asset management for real estate.',
     url: 'https://ufirm.in',
-    siteName: 'UFirm Estates',
+    siteName: 'UFirm',
     images: [
       {
-        url: 'https://ufirm.in/Assets/ufirmlogo.png',
+        url: 'https://ufirm.in/Assets/ufirmlogo.svg',
         width: 1200,
         height: 630,
-        alt: 'UFirm Estates',
+        alt: 'UFirm Logo',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'UFirm - End-to-End Real Estate Performance Management',
+    title: 'UFirm - Connecting Strategy, Operations and Technology',
     description: 'Connecting day-to-day operations with intelligent asset management for real estate.',
-    images: ['https://ufirm.in/Assets/ufirmlogo.png'],
+    images: ['https://ufirm.in/Assets/ufirmlogo.svg'],
   },
 };
 
