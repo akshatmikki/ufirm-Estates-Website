@@ -148,7 +148,7 @@ export const metadata: Metadata = {
     siteName: 'UFirm',
     images: [
       {
-        url: 'https://ufirm.in/Assets/ufirmlogo.svg',
+        url: 'https://ufirm.in/Assets/ufirmthumbnail.jpg',
         width: 1200,
         height: 630,
         alt: 'UFirm Logo',
@@ -160,7 +160,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'UFirm - Connecting Strategy, Operations and Technology',
     description: 'Connecting day-to-day operations with intelligent asset management for real estate.',
-    images: ['https://ufirm.in/Assets/ufirmlogo.svg'],
+    images: ['https://ufirm.in/Assets/ufirmthumbnail.jpg'],
   },
 };
 
