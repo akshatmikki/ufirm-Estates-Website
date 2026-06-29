@@ -722,7 +722,7 @@ export default function AboutusPage() {
 
                 <div className="mb-8 bg-white/70 p-6 rounded-xl shadow-lg">
                     <h3 className="text-xl sm:text-2xl font-bold mb-2" style={{ color: "#146995" }}>VISION</h3>
-                    <h4 className="text-lg sm:text-xl font-semibold mb-3">"Manage, Maintain, Enhance Estates"</h4>
+                    <h4 className="text-lg sm:text-xl font-semibold mb-3">&ldquo;Manage, Maintain, Enhance Estates&rdquo;</h4>
                     <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
                         We manage, maintain, and enhance estates with a focus on people, process, sustainability and
                         technology. We start by building a strong partnership with clients to ensure seamless facility
@@ -735,7 +735,7 @@ export default function AboutusPage() {
                 <div className="bg-white/70 p-6 rounded-xl shadow-lg">
                     <h3 className="text-xl sm:text-2xl font-bold mb-2" style={{ color: "#146995" }}>MISSION</h3>
                     <h4 className="text-lg sm:text-xl font-semibold mb-3">
-                        "On mission to manage, maintain, and enhance estates while caring for people, planet, and profits."
+                        &ldquo;On mission to manage, maintain, and enhance estates while caring for people, planet, and profits.&rdquo;
                     </h4>
                     <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
                         Create value by consciously managing, maintaining, and enhancing estates. We focus on building
