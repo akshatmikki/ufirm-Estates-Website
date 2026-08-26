@@ -753,19 +753,3 @@ export default function AboutusPage() {
         </div>
     );
 }
-
-// Feature component kept for reference but divisions are now inline above
-function Feature({
-    icon, title, meaning, deliverables,
-}: {
-    icon: React.ReactNode; title: string; meaning: string; deliverables: string;
-}) {
-    return (
-        <div className="flex flex-col items-center text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100 h-full">
-            <div className="text-[#146995] text-4xl sm:text-5xl mb-4">{icon}</div>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-2 leading-tight">{title}</h3>
-            <p className="text-gray-700 mb-1 text-sm sm:text-base"><strong>Meaning:</strong> {meaning}</p>
-            <p className="text-gray-700 text-sm sm:text-base"><strong>Deliverables:</strong> {deliverables}</p>
-        </div>
-    );
-}
