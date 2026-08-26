@@ -183,7 +183,7 @@ export function NavBar() {
                             setActive={setActive}
                             active={active}
                             item="About us"
-                            href="https://ufirm.in/Aboutuspage"
+                            href="/Aboutuspage"
                         />
                         <MenuItem
                             setActive={setActive}
