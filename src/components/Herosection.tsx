@@ -106,7 +106,7 @@ export default function Herosection() {
 
             {/* Secondary Button */}
             <a
-              href="https://urest.in/book-service/ola/services/society-site-health-survey-confidential#f9ad9acd-67b8-483a-bd38-ecc1481dd108"
+              href="https://firmity.in/facility-survey"
               target="_blank"
               rel="noopener noreferrer"
               className="
